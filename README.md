@@ -73,3 +73,5 @@ To customize the styling:
 - [x] Animations work smoothly on modern browsers
 - [x] Form validation works correctly
 - [x] Mobile experience is optimized
+
+This is a test change to demonstrate Git workflow.
