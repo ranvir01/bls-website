@@ -1,6 +1,6 @@
 import { Hero } from '@/components/hero';
 import { ServicesGrid } from '@/components/services-grid';
-import { QuoteButton } from '@/components/quote-modal';
+import { QuoteButton } from '@/components/quote-button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -222,9 +222,9 @@ export default function ServicesPage() {
           </div>
 
           <div className="text-center mt-12">
-            <Link href="/contact" className="btn-primary">
+            <QuoteButton className="btn-primary">
               Schedule a Consultation
-            </Link>
+            </QuoteButton>
           </div>
         </div>
       </section>
@@ -250,9 +250,9 @@ export default function ServicesPage() {
             Contact us today to schedule a free consultation and get started on your landscaping project.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
+            <QuoteButton className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
               Get a Free Quote
-            </Link>
+            </QuoteButton>
             <Link href="/about" className="btn-primary bg-transparent border border-white hover:bg-white/10">
               Learn More About Us
             </Link>

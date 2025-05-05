@@ -5,6 +5,7 @@ import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { StickyQuoteButton } from '@/components/sticky-quote-button';
 import { ModalProvider } from '@/components/modal-context';
+import { ModalContainer } from '@/components/modal-container';
 
 const montserrat = Montserrat({ 
   subsets: ['latin'],
@@ -77,6 +78,7 @@ export default function RootLayout({
           </main>
           <StickyQuoteButton />
           <Footer />
+          <ModalContainer />
         </ModalProvider>
       </body>
     </html>

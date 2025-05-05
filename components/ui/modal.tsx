@@ -62,7 +62,7 @@ export const Modal = ({
           />
 
           {/* Modal Content */}
-          <div className="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
+          <div className="fixed inset-0 flex items-center justify-center p-2 md:p-6 pointer-events-none">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -73,8 +73,8 @@ export const Modal = ({
                 damping: 30,
               }}
               className={cn(
-                "relative w-full max-w-lg bg-white rounded-lg shadow-xl pointer-events-auto",
-                "max-h-[90vh] overflow-y-auto overscroll-contain",
+                "relative w-full max-w-5xl lg:max-w-7xl pointer-events-auto flex flex-col items-center justify-center",
+                "max-h-[95vh] overflow-y-auto overscroll-contain",
                 "scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent",
                 className
               )}
@@ -84,9 +84,8 @@ export const Modal = ({
                 <button
                   onClick={onClose}
                   className={cn(
-                    "absolute right-4 top-4 p-1 rounded-full",
-                    "text-gray-500 hover:text-gray-700",
-                    "bg-white hover:bg-gray-100",
+                    "absolute right-4 top-4 p-1 rounded-full z-20",
+                    "text-white hover:text-gray-200 bg-black/60 hover:bg-black/80",
                     "transition-colors duration-200",
                     "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   )}
@@ -95,8 +94,7 @@ export const Modal = ({
                   <X className="h-5 w-5" />
                 </button>
               )}
-
-              {children}
+              <div className="w-full flex items-center justify-center">{children}</div>
             </motion.div>
           </div>
         </div>

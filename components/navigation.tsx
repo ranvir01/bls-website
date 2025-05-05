@@ -4,7 +4,32 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { Menu, X, ChevronDown, Grid, Hammer, Droplets, Waves, Home, Blocks as Brick, Blocks, WrenchIcon, Settings, MapPin, Info, Image as ImageIcon, Phone, MessageSquareQuote, CheckCircle, ArrowRight, Mail } from 'lucide-react';
+import { 
+  Home, 
+  Grid, 
+  MapPin, 
+  Phone, 
+  Menu, 
+  X, 
+  ChevronDown, 
+  ChevronUp,
+  Hammer,
+  Droplets,
+  Settings,
+  WrenchIcon,
+  Blocks,
+  Flame,
+  StepForward,
+  Sofa,
+  Waves,
+  Info,
+  Image as ImageIcon,
+  Fence,
+  Sprout,
+  Scissors,
+  Square,
+  TreePine
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MobileNav } from './mobile-nav';
 import { QuoteButton } from './quote-button';
@@ -95,10 +120,14 @@ export const Navigation = () => {
           name: 'Hardscaping',
           icon: Hammer,
           items: [
+            { name: 'Patios', href: '/services/hardscaping/patios', icon: Home },
+            { name: 'Walkways & Pathways', href: '/services/hardscaping/walkways', icon: Blocks },
+            { name: 'Retaining Walls', href: '/services/hardscaping/retaining-walls', icon: Square },
+            { name: 'Driveways', href: '/services/hardscaping/driveways', icon: Blocks },
+            { name: 'Outdoor Fire Features', href: '/services/hardscaping/fire-features', icon: Flame },
+            { name: 'Steps & Stairs', href: '/services/hardscaping/steps', icon: StepForward },
+            { name: 'Built-in Seating', href: '/services/hardscaping/seating', icon: Sofa },
             { name: 'Water Features', href: '/services/hardscaping/water-features', icon: Waves },
-            { name: 'Patio Installation', href: '/services/hardscaping/patio-installation', icon: Home },
-            { name: 'Retaining Walls', href: '/services/hardscaping/retaining-walls', icon: Brick },
-            { name: 'Driveway Paving', href: '/services/hardscaping/driveway-paving', icon: Blocks },
           ],
         },
         {
@@ -108,6 +137,16 @@ export const Navigation = () => {
             { name: 'Irrigation Maintenance', href: '/services/irrigation/irrigation-maintenance', icon: Settings },
             { name: 'Sprinkler Installation', href: '/services/irrigation/sprinkler-installation', icon: Droplets },
             { name: 'Sprinkler Repair', href: '/services/irrigation/sprinkler-repair', icon: WrenchIcon },
+          ],
+        },
+        {
+          name: 'Other Services',
+          icon: Grid,
+          items: [
+            { name: 'Fencing', href: '/services/other/fencing', icon: Fence },
+            { name: 'Lawn Maintenance', href: '/services/other/lawn-maintenance', icon: Scissors },
+            { name: 'Planting & Design', href: '/services/other/planting-design', icon: Sprout },
+            { name: 'Sod Installation', href: '/services/other/sod-installation', icon: TreePine },
           ],
         },
       ],
@@ -303,6 +342,7 @@ export const Navigation = () => {
                       "text-blue-800 hover:text-blue-600 hover:bg-blue-50"
                     )}
                   >
+                    {item.icon && <item.icon className="h-4 w-4" />}
                     <span>{item.name}</span>
                   </Link>
                 )}
@@ -324,30 +364,26 @@ export const Navigation = () => {
                         </div>
                       </Link>
                     )}
-                    <div className="grid grid-cols-4 gap-6 p-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
-                      {item.items?.map((section, idx) => (
-                        <div key={idx} className="space-y-4">
-                          {section.name && (
-                            <h5 className="font-semibold text-blue-800 text-sm uppercase tracking-wider flex items-center gap-2 pb-2 border-b border-gray-100">
-                              {section.icon && <section.icon className="h-4 w-4" />}
-                              <span>{section.name}</span>
-                            </h5>
-                          )}
+                    <div className="grid grid-cols-3 gap-4 p-4">
+                      {item.items?.map((section) => (
+                        <div key={section.name} className="space-y-2">
+                          <div className="flex items-center gap-2 text-teal-600 font-medium">
+                            <section.icon className="h-5 w-5" />
+                            <h3 className="text-sm">{section.name}</h3>
+                          </div>
                           <ul className="space-y-1">
-                            {(section.items || [section]).map((subItem, subIdx) => (
-                              <li key={subIdx}>
+                            {section.items?.map((service) => (
+                              <li key={service.name}>
                                 <Link
-                                  href={subItem.href || "#"}
-                                  className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-all duration-200 hover:translate-x-1 text-sm group relative"
-                                  onClick={closeMenu}
+                                  href={service.href}
+                                  className="flex items-center gap-2 text-gray-600 hover:text-teal-600 hover:bg-gray-50 p-2 rounded-md transition-colors group"
                                 >
-                                  <div className="flex items-center gap-2">
-                                    {subItem.icon && <subItem.icon className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />}
-                                    <span>{subItem.name}</span>
-                                  </div>
-                                  {subItem.description && (
-                                    <span className="text-xs text-gray-400 ml-6">{subItem.description}</span>
+                                  {service.icon && (
+                                    <div className="flex items-center justify-center w-5 h-5">
+                                      <service.icon className="h-4 w-4 text-gray-400 group-hover:text-teal-600 transition-colors" />
+                                    </div>
                                   )}
+                                  <span className="text-sm">{service.name}</span>
                                 </Link>
                               </li>
                             ))}

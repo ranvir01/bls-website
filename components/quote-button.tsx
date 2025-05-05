@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { QuoteModal } from './quote-modal';
 import { useModal } from './modal-context';
 import { ReactNode } from 'react';
 
@@ -12,14 +10,7 @@ interface QuoteButtonProps {
 }
 
 export const QuoteButton = ({ className, children, onClick }: QuoteButtonProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { isModalOpen, openModal, closeModal } = useModal();
-
-  useEffect(() => {
-    const handleOpenModal = () => openModal();
-    document.addEventListener('openQuoteModal', handleOpenModal);
-    return () => document.removeEventListener('openQuoteModal', handleOpenModal);
-  }, [openModal]);
+  const { openModal } = useModal();
 
   const handleClick = () => {
     openModal();
@@ -27,19 +18,13 @@ export const QuoteButton = ({ className, children, onClick }: QuoteButtonProps) 
   };
 
   return (
-    <>
-      <button 
-        onClick={handleClick}
-        className={className || "btn-primary"}
-        aria-haspopup="dialog"
-        type="button"
-      >
-        {children || "Get a Free Quote"}
-      </button>
-      <QuoteModal 
-        isOpen={isModalOpen} 
-        onClose={closeModal} 
-      />
-    </>
+    <button 
+      onClick={handleClick}
+      className={className || "btn-primary"}
+      aria-haspopup="dialog"
+      type="button"
+    >
+      {children || "Get a Free Quote"}
+    </button>
   );
 };

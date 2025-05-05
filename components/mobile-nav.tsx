@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Grid, Hammer, Droplets, Waves, Home, Blocks as Brick, 
   Blocks, WrenchIcon, Settings, MapPin, Info, Image as ImageIcon, Phone, 
-  MessageSquareQuote, CheckCircle, ArrowRight, Mail } from 'lucide-react';
+  MessageSquareQuote, CheckCircle, ArrowRight, Mail, Flame, Stairs, Sofa, Fence, Scissors, Sprout, Grass } from 'lucide-react';
 import { QuoteButton } from './quote-button';
 import { useModal } from './modal-context';
 import { cn } from '@/lib/utils';
@@ -50,10 +50,14 @@ export const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
           name: 'Hardscaping',
           icon: Hammer,
           items: [
-            { name: 'Water Features', href: '/services/hardscaping/water-features', icon: Waves },
-            { name: 'Patio Installation', href: '/services/hardscaping/patio-installation', icon: Home },
+            { name: 'Patios', href: '/services/hardscaping/patios', icon: Home },
+            { name: 'Walkways & Pathways', href: '/services/hardscaping/walkways', icon: Blocks },
             { name: 'Retaining Walls', href: '/services/hardscaping/retaining-walls', icon: Brick },
-            { name: 'Driveway Paving', href: '/services/hardscaping/driveway-paving', icon: Blocks },
+            { name: 'Driveways', href: '/services/hardscaping/driveways', icon: Blocks },
+            { name: 'Outdoor Fire Features', href: '/services/hardscaping/fire-features', icon: Flame },
+            { name: 'Steps & Stairs', href: '/services/hardscaping/steps', icon: Stairs },
+            { name: 'Built-in Seating', href: '/services/hardscaping/seating', icon: Sofa },
+            { name: 'Water Features', href: '/services/hardscaping/water-features', icon: Waves },
           ],
         },
         {
@@ -63,6 +67,16 @@ export const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
             { name: 'Irrigation Maintenance', href: '/services/irrigation/irrigation-maintenance', icon: Settings },
             { name: 'Sprinkler Installation', href: '/services/irrigation/sprinkler-installation', icon: Droplets },
             { name: 'Sprinkler Repair', href: '/services/irrigation/sprinkler-repair', icon: WrenchIcon },
+          ],
+        },
+        {
+          name: 'Other Services',
+          icon: Grid,
+          items: [
+            { name: 'Fencing', href: '/services/other/fencing', icon: Fence },
+            { name: 'Lawn Maintenance', href: '/services/other/lawn-maintenance', icon: Scissors },
+            { name: 'Planting & Design', href: '/services/other/planting-design', icon: Sprout },
+            { name: 'Sod Installation', href: '/services/other/sod-installation', icon: Grass },
           ],
         },
       ],

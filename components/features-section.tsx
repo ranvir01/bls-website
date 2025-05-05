@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Award, Shield, Clock, Wrench, Users } from 'lucide-react';
+import { QuoteButton } from '@/components/quote-button';
 
 const features = [
   {
@@ -87,12 +88,11 @@ export const FeaturesSection = () => {
               Get started with a free consultation and estimate for your project
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
+              <QuoteButton
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300"
               >
                 Schedule Consultation
-              </a>
+              </QuoteButton>
               <a
                 href="tel:2532170814"
                 className="bg-white hover:bg-gray-50 text-blue-600 px-8 py-3 rounded-lg font-semibold transition-all duration-300 border border-blue-200"

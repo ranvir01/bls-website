@@ -155,7 +155,7 @@ export const Footer = () => {
                         ].map((location) => (
                           <Link
                             key={location}
-                            href={`/localities/${location.toLowerCase().replace(/\s+/g, '-')}`}
+                            href={`/service-areas/${location.toLowerCase().replace(/\s+/g, '-')}`}
                             className="text-teal-100 hover:text-white transition-colors text-sm flex items-center gap-1"
                           >
                             <MapPin className="h-3 w-3 shrink-0" />
@@ -252,27 +252,51 @@ export const Footer = () => {
               <h3 className="font-medium text-teal-300 mb-2">Hardscaping</h3>
               <ul className="space-y-2">
                 <li>
+                  <Link href="/services/hardscaping/patios" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Patios</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/hardscaping/walkways" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Walkways & Pathways</span>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/services/hardscaping/retaining-walls" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
                     <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
                     <span>Retaining Walls</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services/hardscaping/patio-installation" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                  <Link href="/services/hardscaping/driveways" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
                     <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
-                    <span>Patio Installation</span>
+                    <span>Driveways</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/hardscaping/fire-features" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Outdoor Fire Features</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/hardscaping/steps" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Steps & Stairs</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/hardscaping/seating" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Built-in Seating</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="/services/hardscaping/water-features" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
                     <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
                     <span>Water Features</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/hardscaping/driveway-paving" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
-                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
-                    <span>Driveway Paving</span>
                   </Link>
                 </li>
               </ul>
@@ -297,6 +321,36 @@ export const Footer = () => {
                   <Link href="/services/irrigation/irrigation-maintenance" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
                     <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
                     <span>Irrigation Maintenance</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-medium text-teal-300 mb-2">Other Services</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/services/other/fencing" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Fencing</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/other/lawn-maintenance" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Lawn Maintenance</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/other/planting-design" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Planting & Design</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/other/sod-installation" className="flex items-center group text-teal-100 hover:text-white transition-colors hover:translate-x-1 duration-200">
+                    <ChevronRight className="h-4 w-4 text-teal-400 mr-2 group-hover:text-teal-300" />
+                    <span>Sod Installation</span>
                   </Link>
                 </li>
               </ul>

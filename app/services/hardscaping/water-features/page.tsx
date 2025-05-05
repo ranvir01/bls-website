@@ -211,9 +211,9 @@ export default function WaterFeaturesPage() {
             Contact us today to schedule a consultation and learn how we can create the perfect water feature for your outdoor space.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
+            <QuoteButton className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
               Contact Us
-            </Link>
+            </QuoteButton>
             <Link href="/services" className="btn-primary bg-transparent border border-white hover:bg-white/10">
               Explore Other Services
             </Link>

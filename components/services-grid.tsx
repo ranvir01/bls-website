@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { ServiceCategory, Service } from '@/data/service-categories';
 
 interface ServiceCardProps {
   title: string;
@@ -43,23 +44,18 @@ export const ServiceCard = ({ title, description, image, link, className }: Serv
 };
 
 interface ServicesGridProps {
-  title?: string;
-  subtitle?: string;
-  services: Array<{
-    title: string;
-    description: string;
-    image: string;
-    link: string;
-  }>;
+  category?: string;
+  services?: Service[];
+  categories?: ServiceCategory[];
   columns?: 2 | 3 | 4;
   className?: string;
   cardClassName?: string;
 }
 
 export const ServicesGrid = ({
-  title,
-  subtitle,
+  category,
   services,
+  categories,
   columns = 3,
   className,
   cardClassName,
@@ -70,17 +66,59 @@ export const ServicesGrid = ({
     4: 'md:grid-cols-2 lg:grid-cols-4',
   };
 
-  return (
-    <section className={cn('section-padding', className)}>
-      <div className="container-custom">
-        {title && (
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{title}</h2>
-        )}
-        {subtitle && (
-          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12">{subtitle}</p>
-        )}
+  // If specific services are provided, show them
+  if (services) {
+    return (
+      <div className={cn('grid grid-cols-1 gap-6 md:gap-8', columnsClass[columns])}>
+        {services.map((service, index) => (
+          <ServiceCard
+            key={index}
+            {...service}
+            className={cardClassName}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  // If categories are provided, show them grouped
+  if (categories) {
+    return (
+      <div className="space-y-16">
+        {categories.map((cat) => (
+          <div key={cat.slug} className="space-y-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold mb-4">{cat.title}</h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">{cat.description}</p>
+            </div>
+            <div className={cn('grid grid-cols-1 gap-6 md:gap-8', columnsClass[columns])}>
+              {cat.services.map((service, index) => (
+                <ServiceCard
+                  key={index}
+                  {...service}
+                  className={cardClassName}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // If a specific category is provided, show its services
+  if (category && categories) {
+    const selectedCategory = categories.find(cat => cat.slug === category);
+    if (!selectedCategory) return null;
+
+    return (
+      <div className="space-y-8">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold mb-4">{selectedCategory.title}</h2>
+          <p className="text-gray-600 max-w-3xl mx-auto">{selectedCategory.description}</p>
+        </div>
         <div className={cn('grid grid-cols-1 gap-6 md:gap-8', columnsClass[columns])}>
-          {services.map((service, index) => (
+          {selectedCategory.services.map((service, index) => (
             <ServiceCard
               key={index}
               {...service}
@@ -89,6 +127,8 @@ export const ServicesGrid = ({
           ))}
         </div>
       </div>
-    </section>
-  );
+    );
+  }
+
+  return null;
 };

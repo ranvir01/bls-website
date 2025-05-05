@@ -15,6 +15,7 @@ export function CompanyExpertiseShowcase() {
   const [sliderWidth, setSliderWidth] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [isShowingAfterImage, setIsShowingAfterImage] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -120,15 +121,16 @@ export function CompanyExpertiseShowcase() {
   const openLightbox = (index: number, isAfter: boolean = false) => {
     setLightboxIndex(index);
     setLightboxOpen(true);
+    setIsShowingAfterImage(isAfter);
     setIsPaused(true);
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
   };
 
   // Close lightbox
   const closeLightbox = () => {
     setLightboxOpen(false);
     setIsPaused(false);
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
   };
 
   // Handle keyboard navigation
@@ -148,6 +150,14 @@ export function CompanyExpertiseShowcase() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen, beforeAfterImages.length]);
+
+  // Close lightbox
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    // Only close if clicking the backdrop itself
+    if (e.target === e.currentTarget) {
+      closeLightbox();
+    }
+  };
 
   // Stats with counters
   const stats = [
@@ -232,19 +242,20 @@ export function CompanyExpertiseShowcase() {
               viewport={{ once: true }}
               className="relative aspect-[16/9] w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl"
             >
-              <div className="absolute inset-0 bg-gray-900">
-                <div className="w-full h-full flex items-center justify-center text-white text-2xl font-medium">
-                  Team Photo Placeholder
-                </div>
-              </div>
+              <Image
+                src="https://i.imgur.com/KngV7VK.jpg"
+                alt="Our Expert Team"
+                fill
+                className="object-cover"
+                priority
+              />
             </motion.div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 2xl:gap-20 items-center min-h-[80vh]">
-          {/* ENLARGED Image Showcase - Now takes 3/5 of the grid on large screens with bigger images */}
-          <div className="relative overflow-hidden rounded-3xl shadow-2xl lg:col-span-6 xl:col-span-7">
-            {/* Before/After Slider with automated transition */}
+          {/* Desktop Before/After Slider */}
+          <div className="hidden lg:block relative overflow-hidden rounded-3xl shadow-2xl lg:col-span-6 xl:col-span-7">
             <div 
               ref={sliderRef}
               className="relative aspect-[16/9] w-full overflow-visible scale-110"
@@ -261,9 +272,7 @@ export function CompanyExpertiseShowcase() {
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0"
                 >
-                  {/* Split View Container */}
-                  <div className="relative h-full w-full border-[20px] border-white">
-                    {/* Before Image */}
+                  <div className="relative h-full w-full">
                     <div 
                       className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
                       onClick={() => openLightbox(slideIndex)}
@@ -272,16 +281,14 @@ export function CompanyExpertiseShowcase() {
                         src={beforeAfterImages[slideIndex].before}
                         alt={`Before ${beforeAfterImages[slideIndex].title}`}
                         fill
-                        className="object-cover object-center scale-110"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+                        className="object-cover object-center"
+                        sizes="100vw"
                         priority
                       />
                       <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
                         BEFORE
                       </div>
                     </div>
-                    
-                    {/* After Image - Improved Animated Reveal with smoother transition */}
                     <motion.div 
                       initial={{ clipPath: "polygon(0 0, 0% 0, 0% 100%, 0 100%)" }}
                       animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
@@ -299,8 +306,8 @@ export function CompanyExpertiseShowcase() {
                         src={beforeAfterImages[slideIndex].after}
                         alt={`After ${beforeAfterImages[slideIndex].title}`}
                         fill
-                        className="object-cover object-center scale-110"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+                        className="object-cover object-center"
+                        sizes="100vw"
                         priority
                       />
                       <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
@@ -310,26 +317,6 @@ export function CompanyExpertiseShowcase() {
                   </div>
                 </motion.div>
               </AnimatePresence>
-
-              {/* Enhanced Slide Indicators with more visual impact */}
-              <div className="absolute bottom-28 left-6 flex space-x-2 z-30">
-                {beforeAfterImages.map((_, idx) => (
-                  <button 
-                    key={idx}
-                    onClick={() => {
-                      setSlideIndex(idx);
-                      setIsAnimating(true);
-                    }}
-                    className={`h-3 rounded-full transition-all duration-300 ${
-                      idx === slideIndex 
-                        ? 'bg-white w-10' 
-                        : 'bg-white/40 hover:bg-white/60 w-3'
-                    }`}
-                    aria-label={`Go to slide ${idx + 1} of ${beforeAfterImages.length}`}
-                    aria-current={idx === slideIndex ? 'true' : 'false'}
-                  />
-                ))}
-              </div>
             </div>
           </div>
 
@@ -366,6 +353,74 @@ export function CompanyExpertiseShowcase() {
               >
                 For over 25 years, <span className="font-semibold text-blue-900">Blue Landscaping Services</span> has been Seattle's premier provider of <span className="font-semibold text-blue-900">professional hardscaping and irrigation solutions</span>. Our expert team specializes in custom retaining walls, paver patios, water features, and professional irrigation systems designed specifically for Seattle's unique terrain and climate.
               </motion.p>
+
+              {/* Mobile Before/After Slider - Positioned between paragraph and Comprehensive Approach */}
+              <div className="block lg:hidden mb-8">
+                <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+                  <div 
+                    ref={sliderRef}
+                    className="relative aspect-[4/5] w-full overflow-hidden"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                    aria-live="polite"
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.div 
+                        key={slideIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="absolute inset-0"
+                      >
+                        <div className="relative h-full w-full">
+                          <div 
+                            className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
+                            onClick={() => openLightbox(slideIndex)}
+                          >
+                            <Image
+                              src={beforeAfterImages[slideIndex].before}
+                              alt={`Before ${beforeAfterImages[slideIndex].title}`}
+                              fill
+                              className="object-cover object-center"
+                              sizes="100vw"
+                              priority
+                            />
+                            <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
+                              BEFORE
+                            </div>
+                          </div>
+                          <motion.div 
+                            initial={{ clipPath: "polygon(0 0, 0% 0, 0% 100%, 0 100%)" }}
+                            animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
+                            transition={{ 
+                              duration: 5, 
+                              ease: "easeInOut",
+                              repeat: 1, 
+                              repeatType: "reverse", 
+                              repeatDelay: 0.5
+                            }}
+                            className="absolute inset-0 bg-black z-10 cursor-pointer overflow-hidden"
+                            onClick={() => openLightbox(slideIndex, true)}
+                          >
+                            <Image
+                              src={beforeAfterImages[slideIndex].after}
+                              alt={`After ${beforeAfterImages[slideIndex].title}`}
+                              fill
+                              className="object-cover object-center"
+                              sizes="100vw"
+                              priority
+                            />
+                            <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
+                              AFTER
+                            </div>
+                          </motion.div>
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
               
               {/* Expandable Content Areas with improved styling */}
               <div className="space-y-4 my-8">
@@ -471,98 +526,88 @@ export function CompanyExpertiseShowcase() {
           </div>
         </div>
 
-        {/* Lightbox for enlarged image viewing */}
-        <AnimatePresence>
-          {lightboxOpen && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10"
+        {/* Lightbox */}
+        {lightboxOpen && (
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 z-[100] bg-black/95"
               onClick={closeLightbox}
-            >
-              {/* Close button - Positioned further out for larger viewing area */}
+            />
+            
+            {/* Content */}
+            <div className="fixed inset-0 z-[101] flex items-center justify-center" onClick={handleBackdropClick}>
+              {/* Close button */}
               <button
+                className="absolute top-4 right-4 z-[102] bg-white/20 hover:bg-white/30 p-3 rounded-full text-white transition-colors"
                 onClick={closeLightbox}
-                className="fixed top-12 right-12 z-50 bg-white/20 hover:bg-white/30 p-6 rounded-full text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
-                aria-label="Close lightbox"
               >
-                <X size={32} />
+                <X size={24} />
               </button>
 
-              {/* Navigation buttons - Enhanced visibility and interaction */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setLightboxIndex((prev) => (prev - 1 + beforeAfterImages.length) % beforeAfterImages.length);
-                }}
-                className="fixed left-12 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 p-8 rounded-full text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl z-50 backdrop-blur-sm"
-                aria-label="Previous image"
-              >
-                <ArrowLeft size={40} />
-              </button>
-              
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setLightboxIndex((prev) => (prev + 1) % beforeAfterImages.length);
-                }}
-                className="fixed right-12 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 p-8 rounded-full text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl z-50 backdrop-blur-sm"
-                aria-label="Next image"
-              >
-                <ArrowRight size={40} />
-              </button>
-
-              {/* Lightbox content */}
-              <motion.div
-                key={lightboxIndex}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="fixed inset-0 flex items-center justify-center"
+              {/* Controls and Image Container */}
+              <div 
+                className="relative w-full h-full max-w-7xl mx-auto p-4"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Before/After toggle buttons - Moved to sides */}
-                <div className="absolute top-8 left-1/2 -translate-x-1/2 flex justify-center gap-8 w-full max-w-[2000px] px-6">
+                {/* Before/After Controls */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[102] flex gap-4">
                   <button
-                    className="bg-white/20 hover:bg-white/30 text-white px-24 py-8 rounded-full font-semibold text-4xl border-2 border-transparent hover:border-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl backdrop-blur-sm"
-                    onClick={() => setLightboxIndex((prev) => prev)}
+                    className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                      !isShowingAfterImage ? 'bg-white text-black' : 'bg-black/50 text-white'
+                    }`}
+                    onClick={() => setIsShowingAfterImage(false)}
                   >
                     Before
                   </button>
                   <button
-                    className="bg-white/20 hover:bg-white/30 text-white px-24 py-8 rounded-full font-semibold text-4xl border-2 border-transparent hover:border-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl backdrop-blur-sm"
-                    onClick={() => setLightboxIndex((prev) => prev)}
+                    className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                      isShowingAfterImage ? 'bg-white text-black' : 'bg-black/50 text-white'
+                    }`}
+                    onClick={() => setIsShowingAfterImage(true)}
                   >
                     After
                   </button>
                 </div>
 
-                {/* Image container */}
-                <div className="relative mx-auto overflow-hidden rounded-3xl w-[95vw] h-[85vh] max-w-[2000px]">
+                {/* Navigation Arrows */}
+                <button
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-[102] bg-white/20 hover:bg-white/30 p-2 rounded-full text-white transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex((prev) => (prev - 1 + beforeAfterImages.length) % beforeAfterImages.length);
+                  }}
+                >
+                  <ArrowLeft size={24} />
+                </button>
+                <button
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-[102] bg-white/20 hover:bg-white/30 p-2 rounded-full text-white transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex((prev) => (prev + 1) % beforeAfterImages.length);
+                  }}
+                >
+                  <ArrowRight size={24} />
+                </button>
+
+                {/* Image */}
+                <div className="w-full h-full flex items-center justify-center">
                   <div className="relative w-full h-full">
-                    {/* Display Before image in lightbox */}
                     <Image
-                      src={beforeAfterImages[lightboxIndex].before}
-                      alt={`Before ${beforeAfterImages[lightboxIndex].title}`}
+                      src={isShowingAfterImage ? beforeAfterImages[lightboxIndex].after : beforeAfterImages[lightboxIndex].before}
+                      alt={`${isShowingAfterImage ? 'After' : 'Before'} ${beforeAfterImages[lightboxIndex].title}`}
                       fill
-                      className="object-cover scale-100 rounded-3xl"
+                      className="object-contain"
                       sizes="100vw"
                       priority
+                      quality={100}
                     />
                   </div>
-                  
-                  {/* Title bar */}
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent p-16 text-white">
-                    <h3 className="text-4xl sm:text-5xl font-bold mb-4">{beforeAfterImages[lightboxIndex].title}</h3>
-                    <p className="text-2xl sm:text-3xl text-white/90">{beforeAfterImages[lightboxIndex].description}</p>
-                  </div>
                 </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

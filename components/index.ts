@@ -7,6 +7,7 @@ export * from './gallery';
 export * from './hero';
 export * from './hero-home';
 export * from './navigation';
+export * from './professional-services';
 export * from './quote-button';
 export * from './quote-modal';
 export * from './service-pattern';

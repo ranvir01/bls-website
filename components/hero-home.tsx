@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { ChevronDown, Phone, ArrowRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Script from 'next/script';
+import { QuoteButton } from '@/components/quote-button';
 
 interface HeroHomeProps {
   onScrollDown?: () => void;
@@ -209,13 +210,12 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
               variants={fadeIn}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 z-10 mt-6 sm:mt-8 md:mt-10"
             >
-              <Link
-                href="/contact"
+              <QuoteButton
                 className="group bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Free Consultation
                 <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </QuoteButton>
               <a
                 href="tel:2532170814"
                 className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/20 px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300"
@@ -230,7 +230,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
               variants={fadeIn}
               className="mt-8 text-white/70 text-sm"
             >
-              Serving: Seattle • Bellevue • Kirkland • Redmond • Greater Puget Sound Area
+              Serving: Seattle • Bellevue • Kirkland • Redmond • Mercer Island • Issaquah • Sammamish • Woodinville • Bothell • Kenmore • Shoreline • Lake Forest Park • Edmonds • Mountlake Terrace • Magnolia • West Seattle • Burien • Tukwila • Renton • Kent • Auburn • Federal Way • Des Moines • Covington • Maple Valley • SeaTac • Greater Puget Sound Area
             </motion.p>
           </motion.div>
         </div>
