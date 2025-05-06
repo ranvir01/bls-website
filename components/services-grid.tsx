@@ -55,7 +55,7 @@ interface ServicesGridProps {
 export const ServicesGrid = ({
   category,
   services,
-  categories,
+  categories = [],
   columns = 3,
   className,
   cardClassName,
@@ -67,7 +67,7 @@ export const ServicesGrid = ({
   };
 
   // If specific services are provided, show them
-  if (services) {
+  if (services?.length) {
     return (
       <div className={cn('grid grid-cols-1 gap-6 md:gap-8', columnsClass[columns])}>
         {services.map((service, index) => (
@@ -82,7 +82,7 @@ export const ServicesGrid = ({
   }
 
   // If categories are provided, show them grouped
-  if (categories) {
+  if (categories?.length) {
     return (
       <div className="space-y-16">
         {categories.map((cat) => (
@@ -107,8 +107,8 @@ export const ServicesGrid = ({
   }
 
   // If a specific category is provided, show its services
-  if (category && categories) {
-    const selectedCategory = categories.find(cat => cat.slug === category);
+  if (category && categories?.length) {
+    const selectedCategory = categories.find((cat: ServiceCategory) => cat.slug === category);
     if (!selectedCategory) return null;
 
     return (
