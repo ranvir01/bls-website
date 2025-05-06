@@ -59,7 +59,7 @@ export default function WaterFeaturesPage() {
               <p className="text-gray-700 mb-6">
                 Our experienced team works with you to select the perfect water feature for your property, whether it's a serene pond, a dramatic waterfall, a sophisticated fountain, or a gentle stream. We handle everything from design to installation to maintenance, ensuring your water feature remains beautiful and functional throughout the seasons.
               </p>
-              <QuoteButton />
+              <QuoteButton>Get Your Free Quote</QuoteButton>
             </div>
             <div className="relative h-[400px]">
               <Image
@@ -138,7 +138,7 @@ export default function WaterFeaturesPage() {
           </p>
           <Gallery images={galleryImages} className="mb-12" />
           <div className="text-center">
-            <QuoteButton />
+            <QuoteButton>Get Your Free Quote</QuoteButton>
           </div>
         </div>
       </section>
@@ -208,12 +208,10 @@ export default function WaterFeaturesPage() {
             Ready to Add a Water Feature to Your Landscape?
           </h2>
           <p className="text-xl max-w-3xl mx-auto mb-8">
-            Contact us today to schedule a consultation and learn how we can create the perfect water feature for your outdoor space.
+            Contact us today to schedule a consultation and learn how we can create the perfect water feature for your property.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <QuoteButton className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
-              Contact Us
-            </QuoteButton>
+            <QuoteButton>Request a Quote</QuoteButton>
             <Link href="/services" className="btn-primary bg-transparent border border-white hover:bg-white/10">
               Explore Other Services
             </Link>

@@ -48,7 +48,7 @@ export default function IrrigationMaintenancePage() {
               <p className="text-gray-700 mb-6">
                 From seasonal inspections to preventive maintenance, we help protect your investment and maintain a healthy, vibrant landscape while conserving water and reducing costs.
               </p>
-              <QuoteButton />
+              <QuoteButton>Get Your Free Quote</QuoteButton>
             </div>
             <div className="relative h-[400px]">
               <Image

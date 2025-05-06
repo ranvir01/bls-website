@@ -47,7 +47,7 @@ export default function SprinklerRepairPage() {
               <p className="text-gray-700 mb-6">
                 From fixing leaks and broken heads to troubleshooting control systems, we have the expertise to diagnose and repair any irrigation issue quickly and effectively. Our team uses high-quality replacement parts and proven repair techniques to ensure lasting results.
               </p>
-              <QuoteButton />
+              <QuoteButton>Get Your Free Quote</QuoteButton>
             </div>
             <div className="relative h-[400px]">
               <Image
@@ -126,7 +126,7 @@ export default function SprinklerRepairPage() {
           </p>
           <Gallery images={galleryImages} className="mb-12" />
           <div className="text-center">
-            <QuoteButton />
+            <QuoteButton>Get Your Free Quote</QuoteButton>
           </div>
         </div>
       </section>
@@ -196,12 +196,10 @@ export default function SprinklerRepairPage() {
             Need Sprinkler System Repairs?
           </h2>
           <p className="text-xl max-w-3xl mx-auto mb-8">
-            Contact us today for fast, professional sprinkler repair services in Seattle.
+            Contact us today to schedule a repair service and keep your irrigation system running efficiently.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
-              Contact Us
-            </Link>
+            <QuoteButton>Request a Quote</QuoteButton>
             <Link href="/services" className="btn-primary bg-transparent border border-white hover:bg-white/10">
               Explore Other Services
             </Link>

@@ -50,7 +50,7 @@ export default function SprinklerInstallationPage() {
                 From smart controllers and rain sensors to precise zone planning and water-efficient sprinkler heads, 
                 we implement solutions that conserve water while maintaining beautiful, healthy landscapes.
               </p>
-              <QuoteButton />
+              <QuoteButton>Get Your Free Quote</QuoteButton>
             </div>
             <div className="relative h-[400px]">
               <Image
@@ -199,12 +199,10 @@ export default function SprinklerInstallationPage() {
             Ready to Install Your Sprinkler System?
           </h2>
           <p className="text-xl max-w-3xl mx-auto mb-8">
-            Contact us today to schedule a consultation and learn how we can create the perfect irrigation solution for your landscape.
+            Contact us today to schedule a consultation and learn how we can create the perfect irrigation solution for your property.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <QuoteButton className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
-              Contact Us
-            </QuoteButton>
+            <QuoteButton>Request a Quote</QuoteButton>
             <Link href="/services" className="btn-primary bg-transparent border border-white hover:bg-white/10">
               Explore Other Services
             </Link>
