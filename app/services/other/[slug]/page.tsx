@@ -103,7 +103,7 @@ export default function OtherServicePage({ params }: OtherServicePageProps) {
     <ServicePageTemplate
       title={service.title}
       description={service.description}
-      image={service.image}
+      heroImage={service.image}
       features={service.features}
       benefits={service.benefits}
     />
