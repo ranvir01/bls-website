@@ -11,6 +11,26 @@ import { Menu, X, ChevronDown, Grid, Hammer, Droplets, Waves, Home, Blocks as Br
 import { QuoteButton } from './quote-button';
 import { useModal } from './modal-context';
 import { cn } from '@/lib/utils';
+import { LucideIcon } from 'lucide-react';
+
+interface NavItem {
+  name: string;
+  href?: string;
+  icon: LucideIcon;
+  sections?: NavSection[];
+}
+
+interface NavSection {
+  name: string;
+  icon: LucideIcon;
+  items: NavSectionItem[];
+}
+
+interface NavSectionItem {
+  name: string;
+  href: string;
+  icon?: LucideIcon;
+}
 
 interface MobileNavProps {
   isOpen: boolean;
