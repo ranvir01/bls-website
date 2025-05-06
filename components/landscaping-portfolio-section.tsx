@@ -1,97 +1,97 @@
 'use client';
 import React, { useState, useMemo } from 'react';
-import Image from 'next/image';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { QuoteButton } from './quote-button';
 import { X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ProgressiveImage } from './ui/progressive-image';
 
 // --- Portfolio Data (from screenshots) ---
 const PROJECTS = [
   {
     title: 'Front Yard Renovation',
     description: 'Complete front yard transformation featuring modern concrete walkways, custom planting design, and integrated lighting for curb appeal.',
-    image: 'https://imgur.com/IaiBKca.jpg',
+    image: 'https://i.imgur.com/IaiBKca.jpg',
     tags: ['Front Yard', 'Walkways', 'Planting Design'],
   },
   {
     title: 'Modern Patio Design',
     description: 'Custom patio design featuring modern furniture placement, integrated landscaping, and thoughtful space planning for outdoor living.',
-    image: 'https://imgur.com/HVYzhQi.jpg',
+    image: 'https://i.imgur.com/HVYzhQi.jpg',
     tags: ['Patio Design', 'Outdoor Living', 'Space Planning'],
   },
   {
     title: 'Backyard Patio & Irrigation',
     description: 'Custom backyard patio installation with integrated irrigation system, creating a functional outdoor living space with proper water management for surrounding plants.',
-    image: 'https://imgur.com/9sFpPqq.jpg',
+    image: 'https://i.imgur.com/9sFpPqq.jpg',
     tags: ['Patio Design', 'Irrigation', 'Outdoor Space'],
   },
   {
     title: 'Modern Stepping Stone Pathway',
     description: 'Elegant rectangular concrete stepping stones precisely installed along the driveway edge. Set in dark crushed rock, this modern pathway creates a functional connection while preventing soil erosion and enhancing curb appeal with its clean, contemporary design.',
-    image: 'https://imgur.com/Vopbikr.jpg',
+    image: 'https://i.imgur.com/Vopbikr.jpg',
     tags: ['Stepping Stones', 'Driveway Enhancement', 'Modern Design', 'Functional Pathway'],
   },
   {
     title: 'Sod Installation & Landscape Lighting',
     description: 'Professional sod installation paired with strategic landscape lighting to transform your yard. Fresh, premium-grade turf provides an instant green lawn, while energy-efficient lighting enhances nighttime visibility and curb appeal, highlighting your property\'s best features.',
-    image: 'https://imgur.com/EceZEhi.jpg',
+    image: 'https://i.imgur.com/EceZEhi.jpg',
     tags: ['Sod Installation', 'Landscape Lighting', 'Lawn Renovation', 'Curb Appeal'],
   },
   {
     title: 'Custom Entry Design',
     description: 'Architectural entry design combining hardscaping and landscaping elements for a welcoming approach to your home.',
-    image: 'https://imgur.com/5IdRLFZ.jpg',
+    image: 'https://i.imgur.com/5IdRLFZ.jpg',
     tags: ['Entry Design', 'Hardscaping', 'Landscaping'],
   },
   {
     title: 'Stone Retaining Wall',
     description: 'Expertly crafted stone retaining wall with proper drainage and engineering for both function and beauty.',
-    image: 'https://imgur.com/8oL7rQO.jpg',
+    image: 'https://i.imgur.com/8oL7rQO.jpg',
     tags: ['Stone Work', 'Retaining Wall', 'Drainage'],
   },
   {
     title: 'Professional Irrigation System',
     description: 'Custom irrigation system design and installation to efficiently deliver water to your plants and lawn. Features precision sprinkler placement, programmable timer controls, and water-conserving technology to keep your landscape healthy while reducing water usage.',
-    image: 'https://imgur.com/90HMYen.jpg',
+    image: 'https://i.imgur.com/90HMYen.jpg',
     tags: ['Irrigation', 'Water Conservation', 'Landscape Maintenance', 'Sprinkler Systems'],
   },
   {
     title: 'Contemporary Driveway Pathway',
     description: 'Meticulously installed rectangular stepping stones along a residential driveway, creating a functional pathway that enhances curb appeal. Dark crushed rock provides contrast while allowing proper drainage, complemented by a lush, manicured lawn and thoughtfully placed plantings near the home.',
-    image: 'https://imgur.com/Bn1312V.jpg',
+    image: 'https://i.imgur.com/Bn1312V.jpg',
     tags: ['Driveway Design', 'Stepping Stones', 'Modern Landscaping', 'Residential Access'],
   },
   {
     title: 'Modern Planting Design',
     description: 'Contemporary planting design with drought-tolerant plants, decorative mulch, and clean architectural lines for a stunning front yard.',
-    image: 'https://imgur.com/JKm4ubP.jpg',
+    image: 'https://i.imgur.com/JKm4ubP.jpg',
     tags: ['Modern Design', 'Drought Tolerant', 'Low Maintenance'],
   },
   {
     title: 'Modern Gate Installation',
     description: 'Custom designed gate with horizontal wood slats and decorative grid pattern, complemented by vertical fencing and integrated landscaping.',
-    image: 'https://imgur.com/4lAfc27.jpg',
+    image: 'https://i.imgur.com/4lAfc27.jpg',
     tags: ['Custom Gate', 'Modern Design', 'Landscaping'],
   },
   {
     title: 'Custom Deck Stairs',
     description: 'Professional deck stair installation with non-slip treads, sturdy construction, and integrated railing system for safe and stylish access.',
-    image: 'https://imgur.com/QF7kFKc.jpg',
+    image: 'https://i.imgur.com/QF7kFKc.jpg',
     tags: ['Deck Stairs', 'Custom Design', 'Safety'],
   },
   {
     title: 'Luxury Outdoor Kitchen',
     description: 'Custom outdoor kitchen featuring premium appliances, natural stone countertops, and integrated lighting for the ultimate outdoor cooking and entertaining experience.',
-    image: 'https://imgur.com/HMtM9HV.jpg',
+    image: 'https://i.imgur.com/HMtM9HV.jpg',
     tags: ['Outdoor Kitchen', 'Custom Design', 'Entertainment'],
   },
   {
     title: 'Custom Planting Design',
     description: 'Professional planting bed installation with carefully selected plants for year-round color and texture, featuring drought-resistant varieties.',
-    image: 'https://imgur.com/fGbXlwy.jpg',
+    image: 'https://i.imgur.com/fGbXlwy.jpg',
     tags: ['Plant Design', 'Drought Resistant', 'Low Maintenance'],
   },
 ];
@@ -178,12 +178,12 @@ export function LandscapingPortfolioSection() {
           {filteredProjects.map((project, idx) => (
             <Card key={project.title} className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
               <div className="relative h-48 w-full cursor-pointer rounded-t-lg overflow-hidden" onClick={() => setLightbox({ open: true, image: project.image, alt: project.title })}>
-                <Image
+                <ProgressiveImage
                   src={project.image}
                   alt={project.title}
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  unoptimized={true}
                   priority={idx < 3}
                 />
               </div>
@@ -206,30 +206,27 @@ export function LandscapingPortfolioSection() {
         </div>
         {/* Lightbox Modal */}
         <AnimatePresence>
-          {lightbox?.open && (
+          {lightbox && lightbox.open && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-2 sm:p-4 cursor-zoom-out"
+              className="fixed inset-0 z-50 bg-black/90 p-4 flex items-center justify-center"
               onClick={() => setLightbox(null)}
             >
               <button
-                className="absolute top-3 right-3 sm:top-6 sm:right-6 z-10 text-white bg-black/60 p-3 sm:p-4 rounded-full cursor-pointer"
-                onClick={e => { e.stopPropagation(); setLightbox(null); }}
-                aria-label="Close image preview"
+                className="absolute top-4 right-4 p-2 text-white bg-black/50 rounded-full hover:bg-black/70 z-10"
+                onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
               >
-                <X className="h-7 w-7 sm:h-6 sm:w-6" />
+                <X className="h-6 w-6" />
               </button>
-              <div className="relative w-full max-w-2xl h-[60vh] flex items-center justify-center" onClick={e => e.stopPropagation()}>
-                <Image
+              <div className="relative max-w-4xl w-full max-h-[90vh] aspect-video" onClick={(e) => e.stopPropagation()}>
+                <ProgressiveImage
                   src={lightbox.image}
                   alt={lightbox.alt}
                   fill
-                  className="object-contain max-h-[80vh] max-w-full"
-                  sizes="100vw"
-                  quality={90}
-                  priority
+                  className="object-contain"
+                  unoptimized={true}
                 />
               </div>
             </motion.div>

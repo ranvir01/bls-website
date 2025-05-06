@@ -16,6 +16,7 @@ import { Modal } from './ui/modal';
 import Autoplay from 'embla-carousel-autoplay';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { ProgressiveImage } from './ui/progressive-image';
 
 interface ServiceFeature {
   text: string;
@@ -118,127 +119,127 @@ const services: Service[] = [
 
 // Imgur links for hardscaping gallery
 const hardscapingImages = [
-  'https://imgur.com/gNOWitQ.jpg',
-  'https://imgur.com/S0SCwEP.jpg',
-  'https://imgur.com/rONx6pN.jpg',
-  'https://imgur.com/krNpok4.jpg',
-  'https://imgur.com/WxjPT00.jpg',
-  'https://imgur.com/ihMJotj.jpg',
-  'https://imgur.com/IM63yVK.jpg',
-  'https://imgur.com/WalHE5M.jpg',
-  'https://imgur.com/iuOTAoq.jpg',
-  'https://imgur.com/wDBAf8S.jpg',
-  'https://imgur.com/lK3DW9m.jpg',
-  'https://imgur.com/vaAE2xG.jpg',
-  'https://imgur.com/IbU3PZH.jpg',
-  'https://imgur.com/tlBRoZQ.jpg',
-  'https://imgur.com/Vn4NTeS.jpg',
-  'https://imgur.com/01wyJYX.jpg',
-  'https://imgur.com/iI4T9B9.jpg',
-  'https://imgur.com/xrJCGj8.jpg',
-  'https://imgur.com/beK9wHi.jpg',
-  'https://imgur.com/IE7g7jQ.jpg',
-  'https://imgur.com/xlGUzbO.jpg',
-  'https://imgur.com/Z1fqC0W.jpg',
-  'https://imgur.com/3YCtVmB.jpg',
-  'https://imgur.com/W4rJQVT.jpg',
-  'https://imgur.com/kZT1SN0.jpg',
-  'https://imgur.com/HsOg2ir.jpg',
-  'https://imgur.com/Kg5cNlS.jpg',
-  'https://imgur.com/aAuWL1A.jpg',
-  'https://imgur.com/pzVfDKZ.jpg',
-  'https://imgur.com/Ie2Az1m.jpg',
-  'https://imgur.com/8pQpJzJ.jpg',
-  'https://imgur.com/1LbzU5m.jpg',
-  'https://imgur.com/fqpLd95.jpg',
-  'https://imgur.com/JMydFBT.jpg',
-  'https://imgur.com/meLTFWW.jpg',
-  'https://imgur.com/IhXP84p.jpg',
-  'https://imgur.com/ieMuskv.jpg',
-  'https://imgur.com/zM33JVe.jpg',
-  'https://imgur.com/Ti3plls.jpg',
-  'https://imgur.com/cYefFPu.jpg',
-  'https://imgur.com/pMywawC.jpg',
-  'https://imgur.com/p5jQQCe.jpg',
-  'https://imgur.com/YAIIZ80.jpg',
-  'https://imgur.com/pDES5RU.jpg',
-  'https://imgur.com/Q9tSlNG.jpg',
-  'https://imgur.com/nxGpCQx.jpg',
+  'https://i.imgur.com/gNOWitQ.jpg',
+  'https://i.imgur.com/S0SCwEP.jpg',
+  'https://i.imgur.com/rONx6pN.jpg',
+  'https://i.imgur.com/krNpok4.jpg',
+  'https://i.imgur.com/WxjPT00.jpg',
+  'https://i.imgur.com/ihMJotj.jpg',
+  'https://i.imgur.com/IM63yVK.jpg',
+  'https://i.imgur.com/WalHE5M.jpg',
+  'https://i.imgur.com/iuOTAoq.jpg',
+  'https://i.imgur.com/wDBAf8S.jpg',
+  'https://i.imgur.com/lK3DW9m.jpg',
+  'https://i.imgur.com/vaAE2xG.jpg',
+  'https://i.imgur.com/IbU3PZH.jpg',
+  'https://i.imgur.com/tlBRoZQ.jpg',
+  'https://i.imgur.com/Vn4NTeS.jpg',
+  'https://i.imgur.com/01wyJYX.jpg',
+  'https://i.imgur.com/iI4T9B9.jpg',
+  'https://i.imgur.com/xrJCGj8.jpg',
+  'https://i.imgur.com/beK9wHi.jpg',
+  'https://i.imgur.com/IE7g7jQ.jpg',
+  'https://i.imgur.com/xlGUzbO.jpg',
+  'https://i.imgur.com/Z1fqC0W.jpg',
+  'https://i.imgur.com/3YCtVmB.jpg',
+  'https://i.imgur.com/W4rJQVT.jpg',
+  'https://i.imgur.com/kZT1SN0.jpg',
+  'https://i.imgur.com/HsOg2ir.jpg',
+  'https://i.imgur.com/Kg5cNlS.jpg',
+  'https://i.imgur.com/aAuWL1A.jpg',
+  'https://i.imgur.com/pzVfDKZ.jpg',
+  'https://i.imgur.com/Ie2Az1m.jpg',
+  'https://i.imgur.com/8pQpJzJ.jpg',
+  'https://i.imgur.com/1LbzU5m.jpg',
+  'https://i.imgur.com/fqpLd95.jpg',
+  'https://i.imgur.com/JMydFBT.jpg',
+  'https://i.imgur.com/meLTFWW.jpg',
+  'https://i.imgur.com/IhXP84p.jpg',
+  'https://i.imgur.com/ieMuskv.jpg',
+  'https://i.imgur.com/zM33JVe.jpg',
+  'https://i.imgur.com/Ti3plls.jpg',
+  'https://i.imgur.com/cYefFPu.jpg',
+  'https://i.imgur.com/pMywawC.jpg',
+  'https://i.imgur.com/p5jQQCe.jpg',
+  'https://i.imgur.com/YAIIZ80.jpg',
+  'https://i.imgur.com/pDES5RU.jpg',
+  'https://i.imgur.com/Q9tSlNG.jpg',
+  'https://i.imgur.com/nxGpCQx.jpg',
 ];
 
 // Imgur links for irrigation gallery
 const irrigationImages = [
-  'https://imgur.com/jzBsjww.jpg',
-  'https://imgur.com/KP4cslY.jpg',
-  'https://imgur.com/LkN1m9v.jpg',
-  'https://imgur.com/CYMUEYS.jpg',
-  'https://imgur.com/AKFKlal.jpg',
-  'https://imgur.com/DMC2c2v.jpg',
-  'https://imgur.com/9rWWTOJ.jpg',
-  'https://imgur.com/UPQn98E.jpg',
-  'https://imgur.com/EZEIB0b.jpg',
-  'https://imgur.com/y17JRRL.jpg',
-  'https://imgur.com/8Kk2pvf.jpg',
-  'https://imgur.com/oH7Zioq.jpg',
-  'https://imgur.com/SXby7oE.jpg',
-  'https://imgur.com/H90g2lh.jpg',
-  'https://imgur.com/1W7h4KQ.jpg',
-  'https://imgur.com/Q1ITpfM.jpg',
-  'https://imgur.com/emc78kf.jpg',
-  'https://imgur.com/9xXwPeo.jpg',
-  'https://imgur.com/p4pchFK.jpg',
+  'https://i.imgur.com/jzBsjww.jpg',
+  'https://i.imgur.com/KP4cslY.jpg',
+  'https://i.imgur.com/LkN1m9v.jpg',
+  'https://i.imgur.com/CYMUEYS.jpg',
+  'https://i.imgur.com/AKFKlal.jpg',
+  'https://i.imgur.com/DMC2c2v.jpg',
+  'https://i.imgur.com/9rWWTOJ.jpg',
+  'https://i.imgur.com/UPQn98E.jpg',
+  'https://i.imgur.com/EZEIB0b.jpg',
+  'https://i.imgur.com/y17JRRL.jpg',
+  'https://i.imgur.com/8Kk2pvf.jpg',
+  'https://i.imgur.com/oH7Zioq.jpg',
+  'https://i.imgur.com/SXby7oE.jpg',
+  'https://i.imgur.com/H90g2lh.jpg',
+  'https://i.imgur.com/1W7h4KQ.jpg',
+  'https://i.imgur.com/Q1ITpfM.jpg',
+  'https://i.imgur.com/emc78kf.jpg',
+  'https://i.imgur.com/9xXwPeo.jpg',
+  'https://i.imgur.com/p4pchFK.jpg',
 ];
 
 // Imgur links for other services gallery
 const otherServicesImages = [
-  'https://imgur.com/ac5J7DP.jpg',
-  'https://imgur.com/TRSuzIt.jpg',
-  'https://imgur.com/PwTnP1V.jpg',
-  'https://imgur.com/fcuXlOI.jpg',
-  'https://imgur.com/TrOMn93.jpg',
-  'https://imgur.com/Gp7p8rn.jpg',
-  'https://imgur.com/bXUelJe.jpg',
-  'https://imgur.com/4rQXFgr.jpg',
-  'https://imgur.com/QkYDlxb.jpg',
-  'https://imgur.com/cW5U6SQ.jpg',
-  'https://imgur.com/0yszzEK.jpg',
-  'https://imgur.com/9iTCouu.jpg',
-  'https://imgur.com/Z4FDFMh.jpg',
-  'https://imgur.com/fLtQURL.jpg',
-  'https://imgur.com/30vqK2G.jpg',
-  'https://imgur.com/9mAnZGw.jpg',
-  'https://imgur.com/CqckNYx.jpg',
-  'https://imgur.com/1hZGbAl.jpg',
-  'https://imgur.com/MRdn7QA.jpg',
-  'https://imgur.com/xPoK3O9.jpg',
-  'https://imgur.com/u0ngIw5.jpg',
-  'https://imgur.com/haU73uK.jpg',
-  'https://imgur.com/oQaMbnI.jpg',
-  'https://imgur.com/u3SGBMG.jpg',
-  'https://imgur.com/Oh7X8e3.jpg',
-  'https://imgur.com/qKo8vfZ.jpg',
-  'https://imgur.com/YsV0DLp.jpg',
-  'https://imgur.com/hqSfibV.jpg',
-  'https://imgur.com/gG5h7Zu.jpg',
-  'https://imgur.com/62hxRnY.jpg',
-  'https://imgur.com/KGYTzxd.jpg',
-  'https://imgur.com/TkQ9QVb.jpg',
-  'https://imgur.com/s85ERoS.jpg',
-  'https://imgur.com/6ufmNMb.jpg',
-  'https://imgur.com/vLoG0qT.jpg',
-  'https://imgur.com/vekuodq.jpg',
-  'https://imgur.com/8ZePdi5.jpg',
-  'https://imgur.com/LkWTnyz.jpg',
-  'https://imgur.com/v9ZdiZx.jpg',
-  'https://imgur.com/PCWNVxb.jpg',
-  'https://imgur.com/oGHOa8b.jpg',
-  'https://imgur.com/BzVWsTq.jpg',
-  'https://imgur.com/TKANgyr.jpg',
-  'https://imgur.com/cXTjSEa.jpg',
-  'https://imgur.com/BtR9L5l.jpg',
-  'https://imgur.com/567ip1q.jpg',
-  'https://imgur.com/LxTuww5.jpg',
-  'https://imgur.com/WLxRsiB.jpg',
+  'https://i.imgur.com/ac5J7DP.jpg',
+  'https://i.imgur.com/TRSuzIt.jpg',
+  'https://i.imgur.com/PwTnP1V.jpg',
+  'https://i.imgur.com/fcuXlOI.jpg',
+  'https://i.imgur.com/TrOMn93.jpg',
+  'https://i.imgur.com/Gp7p8rn.jpg',
+  'https://i.imgur.com/bXUelJe.jpg',
+  'https://i.imgur.com/4rQXFgr.jpg',
+  'https://i.imgur.com/QkYDlxb.jpg',
+  'https://i.imgur.com/cW5U6SQ.jpg',
+  'https://i.imgur.com/0yszzEK.jpg',
+  'https://i.imgur.com/9iTCouu.jpg',
+  'https://i.imgur.com/Z4FDFMh.jpg',
+  'https://i.imgur.com/fLtQURL.jpg',
+  'https://i.imgur.com/30vqK2G.jpg',
+  'https://i.imgur.com/9mAnZGw.jpg',
+  'https://i.imgur.com/CqckNYx.jpg',
+  'https://i.imgur.com/1hZGbAl.jpg',
+  'https://i.imgur.com/MRdn7QA.jpg',
+  'https://i.imgur.com/xPoK3O9.jpg',
+  'https://i.imgur.com/u0ngIw5.jpg',
+  'https://i.imgur.com/haU73uK.jpg',
+  'https://i.imgur.com/oQaMbnI.jpg',
+  'https://i.imgur.com/u3SGBMG.jpg',
+  'https://i.imgur.com/Oh7X8e3.jpg',
+  'https://i.imgur.com/qKo8vfZ.jpg',
+  'https://i.imgur.com/YsV0DLp.jpg',
+  'https://i.imgur.com/hqSfibV.jpg',
+  'https://i.imgur.com/gG5h7Zu.jpg',
+  'https://i.imgur.com/62hxRnY.jpg',
+  'https://i.imgur.com/KGYTzxd.jpg',
+  'https://i.imgur.com/TkQ9QVb.jpg',
+  'https://i.imgur.com/s85ERoS.jpg',
+  'https://i.imgur.com/6ufmNMb.jpg',
+  'https://i.imgur.com/vLoG0qT.jpg',
+  'https://i.imgur.com/vekuodq.jpg',
+  'https://i.imgur.com/8ZePdi5.jpg',
+  'https://i.imgur.com/LkWTnyz.jpg',
+  'https://i.imgur.com/v9ZdiZx.jpg',
+  'https://i.imgur.com/PCWNVxb.jpg',
+  'https://i.imgur.com/oGHOa8b.jpg',
+  'https://i.imgur.com/BzVWsTq.jpg',
+  'https://i.imgur.com/TKANgyr.jpg',
+  'https://i.imgur.com/cXTjSEa.jpg',
+  'https://i.imgur.com/BtR9L5l.jpg',
+  'https://i.imgur.com/567ip1q.jpg',
+  'https://i.imgur.com/LxTuww5.jpg',
+  'https://i.imgur.com/WLxRsiB.jpg',
 ];
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -264,12 +265,12 @@ function HardscapingGallery({ images, onImageClick }: GalleryProps) {
         {images.map((img, idx) => (
           <CarouselItem key={img} className="flex justify-center items-center">
             <div className="relative w-full h-64 cursor-pointer group" onClick={() => onImageClick(img)}>
-              <img
+              <ProgressiveImage
                 src={img}
                 alt={`Hardscaping example ${idx + 1}`}
-                className="object-cover w-full h-full rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
-                loading="lazy"
-                style={{ background: '#e5e7eb' }}
+                fill
+                className="object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
+                unoptimized={true}
               />
               <div className="absolute inset-0 bg-black/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
@@ -290,12 +291,12 @@ function IrrigationGallery({ images, onImageClick }: GalleryProps) {
         {images.map((img, idx) => (
           <CarouselItem key={img} className="flex justify-center items-center">
             <div className="relative w-full h-64 cursor-pointer group" onClick={() => onImageClick(img)}>
-              <img
+              <ProgressiveImage
                 src={img}
                 alt={`Irrigation example ${idx + 1}`}
-                className="object-cover w-full h-full rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
-                loading="lazy"
-                style={{ background: '#e5e7eb' }}
+                fill
+                className="object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
+                unoptimized={true}
               />
               <div className="absolute inset-0 bg-black/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
@@ -316,12 +317,12 @@ function OtherServicesGallery({ images, onImageClick }: GalleryProps) {
         {images.map((img, idx) => (
           <CarouselItem key={img} className="flex justify-center items-center">
             <div className="relative w-full h-64 cursor-pointer group" onClick={() => onImageClick(img)}>
-              <img
+              <ProgressiveImage
                 src={img}
-                alt={`Other services example ${idx + 1}`}
-                className="object-cover w-full h-full rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
-                loading="lazy"
-                style={{ background: '#e5e7eb' }}
+                alt={`Landscaping example ${idx + 1}`}
+                fill
+                className="object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
+                unoptimized={true}
               />
               <div className="absolute inset-0 bg-black/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
@@ -445,12 +446,15 @@ export const ProfessionalServices = () => {
             >
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
-            <img
-              src={shuffledImages[modalImgIdx]}
-              alt={`Expanded hardscaping example ${modalImgIdx + 1}`}
-              className="mx-auto w-full max-w-[95vw] md:max-w-4xl lg:max-w-5xl h-auto max-h-[80vh] rounded-2xl shadow-2xl object-contain bg-gray-200"
-              style={{ background: '#e5e7eb' }}
-            />
+            <div className="relative mx-auto w-full max-w-[95vw] md:max-w-4xl lg:max-w-5xl h-[60vh] rounded-2xl shadow-2xl overflow-hidden">
+              <ProgressiveImage
+                src={shuffledImages[modalImgIdx]}
+                alt={`Expanded hardscaping example ${modalImgIdx + 1}`}
+                fill
+                className="object-contain bg-gray-200 rounded-2xl"
+                unoptimized={true}
+              />
+            </div>
             <button
               onClick={handleNext}
               className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg"
@@ -471,12 +475,15 @@ export const ProfessionalServices = () => {
             >
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
-            <img
-              src={shuffledIrrigationImages[modalIrrigationImgIdx]}
-              alt={`Expanded irrigation example ${modalIrrigationImgIdx + 1}`}
-              className="mx-auto w-full max-w-[95vw] md:max-w-4xl lg:max-w-5xl h-auto max-h-[80vh] rounded-2xl shadow-2xl object-contain bg-gray-200"
-              style={{ background: '#e5e7eb' }}
-            />
+            <div className="relative mx-auto w-full max-w-[95vw] md:max-w-4xl lg:max-w-5xl h-[60vh] rounded-2xl shadow-2xl overflow-hidden">
+              <ProgressiveImage
+                src={shuffledIrrigationImages[modalIrrigationImgIdx]}
+                alt={`Expanded irrigation example ${modalIrrigationImgIdx + 1}`}
+                fill
+                className="object-contain bg-gray-200 rounded-2xl"
+                unoptimized={true}
+              />
+            </div>
             <button
               onClick={handleIrrigationNext}
               className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg"
@@ -497,12 +504,15 @@ export const ProfessionalServices = () => {
             >
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
-            <img
-              src={shuffledOtherImages[modalOtherImgIdx]}
-              alt={`Expanded other services example ${modalOtherImgIdx + 1}`}
-              className="mx-auto w-full max-w-[95vw] md:max-w-4xl lg:max-w-5xl h-auto max-h-[80vh] rounded-2xl shadow-2xl object-contain bg-gray-200"
-              style={{ background: '#e5e7eb' }}
-            />
+            <div className="relative mx-auto w-full max-w-[95vw] md:max-w-4xl lg:max-w-5xl h-[60vh] rounded-2xl shadow-2xl overflow-hidden">
+              <ProgressiveImage
+                src={shuffledOtherImages[modalOtherImgIdx]}
+                alt={`Expanded other services example ${modalOtherImgIdx + 1}`}
+                fill
+                className="object-contain bg-gray-200 rounded-2xl"
+                unoptimized={true}
+              />
+            </div>
             <button
               onClick={handleOtherNext}
               className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg"

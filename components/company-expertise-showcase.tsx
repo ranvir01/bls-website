@@ -3,10 +3,12 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Shield, Clock, Users, MapPin, Star, Check, ChevronDown, X, Leaf, Globe } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Shield, Clock, Users, MapPin, Star, Check, ChevronDown, X, Leaf, Globe, ChevronRight, ChevronLeft, MaximizeIcon } from 'lucide-react';
 import { QuoteButton } from '@/components/quote-button';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { ProgressiveImage } from '@/components/ui/progressive-image';
+import { LazyLoad } from '@/components/ui/lazy-load';
 
 export function CompanyExpertiseShowcase() {
   const pathname = usePathname();
@@ -27,13 +29,13 @@ export function CompanyExpertiseShowcase() {
   const [imageLightboxIndex, setImageLightboxIndex] = useState(0);
 
   const beforeAfterImages = [
-    { before: "https://imgur.com/a4YfFsq.png", after: "https://imgur.com/g7If2eg.png" },
-    { before: "https://imgur.com/rtFxUlr.png", after: "https://imgur.com/w5zcAJ6.png" },
-    { before: "https://imgur.com/zHKeI3Q.png", after: "https://imgur.com/kDH4cbo.png" },
-    { before: "https://imgur.com/znNyHFH.png", after: "https://imgur.com/iXHwj38.png" },
-    { before: "https://imgur.com/2FpEyQb.png", after: "https://imgur.com/qd4YfuQ.png" },
-    { before: "https://imgur.com/OADM5v9.png", after: "https://imgur.com/jO1pDEK.png" },
-    { before: "https://imgur.com/i4ZrNmk.png", after: "https://imgur.com/055OKmw.png" },
+    { before: "https://i.imgur.com/a4YfFsq.png", after: "https://i.imgur.com/g7If2eg.png" },
+    { before: "https://i.imgur.com/rtFxUlr.png", after: "https://i.imgur.com/w5zcAJ6.png" },
+    { before: "https://i.imgur.com/zHKeI3Q.png", after: "https://i.imgur.com/kDH4cbo.png" },
+    { before: "https://i.imgur.com/znNyHFH.png", after: "https://i.imgur.com/iXHwj38.png" },
+    { before: "https://i.imgur.com/2FpEyQb.png", after: "https://i.imgur.com/qd4YfuQ.png" },
+    { before: "https://i.imgur.com/OADM5v9.png", after: "https://i.imgur.com/jO1pDEK.png" },
+    { before: "https://i.imgur.com/i4ZrNmk.png", after: "https://i.imgur.com/055OKmw.png" },
   ];
 
   const totalLightboxImages = beforeAfterImages.length * 2;
@@ -320,13 +322,12 @@ export function CompanyExpertiseShowcase() {
                         className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
                         onClick={() => openImageLightbox('before', slideIndex)}
                       >
-                        <Image
+                        <ProgressiveImage
                           src={beforeAfterImages[slideIndex].before}
                           alt={`Before ${slideIndex + 1}`}
                           fill
                           className="object-cover object-center"
-                          sizes="100vw"
-                          priority
+                          unoptimized={true}
                         />
                         <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
                           BEFORE
@@ -345,13 +346,12 @@ export function CompanyExpertiseShowcase() {
                         className="absolute inset-0 bg-black z-10 cursor-pointer overflow-hidden"
                         onClick={() => openImageLightbox('after', slideIndex)}
                       >
-                        <Image
+                        <ProgressiveImage
                           src={beforeAfterImages[slideIndex].after}
                           alt={`After ${slideIndex + 1}`}
                           fill
                           className="object-cover object-center"
-                          sizes="100vw"
-                          priority
+                          unoptimized={true}
                         />
                         <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
                           AFTER
@@ -392,13 +392,12 @@ export function CompanyExpertiseShowcase() {
                           className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
                           onClick={() => openImageLightbox('before', slideIndex)}
                         >
-                          <Image
+                          <ProgressiveImage
                             src={beforeAfterImages[slideIndex].before}
                             alt={`Before ${slideIndex + 1}`}
                             fill
                             className="object-cover object-center"
-                            sizes="100vw"
-                            priority
+                            unoptimized={true}
                           />
                           <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
                             BEFORE
@@ -417,13 +416,12 @@ export function CompanyExpertiseShowcase() {
                           className="absolute inset-0 bg-black z-10 cursor-pointer overflow-hidden"
                           onClick={() => openImageLightbox('after', slideIndex)}
                         >
-                          <Image
+                          <ProgressiveImage
                             src={beforeAfterImages[slideIndex].after}
                             alt={`After ${slideIndex + 1}`}
                             fill
                             className="object-cover object-center"
-                            sizes="100vw"
-                            priority
+                            unoptimized={true}
                           />
                           <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
                             AFTER
@@ -571,44 +569,60 @@ export function CompanyExpertiseShowcase() {
         </div>
 
         {/* Lightbox for before/after images */}
-        {imageLightboxOpen && (
-          <div className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4" onClick={closeImageLightbox}>
-            <button
-              className="absolute top-4 right-4 z-10 text-white bg-black/60 p-3 rounded-full"
-              onClick={e => { e.stopPropagation(); closeImageLightbox(); }}
-              aria-label="Close expanded image"
+        <AnimatePresence>
+          {imageLightboxOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+              onClick={handleBackdropClick}
             >
-              <X size={28} />
-            </button>
-            <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white bg-black/60 p-3 rounded-full"
-              onClick={goToPrevLightbox}
-              aria-label="Previous image"
-            >
-              <ArrowLeft size={28} />
-            </button>
-            <button
-              className="absolute right-16 top-1/2 -translate-y-1/2 z-10 text-white bg-black/60 p-3 rounded-full"
-              onClick={goToNextLightbox}
-              aria-label="Next image"
-            >
-              <ArrowRight size={28} />
-            </button>
-            <div className="relative w-full max-w-4xl max-h-[90vh] aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border-4 border-blue-200 flex items-center justify-center bg-black" onClick={e => e.stopPropagation()}>
-              <Image
-                src={getLightboxImage().src}
-                alt={getLightboxImage().alt}
-                fill
-                className="object-contain"
-                priority
-                quality={100}
-              />
-              <div className={`absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold`}>
-                {getLightboxImage().label}
+              <div 
+                className="relative max-w-5xl w-full mx-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative aspect-video bg-black/30 overflow-hidden rounded-lg">
+                  <ProgressiveImage
+                    src={getLightboxImage().src}
+                    alt={getLightboxImage().alt}
+                    fill
+                    className="object-contain"
+                    unoptimized={true}
+                  />
+                  <div className="absolute top-4 right-4 bg-black/70 px-3 py-1 rounded-full text-white text-sm font-bold">
+                    {getLightboxImage().label}
+                  </div>
+                </div>
+                <button 
+                  onClick={closeImageLightbox}
+                  className="absolute -top-12 right-0 text-white hover:text-gray-300 flex items-center gap-2"
+                >
+                  Close <X className="w-5 h-5" />
+                </button>
+                <div className="absolute inset-y-0 left-0 flex items-center">
+                  <button 
+                    onClick={goToPrevLightbox}
+                    className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full -ml-6"
+                  >
+                    <ChevronLeft className="w-8 h-8" />
+                  </button>
+                </div>
+                <div className="absolute inset-y-0 right-0 flex items-center">
+                  <button 
+                    onClick={goToNextLightbox}
+                    className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full -mr-6"
+                  >
+                    <ChevronRight className="w-8 h-8" />
+                  </button>
+                </div>
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 px-3 py-1 rounded-full text-white text-sm">
+                  {imageLightboxIndex + 1} / {totalLightboxImages}
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
