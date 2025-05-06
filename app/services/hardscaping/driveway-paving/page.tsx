@@ -47,7 +47,7 @@ export default function DrivewayPavingPage() {
               <p className="text-gray-700 mb-6">
                 From traditional concrete to decorative pavers, we offer a range of options to match your home's style and meet your specific needs. Our driveways are built to last, with proper drainage and a strong foundation.
               </p>
-              <QuoteButton />
+              <QuoteButton>Get Your Free Quote</QuoteButton>
             </div>
             <div className="relative h-[400px]">
               <Image
