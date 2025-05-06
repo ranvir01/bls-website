@@ -14,6 +14,7 @@ const nextConfig = {
   
   // Configure images
   images: { 
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

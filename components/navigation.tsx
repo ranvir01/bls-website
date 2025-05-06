@@ -309,6 +309,7 @@ export const Navigation = () => {
                 alt="Blue Landscaping Logo"
                 fill
                 priority
+                unoptimized={true}
                 sizes="(max-width: 768px) 11rem, 14rem"
                 className="object-contain drop-shadow-sm brightness-90 hover:brightness-110 hover:scale-105 transition-all duration-300"
               />

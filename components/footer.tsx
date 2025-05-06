@@ -90,6 +90,7 @@ export const Footer = () => {
                 alt="Blue Landscaping"
                 width={180}
                 height={60}
+                unoptimized={true}
                 className="object-contain brightness-150"
               />
             </Link>

@@ -197,6 +197,7 @@ export const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
                     src="/images/logo.png"
                     alt="Blue Landscaping Logo"
                     fill
+                    unoptimized={true}
                     className="object-contain brightness-200"
                   />
                 </div>
