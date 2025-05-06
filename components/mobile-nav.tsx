@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Grid, Hammer, Droplets, Waves, Home, Blocks as Brick, 
   Blocks, WrenchIcon, Settings, MapPin, Info, Image as ImageIcon, Phone, 
-  MessageSquareQuote, CheckCircle, ArrowRight, Mail, Flame, Stairs, Sofa, Fence, Scissors, Sprout, Grass } from 'lucide-react';
+  MessageSquareQuote, CheckCircle, ArrowRight, Mail, Flame, ArrowUpDown, Sofa, Fence, Scissors, Sprout, Leaf } from 'lucide-react';
 import { QuoteButton } from './quote-button';
 import { useModal } from './modal-context';
 import { cn } from '@/lib/utils';
@@ -55,7 +55,7 @@ export const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
             { name: 'Retaining Walls', href: '/services/hardscaping/retaining-walls', icon: Brick },
             { name: 'Driveways', href: '/services/hardscaping/driveways', icon: Blocks },
             { name: 'Outdoor Fire Features', href: '/services/hardscaping/fire-features', icon: Flame },
-            { name: 'Steps & Stairs', href: '/services/hardscaping/steps', icon: Stairs },
+            { name: 'Steps & Stairs', href: '/services/hardscaping/steps', icon: ArrowUpDown },
             { name: 'Built-in Seating', href: '/services/hardscaping/seating', icon: Sofa },
             { name: 'Water Features', href: '/services/hardscaping/water-features', icon: Waves },
           ],
@@ -76,7 +76,7 @@ export const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
             { name: 'Fencing', href: '/services/other/fencing', icon: Fence },
             { name: 'Lawn Maintenance', href: '/services/other/lawn-maintenance', icon: Scissors },
             { name: 'Planting & Design', href: '/services/other/planting-design', icon: Sprout },
-            { name: 'Sod Installation', href: '/services/other/sod-installation', icon: Grass },
+            { name: 'Sod Installation', href: '/services/other/sod-installation', icon: Leaf },
           ],
         },
       ],

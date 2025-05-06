@@ -59,7 +59,7 @@ export default function PatioInstallationPage() {
               <p className="text-gray-700 mb-6">
                 We handle every aspect of your patio project, from initial design concepts through final installation. Our experienced team ensures proper drainage, stable foundation preparation, and precise installation for a patio that will last for years to come.
               </p>
-              <QuoteButton />
+              <QuoteButton>Get Your Free Quote</QuoteButton>
             </div>
             <div className="relative h-[400px]">
               <Image
@@ -138,7 +138,7 @@ export default function PatioInstallationPage() {
           </p>
           <Gallery images={galleryImages} className="mb-12" />
           <div className="text-center">
-            <QuoteButton />
+            <QuoteButton>Request a Quote</QuoteButton>
           </div>
         </div>
       </section>
