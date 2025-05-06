@@ -324,11 +324,14 @@ export const Navigation = () => {
                   <button
                     className={cn(
                       "flex items-center gap-1.5 px-2 py-1 font-medium transition-colors rounded-md",
-                      "text-blue-800 hover:text-blue-600 hover:bg-blue-50",
-                      activeDropdown === item.name && "bg-blue-50 text-blue-700"
+                      scrolled
+                        ? "text-blue-800 hover:text-blue-600 hover:bg-blue-50"
+                        : "text-white hover:text-white hover:bg-black/30 drop-shadow-md",
+                      activeDropdown === item.name && (scrolled ? "bg-blue-50 text-blue-700" : "bg-black/30 text-white")
                     )}
                     onClick={() => toggleDropdown(item.name)}
                     aria-expanded={activeDropdown === item.name}
+                    style={!scrolled ? {textShadow: '0 2px 4px rgba(0,0,0,0.8)'} : {}}
                   >
                     <span>{item.name}</span>
                     <ChevronDown className={cn(
@@ -341,8 +344,11 @@ export const Navigation = () => {
                     href={item.href}
                     className={cn(
                       "flex items-center gap-1.5 px-2 py-1 font-medium transition-colors rounded-md",
-                      "text-blue-800 hover:text-blue-600 hover:bg-blue-50"
+                      scrolled
+                        ? "text-blue-800 hover:text-blue-600 hover:bg-blue-50"
+                        : "text-white hover:text-white hover:bg-black/30 drop-shadow-md"
                     )}
+                    style={!scrolled ? {textShadow: '0 2px 4px rgba(0,0,0,0.8)'} : {}}
                   >
                     {item.icon && <item.icon className="h-4 w-4" />}
                     <span>{item.name}</span>
@@ -411,7 +417,12 @@ export const Navigation = () => {
             </button>
             
             <button
-              className="p-1.5 sm:p-2 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors focus:outline-none"
+              className={cn(
+                "p-1.5 sm:p-2 rounded-lg transition-colors focus:outline-none",
+                scrolled 
+                  ? "text-blue-600 hover:bg-blue-50" 
+                  : "text-white hover:bg-black/30 bg-black/20"
+              )}
               onClick={handleMenuToggle}
               aria-label="Toggle mobile menu"
             >

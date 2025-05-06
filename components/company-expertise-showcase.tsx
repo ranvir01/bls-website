@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Shield, Clock, Users, MapPin, Star, Check, ChevronDown, X, Leaf, Globe, ChevronRight, ChevronLeft, MaximizeIcon } from 'lucide-react';
+import { Clock, Users, MapPin, Star, ChevronRight, ChevronDown, ChevronUp, ArrowLeft, ArrowRight, Check, X, ChevronLeft, Shield, Maximize } from 'lucide-react';
 import { QuoteButton } from '@/components/quote-button';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
@@ -286,12 +286,16 @@ export function CompanyExpertiseShowcase() {
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 priority
                 unoptimized={true}
-                style={{objectPosition: '50% 35%'}} // Adjusting focus more on the people's faces
+                style={{objectPosition: '50% 30%'}} // Adjusting focus more on the people's faces
               />
               {/* Overlay caption */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent px-6 py-4 flex flex-col items-start">
-                <span className="text-white text-lg font-semibold drop-shadow">Owners</span>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-6 py-4 flex flex-col items-start">
+                <span className="text-white text-lg font-semibold drop-shadow-md">Owners</span>
                 <span className="text-white text-xs mt-1 opacity-80">Click to expand</span>
+              </div>
+              {/* Add zoom indicator */}
+              <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <Maximize className="h-4 w-4 text-white" />
               </div>
             </motion.div>
           </div>
@@ -652,8 +656,13 @@ export function CompanyExpertiseShowcase() {
                     fill
                     className="object-contain md:object-cover"
                     unoptimized={true}
-                    style={{objectPosition: '50% 35%'}} // Adjusted to focus on faces
+                    style={{objectPosition: '50% 30%'}} // Adjusted to focus on faces
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-3">
+                    <div className="text-center text-white text-base sm:text-lg font-medium">
+                      Blue Landscaping Services Team
+                    </div>
+                  </div>
                 </div>
                 <button 
                   onClick={() => {
@@ -664,9 +673,6 @@ export function CompanyExpertiseShowcase() {
                 >
                   Close <X className="w-5 h-5" />
                 </button>
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 px-3 py-1 rounded-full text-white text-sm">
-                  Our Team
-                </div>
               </div>
             </motion.div>
           )}

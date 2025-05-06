@@ -98,20 +98,21 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
           className="object-cover object-center scale-110 brightness-[1.15] contrast-[1.1] saturate-[1.1]"
           sizes="100vw"
           quality={95}
+          unoptimized={true}
         />
         {/* Enhanced gradient overlay with more contrast for text */}
-        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/90 via-black/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/75 to-transparent md:bg-gradient-to-r md:from-black/90 md:via-black/75 md:to-transparent" />
       </div>
 
       {/* Content container */}
-      <div className="relative z-10 flex h-full items-center pt-12 sm:pt-16 md:pt-24 px-4 sm:px-6 md:px-8">
-        <div className="container-custom">
+      <div className="relative z-10 flex h-full items-center pt-20 sm:pt-24 md:pt-24 px-4 sm:px-6 md:px-8">
+        <div className="container-custom w-full">
           <motion.div
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
             variants={staggerChildren}
             viewport={{ once: true }}
-            className="max-w-4xl relative mt-16 sm:mt-4 md:mt-0 px-0 sm:px-4 md:px-6"
+            className="max-w-4xl relative mt-8 sm:mt-4 md:mt-0 px-0 sm:px-4 md:px-6 mx-auto w-full"
           >
             {/* Centered trust badges and payment methods */}
             <div className="w-full flex flex-col items-center">
@@ -120,17 +121,17 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
                 className="flex flex-wrap items-center gap-2 sm:gap-4 mb-2 sm:mb-4 text-white/90 justify-center"
               >
                 <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
                   <span className="text-xs sm:text-sm font-medium">4.8/5 Rating (127+ Reviews)</span>
                 </div>
-                <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-white/30" />
+                <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white/30" />
                 <div className="flex items-center gap-1">
-                  <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+                  <Shield className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-blue-400" />
                   <span className="text-xs sm:text-sm font-medium">License No. BLUELLS880K2</span>
                 </div>
-                <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-white/30" />
+                <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white/30" />
                 <div className="flex items-center gap-1">
-                  <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
+                  <CreditCard className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-green-400" />
                   <span className="text-xs sm:text-sm font-medium">Multiple Payment Options</span>
                 </div>
               </motion.div>
@@ -155,7 +156,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             {/* Main headline with enhanced typography */}
             <motion.h1 
               variants={fadeIn}
-              className="mb-3 sm:mb-4 md:mb-8 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl text-center mx-auto"
+              className="mb-3 sm:mb-4 md:mb-6 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl text-center mx-auto"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
             >
               Expert Landscaping & Hardscaping in <span className="text-blue-300">Seattle</span>
@@ -164,7 +165,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             {/* Enhanced subheadline with better contrast */}
             <motion.p 
               variants={fadeIn}
-              className="mb-4 sm:mb-6 md:mb-10 text-base sm:text-xl md:text-2xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl text-center mx-auto"
+              className="mb-4 sm:mb-6 md:mb-8 text-sm sm:text-lg md:text-xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl text-center mx-auto"
               style={{ textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
             >
               Transform your outdoor space with our premium landscaping services. Specializing in retaining walls, custom patios, and professional irrigation systems.
@@ -279,7 +280,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             Scroll to explore
           </div>
           <div className="bg-white/10 backdrop-blur-sm p-1 sm:p-2 rounded-full">
-            <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5 text-white animate-pulse" />
+            <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
           </div>
         </motion.button>
       </div>
