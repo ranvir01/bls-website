@@ -104,49 +104,49 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
       </div>
 
       {/* Content container */}
-      <div className="relative z-10 flex h-full items-center pt-16 sm:pt-20 md:pt-24 px-4 sm:px-6 md:px-8">
+      <div className="relative z-10 flex h-full items-center pt-12 sm:pt-16 md:pt-24 px-4 sm:px-6 md:px-8">
         <div className="container-custom">
           <motion.div
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
             variants={staggerChildren}
             viewport={{ once: true }}
-            className="max-w-4xl relative mt-0 sm:mt-4 md:mt-0 px-0 sm:px-4 md:px-6"
+            className="max-w-4xl relative mt-16 sm:mt-4 md:mt-0 px-0 sm:px-4 md:px-6"
           >
             {/* Centered trust badges and payment methods */}
             <div className="w-full flex flex-col items-center">
               <motion.div
                 variants={fadeIn}
-                className="flex flex-wrap items-center gap-4 mb-4 text-white/90 justify-center"
+                className="flex flex-wrap items-center gap-2 sm:gap-4 mb-2 sm:mb-4 text-white/90 justify-center"
               >
                 <div className="flex items-center gap-1">
-                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-medium">4.8/5 Rating (127+ Reviews)</span>
+                  <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
+                  <span className="text-xs sm:text-sm font-medium">4.8/5 Rating (127+ Reviews)</span>
                 </div>
-                <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-white/30" />
                 <div className="flex items-center gap-1">
-                  <Shield className="w-5 h-5 text-blue-400" />
-                  <span className="text-sm font-medium">License No. BLUELLS880K2</span>
+                  <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+                  <span className="text-xs sm:text-sm font-medium">License No. BLUELLS880K2</span>
                 </div>
-                <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-white/30" />
                 <div className="flex items-center gap-1">
-                  <CreditCard className="w-5 h-5 text-green-400" />
-                  <span className="text-sm font-medium">Multiple Payment Options</span>
+                  <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
+                  <span className="text-xs sm:text-sm font-medium">Multiple Payment Options</span>
                 </div>
               </motion.div>
               <motion.div
                 variants={fadeIn}
-                className="w-full flex justify-center mb-6"
+                className="w-full flex justify-center mb-4 sm:mb-6"
               >
                 <div className="flex flex-col items-center">
                   <span className="text-xs text-white/90 mb-1 text-center">Accepted Payments:</span>
-                  <div className="flex flex-wrap justify-center gap-1 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Zelle</span>
-                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Venmo</span>
-                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">PayPal</span>
-                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Cash</span>
-                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Visa</span>
-                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Mastercard</span>
+                  <div className="flex flex-wrap justify-center gap-1 bg-white/10 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
+                    <span className="text-[10px] sm:text-xs bg-white/20 px-2 py-0.5 rounded text-white">Zelle</span>
+                    <span className="text-[10px] sm:text-xs bg-white/20 px-2 py-0.5 rounded text-white">Venmo</span>
+                    <span className="text-[10px] sm:text-xs bg-white/20 px-2 py-0.5 rounded text-white">PayPal</span>
+                    <span className="text-[10px] sm:text-xs bg-white/20 px-2 py-0.5 rounded text-white">Cash</span>
+                    <span className="text-[10px] sm:text-xs bg-white/20 px-2 py-0.5 rounded text-white">Visa</span>
+                    <span className="text-[10px] sm:text-xs bg-white/20 px-2 py-0.5 rounded text-white">Mastercard</span>
                   </div>
                 </div>
               </motion.div>
@@ -155,7 +155,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             {/* Main headline with enhanced typography */}
             <motion.h1 
               variants={fadeIn}
-              className="mb-4 sm:mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl text-center mx-auto"
+              className="mb-3 sm:mb-4 md:mb-8 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl text-center mx-auto"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
             >
               Expert Landscaping & Hardscaping in <span className="text-blue-300">Seattle</span>
@@ -164,7 +164,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             {/* Enhanced subheadline with better contrast */}
             <motion.p 
               variants={fadeIn}
-              className="mb-6 sm:mb-8 md:mb-10 text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl text-center mx-auto"
+              className="mb-4 sm:mb-6 md:mb-10 text-base sm:text-xl md:text-2xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl text-center mx-auto"
               style={{ textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
             >
               Transform your outdoor space with our premium landscaping services. Specializing in retaining walls, custom patios, and professional irrigation systems.
@@ -173,12 +173,12 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             {/* Expandable info section */}
             <motion.div
               variants={fadeIn}
-              className="mb-6 sm:mb-8 relative z-20"
+              className="mb-4 sm:mb-6 relative z-20"
             >
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 aria-expanded={isExpanded}
-                className="group flex items-center text-gray-100/90 hover:text-white transition-all duration-300 bg-black/20 px-4 sm:px-5 py-3 sm:py-3.5 rounded-full backdrop-blur-sm border border-white/10 hover:border-white/20 min-h-[48px] sm:min-h-[52px] w-full sm:w-auto relative text-sm sm:text-base hover:bg-black/30"
+                className="group flex items-center text-gray-100/90 hover:text-white transition-all duration-300 bg-black/20 px-3 sm:px-5 py-2 sm:py-3.5 rounded-full backdrop-blur-sm border border-white/10 hover:border-white/20 min-h-[40px] sm:min-h-[52px] w-full sm:w-auto relative text-sm sm:text-base hover:bg-black/30"
               >
                 <span className="font-medium">Learn more about our expertise</span>
                 <ChevronDown className={cn(
@@ -192,7 +192,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
                 animate={{
                   height: isExpanded ? "auto" : 0,
                   opacity: isExpanded ? 1 : 0,
-                  marginTop: isExpanded ? "1rem" : 0,
+                  marginTop: isExpanded ? "0.75rem" : 0,
                   scale: isExpanded ? 1 : 0.98,
                   transformOrigin: "top"
                 }}
@@ -205,26 +205,26 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
               >
                 <div 
                   className={cn(
-                    "bg-black/40 backdrop-blur-sm p-6 text-gray-100 border border-white/10",
-                    "overflow-y-auto max-h-[min(60vh,480px)] custom-scrollbar",
+                    "bg-black/40 backdrop-blur-sm p-4 sm:p-6 text-gray-100 border border-white/10",
+                    "overflow-y-auto max-h-[min(40vh,360px)] sm:max-h-[min(60vh,480px)] custom-scrollbar",
                     "shadow-[0_0_15px_rgba(0,0,0,0.2)] rounded-xl",
                     "transition-all duration-300"
                   )}
                 >
-                  <p className="mb-6">
+                  <p className="mb-4 sm:mb-6 text-sm sm:text-base">
                     From engineered <strong>retaining walls</strong> and custom <strong>paver patios</strong> to <strong>water-efficient irrigation systems</strong>, 
                     we deliver premium solutions that enhance both <strong>functionality</strong> and <strong>beauty</strong>. Our expert team has 
                     completed over 3,600 successful projects throughout the <strong>Greater Seattle area</strong>.
                   </p>
-                  <p className="mb-6">
+                  <p className="mb-4 sm:mb-6 text-sm sm:text-base">
                     Specializing in custom <strong>hardscaping solutions</strong> including <strong>retaining walls</strong>, <strong>paver patios</strong>, and <strong>water features</strong> 
                     designed for <strong>Seattle's unique terrain</strong>. Our professional <strong>irrigation systems</strong> provide efficient watering solutions engineered specifically for the <strong>Pacific Northwest climate</strong>.
                   </p>
-                  <p className="mb-4">
+                  <p className="mb-4 text-sm sm:text-base">
                     From <strong>slope stabilization</strong> to <strong>outdoor living spaces</strong>, we deliver premium <strong>landscaping services</strong> that 
                     enhance both functionality and beauty.
                   </p>
-                  <div className="h-8 bg-gradient-to-t from-black/30 via-black/10 to-transparent sticky bottom-0 -mx-6 -mb-6" />
+                  <div className="h-8 bg-gradient-to-t from-black/30 via-black/10 to-transparent sticky bottom-0 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6" />
                 </div>
               </motion.div>
             </motion.div>
@@ -232,19 +232,19 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             {/* CTA buttons */}
             <motion.div 
               variants={fadeIn}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 z-10 mt-6 sm:mt-8 md:mt-10"
+              className="flex flex-col sm:flex-row gap-2 sm:gap-4 md:gap-5 z-10 mt-4 sm:mt-8 md:mt-10"
             >
               <QuoteButton
-                className="group bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="group bg-blue-600 hover:bg-blue-700 text-white px-5 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Free Consultation
-                <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1 transition-transform" />
               </QuoteButton>
               <a
                 href="tel:2532170814"
-                className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/20 px-8 py-4 rounded-lg text-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300"
+                className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/20 px-5 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300"
               >
-                <Phone className="w-5 h-5" />
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                 (253) 217-0814
               </a>
             </motion.div>
@@ -262,17 +262,25 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
         </div>
       </div>
       
-      {/* Scroll down indicator - repositioned and styled for visibility */}
-      <div className={`absolute left-0 right-0 mx-auto z-40 flex justify-center transition-opacity duration-300 ${scrollY > 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{bottom: '0'}}>
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center z-10 px-4">
         <motion.button
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          onClick={onScrollDown}
-          className="bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg text-white/90 hover:text-white flex flex-col items-center gap-2 border border-white/10"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          onClick={onScrollDown || (() => window.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+          }))}
+          className="flex flex-col items-center group"
+          aria-label="Scroll down"
         >
-          <span className="text-sm font-semibold whitespace-nowrap drop-shadow">Scroll to explore</span>
-          <ChevronDown className="w-6 h-6 animate-bounce" />
+          <div className="text-white/80 text-xs sm:text-sm font-medium mb-1 group-hover:text-white transition-colors">
+            Scroll to explore
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm p-1 sm:p-2 rounded-full">
+            <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5 text-white animate-pulse" />
+          </div>
         </motion.button>
       </div>
     </div>

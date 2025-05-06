@@ -297,7 +297,7 @@ export function CompanyExpertiseShowcase() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 2xl:gap-20 items-center min-h-[80vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12 xl:gap-16 2xl:gap-20 items-center min-h-[80vh]">
           {/* Desktop Design Work Heading + Image Group */}
           <div className="hidden lg:flex flex-col lg:col-span-6 xl:col-span-7 items-center">
             <h3 className="text-lg md:text-2xl font-bold text-blue-900 text-center bg-white/80 rounded-xl px-4 py-2 shadow-md mb-2">
@@ -368,12 +368,12 @@ export function CompanyExpertiseShowcase() {
             </div>
           </div>
           {/* Mobile Design Work Heading + Image Group */}
-          <div className="block lg:hidden w-full mb-8">
+          <div className="block lg:hidden w-full mb-4 sm:mb-8">
             <div className="flex flex-col items-center w-full">
               <h3 className="text-base md:text-xl font-bold text-blue-900 text-center bg-white/80 rounded-xl px-3 py-1.5 shadow mb-1">
                 Our Design Work: Before & After Transformations
               </h3>
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl w-full">
+              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl w-full">
                 {/* Mobile Before/After Slider */}
                 <div 
                   ref={sliderRef}
@@ -403,7 +403,7 @@ export function CompanyExpertiseShowcase() {
                             className="object-cover object-center"
                             unoptimized={true}
                           />
-                          <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
+                          <div className="absolute top-3 sm:top-6 left-3 sm:left-6 bg-black/80 text-white px-3 sm:px-6 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold">
                             BEFORE
                           </div>
                         </div>
@@ -427,7 +427,7 @@ export function CompanyExpertiseShowcase() {
                             className="object-cover object-center"
                             unoptimized={true}
                           />
-                          <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
+                          <div className="absolute top-3 sm:top-6 right-3 sm:right-6 bg-white/80 text-black px-3 sm:px-6 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold">
                             AFTER
                           </div>
                         </motion.div>
@@ -440,16 +440,16 @@ export function CompanyExpertiseShowcase() {
           </div>
 
           {/* Expertise Content */}
-          <div className="space-y-8 lg:col-span-6 xl:col-span-5 lg:pl-8 xl:pl-12 2xl:pl-16">
+          <div className="space-y-5 sm:space-y-8 lg:col-span-6 xl:col-span-5 lg:pl-8 xl:pl-12 2xl:pl-16">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-medium mb-4"
+                className="inline-flex items-center bg-blue-100 text-blue-800 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4"
               >
-                <Shield className="h-4 w-4 mr-1.5" />
+                <Shield className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-1.5" />
                 <span>Professional Hardscaping & Irrigation</span>
               </motion.div>
               
@@ -458,7 +458,7 @@ export function CompanyExpertiseShowcase() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
               >
                 Expert Retaining Walls & Custom Patios in Seattle Since 1998
               </motion.h2>
@@ -468,7 +468,7 @@ export function CompanyExpertiseShowcase() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-lg text-gray-700 mb-6"
+                className="text-base sm:text-lg text-gray-700 mb-4 sm:mb-6"
               >
                 For over 25 years, <span className="font-semibold text-blue-900">Blue Landscaping Services</span> has been Seattle's premier provider of <span className="font-semibold text-blue-900">professional hardscaping and irrigation solutions</span>. Our expert team specializes in custom retaining walls, paver patios, water features, and professional irrigation systems designed specifically for Seattle's unique terrain and climate.
               </motion.p>

@@ -6,17 +6,20 @@ import { Footer } from '@/components/footer';
 import { StickyQuoteButton } from '@/components/sticky-quote-button';
 import { ModalProvider } from '@/components/modal-context';
 import { ModalContainer } from '@/components/modal-container';
+import PerformanceOptimizer from '@/components/performance-optimizer';
 
 const montserrat = Montserrat({ 
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-montserrat',
+  preload: true,
 });
 
 const quicksand = Quicksand({ 
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-quicksand',
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -27,6 +30,7 @@ export const metadata: Metadata = {
   description: 'Blue Landscaping Services offers professional landscaping, hardscaping, irrigation, and lawn care services in Seattle and surrounding areas. Get a free quote today!',
   keywords: 'landscaping, hardscaping, irrigation, lawn care, seattle, washington, garden design, patio installation',
   metadataBase: new URL('https://bluelandscaping.com'),
+  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -70,8 +74,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${quicksand.variable}`}>
+      <head>
+        {/* Preload critical assets */}
+        <link rel="preload" href="/images/logo.png" as="image" />
+        
+        {/* DNS Prefetch and preconnect to external domains */}
+        <link rel="dns-prefetch" href="https://images.pexels.com" />
+        <link rel="dns-prefetch" href="https://i.imgur.com" />
+        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.imgur.com" crossOrigin="anonymous" />
+      </head>
       <body className="relative min-h-screen flex flex-col">
         <ModalProvider>
+          <PerformanceOptimizer />
           <Navigation />
           <main className="flex-grow">
             {children}

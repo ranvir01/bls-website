@@ -291,74 +291,35 @@ export const Navigation = () => {
   };
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-[60] transition-all duration-300',
-        scrolled 
-          ? 'bg-white/95 backdrop-blur-sm shadow-lg py-2' 
-          : 'bg-white/90 backdrop-blur-sm py-3'
-      )}
-    >
-      <div className="container-custom mx-auto">
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      scrolled ? 
+        "bg-white shadow-md py-2" : 
+        "bg-transparent py-3 md:py-5"
+    )}>
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center relative z-[999]" onClick={closeMenu}>
-            <div className="relative w-44 h-12 md:w-56 md:h-16">
+          <Link href="/" className="relative flex items-center">
+            <div className="relative h-8 sm:h-10 w-36 sm:w-40">
               <Image
                 src="/images/logo.png"
                 alt="Blue Landscaping Logo"
                 fill
-                priority
                 unoptimized={true}
-                sizes="(max-width: 768px) 11rem, 14rem"
-                className="object-contain drop-shadow-sm brightness-90 hover:brightness-110 hover:scale-105 transition-all duration-300"
+                className={cn(
+                  "object-contain transition-opacity duration-300", 
+                  scrolled ? "opacity-100" : "opacity-100"
+                )}
+                priority
               />
             </div>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className={cn(
-              "md:hidden flex items-center justify-center",
-              "rounded-full z-[10000] relative transition-all duration-300",
-              isOpen 
-                ? "bg-white text-teal-700 shadow-lg p-3" 
-                : "bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-md hover:shadow-lg p-3"
-            )}
-            onClick={handleMenuToggle}
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isOpen}
-          >
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <X className="h-6 w-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Menu className="h-6 w-6" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
-
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-4 lg:gap-6 ml-auto">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
-              <div key={item.name} className="relative group">
+              <div key={item.name} className="relative" ref={item.dropdown && activeDropdown === item.name ? menuRef : null}>
                 {item.dropdown ? (
                   <button
                     className={cn(
@@ -436,17 +397,31 @@ export const Navigation = () => {
                 )}
               </div>
             ))}
-            <QuoteButton 
-              className="btn-primary text-white rounded-md px-5 py-2.5 font-semibold shadow-md hover:shadow-lg
-                transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 active:translate-y-0
-                bg-blue-500 hover:bg-blue-600"
-              onClick={openModal}
-            />
           </nav>
+
+          {/* CTA Button & Mobile Menu Button */}
+          <div className="flex items-center">
+            <button
+              className="hidden sm:flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors mr-2"
+              onClick={openModal}
+            >
+              <Phone className="w-3.5 h-3.5 mr-1.5" />
+              <span className="hidden md:inline">Get a Quote</span>
+              <span className="inline md:hidden">Quote</span>
+            </button>
+            
+            <button
+              className="p-1.5 sm:p-2 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors focus:outline-none"
+              onClick={handleMenuToggle}
+              aria-label="Toggle mobile menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Portal-based Mobile Navigation */}
+      {/* Mobile Navigation */}
       <MobileNav isOpen={isOpen} onClose={closeMenu} />
     </header>
   );
