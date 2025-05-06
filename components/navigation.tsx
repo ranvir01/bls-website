@@ -34,6 +34,46 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MobileNav } from './mobile-nav';
 import { QuoteButton } from './quote-button';
 import { useModal } from './modal-context';
+import { LucideIcon } from 'lucide-react';
+
+interface NavItemBase {
+  name: string;
+  icon: LucideIcon;
+}
+
+interface NavItemWithDropdown extends NavItemBase {
+  href: string;
+  dropdown: true;
+  items: NavSection[];
+  mainItem?: {
+    name: string;
+    href: string;
+    icon: LucideIcon;
+    description: string;
+  };
+}
+
+interface NavItemWithoutDropdown extends NavItemBase {
+  href: string;
+  dropdown?: false;
+  items?: never;
+  mainItem?: never;
+}
+
+type NavItem = NavItemWithDropdown | NavItemWithoutDropdown;
+
+interface NavSection {
+  name: string;
+  icon: LucideIcon;
+  items: NavSectionItem[];
+}
+
+interface NavSectionItem {
+  name: string;
+  href: string;
+  icon?: LucideIcon;
+  description?: string;
+}
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
