@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Use export output for static site generation (works well with Netlify)
-  output: 'export',
-  
   // Enable build caching for faster builds
   experimental: {
     turbotrace: {
@@ -16,9 +13,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   
-  // Configure images for static export
+  // Configure images
   images: { 
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
