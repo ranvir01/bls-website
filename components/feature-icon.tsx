@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 import { 
   Home, Blocks, Square, Flame, Settings, 
-  Palette, Trees, Scissors, Sun, Plant, Recycle, Droplets,
+  Palette, Trees, Scissors, Sun, Sprout, Recycle, Droplets,
   Hammer, Leaf
 } from 'lucide-react';
 
@@ -18,7 +18,7 @@ const iconMap = {
   Trees,
   Scissors,
   Sun,
-  Plant,
+  Sprout,
   Recycle,
   Droplets,
   Hammer,
