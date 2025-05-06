@@ -30,7 +30,6 @@ export const metadata: Metadata = {
   description: 'Blue Landscaping Services offers professional landscaping, hardscaping, irrigation, and lawn care services in Seattle and surrounding areas. Get a free quote today!',
   keywords: 'landscaping, hardscaping, irrigation, lawn care, seattle, washington, garden design, patio installation',
   metadataBase: new URL('https://bluelandscaping.com'),
-  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -65,6 +64,13 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 5.0,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({

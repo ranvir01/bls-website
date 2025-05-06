@@ -35,6 +35,33 @@ export NEXT_TELEMETRY_DISABLED=1
 echo "Building with TypeScript checking disabled..."
 npm run build
 
+# Apply viewport metadata fix
+echo "Applying viewport metadata fix..."
+node scripts/fix-viewport.js
+
+# Optimize images during build
+echo "Optimizing image configuration..."
+# Add a special image handling comment to help Netlify
+cat << EOF > ./.next/images-manifest.json
+{
+  "version": 1,
+  "images": {
+    "domains": ["i.imgur.com", "images.pexels.com"],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "i.imgur.com"
+      },
+      {
+        "protocol": "https",
+        "hostname": "images.pexels.com"
+      }
+    ],
+    "unoptimized": true
+  }
+}
+EOF
+
 # Verify the build directory exists
 if [ -d ".next" ]; then
   echo "Build directory '.next' found successfully"
@@ -42,4 +69,6 @@ if [ -d ".next" ]; then
 else
   echo "ERROR: '.next' directory not found after build"
   exit 1
-fi 
+fi
+
+echo "Build completed successfully!" 
