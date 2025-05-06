@@ -241,7 +241,7 @@ const otherServicesImages = [
   'https://imgur.com/WLxRsiB.jpg',
 ];
 
-function shuffleArray(array) {
+function shuffleArray<T>(array: T[]): T[] {
   // Fisher-Yates shuffle
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
