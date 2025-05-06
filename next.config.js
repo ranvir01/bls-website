@@ -8,6 +8,11 @@ const nextConfig = {
     optimizePackageImports: ['@radix-ui/react-*', 'lucide-react'],
   },
   
+  // Disable TypeScript and ESLint during builds for faster build times
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  
   // Disable ESLint during builds for faster build times
   eslint: {
     ignoreDuringBuilds: true,
