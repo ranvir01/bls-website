@@ -40,25 +40,10 @@ const nextConfig = {
   // Optimize package imports
   experimental: {
     optimizePackageImports: ['@radix-ui/react-*', 'lucide-react'],
-    // Enable build cache
-    turborepo: {
-      enabled: true,
-    },
   },
   
   // Build output directory
   distDir: '.next',
-  
-  // Webpack optimizations
-  webpack: (config) => {
-    // Add typescript to externals to fix build issues
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      typescript: false
-    };
-    
-    return config;
-  },
 };
 
 export default nextConfig; 
