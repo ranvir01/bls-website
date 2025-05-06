@@ -91,7 +91,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
         style={{ transform: `translateY(${scrollY * 0.2}px)` }} // Subtle parallax effect
       >
         <Image
-          src="/images/logo.png"
+          src="https://i.imgur.com/ZLEqCBU.jpg"
           alt="Beautiful landscaped waterfront property with custom stonework and retaining walls in Seattle"
           fill
           priority
