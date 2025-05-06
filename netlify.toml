@@ -12,13 +12,13 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Redirect all URLs to the app
+# Simple redirect for client-side routing
 [[redirects]]
   from = "/*"
   to = "/"
   status = 200
 
-# Security headers
+# Security headers for improved security
 [[headers]]
   for = "/*"
   [headers.values]
