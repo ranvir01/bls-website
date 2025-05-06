@@ -251,7 +251,12 @@ function shuffleArray<T>(array: T[]): T[] {
   return arr;
 }
 
-function HardscapingGallery({ images, onImageClick }) {
+interface GalleryProps {
+  images: string[];
+  onImageClick: (img: string) => void;
+}
+
+function HardscapingGallery({ images, onImageClick }: GalleryProps) {
   const plugins = React.useMemo(() => [Autoplay({ delay: 3000, stopOnInteraction: false })], []);
   return (
     <Carousel opts={{ loop: true }} plugins={plugins} className="relative">
@@ -277,7 +282,7 @@ function HardscapingGallery({ images, onImageClick }) {
   );
 }
 
-function IrrigationGallery({ images, onImageClick }) {
+function IrrigationGallery({ images, onImageClick }: GalleryProps) {
   const plugins = React.useMemo(() => [Autoplay({ delay: 3000, stopOnInteraction: false })], []);
   return (
     <Carousel opts={{ loop: true }} plugins={plugins} className="relative">
@@ -303,7 +308,7 @@ function IrrigationGallery({ images, onImageClick }) {
   );
 }
 
-function OtherServicesGallery({ images, onImageClick }) {
+function OtherServicesGallery({ images, onImageClick }: GalleryProps) {
   const plugins = React.useMemo(() => [Autoplay({ delay: 3000, stopOnInteraction: false })], []);
   return (
     <Carousel opts={{ loop: true }} plugins={plugins} className="relative">
