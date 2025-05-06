@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ChevronDown, Phone, ArrowRight, Star } from 'lucide-react';
+import { ChevronDown, Phone, ArrowRight, Star, Shield, CreditCard } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Script from 'next/script';
 import { QuoteButton } from '@/components/quote-button';
@@ -113,23 +113,49 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             viewport={{ once: true }}
             className="max-w-4xl relative mt-0 sm:mt-4 md:mt-0 px-0 sm:px-4 md:px-6"
           >
-            {/* Trust badges */}
-            <motion.div
-              variants={fadeIn}
-              className="flex items-center gap-4 mb-6 text-white/90"
-            >
-              <div className="flex items-center gap-1">
-                <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                <span className="text-sm font-medium">4.9/5 Rating (127+ Reviews)</span>
-              </div>
-              <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
-              <span className="text-sm font-medium">Licensed & Insured</span>
-            </motion.div>
+            {/* Centered trust badges and payment methods */}
+            <div className="w-full flex flex-col items-center">
+              <motion.div
+                variants={fadeIn}
+                className="flex flex-wrap items-center gap-4 mb-4 text-white/90 justify-center"
+              >
+                <div className="flex items-center gap-1">
+                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <span className="text-sm font-medium">4.8/5 Rating (127+ Reviews)</span>
+                </div>
+                <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                <div className="flex items-center gap-1">
+                  <Shield className="w-5 h-5 text-blue-400" />
+                  <span className="text-sm font-medium">License No. BLUELLS880K2</span>
+                </div>
+                <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                <div className="flex items-center gap-1">
+                  <CreditCard className="w-5 h-5 text-green-400" />
+                  <span className="text-sm font-medium">Multiple Payment Options</span>
+                </div>
+              </motion.div>
+              <motion.div
+                variants={fadeIn}
+                className="w-full flex justify-center mb-6"
+              >
+                <div className="flex flex-col items-center">
+                  <span className="text-xs text-white/90 mb-1 text-center">Accepted Payments:</span>
+                  <div className="flex flex-wrap justify-center gap-1 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Zelle</span>
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Venmo</span>
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">PayPal</span>
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Cash</span>
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Visa</span>
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded text-white">Mastercard</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
 
             {/* Main headline with enhanced typography */}
             <motion.h1 
               variants={fadeIn}
-              className="mb-4 sm:mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl"
+              className="mb-4 sm:mb-6 md:mb-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl text-center mx-auto"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
             >
               Expert Landscaping & Hardscaping in <span className="text-blue-300">Seattle</span>
@@ -138,7 +164,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             {/* Enhanced subheadline with better contrast */}
             <motion.p 
               variants={fadeIn}
-              className="mb-6 sm:mb-8 md:mb-10 text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl"
+              className="mb-6 sm:mb-8 md:mb-10 text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl text-center mx-auto"
               style={{ textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
             >
               Transform your outdoor space with our premium landscaping services. Specializing in retaining walls, custom patios, and professional irrigation systems.
@@ -186,19 +212,17 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
                   )}
                 >
                   <p className="mb-6">
-                    From engineered retaining walls and custom paver patios to water-efficient irrigation systems, 
-                    we deliver premium solutions that enhance both functionality and beauty. Our expert team has 
-                    completed over 3,600 successful projects throughout the Greater Seattle area.
+                    From engineered <strong>retaining walls</strong> and custom <strong>paver patios</strong> to <strong>water-efficient irrigation systems</strong>, 
+                    we deliver premium solutions that enhance both <strong>functionality</strong> and <strong>beauty</strong>. Our expert team has 
+                    completed over 3,600 successful projects throughout the <strong>Greater Seattle area</strong>.
                   </p>
                   <p className="mb-6">
-                    Specializing in custom hardscaping solutions including retaining walls, paver patios, and water 
-                    features designed for Seattle's unique terrain. Our professional irrigation systems provide efficient 
-                    watering solutions engineered specifically for the Pacific Northwest climate.
+                    Specializing in custom <strong>hardscaping solutions</strong> including <strong>retaining walls</strong>, <strong>paver patios</strong>, and <strong>water features</strong> 
+                    designed for <strong>Seattle's unique terrain</strong>. Our professional <strong>irrigation systems</strong> provide efficient watering solutions engineered specifically for the <strong>Pacific Northwest climate</strong>.
                   </p>
                   <p className="mb-4">
-                    From slope stabilization to outdoor living spaces, we deliver premium landscaping services that 
-                    enhance both functionality and beauty. Our expert team has completed over 3,600 successful projects 
-                    throughout the Greater Seattle area.
+                    From <strong>slope stabilization</strong> to <strong>outdoor living spaces</strong>, we deliver premium <strong>landscaping services</strong> that 
+                    enhance both functionality and beauty.
                   </p>
                   <div className="h-8 bg-gradient-to-t from-black/30 via-black/10 to-transparent sticky bottom-0 -mx-6 -mb-6" />
                 </div>
@@ -226,26 +250,28 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             </motion.div>
 
             {/* Service areas */}
-            <motion.p
+            <motion.div
               variants={fadeIn}
-              className="mt-8 text-white/70 text-sm"
+              className="mt-8 flex justify-center"
             >
-              Serving: Seattle • Bellevue • Kirkland • Redmond • Mercer Island • Issaquah • Sammamish • Woodinville • Bothell • Kenmore • Shoreline • Lake Forest Park • Edmonds • Mountlake Terrace • Magnolia • West Seattle • Burien • Tukwila • Renton • Kent • Auburn • Federal Way • Des Moines • Covington • Maple Valley • SeaTac • Greater Puget Sound Area
-            </motion.p>
+              <div className="bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg text-white/80 text-center text-xs sm:text-sm max-w-full" style={{wordBreak: 'break-word'}}>
+                Serving: Seattle • Bellevue • Kirkland • Redmond • Mercer Island • Issaquah • Sammamish • Woodinville • Bothell • Kenmore • Shoreline • Lake Forest Park • Edmonds • Mountlake Terrace • Magnolia • West Seattle • Burien • Tukwila • Renton • Kent • Auburn • Federal Way • Des Moines • Covington • Maple Valley • SeaTac • Greater Puget Sound Area
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
       
-      {/* Scroll down indicator */}
-      <div className={`fixed bottom-8 w-full flex justify-center items-center z-50 px-4 transition-opacity duration-300 ${scrollY > 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      {/* Scroll down indicator - repositioned and styled for visibility */}
+      <div className={`absolute left-0 right-0 mx-auto z-40 flex justify-center transition-opacity duration-300 ${scrollY > 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{bottom: '0'}}>
         <motion.button
           variants={fadeIn}
           initial="hidden"
           animate="visible"
           onClick={onScrollDown}
-          className="text-white/70 hover:text-white transition-colors duration-300 flex flex-col items-center gap-2"
+          className="bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg text-white/90 hover:text-white flex flex-col items-center gap-2 border border-white/10"
         >
-          <span className="text-sm font-medium whitespace-nowrap">Scroll to explore</span>
+          <span className="text-sm font-semibold whitespace-nowrap drop-shadow">Scroll to explore</span>
           <ChevronDown className="w-6 h-6 animate-bounce" />
         </motion.button>
       </div>

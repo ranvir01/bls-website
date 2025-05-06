@@ -25,8 +25,16 @@ export default function TermsOfService() {
         <Card className="p-6">
           <h2 className="text-2xl font-semibold mb-4">3. Pricing and Payment</h2>
           <p className="text-gray-700">
-            Prices for our services are as quoted on a project-by-project basis. Payment terms will be specified in the service agreement or quote.
+            Prices for our services are as quoted on a project-by-project basis. Payment terms will be specified in the service agreement or quote. We accept the following payment methods:
           </p>
+          <ul className="list-disc list-inside mt-2 text-gray-700">
+            <li>Zelle</li>
+            <li>Venmo</li>
+            <li>PayPal</li>
+            <li>Cash</li>
+            <li>Visa</li>
+            <li>Mastercard</li>
+          </ul>
         </Card>
 
         <Card className="p-6">

@@ -3,11 +3,14 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Shield, Clock, Users, MapPin, Star, Check, ChevronDown, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Shield, Clock, Users, MapPin, Star, Check, ChevronDown, X, Leaf, Globe } from 'lucide-react';
 import { QuoteButton } from '@/components/quote-button';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 export function CompanyExpertiseShowcase() {
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
   const [slideIndex, setSlideIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -20,39 +23,20 @@ export function CompanyExpertiseShowcase() {
 
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [imageLightboxOpen, setImageLightboxOpen] = useState(false);
+  const [imageLightboxIndex, setImageLightboxIndex] = useState(0);
+
   const beforeAfterImages = [
-    {
-      before: "https://images.pexels.com/photos/589/garden-green-grass-spring.jpg",
-      after: "https://images.pexels.com/photos/158028/bellingrath-gardens-alabama-landscape-scenic-158028.jpeg",
-      title: "Hillside Terracing",
-      description: "Transforming a plain slope into a beautiful terraced garden with native plants"
-    },
-    {
-      before: "https://images.pexels.com/photos/53610/large-home-residential-house-architecture-53610.jpeg",
-      after: "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg",
-      title: "Patio Installation",
-      description: "Creating a stunning outdoor living space with custom stonework and seating"
-    },
-    {
-      before: "https://images.pexels.com/photos/158163/color-pattern-plant-wall-158163.jpeg",
-      after: "https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg",
-      title: "Retaining Wall Project",
-      description: "Building functional and beautiful retaining walls to maximize usable space"
-    },
-    {
-      before: "https://images.pexels.com/photos/5847357/pexels-photo-5847357.jpeg",
-      after: "https://images.pexels.com/photos/1477387/pexels-photo-1477387.jpeg",
-      title: "Water Feature Design",
-      description: "Adding tranquility and visual interest with custom water features"
-    },
-    // New slide with the landscaped property image
-    {
-      before: "https://images.pexels.com/photos/869095/pexels-photo-869095.jpeg",
-      after: "https://images.pexels.com/photos/2132101/pexels-photo-2132101.jpeg", 
-      title: "Complete Lawn Transformation",
-      description: "Revitalizing properties with premium lawn services and landscape design"
-    },
+    { before: "https://imgur.com/a4YfFsq.png", after: "https://imgur.com/g7If2eg.png" },
+    { before: "https://imgur.com/rtFxUlr.png", after: "https://imgur.com/w5zcAJ6.png" },
+    { before: "https://imgur.com/zHKeI3Q.png", after: "https://imgur.com/kDH4cbo.png" },
+    { before: "https://imgur.com/znNyHFH.png", after: "https://imgur.com/iXHwj38.png" },
+    { before: "https://imgur.com/2FpEyQb.png", after: "https://imgur.com/qd4YfuQ.png" },
+    { before: "https://imgur.com/OADM5v9.png", after: "https://imgur.com/jO1pDEK.png" },
+    { before: "https://imgur.com/i4ZrNmk.png", after: "https://imgur.com/055OKmw.png" },
   ];
+
+  const totalLightboxImages = beforeAfterImages.length * 2;
 
   // Update slider width on resize
   useEffect(() => {
@@ -117,20 +101,34 @@ export function CompanyExpertiseShowcase() {
     return () => clearTimeout(timer);
   }, [slideIndex]);
 
-  // Open lightbox with specific image
-  const openLightbox = (index: number, isAfter: boolean = false) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-    setIsShowingAfterImage(isAfter);
+  // Replace openLightbox and closeLightbox for before/after images
+  const openImageLightbox = (type: 'before' | 'after', idx: number) => {
+    setImageLightboxIndex(idx * 2 + (type === 'after' ? 1 : 0));
+    setImageLightboxOpen(true);
     setIsPaused(true);
-    document.body.style.overflow = 'hidden';
+  };
+  const closeImageLightbox = () => {
+    setImageLightboxOpen(false);
+    setIsPaused(false);
+  };
+  const goToPrevLightbox = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setImageLightboxIndex((prev) => (prev - 1 + totalLightboxImages) % totalLightboxImages);
+  };
+  const goToNextLightbox = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setImageLightboxIndex((prev) => (prev + 1) % totalLightboxImages);
   };
 
-  // Close lightbox
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-    setIsPaused(false);
-    document.body.style.overflow = '';
+  // Helper to get current image and label
+  const getLightboxImage = () => {
+    const idx = Math.floor(imageLightboxIndex / 2);
+    const isAfter = imageLightboxIndex % 2 === 1;
+    return {
+      src: isAfter ? beforeAfterImages[idx].after : beforeAfterImages[idx].before,
+      label: isAfter ? 'AFTER' : 'BEFORE',
+      alt: `${isAfter ? 'After' : 'Before'} ${idx + 1}`
+    };
   };
 
   // Handle keyboard navigation
@@ -164,24 +162,33 @@ export function CompanyExpertiseShowcase() {
     { icon: Clock, title: "25+", subtitle: "Years Experience", color: "bg-blue-50 text-blue-600" },
     { icon: Users, title: "3600+", subtitle: "Projects Completed", color: "bg-teal-50 text-teal-600" },
     { icon: MapPin, title: "25+", subtitle: "Cities Served", color: "bg-green-50 text-green-600" },
-    { icon: Star, title: "4.8", subtitle: "Average Rating", color: "bg-amber-50 text-amber-600" },
+    { icon: Star, title: "4.8/5", subtitle: "Average Rating", color: "bg-amber-50 text-amber-600" },
   ];
 
   const expertiseAreas = [
     {
+      id: "design-work",
+      title: "Design Work",
+      content: `<div class='flex items-start gap-3 mb-2'><span class='inline-flex items-center justify-center bg-yellow-100 rounded-full p-2'><svg xmlns='http://www.w3.org/2000/svg' class='lucide lucide-brush w-6 h-6 text-yellow-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path d='M2 22c0-2.5 2-4.5 4.5-4.5S11 19.5 11 22' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M22 2L12 12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><rect x='14' y='2' width='8' height='8' rx='2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></span><span class='font-bold text-yellow-800'>Design Work</span></div>
+      <strong>Our design work</strong> showcases the best in <strong>landscaping innovation</strong> for <strong>Seattle</strong> and the Pacific Northwest. We blend creative vision with advanced technology, including <strong>AI-driven design tools</strong>, to deliver outdoor spaces that are both beautiful and functional. Our team understands the unique climate and terrain of <strong>Seattle</strong>, ensuring every project is tailored for local conditions. Whether you need a modern garden, sustainable landscape, or a complete transformation, our <strong>design work</strong> stands out for quality, creativity, and local expertise. Discover how we use the latest trends and future technology to create lasting value for your property in <strong>Seattle</strong> and surrounding areas.`
+    },
+    {
       id: "comprehensive",
       title: "Comprehensive Approach",
-      content: "Our comprehensive approach combines expert hardscaping knowledge with professional irrigation design, ensuring that every project enhances both beauty and functionality. From engineered retaining walls and custom paver patios to water-efficient irrigation systems and drainage solutions, we create outdoor spaces that maximize curb appeal while solving complex drainage challenges. What sets us apart is our deep expertise in Seattle's unique landscaping challenges. Our solutions are precisely engineered to handle the Pacific Northwest's rainfall patterns while ensuring long-term stability and beauty in our region's demanding climate."
+      content: `<div class='flex items-start gap-3 mb-2'><span class='inline-flex items-center justify-center bg-indigo-100 rounded-full p-2'><svg xmlns='http://www.w3.org/2000/svg' class='lucide lucide-layers w-6 h-6 text-indigo-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'><polygon points='12 2 2 7 12 12 22 7 12 2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><polyline points='2 17 12 22 22 17' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><polyline points='2 12 12 17 22 12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></span><span class='font-bold text-indigo-800'>Comprehensive Landscaping</span></div>
+      Our <strong>comprehensive approach</strong> combines <strong>expert hardscaping</strong> knowledge with <strong>professional irrigation design</strong>, ensuring every project enhances both <strong>beauty</strong> and <strong>functionality</strong>. From <strong>engineered retaining walls</strong> and <strong>custom paver patios</strong> to <strong>water-efficient irrigation systems</strong> and <strong>drainage solutions</strong>, we create outdoor spaces that maximize <strong>curb appeal</strong> while solving complex drainage challenges. What sets us apart is our <strong>deep expertise</strong> in <strong>Seattle's unique landscaping</strong> needs. Our solutions are precisely engineered to handle the <strong>Pacific Northwest's rainfall patterns</strong> while ensuring <strong>long-term stability</strong> and <strong>lasting beauty</strong> in our region's demanding climate. Choose us for <strong>comprehensive landscaping services</strong> in Seattle and beyond.`
     },
     {
       id: "environmental",
       title: "Environmental Stewardship", 
-      content: "We're committed to sustainable practices that conserve resources, protect local ecosystems, and minimize our environmental impact while creating beautiful outdoor spaces."
+      content: `<div class='flex items-start gap-3 mb-2'><span class='inline-flex items-center justify-center bg-green-100 rounded-full p-2'><svg xmlns='http://www.w3.org/2000/svg' class='lucide lucide-leaf w-6 h-6 text-green-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path d='M2 22C2 22 2 15 8 9C14 3 22 2 22 2C22 2 21 10 15 16C9 22 2 22 2 22Z' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></span><span class='font-bold text-green-800'>Eco-Friendly</span></div>
+      We're committed to <strong>sustainable practices</strong> that conserve resources, protect local ecosystems, and minimize our <strong>environmental impact</strong> while creating beautiful outdoor spaces. Our <strong>eco-friendly landscaping</strong> solutions use native plants, water-efficient irrigation, and organic materials to support biodiversity and reduce waste. Choose us for <strong>green landscaping</strong> in <strong>Seattle</strong> and the <strong>Pacific Northwest</strong>.`
     },
     {
       id: "local-expertise",
       title: "Local Expertise",
-      content: "Over 25 years of specialized experience in hardscaping and irrigation services throughout Seattle. Our expert team designs and installs custom retaining walls, paver patios, and professional irrigation systems engineered specifically for the Pacific Northwest climate."
+      content: `<div class='flex items-start gap-3 mb-2'><span class='inline-flex items-center justify-center bg-blue-100 rounded-full p-2'><svg xmlns='http://www.w3.org/2000/svg' class='lucide lucide-map-pin w-6 h-6 text-blue-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path d='M12 21C12 21 5 13.5 5 9.5C5 6.46243 7.46243 4 10.5 4C13.5376 4 16 6.46243 16 9.5C16 13.5 12 21 12 21Z' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><circle cx='12' cy='9.5' r='2.5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></span><span class='font-bold text-blue-800'>Seattle Experts</span></div>
+      With over <strong>25 years of specialized experience</strong> in <strong>hardscaping</strong> and <strong>irrigation services</strong> throughout <strong>Seattle</strong>, our expert team designs and installs custom <strong>retaining walls</strong>, <strong>paver patios</strong>, and <strong>professional irrigation systems</strong> engineered specifically for the <strong>Pacific Northwest climate</strong>. We understand the unique soil, weather, and drainage challenges of our region, ensuring every project is built to last. Trust our <strong>local expertise</strong> for your next landscaping project.`
     }
   ];
 
@@ -201,11 +208,32 @@ export function CompanyExpertiseShowcase() {
     }
   };
 
+  // Helper for Isaac label position (tweak as needed for your image)
+  const isaacLabelStyle = {
+    position: 'absolute',
+    bottom: '18%', // adjust as needed
+    right: '22%', // adjust as needed
+    background: 'rgba(0,0,0,0.7)',
+    color: 'white',
+    padding: '4px 12px',
+    borderRadius: '12px',
+    fontSize: '1rem',
+    fontWeight: 600,
+    zIndex: 10,
+    pointerEvents: 'none',
+  };
+
   return (
-    <section id="expertise" className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden relative">
+    <section className={cn(
+      "bg-gradient-to-b from-gray-50 to-white overflow-hidden relative",
+      isHomePage ? "pt-4 md:pt-6" : "pt-16 md:pt-20"
+    )}>
       <div className="container-custom max-w-[1920px] px-4 sm:px-6 lg:px-8 xl:px-12">
         {/* Team Section - Integrated with showcase */}
-        <div className="mb-24">
+        <div className={cn(
+          "mb-24",
+          isHomePage ? "pt-4" : "pt-16"
+        )} id="team">
           <div className="text-center mb-16">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -235,88 +263,177 @@ export function CompanyExpertiseShowcase() {
             </motion.p>
           </div>
 
-          <div className="mb-16">
+          <div className="mb-16 flex justify-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative aspect-[16/9] w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl"
+              className="relative w-full max-w-2xl aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border-4 border-blue-200 group cursor-pointer"
+              onClick={() => { setLightboxOpen(true); setLightboxIndex(-1); }}
+              tabIndex={0}
+              role="button"
+              aria-label="Expand team photo"
             >
               <Image
                 src="https://i.imgur.com/KngV7VK.jpg"
-                alt="Our Expert Team"
+                alt="Owners"
                 fill
-                className="object-cover"
+                className="object-cover object-center transition-transform duration-300 group-hover:scale-110"
                 priority
+                style={{objectPosition: 'center 60%'}} // focus more on people
               />
+              {/* Overlay caption */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent px-6 py-4 flex flex-col items-start">
+                <span className="text-white text-lg font-semibold drop-shadow">Owners</span>
+                <span className="text-white text-xs mt-1 opacity-80">Click to expand</span>
+              </div>
             </motion.div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 2xl:gap-20 items-center min-h-[80vh]">
-          {/* Desktop Before/After Slider */}
-          <div className="hidden lg:block relative overflow-hidden rounded-3xl shadow-2xl lg:col-span-6 xl:col-span-7">
-            <div 
-              ref={sliderRef}
-              className="relative aspect-[16/9] w-full overflow-visible scale-110"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-              aria-live="polite"
-            >
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={slideIndex}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                >
-                  <div className="relative h-full w-full">
-                    <div 
-                      className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
-                      onClick={() => openLightbox(slideIndex)}
-                    >
-                      <Image
-                        src={beforeAfterImages[slideIndex].before}
-                        alt={`Before ${beforeAfterImages[slideIndex].title}`}
-                        fill
-                        className="object-cover object-center"
-                        sizes="100vw"
-                        priority
-                      />
-                      <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
-                        BEFORE
+          {/* Desktop Design Work Heading + Image Group */}
+          <div className="hidden lg:flex flex-col lg:col-span-6 xl:col-span-7 items-center">
+            <h3 className="text-lg md:text-2xl font-bold text-blue-900 text-center bg-white/80 rounded-xl px-4 py-2 shadow-md mb-2">
+              Our Design Work: Before & After Transformations
+            </h3>
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl w-full">
+              {/* Desktop Before/After Slider */}
+              <div 
+                ref={sliderRef}
+                className="relative aspect-[16/9] w-full overflow-visible scale-110"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                aria-live="polite"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={slideIndex}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0"
+                  >
+                    <div className="relative h-full w-full">
+                      <div 
+                        className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
+                        onClick={() => openImageLightbox('before', slideIndex)}
+                      >
+                        <Image
+                          src={beforeAfterImages[slideIndex].before}
+                          alt={`Before ${slideIndex + 1}`}
+                          fill
+                          className="object-cover object-center"
+                          sizes="100vw"
+                          priority
+                        />
+                        <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
+                          BEFORE
+                        </div>
                       </div>
+                      <motion.div 
+                        initial={{ clipPath: "polygon(0 0, 0% 0, 0% 100%, 0 100%)" }}
+                        animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
+                        transition={{ 
+                          duration: 5, 
+                          ease: "easeInOut",
+                          repeat: 1, 
+                          repeatType: "reverse", 
+                          repeatDelay: 0.5
+                        }}
+                        className="absolute inset-0 bg-black z-10 cursor-pointer overflow-hidden"
+                        onClick={() => openImageLightbox('after', slideIndex)}
+                      >
+                        <Image
+                          src={beforeAfterImages[slideIndex].after}
+                          alt={`After ${slideIndex + 1}`}
+                          fill
+                          className="object-cover object-center"
+                          sizes="100vw"
+                          priority
+                        />
+                        <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
+                          AFTER
+                        </div>
+                      </motion.div>
                     </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+          {/* Mobile Design Work Heading + Image Group */}
+          <div className="block lg:hidden w-full mb-8">
+            <div className="flex flex-col items-center w-full">
+              <h3 className="text-base md:text-xl font-bold text-blue-900 text-center bg-white/80 rounded-xl px-3 py-1.5 shadow mb-1">
+                Our Design Work: Before & After Transformations
+              </h3>
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl w-full">
+                {/* Mobile Before/After Slider */}
+                <div 
+                  ref={sliderRef}
+                  className="relative aspect-[4/5] w-full overflow-hidden"
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
+                  aria-live="polite"
+                >
+                  <AnimatePresence mode="wait">
                     <motion.div 
-                      initial={{ clipPath: "polygon(0 0, 0% 0, 0% 100%, 0 100%)" }}
-                      animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-                      transition={{ 
-                        duration: 5, 
-                        ease: "easeInOut",
-                        repeat: 1, 
-                        repeatType: "reverse", 
-                        repeatDelay: 0.5
-                      }}
-                      className="absolute inset-0 bg-black z-10 cursor-pointer overflow-hidden"
-                      onClick={() => openLightbox(slideIndex, true)}
+                      key={slideIndex}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute inset-0"
                     >
-                      <Image
-                        src={beforeAfterImages[slideIndex].after}
-                        alt={`After ${beforeAfterImages[slideIndex].title}`}
-                        fill
-                        className="object-cover object-center"
-                        sizes="100vw"
-                        priority
-                      />
-                      <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
-                        AFTER
+                      <div className="relative h-full w-full">
+                        <div 
+                          className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
+                          onClick={() => openImageLightbox('before', slideIndex)}
+                        >
+                          <Image
+                            src={beforeAfterImages[slideIndex].before}
+                            alt={`Before ${slideIndex + 1}`}
+                            fill
+                            className="object-cover object-center"
+                            sizes="100vw"
+                            priority
+                          />
+                          <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
+                            BEFORE
+                          </div>
+                        </div>
+                        <motion.div 
+                          initial={{ clipPath: "polygon(0 0, 0% 0, 0% 100%, 0 100%)" }}
+                          animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
+                          transition={{ 
+                            duration: 5, 
+                            ease: "easeInOut",
+                            repeat: 1, 
+                            repeatType: "reverse", 
+                            repeatDelay: 0.5
+                          }}
+                          className="absolute inset-0 bg-black z-10 cursor-pointer overflow-hidden"
+                          onClick={() => openImageLightbox('after', slideIndex)}
+                        >
+                          <Image
+                            src={beforeAfterImages[slideIndex].after}
+                            alt={`After ${slideIndex + 1}`}
+                            fill
+                            className="object-cover object-center"
+                            sizes="100vw"
+                            priority
+                          />
+                          <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
+                            AFTER
+                          </div>
+                        </motion.div>
                       </div>
                     </motion.div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -354,74 +471,6 @@ export function CompanyExpertiseShowcase() {
                 For over 25 years, <span className="font-semibold text-blue-900">Blue Landscaping Services</span> has been Seattle's premier provider of <span className="font-semibold text-blue-900">professional hardscaping and irrigation solutions</span>. Our expert team specializes in custom retaining walls, paver patios, water features, and professional irrigation systems designed specifically for Seattle's unique terrain and climate.
               </motion.p>
 
-              {/* Mobile Before/After Slider - Positioned between paragraph and Comprehensive Approach */}
-              <div className="block lg:hidden mb-8">
-                <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-                  <div 
-                    ref={sliderRef}
-                    className="relative aspect-[4/5] w-full overflow-hidden"
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                    aria-live="polite"
-                  >
-                    <AnimatePresence mode="wait">
-                      <motion.div 
-                        key={slideIndex}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute inset-0"
-                      >
-                        <div className="relative h-full w-full">
-                          <div 
-                            className="absolute inset-0 bg-black cursor-pointer overflow-hidden"
-                            onClick={() => openLightbox(slideIndex)}
-                          >
-                            <Image
-                              src={beforeAfterImages[slideIndex].before}
-                              alt={`Before ${beforeAfterImages[slideIndex].title}`}
-                              fill
-                              className="object-cover object-center"
-                              sizes="100vw"
-                              priority
-                            />
-                            <div className="absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold">
-                              BEFORE
-                            </div>
-                          </div>
-                          <motion.div 
-                            initial={{ clipPath: "polygon(0 0, 0% 0, 0% 100%, 0 100%)" }}
-                            animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-                            transition={{ 
-                              duration: 5, 
-                              ease: "easeInOut",
-                              repeat: 1, 
-                              repeatType: "reverse", 
-                              repeatDelay: 0.5
-                            }}
-                            className="absolute inset-0 bg-black z-10 cursor-pointer overflow-hidden"
-                            onClick={() => openLightbox(slideIndex, true)}
-                          >
-                            <Image
-                              src={beforeAfterImages[slideIndex].after}
-                              alt={`After ${beforeAfterImages[slideIndex].title}`}
-                              fill
-                              className="object-cover object-center"
-                              sizes="100vw"
-                              priority
-                            />
-                            <div className="absolute top-6 right-6 bg-white/80 text-black px-6 py-2 rounded-full text-sm font-bold">
-                              AFTER
-                            </div>
-                          </motion.div>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
-              
               {/* Expandable Content Areas with improved styling */}
               <div className="space-y-4 my-8">
                 {expertiseAreas.map((area) => (
@@ -464,12 +513,7 @@ export function CompanyExpertiseShowcase() {
                           variants={tabVariants}
                         >
                           <div className="px-5 py-4 bg-gray-50 border-t border-gray-200"> 
-                            <p className="text-gray-700" dangerouslySetInnerHTML={{
-                              __html: area.content.replace(
-                                /(expert hardscaping|professional irrigation design|engineered retaining walls|custom paver patios|water-efficient irrigation systems|drainage solutions|deep expertise|long-term stability)/g,
-                                '<span class="font-semibold text-blue-900">$1</span>'
-                              )
-                            }} />
+                            <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: area.content }} />
                           </div>
                         </motion.div>
                       )}
@@ -526,87 +570,44 @@ export function CompanyExpertiseShowcase() {
           </div>
         </div>
 
-        {/* Lightbox */}
-        {lightboxOpen && (
-          <>
-            {/* Backdrop */}
-            <div 
-              className="fixed inset-0 z-[100] bg-black/95"
-              onClick={closeLightbox}
-            />
-            
-            {/* Content */}
-            <div className="fixed inset-0 z-[101] flex items-center justify-center" onClick={handleBackdropClick}>
-              {/* Close button */}
-              <button
-                className="absolute top-4 right-4 z-[102] bg-white/20 hover:bg-white/30 p-3 rounded-full text-white transition-colors"
-                onClick={closeLightbox}
-              >
-                <X size={24} />
-              </button>
-
-              {/* Controls and Image Container */}
-              <div 
-                className="relative w-full h-full max-w-7xl mx-auto p-4"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Before/After Controls */}
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[102] flex gap-4">
-                  <button
-                    className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                      !isShowingAfterImage ? 'bg-white text-black' : 'bg-black/50 text-white'
-                    }`}
-                    onClick={() => setIsShowingAfterImage(false)}
-                  >
-                    Before
-                  </button>
-                  <button
-                    className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                      isShowingAfterImage ? 'bg-white text-black' : 'bg-black/50 text-white'
-                    }`}
-                    onClick={() => setIsShowingAfterImage(true)}
-                  >
-                    After
-                  </button>
-                </div>
-
-                {/* Navigation Arrows */}
-                <button
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-[102] bg-white/20 hover:bg-white/30 p-2 rounded-full text-white transition-colors"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setLightboxIndex((prev) => (prev - 1 + beforeAfterImages.length) % beforeAfterImages.length);
-                  }}
-                >
-                  <ArrowLeft size={24} />
-                </button>
-                <button
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-[102] bg-white/20 hover:bg-white/30 p-2 rounded-full text-white transition-colors"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setLightboxIndex((prev) => (prev + 1) % beforeAfterImages.length);
-                  }}
-                >
-                  <ArrowRight size={24} />
-                </button>
-
-                {/* Image */}
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={isShowingAfterImage ? beforeAfterImages[lightboxIndex].after : beforeAfterImages[lightboxIndex].before}
-                      alt={`${isShowingAfterImage ? 'After' : 'Before'} ${beforeAfterImages[lightboxIndex].title}`}
-                      fill
-                      className="object-contain"
-                      sizes="100vw"
-                      priority
-                      quality={100}
-                    />
-                  </div>
-                </div>
+        {/* Lightbox for before/after images */}
+        {imageLightboxOpen && (
+          <div className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4" onClick={closeImageLightbox}>
+            <button
+              className="absolute top-4 right-4 z-10 text-white bg-black/60 p-3 rounded-full"
+              onClick={e => { e.stopPropagation(); closeImageLightbox(); }}
+              aria-label="Close expanded image"
+            >
+              <X size={28} />
+            </button>
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white bg-black/60 p-3 rounded-full"
+              onClick={goToPrevLightbox}
+              aria-label="Previous image"
+            >
+              <ArrowLeft size={28} />
+            </button>
+            <button
+              className="absolute right-16 top-1/2 -translate-y-1/2 z-10 text-white bg-black/60 p-3 rounded-full"
+              onClick={goToNextLightbox}
+              aria-label="Next image"
+            >
+              <ArrowRight size={28} />
+            </button>
+            <div className="relative w-full max-w-4xl max-h-[90vh] aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border-4 border-blue-200 flex items-center justify-center bg-black" onClick={e => e.stopPropagation()}>
+              <Image
+                src={getLightboxImage().src}
+                alt={getLightboxImage().alt}
+                fill
+                className="object-contain"
+                priority
+                quality={100}
+              />
+              <div className={`absolute top-6 left-6 bg-black/80 text-white px-6 py-2 rounded-full text-sm font-bold`}>
+                {getLightboxImage().label}
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </section>
@@ -615,11 +616,11 @@ export function CompanyExpertiseShowcase() {
 
 // Simple CountUp component for statistics
 function CountUp({ target, className, duration = 2 }: { target: string, className?: string, duration?: number }) {
-  const [count, setCount] = useState("0");
+  // Detect if the stat is a decimal with a slash (e.g., 4.8/5)
+  const decimalMatch = target.match(/^(\d+\.?\d*)\/(\d+)$/);
+  const [count, setCount] = useState(decimalMatch ? 0 : (target.match(/\d+/) ? "0" : target));
   const [hasAnimated, setHasAnimated] = useState(false);
   const counterRef = useRef<HTMLParagraphElement>(null);
-  const targetValue = target.replace(/\D/g, '');
-  const hasPlus = target.includes('+');
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -640,29 +641,44 @@ function CountUp({ target, className, duration = 2 }: { target: string, classNam
   }, [hasAnimated]);
 
   const startCounting = () => {
-    const isNumber = !isNaN(Number(targetValue));
-    
-    if (!isNumber) {
-      setCount(target);
-      return;
-    }
-    
-    const endValue = Number(targetValue);
-    const step = endValue / (duration * 60); // 60fps
-    
-    let currentValue = 0;
-    const timer = setInterval(() => {
-      currentValue += step;
-      
-      if (currentValue >= endValue) {
-        setCount(targetValue + (hasPlus ? '+' : ''));
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(currentValue).toString() + (hasPlus ? '+' : ''));
+    if (decimalMatch) {
+      const endValue = parseFloat(decimalMatch[1]);
+      const denominator = decimalMatch[2];
+      const step = endValue / (duration * 60); // 60fps
+      let currentValue = 0;
+      const timer = setInterval(() => {
+        currentValue += step;
+        if (currentValue >= endValue) {
+          setCount(`${endValue.toFixed(1)}/${denominator}`);
+          clearInterval(timer);
+        } else {
+          setCount(`${currentValue.toFixed(1)}/${denominator}`);
+        }
+      }, 1000 / 60);
+      return () => clearInterval(timer);
+    } else {
+      const targetValue = target.replace(/\D/g, '');
+      const hasPlus = target.includes('+');
+      const suffix = hasPlus ? '+' : '';
+      const isNumber = !isNaN(Number(targetValue));
+      if (!isNumber) {
+        setCount(target);
+        return;
       }
-    }, 1000 / 60);
-    
-    return () => clearInterval(timer);
+      const endValue = Number(targetValue);
+      const step = endValue / (duration * 60); // 60fps
+      let currentValue = 0;
+      const timer = setInterval(() => {
+        currentValue += step;
+        if (currentValue >= endValue) {
+          setCount(targetValue + suffix);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(currentValue).toString() + suffix);
+        }
+      }, 1000 / 60);
+      return () => clearInterval(timer);
+    }
   };
   
   return <p ref={counterRef} className={className}>{count}</p>;

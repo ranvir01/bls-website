@@ -11,11 +11,11 @@ const faqs = [
   },
   {
     question: "Are you licensed and insured to provide landscaping services in Washington?",
-    answer: "Yes, we are fully licensed, bonded, and insured to operate as a landscaping contractor in Washington State. We comply with all local and state regulations, and our team is trained to meet the highest industry standards for safety and quality."
+    answer: "Yes, we are fully licensed, bonded, and insured to operate as a landscaping contractor in Washington State. Our license number is BLUELLS880K2. We comply with all local and state regulations, and our team is trained to meet the highest industry standards for safety and quality."
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept major credit cards, checks, and electronic transfers for your convenience. All payment terms and schedules are clearly outlined in your project agreement."
+    answer: "We accept a variety of payment methods for your convenience including Zelle, Venmo, PayPal, Cash, Visa, Mastercard, and other major credit cards. All payment terms and schedules are clearly outlined in your project agreement."
   },
   {
     question: "How do you handle Seattle's specific drainage challenges?",

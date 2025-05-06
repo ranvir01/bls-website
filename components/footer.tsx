@@ -27,6 +27,16 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+// Add SVGs for payment brand icons
+const PaymentIcons = {
+  Zelle: <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#6F2B8C"/><text x="16" y="21" textAnchor="middle" fontSize="14" fill="white" fontWeight="bold" fontFamily="Arial">Z</text></svg>,
+  Venmo: <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#3D95CE"/><text x="16" y="21" textAnchor="middle" fontSize="14" fill="white" fontWeight="bold" fontFamily="Arial">V</text></svg>,
+  PayPal: <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#003087"/><text x="16" y="21" textAnchor="middle" fontSize="14" fill="white" fontWeight="bold" fontFamily="Arial">P</text></svg>,
+  Cash: <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#27AE60"/><text x="16" y="21" textAnchor="middle" fontSize="14" fill="white" fontWeight="bold" fontFamily="Arial">$</text></svg>,
+  Visa: <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#1A1F71"/><text x="16" y="21" textAnchor="middle" fontSize="14" fill="white" fontWeight="bold" fontFamily="Arial">V</text></svg>,
+  Mastercard: <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#F79E1B"/><circle cx="12" cy="16" r="6" fill="#EA001B"/><circle cx="20" cy="16" r="6" fill="#FFA200" fillOpacity="0.7"/></svg>,
+};
+
 export const Footer = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -88,18 +98,22 @@ export const Footer = () => {
               Specializing in custom retaining walls, patios, and professional irrigation systems 
               designed for the Pacific Northwest climate since 2008.
             </p>
+            <div className="space-y-2">
+              <p className="text-teal-200 text-sm font-medium">
+                License No. BLUELLS880K2
+              </p>
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="bg-teal-700 px-2 py-1 rounded text-teal-100 text-xs flex items-center gap-1">{PaymentIcons.Zelle} Zelle</span>
+                <span className="bg-teal-700 px-2 py-1 rounded text-teal-100 text-xs flex items-center gap-1">{PaymentIcons.Venmo} Venmo</span>
+                <span className="bg-teal-700 px-2 py-1 rounded text-teal-100 text-xs flex items-center gap-1">{PaymentIcons.PayPal} PayPal</span>
+                <span className="bg-teal-700 px-2 py-1 rounded text-teal-100 text-xs flex items-center gap-1">{PaymentIcons.Cash} Cash</span>
+                <span className="bg-teal-700 px-2 py-1 rounded text-teal-100 text-xs flex items-center gap-1">{PaymentIcons.Visa} Visa</span>
+                <span className="bg-teal-700 px-2 py-1 rounded text-teal-100 text-xs flex items-center gap-1">{PaymentIcons.Mastercard} Mastercard</span>
+              </div>
+            </div>
             <div className="flex space-x-4 items-center">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="bg-teal-700 p-2 rounded-full hover:bg-teal-600 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-                <Facebook size={20} className="text-teal-200" />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="bg-teal-700 p-2 rounded-full hover:bg-teal-600 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-                <Twitter size={20} className="text-teal-200" />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="bg-teal-700 p-2 rounded-full hover:bg-teal-600 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+              <a href="https://www.instagram.com/blue_landscaping_services/?igsh=c3FrOWd4ZGxoZjll#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="bg-teal-700 p-2 rounded-full hover:bg-teal-600 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
                 <Instagram size={20} className="text-teal-200" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="bg-teal-700 p-2 rounded-full hover:bg-teal-600 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-                <Linkedin size={20} className="text-teal-200" />
               </a>
             </div>
           </div>

@@ -14,6 +14,8 @@ import { serviceCategories } from '@/data/service-categories';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './ui/carousel';
 import { Modal } from './ui/modal';
 import Autoplay from 'embla-carousel-autoplay';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 interface ServiceFeature {
   text: string;
@@ -420,8 +422,14 @@ export const ProfessionalServices = () => {
     return () => window.removeEventListener('keydown', handleKey);
   }, [modalOtherOpen, modalOtherImgIdx]);
 
+  const pathname = usePathname();
+  const isPortfolioPage = pathname === '/portfolio';
+
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section className={cn(
+      "py-20 bg-white",
+      isPortfolioPage && "pt-32 md:pt-40"
+    )}>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         {modalImgIdx !== null && (
           <div className="relative flex items-center justify-center min-h-[60vh]">

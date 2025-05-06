@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
@@ -55,16 +55,36 @@ const testimonials = [
   },
 ];
 
-export const TestimonialsCarousel = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+interface TestimonialsCarouselProps {
+  city?: string;
+  testimonial?: {
+    name: string;
+    text: string;
+    location: string;
+  };
+}
+
+export const TestimonialsCarousel = ({ city, testimonial }: TestimonialsCarouselProps) => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const allTestimonials = [
+    ...(testimonial ? [{
+      name: testimonial.name,
+      location: testimonial.location,
+      image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg',
+      text: testimonial.text,
+    }] : []),
+    ...testimonials
+  ];
 
   // Auto-scroll horizontally
   useEffect(() => {
     const interval = setInterval(() => {
-      if (scrollRef.current) {
-        scrollRef.current.scrollLeft += 1;
-        if (scrollRef.current.scrollLeft >= scrollRef.current.scrollWidth / 2) {
-          scrollRef.current.scrollLeft = 0; // reset loop
+      if (carouselRef.current) {
+        carouselRef.current.scrollLeft += 1;
+        if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth / 2) {
+          carouselRef.current.scrollLeft = 0; // reset loop
         }
       }
     }, 20); // smoother motion
@@ -80,12 +100,12 @@ export const TestimonialsCarousel = () => {
 
       <div className="relative">
         <div
-          ref={scrollRef}
+          ref={carouselRef}
           className="overflow-x-auto hide-scrollbar"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
           <div className="flex gap-8 px-8 pb-8">
-            {[...testimonials, ...testimonials].map((t, i) => (
+            {allTestimonials.map((t, i) => (
               <motion.div
                 key={`${t.name}-${i}`}
                 whileHover={{ scale: 1.02 }}

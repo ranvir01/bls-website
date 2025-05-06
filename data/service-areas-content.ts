@@ -66,9 +66,23 @@ export const serviceAreasContent: Record<string, ServiceAreaContent> = {
   'bellevue': {
     city: 'Bellevue',
     region: 'Eastside',
-    heroImage: '/images/cities/bellevue-downtown.svg',
-    description: 'Premium landscaping services for Bellevue\'s luxury homes and upscale properties. We bring sophistication and elegance to every project.',
-    features: commonFeatures,
+    heroImage: '/images/areas/bellevue.jpg',
+    description: 'Award-winning landscaping in Bellevue, WA. We specialize in transforming Bellevue\'s luxury homes, tech campuses, and residential neighborhoods—including West Bellevue, Somerset, Bridle Trails, and Newport Hills—into stunning outdoor spaces. Our Bellevue landscaping team brings sophistication, sustainability, and local expertise to every project, from custom patios to eco-friendly irrigation.',
+    features: [
+      'Landscape Design',
+      'Hardscaping & Retaining Walls',
+      'Irrigation Systems',
+      'Lawn Maintenance',
+      'Garden Installation',
+      'Outdoor Lighting',
+      'Bellevue Drainage Solutions',
+      'Sustainable Landscaping'
+    ],
+    testimonial: {
+      name: 'Michael Johnson',
+      text: 'Blue Landscaping took on our large-scale project in Bellevue with utmost professionalism. Their attention to detail was impeccable, from the initial design to the final installation. The result is a breathtaking landscape that exceeds our expectations. Highly recommend for anyone in Bellevue!',
+      location: 'Bellevue, Eastside'
+    }
   },
   'redmond': {
     city: 'Redmond',
