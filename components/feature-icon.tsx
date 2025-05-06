@@ -1,19 +1,21 @@
 "use client";
 
+import { cn } from '@/lib/utils';
+
 import { 
-  Home, Blocks, Brick, Flame, Settings, 
-  Palette, Tree, Scissors, Sun, Plant, Recycle, Droplets,
+  Home, Blocks, Square, Flame, Settings, 
+  Palette, Trees, Scissors, Sun, Plant, Recycle, Droplets,
   Hammer, Leaf
 } from 'lucide-react';
 
 const iconMap = {
   Home,
   Blocks,
-  Brick,
+  Square,
   Flame,
   Settings,
   Palette,
-  Tree,
+  Trees,
   Scissors,
   Sun,
   Plant,

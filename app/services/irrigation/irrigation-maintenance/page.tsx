@@ -221,9 +221,9 @@ export default function IrrigationMaintenancePage() {
             Contact us today to set up a maintenance plan that keeps your irrigation system running efficiently.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
-              Contact Us
-            </Link>
+            <QuoteButton className="btn-primary bg-white text-blue-800 hover:bg-blue-50">
+              Get Your Free Quote
+            </QuoteButton>
             <Link href="/services" className="btn-primary bg-transparent border border-white hover:bg-white/10">
               Explore Other Services
             </Link>

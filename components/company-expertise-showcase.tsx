@@ -134,26 +134,26 @@ export function CompanyExpertiseShowcase() {
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (lightboxOpen) {
+      if (imageLightboxOpen) {
         if (e.key === 'Escape') {
-          closeLightbox();
+          closeImageLightbox();
         } else if (e.key === 'ArrowRight') {
-          setLightboxIndex((prev) => (prev + 1) % beforeAfterImages.length);
+          setImageLightboxIndex((prev) => (prev + 1) % totalLightboxImages);
         } else if (e.key === 'ArrowLeft') {
-          setLightboxIndex((prev) => (prev - 1 + beforeAfterImages.length) % beforeAfterImages.length);
+          setImageLightboxIndex((prev) => (prev - 1 + totalLightboxImages) % totalLightboxImages);
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, beforeAfterImages.length]);
+  }, [imageLightboxOpen, totalLightboxImages]);
 
   // Close lightbox
   const handleBackdropClick = (e: React.MouseEvent) => {
     // Only close if clicking the backdrop itself
     if (e.target === e.currentTarget) {
-      closeLightbox();
+      closeImageLightbox();
     }
   };
 
