@@ -40,7 +40,14 @@ const nextConfig = {
   // Optimize package imports
   experimental: {
     optimizePackageImports: ['@radix-ui/react-*', 'lucide-react'],
+    // Enable build cache
+    turborepo: {
+      enabled: true,
+    },
   },
+  
+  // Enable build cache for faster builds
+  distDir: process.env.NODE_ENV === 'development' ? '.next' : '.next-cache',
   
   // Webpack optimizations
   webpack: (config) => {

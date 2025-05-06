@@ -1,7 +1,11 @@
 [build]
   command = "NODE_ENV=production npm ci --no-audit --prefer-offline && npm run build"
-  publish = ".next"
+  publish = ".next-cache"
   environment = { NODE_VERSION = "18.17.0", NPM_VERSION = "10.8.2", NEXT_TELEMETRY_DISABLED = "1" }
+
+[build.environment]
+  # Enable Next.js cache
+  NEXT_CACHE = "true"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
