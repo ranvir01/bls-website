@@ -129,7 +129,7 @@ export default function SprinklerInstallationPage() {
           </p>
           <Gallery images={galleryImages} className="mb-12" />
           <div className="text-center">
-            <QuoteButton />
+            <QuoteButton>Get Your Free Quote</QuoteButton>
           </div>
         </div>
       </section>
