@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm install typescript && npm run build"
   publish = ".next"
   environment = { NODE_VERSION = "18.17.0", NPM_VERSION = "10.8.2" }
 

@@ -42,6 +42,14 @@ const nextConfig = {
   
   // Configure webpack for better performance
   webpack: (config, { dev, isServer }) => {
+    // Add typescript to externals to fix build issues
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        typescript: false
+      };
+    }
+    
     // Optimize production builds
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
