@@ -1,4 +1,3 @@
-import TestimonialSlider from '@/components/TestimonialSlider';
 import { Hero } from '@/components/hero';
 import { QuoteButton } from '@/components/quote-modal';
 import Link from 'next/link';
@@ -27,7 +26,7 @@ export default function TestimonialsPage() {
             </p>
           </div>
           
-          <TestimonialSlider />
+          {/* <TestimonialSlider /> */}
           
           <div className="mt-16 max-w-3xl mx-auto text-center">
             <h3 className="text-2xl font-bold mb-4 text-gray-900">Ready to Transform Your Outdoor Space?</h3>
