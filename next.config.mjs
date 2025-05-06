@@ -46,8 +46,8 @@ const nextConfig = {
     },
   },
   
-  // Enable build cache for faster builds
-  distDir: process.env.NODE_ENV === 'development' ? '.next' : '.next-cache',
+  // Build output directory
+  distDir: '.next',
   
   // Webpack optimizations
   webpack: (config) => {
