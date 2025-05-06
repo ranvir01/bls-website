@@ -1,6 +1,5 @@
 import { Hero } from '@/components/hero';
 import { QuoteButton } from '@/components/quote-button';
-import { TestimonialCard } from '@/components/testimonial-card';
 import Link from 'next/link';
 
 export const metadata = {
