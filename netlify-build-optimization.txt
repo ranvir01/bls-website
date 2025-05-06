@@ -5,7 +5,8 @@ This file documents the changes made to optimize the Netlify build:
 1. Updated @netlify/plugin-nextjs to version 5.11.1
 2. Enabled build caching for Next.js via the NEXT_CACHE environment variable
 3. Fixed Netlify configuration file syntax
-4. Optimized build commands with production flags
-5. Corrected the build output and publish directory to .next
+4. Simplified build commands for compatibility with Netlify environment
+5. Set environment variables properly in the build.environment section
+6. Corrected the build output and publish directory to .next
 
-These changes should help with both the timeout issues and enable proper caching for faster future builds. 
+These changes should help with both the command syntax issues and enable proper caching for faster future builds. 
