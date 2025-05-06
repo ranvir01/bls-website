@@ -13,12 +13,22 @@ import { useModal } from './modal-context';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 
-interface NavItem {
+interface BaseNavItem {
   name: string;
-  href?: string;
   icon: LucideIcon;
-  sections?: NavSection[];
 }
+
+interface NavItemWithHref extends BaseNavItem {
+  href: string;
+  sections?: never;
+}
+
+interface NavItemWithSections extends BaseNavItem {
+  href?: never;
+  sections: NavSection[];
+}
+
+type NavItem = NavItemWithHref | NavItemWithSections;
 
 interface NavSection {
   name: string;
