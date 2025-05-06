@@ -57,7 +57,7 @@ export const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
     openModal(); // Open the quote modal
   };
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'About', href: '/about', icon: Info },
     { name: 'Portfolio', href: '/portfolio', icon: ImageIcon },
@@ -109,48 +109,48 @@ export const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
           name: 'Seattle & Neighborhoods',
           icon: MapPin,
           items: [
-            { name: 'Seattle (All Areas)', href: '/localities/seattle' },
-            { name: 'Belltown', href: '/localities/belltown' },
-            { name: 'Capitol Hill', href: '/localities/capitol-hill' },
-            { name: 'Magnolia', href: '/localities/magnolia' },
-            { name: 'West Seattle', href: '/localities/west-seattle' }
+            { name: 'Seattle (All Areas)', href: '/localities/seattle', icon: MapPin },
+            { name: 'Belltown', href: '/localities/belltown', icon: MapPin },
+            { name: 'Capitol Hill', href: '/localities/capitol-hill', icon: MapPin },
+            { name: 'Magnolia', href: '/localities/magnolia', icon: MapPin },
+            { name: 'West Seattle', href: '/localities/west-seattle', icon: MapPin }
           ],
         },
         {
           name: 'Eastside',
           icon: MapPin,
           items: [
-            { name: 'Bellevue', href: '/localities/bellevue' },
-            { name: 'Kirkland', href: '/localities/kirkland' },
-            { name: 'Redmond', href: '/localities/redmond' },
-            { name: 'Mercer Island', href: '/localities/mercer-island' },
-            { name: 'Issaquah', href: '/localities/issaquah' }
+            { name: 'Bellevue', href: '/localities/bellevue', icon: MapPin },
+            { name: 'Kirkland', href: '/localities/kirkland', icon: MapPin },
+            { name: 'Redmond', href: '/localities/redmond', icon: MapPin },
+            { name: 'Mercer Island', href: '/localities/mercer-island', icon: MapPin },
+            { name: 'Issaquah', href: '/localities/issaquah', icon: MapPin }
           ],
         },
         {
           name: 'North Seattle Suburbs',
           icon: MapPin,
           items: [
-            { name: 'Shoreline', href: '/localities/shoreline' },
-            { name: 'Lake Forest Park', href: '/localities/lake-forest-park' },
-            { name: 'Edmonds', href: '/localities/edmonds' },
-            { name: 'Mountlake Terrace', href: '/localities/mountlake-terrace' }
+            { name: 'Shoreline', href: '/localities/shoreline', icon: MapPin },
+            { name: 'Lake Forest Park', href: '/localities/lake-forest-park', icon: MapPin },
+            { name: 'Edmonds', href: '/localities/edmonds', icon: MapPin },
+            { name: 'Mountlake Terrace', href: '/localities/mountlake-terrace', icon: MapPin }
           ],
         },
         {
           name: 'South King County',
           icon: MapPin,
           items: [
-            { name: 'Burien', href: '/localities/burien' },
-            { name: 'Tukwila', href: '/localities/tukwila' },
-            { name: 'Renton', href: '/localities/renton' },
-            { name: 'Kent', href: '/localities/kent' },
-            { name: 'Auburn', href: '/localities/auburn' },
-            { name: 'Federal Way', href: '/localities/federal-way' },
-            { name: 'Des Moines', href: '/localities/des-moines' },
-            { name: 'Covington', href: '/localities/covington' },
-            { name: 'Maple Valley', href: '/localities/maple-valley' },
-            { name: 'SeaTac', href: '/localities/seatac' }
+            { name: 'Burien', href: '/localities/burien', icon: MapPin },
+            { name: 'Tukwila', href: '/localities/tukwila', icon: MapPin },
+            { name: 'Renton', href: '/localities/renton', icon: MapPin },
+            { name: 'Kent', href: '/localities/kent', icon: MapPin },
+            { name: 'Auburn', href: '/localities/auburn', icon: MapPin },
+            { name: 'Federal Way', href: '/localities/federal-way', icon: MapPin },
+            { name: 'Des Moines', href: '/localities/des-moines', icon: MapPin },
+            { name: 'Covington', href: '/localities/covington', icon: MapPin },
+            { name: 'Maple Valley', href: '/localities/maple-valley', icon: MapPin },
+            { name: 'SeaTac', href: '/localities/seatac', icon: MapPin }
           ],
         },
       ],
