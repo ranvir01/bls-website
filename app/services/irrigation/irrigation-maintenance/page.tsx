@@ -1,6 +1,6 @@
 import { Hero } from '@/components/hero';
 import { Gallery } from '@/components/gallery';
-import { QuoteButton } from '@/components/quote-modal';
+import { QuoteButton } from '@/components/quote-button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';

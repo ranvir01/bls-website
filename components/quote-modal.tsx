@@ -297,30 +297,3 @@ export const QuoteModal = ({ isOpen, onClose, children }: QuoteModalProps) => {
     document.body
   );
 };
-
-// Export the QuoteButton component that can be used in server components
-export const QuoteButton = ({ 
-  children, 
-  className 
-}: { 
-  children: React.ReactNode; 
-  className?: string 
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  
-  return (
-    <>
-      <button 
-        onClick={() => setIsOpen(true)}
-        className={className}
-      >
-        {children}
-      </button>
-      
-      <QuoteModal 
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-      />
-    </>
-  );
-};
