@@ -73,7 +73,7 @@ const SERVICES = [
   },
   {
     title: '3D Designs',
-    description: 'Visualize your project before it's built with professional 3D renderings.',
+    description: 'Visualize your project before it\'s built with professional 3D renderings.',
     image: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=800&q=80',
     link: '/services/3d-designs',
   },
