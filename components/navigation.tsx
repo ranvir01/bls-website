@@ -145,7 +145,7 @@ export const Navigation = () => {
     setIsOpen(!isOpen);
   };
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'About', href: '/about', icon: Info },
     { name: 'Portfolio', href: '/portfolio', icon: ImageIcon },
@@ -207,48 +207,48 @@ export const Navigation = () => {
           name: 'Seattle & Neighborhoods',
           icon: MapPin,
           items: [
-            { name: 'Seattle (All Areas)', href: '/localities/seattle', description: 'Including all Seattle neighborhoods' },
-            { name: 'Belltown', href: '/localities/belltown', description: 'Seattle neighborhood' },
-            { name: 'Capitol Hill', href: '/localities/capitol-hill', description: 'Seattle neighborhood' },
-            { name: 'Magnolia', href: '/localities/magnolia', description: 'Seattle neighborhood' },
-            { name: 'West Seattle', href: '/localities/west-seattle', description: 'Seattle neighborhood' }
+            { name: 'Seattle (All Areas)', href: '/localities/seattle', icon: MapPin, description: 'Including all Seattle neighborhoods' },
+            { name: 'Belltown', href: '/localities/belltown', icon: MapPin, description: 'Seattle neighborhood' },
+            { name: 'Capitol Hill', href: '/localities/capitol-hill', icon: MapPin, description: 'Seattle neighborhood' },
+            { name: 'Magnolia', href: '/localities/magnolia', icon: MapPin, description: 'Seattle neighborhood' },
+            { name: 'West Seattle', href: '/localities/west-seattle', icon: MapPin, description: 'Seattle neighborhood' }
           ],
         },
         {
           name: 'Eastside',
           icon: MapPin,
           items: [
-            { name: 'Bellevue', href: '/localities/bellevue', description: 'Including Factoria' },
-            { name: 'Kirkland', href: '/localities/kirkland' },
-            { name: 'Redmond', href: '/localities/redmond' },
-            { name: 'Mercer Island', href: '/localities/mercer-island' },
-            { name: 'Issaquah', href: '/localities/issaquah' }
+            { name: 'Bellevue', href: '/localities/bellevue', icon: MapPin, description: 'Including Factoria' },
+            { name: 'Kirkland', href: '/localities/kirkland', icon: MapPin },
+            { name: 'Redmond', href: '/localities/redmond', icon: MapPin },
+            { name: 'Mercer Island', href: '/localities/mercer-island', icon: MapPin },
+            { name: 'Issaquah', href: '/localities/issaquah', icon: MapPin }
           ],
         },
         {
           name: 'North Seattle Suburbs',
           icon: MapPin,
           items: [
-            { name: 'Shoreline', href: '/localities/shoreline' },
-            { name: 'Lake Forest Park', href: '/localities/lake-forest-park' },
-            { name: 'Edmonds', href: '/localities/edmonds' },
-            { name: 'Mountlake Terrace', href: '/localities/mountlake-terrace' }
+            { name: 'Shoreline', href: '/localities/shoreline', icon: MapPin },
+            { name: 'Lake Forest Park', href: '/localities/lake-forest-park', icon: MapPin },
+            { name: 'Edmonds', href: '/localities/edmonds', icon: MapPin },
+            { name: 'Mountlake Terrace', href: '/localities/mountlake-terrace', icon: MapPin }
           ],
         },
         {
           name: 'South King County',
           icon: MapPin,
           items: [
-            { name: 'Burien', href: '/localities/burien' },
-            { name: 'Tukwila', href: '/localities/tukwila' },
-            { name: 'Renton', href: '/localities/renton' },
-            { name: 'Kent', href: '/localities/kent' },
-            { name: 'Auburn', href: '/localities/auburn' },
-            { name: 'Federal Way', href: '/localities/federal-way' },
-            { name: 'Des Moines', href: '/localities/des-moines' },
-            { name: 'Covington', href: '/localities/covington' },
-            { name: 'Maple Valley', href: '/localities/maple-valley' },
-            { name: 'SeaTac', href: '/localities/seatac' }
+            { name: 'Burien', href: '/localities/burien', icon: MapPin },
+            { name: 'Tukwila', href: '/localities/tukwila', icon: MapPin },
+            { name: 'Renton', href: '/localities/renton', icon: MapPin },
+            { name: 'Kent', href: '/localities/kent', icon: MapPin },
+            { name: 'Auburn', href: '/localities/auburn', icon: MapPin },
+            { name: 'Federal Way', href: '/localities/federal-way', icon: MapPin },
+            { name: 'Des Moines', href: '/localities/des-moines', icon: MapPin },
+            { name: 'Covington', href: '/localities/covington', icon: MapPin },
+            { name: 'Maple Valley', href: '/localities/maple-valley', icon: MapPin },
+            { name: 'SeaTac', href: '/localities/seatac', icon: MapPin }
           ],
         },
       ],
