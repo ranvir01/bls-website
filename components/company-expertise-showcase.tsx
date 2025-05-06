@@ -271,7 +271,10 @@ export function CompanyExpertiseShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="relative w-full max-w-2xl aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border-4 border-blue-200 group cursor-pointer"
-              onClick={() => { setLightboxOpen(true); setLightboxIndex(-1); }}
+              onClick={() => {
+                setLightboxOpen(true);
+                setIsPaused(true);
+              }}
               tabIndex={0}
               role="button"
               aria-label="Expand team photo"
@@ -280,9 +283,10 @@ export function CompanyExpertiseShowcase() {
                 src="https://i.imgur.com/KngV7VK.jpg"
                 alt="Owners"
                 fill
-                className="object-cover object-center transition-transform duration-300 group-hover:scale-110"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
                 priority
-                style={{objectPosition: 'center 60%'}} // focus more on people
+                unoptimized={true}
+                style={{objectPosition: '50% 35%'}} // Adjusting focus more on the people's faces
               />
               {/* Overlay caption */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent px-6 py-4 flex flex-col items-start">
@@ -618,6 +622,50 @@ export function CompanyExpertiseShowcase() {
                 </div>
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 px-3 py-1 rounded-full text-white text-sm">
                   {imageLightboxIndex + 1} / {totalLightboxImages}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Team Photo Lightbox */}
+        <AnimatePresence>
+          {lightboxOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+              onClick={() => {
+                setLightboxOpen(false);
+                setIsPaused(false);
+              }}
+            >
+              <div 
+                className="relative max-w-5xl w-full mx-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+                  <ProgressiveImage
+                    src="https://i.imgur.com/KngV7VK.jpg"
+                    alt="Team photo - Owners"
+                    fill
+                    className="object-contain md:object-cover"
+                    unoptimized={true}
+                    style={{objectPosition: '50% 35%'}} // Adjusted to focus on faces
+                  />
+                </div>
+                <button 
+                  onClick={() => {
+                    setLightboxOpen(false);
+                    setIsPaused(false);
+                  }}
+                  className="absolute -top-12 right-0 text-white hover:text-gray-300 flex items-center gap-2"
+                >
+                  Close <X className="w-5 h-5" />
+                </button>
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 px-3 py-1 rounded-full text-white text-sm">
+                  Our Team
                 </div>
               </div>
             </motion.div>
