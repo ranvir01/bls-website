@@ -47,7 +47,7 @@ export default function RetainingWallsPage() {
               <p className="text-gray-700 mb-6">
                 From natural stone to modern concrete systems, we offer a range of materials and designs to match your property's style while ensuring structural integrity and longevity.
               </p>
-              <QuoteButton />
+              <QuoteButton>Get Your Free Quote</QuoteButton>
             </div>
             <div className="relative h-[400px]">
               <Image
