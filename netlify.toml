@@ -1,11 +1,7 @@
 [build]
   command = "npm run build"
-  publish = ".next"
-
-[build.environment]
-  NODE_VERSION = "18.17.0"
-  NPM_VERSION = "10.8.2"
-  NEXT_USE_NETLIFY_EDGE = "true"
+  publish = "out"
+  environment = { NODE_VERSION = "18.17.0", NPM_VERSION = "10.8.2", NEXT_USE_NETLIFY_EDGE = "true" }
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -16,9 +12,12 @@
   to = "/index.html"
   status = 200
 
-# Add custom headers if needed
+# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.imgur.com data: blob:; img-src 'self' data: blob: *.imgur.com; frame-ancestors 'none';"
