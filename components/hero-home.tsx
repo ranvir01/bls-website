@@ -54,7 +54,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
   };
 
   return (
-    <div className="relative h-[100dvh] md:h-screen min-h-[600px] w-full overflow-hidden">
+    <div className="relative h-[100dvh] md:h-screen min-h-[600px] w-full overflow-hidden bg-blue-900">
       {/* Structured data for SEO */}
       <script
         type="application/ld+json"
@@ -83,7 +83,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
 
       {/* Background image with optimized Next.js Image */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 bg-gradient-to-b from-blue-900 to-blue-800"
         style={{ transform: `translateY(${scrollY * 0.2}px)` }} // Subtle parallax effect
       >
         <Image
@@ -92,6 +92,7 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
           fill
           priority
           fetchPriority="high"
+          unoptimized
           className="object-cover object-center scale-110 brightness-[0.6] contrast-[1.1] saturate-[1.1]"
           sizes="100vw"
           quality={90}
