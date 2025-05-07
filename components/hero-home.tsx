@@ -8,6 +8,7 @@ import { ChevronDown, Phone, ArrowRight, Star, Shield, CreditCard } from 'lucide
 import { cn } from '@/lib/utils';
 import Script from 'next/script';
 import { QuoteButton } from '@/components/quote-button';
+import { EnhancedImage } from '@/components/enhanced-image';
 
 interface HeroHomeProps {
   onScrollDown?: () => void;
@@ -54,7 +55,12 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
   };
 
   return (
-    <div className="relative h-[100dvh] md:h-screen min-h-[600px] w-full overflow-hidden bg-blue-900">
+    <div className="relative h-[100dvh] md:h-screen min-h-[600px] w-full overflow-hidden bg-blue-900"
+         style={{
+           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url('/images/hero-home.jpg')`,
+           backgroundSize: 'cover',
+           backgroundPosition: 'center',
+         }}>
       {/* Structured data for SEO */}
       <script
         type="application/ld+json"
@@ -86,8 +92,9 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
         className="absolute inset-0 bg-gradient-to-b from-blue-900 to-blue-800"
         style={{ transform: `translateY(${scrollY * 0.2}px)` }} // Subtle parallax effect
       >
-        <Image
+        <EnhancedImage
           src="/images/hero-home.jpg"
+          fallbackSrc="https://i.imgur.com/ZLEqCBU.jpg"
           alt="Beautiful landscaped waterfront property with custom stonework and retaining walls in Seattle"
           fill
           priority
