@@ -114,8 +114,26 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
             viewport={{ once: true }}
             className="max-w-4xl relative mt-0 sm:mt-0 md:mt-0 px-0 sm:px-4 md:px-6 mx-auto w-full"
           >
-            {/* Centered trust badges and payment methods */}
-            <div className="w-full flex flex-col items-center">
+            {/* Main headline with enhanced typography */}
+            <motion.h1 
+              variants={fadeIn}
+              className="mb-2 sm:mb-4 md:mb-6 text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl text-center mx-auto"
+              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
+            >
+              Expert Landscaping & Hardscaping in <span className="text-blue-300">Seattle</span>
+            </motion.h1>
+            
+            {/* Enhanced subheadline with better contrast */}
+            <motion.p 
+              variants={fadeIn}
+              className="mb-3 sm:mb-6 md:mb-8 text-xs sm:text-lg md:text-xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl text-center mx-auto"
+              style={{ textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
+            >
+              Transform your outdoor space with our premium landscaping services. Specializing in retaining walls, custom patios, and professional irrigation systems.
+            </motion.p>
+
+            {/* Move badges/payment section here, just above CTA buttons */}
+            <div className="w-full flex flex-col items-center mb-6">
               <motion.div
                 variants={fadeIn}
                 className="flex flex-wrap items-center gap-1 sm:gap-4 mb-2 sm:mb-4 text-white/90 justify-center"
@@ -153,24 +171,6 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
               </motion.div>
             </div>
 
-            {/* Main headline with enhanced typography */}
-            <motion.h1 
-              variants={fadeIn}
-              className="mb-2 sm:mb-4 md:mb-6 text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-white drop-shadow-xl hover:drop-shadow-2xl transition-all duration-300 max-w-3xl text-center mx-auto"
-              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
-            >
-              Expert Landscaping & Hardscaping in <span className="text-blue-300">Seattle</span>
-            </motion.h1>
-            
-            {/* Enhanced subheadline with better contrast */}
-            <motion.p 
-              variants={fadeIn}
-              className="mb-3 sm:mb-6 md:mb-8 text-xs sm:text-lg md:text-xl leading-relaxed text-gray-100 drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 max-w-2xl text-center mx-auto"
-              style={{ textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
-            >
-              Transform your outdoor space with our premium landscaping services. Specializing in retaining walls, custom patios, and professional irrigation systems.
-            </motion.p>
-            
             {/* Expandable info section */}
             <motion.div
               variants={fadeIn}
@@ -249,40 +249,8 @@ export const HeroHome: React.FC<HeroHomeProps> = ({ onScrollDown }) => {
                 (253) 217-0814
               </a>
             </motion.div>
-
-            {/* Service areas */}
-            <motion.div
-              variants={fadeIn}
-              className="mt-8 flex justify-center"
-            >
-              <div className="bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg text-white/80 text-center text-xs sm:text-sm max-w-full" style={{wordBreak: 'break-word'}}>
-                Serving: Seattle • Bellevue • Kirkland • Redmond • Mercer Island • Issaquah • Sammamish • Woodinville • Bothell • Kenmore • Shoreline • Lake Forest Park • Edmonds • Mountlake Terrace • Magnolia • West Seattle • Burien • Tukwila • Renton • Kent • Auburn • Federal Way • Des Moines • Covington • Maple Valley • SeaTac • Greater Puget Sound Area
-              </div>
-            </motion.div>
           </motion.div>
         </div>
-      </div>
-      
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center z-10 px-4">
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          onClick={onScrollDown || (() => window.scrollTo({
-            top: window.innerHeight,
-            behavior: 'smooth'
-          }))}
-          className="flex flex-col items-center group"
-          aria-label="Scroll down"
-        >
-          <div className="text-white/80 text-xs sm:text-sm font-medium mb-1 group-hover:text-white transition-colors">
-            Scroll to explore
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm p-1 sm:p-2 rounded-full">
-            <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-          </div>
-        </motion.button>
       </div>
     </div>
   );

@@ -69,6 +69,6 @@ if [ -d ".next" ]; then
 else
   echo "ERROR: '.next' directory not found after build"
   exit 1
-fi
+fi 
 
 echo "Build completed successfully!" 
