@@ -89,6 +89,19 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://i.imgur.com" />
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://i.imgur.com" crossOrigin="anonymous" />
+
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5F1P40ZMK3"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-5F1P40ZMK3');
+            `,
+          }}
+        />
       </head>
       <body className="relative min-h-screen flex flex-col">
         <ModalProvider>
