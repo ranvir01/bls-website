@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: 'Professional landscaping and hardscaping services in Seattle and surrounding areas. Get a free quote today!',
     images: [
       {
-        url: 'https://images.pexels.com/photos/589/garden-green-grass-spring.jpg',
+        url: '/images/hero-home.jpg',
         width: 1200,
         height: 630,
         alt: 'Blue Landscaping Services',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Blue Landscaping Services | Professional Landscaping & Hardscaping in Seattle',
     description: 'Professional landscaping and hardscaping services in Seattle and surrounding areas. Get a free quote today!',
-    images: ['https://images.pexels.com/photos/589/garden-green-grass-spring.jpg'],
+    images: ['/images/hero-home.jpg'],
     creator: '@bluelandscaping',
   },
   robots: {
@@ -83,6 +83,7 @@ export default function RootLayout({
       <head>
         {/* Preload critical assets */}
         <link rel="preload" href="/images/logo.png" as="image" />
+        <link rel="preload" href="/images/hero-home.jpg" as="image" type="image/jpeg" fetchPriority="high" />
         
         {/* DNS Prefetch and preconnect to external domains */}
         <link rel="dns-prefetch" href="https://images.pexels.com" />

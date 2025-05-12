@@ -18,6 +18,13 @@
   to = "/"
   status = 200
 
+# Special rule for hero image
+[[headers]]
+  for = "/images/hero-home.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "image/jpeg"
+
 # Security headers for improved security
 [[headers]]
   for = "/*"
@@ -26,4 +33,4 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' *.imgur.com data: blob:; img-src 'self' data: blob: *.imgur.com; frame-ancestors 'none';"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; img-src 'self' data: blob:; frame-ancestors 'none';"
