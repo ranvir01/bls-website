@@ -2,7 +2,7 @@
 
 Marketing and lead-generation site for **Blue Landscaping Services** (Seattle-area hardscaping, irrigation, lawn care).
 
-**Live purpose:** convert visitors into quote requests via a global quote modal, sticky CTA, and localized service-area pages.
+**Purpose:** convert visitors into quote requests through a global quote modal, sticky CTA, and localized service-area pages.
 
 ## Stack
 
@@ -13,10 +13,10 @@ Marketing and lead-generation site for **Blue Landscaping Services** (Seattle-ar
 
 ## Highlights
 
-- **25+ geo-targeted service-area pages** for local SEO
-- Reusable **quote modal system** (global state, sticky button, validation)
-- Content-driven architecture (services, localities, testimonials) via typed data files
-- Built with AI-assisted tooling (Bolt.new scaffold, then customized in Cursor) with human ownership of UX, SEO, and conversion
+- 25+ geo-targeted service-area pages for local SEO
+- Reusable quote modal (global state, sticky button, validation)
+- Content-driven services, localities, and testimonials via typed data files
+- Built with AI-assisted tooling, then customized and owned in Cursor for UX, SEO, and conversion
 
 ## Quick start
 
@@ -25,6 +25,6 @@ npm install
 npm run dev
 ```
 
-## Note
+## Repo
 
-This README replaces an older quote-modal-only doc. For component usage details, see comments in `src/components` related to the quote modal.
+Portfolio piece for client website delivery. Component details live in `src/components`.
