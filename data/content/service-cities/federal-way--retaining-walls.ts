@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Retaining Walls in Federal Way, WA',
   metaTitle: 'Retaining Wall Contractor in Federal Way, WA',
   metaDescription:
-    'Federal Way retaining walls: failing 1970s railroad-tie terraces replaced with drained segmental block, plus kettle-lake and bluff lots handled the way they need.',
+    'Federal Way retaining walls: failing 1970s railroad-tie terraces replaced with drained segmental block, plus kettle-lake and bluff lots done right.',
   quickAnswer:
     'The signature retaining wall job in Federal Way is replacing a 1970s timber or railroad-tie terrace whose deadmen rotted out years ago. We demo it, cut a proper bench, install the drain zone the original never had, and rebuild in segmental block. Federal Way is about twenty minutes from our Kent shop.',
   body: [

@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Retaining Walls in Covington, WA',
   metaTitle: 'Retaining Wall Contractor in Covington, WA',
   metaDescription:
-    'Covington retaining walls built for plateau hardpan and perched winter water. Timberlane terraces, raised drained pads, tiered walls laid out right. Kent-based crew.',
+    'Covington retaining walls built for plateau hardpan and perched winter water. Timberlane terraces, raised pads, tiered walls laid out right. Kent-based crew.',
   quickAnswer:
     'Covington sits on a glacial till plateau near 400 feet, and a wall here is usually solving water before it is solving slope. We build terraces and raised, drained pads on Timberlane and Jenkins Creek lots, cutting the base into hardpan and giving the drain line an outlet that actually works in February.',
   body: [
