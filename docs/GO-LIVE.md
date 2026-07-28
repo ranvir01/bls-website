@@ -147,7 +147,19 @@ automatically.
 Adding one entry to `data/reviews.ts` activates the reviews page, the homepage
 section, the city-page sections and the `AggregateRating` structured data.
 
-## 10. Repository housekeeping
+## 10. The L&I verification link
+
+The footer, the about page and every NAP block link the licence number to
+`https://secure.lni.wa.gov/verify/` — L&I's contractor verification search.
+Searching `BLUELLS880K2` there returns the record.
+
+A direct `Detail.aspx` deep link would be one click better, but it is built
+from the business UBI and could not be verified from the build environment
+(outbound access to `secure.lni.wa.gov` is blocked there). If you look up the
+record and copy the resulting URL, paste it into `license.lookupUrl` in
+`data/business.ts` and every link on the site updates.
+
+## 11. Repository housekeeping
 
 - **PR #1** (`cursor/setup-dev-environment-c0c8`, open draft) documents the
   broken `next lint` caused by ESLint 9. That is now fixed — ESLint is pinned to

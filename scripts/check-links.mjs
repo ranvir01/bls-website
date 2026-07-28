@@ -59,14 +59,25 @@ function visibleText(html) {
     .trim();
 }
 
+/** Attribute values arrive HTML-escaped; a query string is useless until decoded. */
+function decodeEntities(value) {
+  return value
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;/g, "'")
+    .replace(/&apos;/g, "'");
+}
+
 function extractAnchors(html) {
   const out = [];
   const re = /<a\b([^>]*)>/gi;
   let match;
   while ((match = re.exec(html))) {
     const attrs = match[1];
-    const href = /\bhref\s*=\s*["']([^"']*)["']/i.exec(attrs)?.[1];
-    out.push({ href, raw: match[0] });
+    const raw = /\bhref\s*=\s*["']([^"']*)["']/i.exec(attrs)?.[1];
+    out.push({ href: raw === undefined ? undefined : decodeEntities(raw), raw: match[0] });
   }
   return out;
 }

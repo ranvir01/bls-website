@@ -52,8 +52,13 @@ export const business = {
     /** Washington State Department of Labor & Industries contractor registration */
     number: 'BLUELLS880K2',
     authority: 'Washington State Department of Labor & Industries',
-    lookupUrl:
-      'https://secure.lni.wa.gov/verify/Detail.aspx?UBI=&LIC=BLUELLS880K2&SAW=',
+    /**
+     * L&I's contractor verification search. Deliberately the search page
+     * rather than a Detail.aspx deep link: that link is built from a UBI we do
+     * not publish, and a dead outbound link on a contractor site reads as an
+     * abandoned business. Searching "BLUELLS880K2" here returns the record.
+     */
+    lookupUrl: 'https://secure.lni.wa.gov/verify/',
     bondAmount: 12000,
     insuranceAmount: 1000000,
   },
