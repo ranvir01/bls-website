@@ -148,6 +148,49 @@ for (const width of WIDTHS) {
       for (const s of small) report(path, width, `touch target under 44px: ${s}`);
     }
 
+    // ── Controls trapped under the fixed action bar ───────────────────────
+    //
+    // The sticky mobile action bar is fixed at the bottom. If the document
+    // cannot scroll past it, whatever sits in that last strip is permanently
+    // un-tappable — a tap lands on "Call" instead. This scrolls to the very
+    // bottom and checks that nothing interactive is left underneath.
+    if (width < 768) {
+      const trapped = await page.evaluate(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            const bar = document.querySelector('.mobile-action-bar');
+            if (!bar) return resolve([]);
+            const barTop = bar.getBoundingClientRect().top;
+
+            const out = [];
+            for (const el of document.querySelectorAll('a, button, input, select, textarea')) {
+              if (el.closest('.mobile-action-bar')) continue;
+              const r = el.getBoundingClientRect();
+              if (r.width === 0 || r.height === 0) continue;
+              if (r.right < 0 || r.left > window.innerWidth) continue;
+              if (r.width <= 2 && r.height <= 2) continue;
+              // Its midpoint is behind the bar and the page cannot scroll further.
+              const mid = r.top + r.height / 2;
+              if (mid > barTop && r.top < window.innerHeight) {
+                out.push(
+                  `${el.tagName.toLowerCase()} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}"`,
+                );
+              }
+              if (out.length >= 3) break;
+            }
+            resolve(out);
+          }, 700);
+        });
+      });
+
+      for (const t of trapped) {
+        report(path, width, `control trapped under the fixed action bar at page bottom: ${t}`);
+      }
+
+      await page.evaluate(() => window.scrollTo(0, 0));
+    }
+
     // ── Heading order ─────────────────────────────────────────────────────
     const headings = await page.evaluate(() => {
       const hs = [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map((h) =>

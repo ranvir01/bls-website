@@ -182,7 +182,11 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* Reserve room for the mobile action bar at the foot of the page. */
+  /* Reserve room for the mobile action bar at the foot of the page.
+     Without this the bottom 56px of the document sits permanently under the
+     fixed bar, and any control that lands there is un-tappable — a tap hits
+     "Call" instead of the button the user aimed at. Verified in a browser:
+     the quote form's Continue button was being swallowed exactly this way. */
   .pb-action-bar {
     padding-bottom: calc(var(--action-bar-h) + env(safe-area-inset-bottom));
   }

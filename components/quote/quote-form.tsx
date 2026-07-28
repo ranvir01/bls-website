@@ -14,6 +14,7 @@ import {
   PROJECT_TYPES,
   SIZE_OPTIONS,
   STEP_FIELDS,
+  STEP_SCHEMAS,
   STEP_TITLES,
   TIMELINE_OPTIONS,
   isInServiceArea,
@@ -64,6 +65,10 @@ export function QuoteForm({
   const form = useForm<LeadInput>({
     resolver: zodResolver(leadSchema),
     mode: 'onTouched',
+    // Once a field has errored, revalidate as the user types rather than
+    // waiting for another blur — otherwise a corrected field keeps showing its
+    // old error message.
+    reValidateMode: 'onChange',
     defaultValues: {
       projectType: defaultProjectType ?? undefined,
       city: '',
@@ -76,11 +81,25 @@ export function QuoteForm({
     },
   });
 
-  const { register, handleSubmit, trigger, setValue, watch, formState } = form;
+  const { register, handleSubmit, setValue, watch, formState, getValues, setError, clearErrors } =
+    form;
   const values = watch();
 
   // ── Persist and restore progress ──────────────────────────────────────────
+  //
+  // Restore runs EXACTLY ONCE, guarded by a ref rather than by a dependency
+  // array. react-hook-form's `setValue` is not reliably referentially stable
+  // across renders, so listing it as a dependency let this effect re-run
+  // mid-session — reading back the step persisted on the *previous* render and
+  // resetting the user to the step they had just left. The visible symptom was
+  // a form that refused to advance past a step whose validation had failed
+  // once, because the extra renders from setError made the re-run more likely.
+  const restoreRan = useRef(false);
+
   useEffect(() => {
+    if (restoreRan.current) return;
+    restoreRan.current = true;
+
     try {
       const saved = sessionStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -115,16 +134,29 @@ export function QuoteForm({
   }, [pathname]);
 
   // ── Navigation ────────────────────────────────────────────────────────────
-  const goNext = useCallback(async () => {
+  const goNext = useCallback(() => {
     markStarted();
     const fields = STEP_FIELDS[step] as FieldPath<LeadInput>[];
-    const valid = await trigger(fields);
-    if (!valid) return;
 
+    // Parse this step's slice of the schema against the current values. Doing
+    // it here rather than via RHF's `trigger` is deliberate: once a step has
+    // failed validation, RHF's error map trails the input by a render, so a
+    // user who fixed the field still could not advance on the next click.
+    const result = STEP_SCHEMAS[step].safeParse(getValues());
+
+    if (!result.success) {
+      for (const issue of result.error.issues) {
+        const field = issue.path[0] as FieldPath<LeadInput>;
+        setError(field, { type: 'manual', message: issue.message });
+      }
+      return;
+    }
+
+    clearErrors(fields);
     trackEvent('quote_form_step', { step: step + 1, path: pathname });
     setDirection(1);
     setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
-  }, [markStarted, pathname, step, trigger]);
+  }, [clearErrors, getValues, markStarted, pathname, setError, step]);
 
   const goBack = useCallback(() => {
     setDirection(-1);

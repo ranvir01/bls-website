@@ -104,6 +104,22 @@ export const STEP_FIELDS: (keyof LeadInput)[][] = [
   ['name', 'phone', 'email'],
 ];
 
+/**
+ * A schema per step, derived from the same source of truth.
+ *
+ * The form validates a step by parsing this slice against the current values
+ * directly, rather than asking react-hook-form whether the named fields are
+ * valid. RHF's error map lags a render behind the input when validation has
+ * already failed once on a step, which left a user who tripped a validation
+ * error unable to advance even after fixing it. Parsing the slice ourselves is
+ * deterministic and depends on nothing but the values.
+ */
+export const STEP_SCHEMAS = STEP_FIELDS.map((fields) =>
+  leadSchema.pick(
+    Object.fromEntries(fields.map((f) => [f, true])) as { [K in keyof LeadInput]?: true },
+  ),
+);
+
 export const STEP_TITLES = [
   'What do you need?',
   'How big is the project?',
