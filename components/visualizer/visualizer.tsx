@@ -181,7 +181,7 @@ export function Visualizer() {
     <LazyMotion features={domAnimation} strict>
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
         {/* ── Controls ───────────────────────────────────────────────────── */}
-        <div className="space-y-8 lg:col-span-5">
+        <div className="min-w-0 space-y-8 lg:col-span-5">
           <Step n={1} title="Add a photo of your yard">
             <input
               ref={fileInput}
@@ -372,7 +372,7 @@ export function Visualizer() {
         </div>
 
         {/* ── Result ─────────────────────────────────────────────────────── */}
-        <div className="lg:col-span-7">
+        <div className="min-w-0 lg:col-span-7">
           <div className="lg:sticky lg:top-28">
             <div aria-live="polite" aria-atomic="false">
               <AnimatePresence mode="wait">

@@ -67,7 +67,7 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             <h2 className="text-h2">Send us the details</h2>
             <p className="mt-3 max-w-prose text-body-lg text-stone-500">
               Five quick questions. It goes straight to the owner&rsquo;s phone.
@@ -77,7 +77,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <aside className="space-y-8 lg:col-span-5">
+          <aside className="min-w-0 space-y-8 lg:col-span-5">
             <NapBlock />
 
             <section className="rounded-sm border border-stone-200 bg-white p-6">
@@ -99,7 +99,7 @@ export default function ContactPage() {
               </div>
               <Link
                 href="/locations"
-                className="mt-5 inline-flex text-caption font-semibold text-moss-700 underline underline-offset-4"
+                className="mt-5 inline-flex min-h-[44px] items-center text-caption font-semibold text-moss-700 underline underline-offset-4"
               >
                 See all service areas
               </Link>

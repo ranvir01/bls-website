@@ -60,7 +60,11 @@ export function SiteHeader() {
         transition={spring.soft}
       >
         <div className="shell flex h-16 items-center justify-between gap-4 lg:h-20">
-          <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="Blue Landscaping Services — home">
+          <Link
+            href="/"
+            className="flex min-h-[44px] shrink-0 items-center gap-2.5"
+            aria-label="Blue Landscaping Services — home"
+          >
             <Image
               src="/images/logo.png"
               alt=""

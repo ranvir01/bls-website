@@ -19,7 +19,7 @@ import { Reveal } from '@/components/motion/reveal';
 import { ProjectGrid } from '@/components/portfolio/project-grid';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
-import { getServiceContent, serviceContent } from '@/data/content/services';
+import { getServiceContent } from '@/data/content/services';
 import { postsForService } from '@/data/content/blog';
 import { projectsForService } from '@/data/projects';
 import {
@@ -134,7 +134,7 @@ export default function ServicePage({ params }: Params) {
         {/* Editorial 12-col split: prose left, sticky quote form right. Avoids
             the centered-everything look every competitor template has. */}
         <div className="shell grid gap-12 pb-16 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-14 lg:col-span-7 xl:col-span-8">
+          <div className="min-w-0 space-y-14 lg:col-span-7 xl:col-span-8">
             <Reveal>
               <Prose paragraphs={content.intro} />
             </Reveal>
@@ -199,7 +199,7 @@ export default function ServicePage({ params }: Params) {
             </Reveal>
           </div>
 
-          <aside className="lg:col-span-5 xl:col-span-4">
+          <aside className="min-w-0 lg:col-span-5 xl:col-span-4">
             <div className="lg:sticky lg:top-28">
               <QuoteForm defaultProjectType={quoteTypeFor(content.slug)} />
             </div>
@@ -239,7 +239,7 @@ export default function ServicePage({ params }: Params) {
               </p>
               <Link
                 href={`/portfolio?service=${content.slug}`}
-                className="mt-4 inline-flex text-body font-medium text-moss-700 underline underline-offset-4"
+                className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-moss-700 underline underline-offset-4"
               >
                 View {ref.name.toLowerCase()} projects
               </Link>
@@ -270,6 +270,3 @@ function quoteTypeFor(slug: string): string {
 }
 
 export const dynamicParams = false;
-
-/** Exposed for the link checker's coverage assertion. */
-export const __serviceCount = Object.keys(serviceContent).length;

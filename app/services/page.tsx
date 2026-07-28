@@ -60,7 +60,7 @@ export default function ServicesPage() {
                   <h2 className="text-h2">{category.name}</h2>
                   <Link
                     href={`/services/${category.slug}`}
-                    className="inline-flex items-center gap-1.5 text-caption font-semibold text-moss-700 underline underline-offset-4"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 text-caption font-semibold text-moss-700 underline underline-offset-4"
                   >
                     All {category.name.toLowerCase()}
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

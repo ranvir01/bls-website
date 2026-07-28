@@ -81,7 +81,7 @@ export function SiteFooter() {
 
           {/* NAP block — must match the JSON-LD and the Google Business Profile */}
           <div>
-            <Link href="/" className="mb-4 flex items-center gap-2.5">
+            <Link href="/" className="mb-4 flex min-h-[44px] items-center gap-2.5">
               <Image
                 src="/images/logo.png"
                 alt=""

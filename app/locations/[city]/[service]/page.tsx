@@ -105,7 +105,7 @@ export default function ServiceCityPage({ params }: Params) {
         </header>
 
         <div className="shell grid gap-12 pb-16 pt-10 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-14 lg:col-span-7 xl:col-span-8">
+          <div className="min-w-0 space-y-14 lg:col-span-7 xl:col-span-8">
             <Reveal>
               <Prose paragraphs={content.body} />
             </Reveal>
@@ -146,7 +146,7 @@ export default function ServiceCityPage({ params }: Params) {
             </Reveal>
           </div>
 
-          <aside className="space-y-8 lg:col-span-5 xl:col-span-4">
+          <aside className="min-w-0 space-y-8 lg:col-span-5 xl:col-span-4">
             <div className="lg:sticky lg:top-28 lg:space-y-8">
               <QuoteForm defaultProjectType={service.slug} />
               <NapBlock />

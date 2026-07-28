@@ -39,7 +39,7 @@ export default function AboutPage() {
       <TrustBar />
 
       <div className="shell grid gap-12 pb-16 pt-16 lg:grid-cols-12 lg:gap-16">
-        <div className="space-y-12 lg:col-span-8">
+        <div className="min-w-0 space-y-12 lg:col-span-8">
           <Reveal as="section">
             <h2 className="text-h2">How we work, and why it is set up this way</h2>
             <div className="mt-5 max-w-prose space-y-4 text-body-lg text-stone-800">

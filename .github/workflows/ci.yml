@@ -53,6 +53,14 @@ jobs:
       - name: Link check
         run: node scripts/check-links.mjs --skip-external
 
+      # Browser-driven checks a static crawl cannot make: horizontal overflow at
+      # real phone widths, touch targets under 44px, heading order.
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: UI audit
+        run: node scripts/audit-ui.mjs --base=http://localhost:3000
+
   external-links:
     name: External link check
     runs-on: ubuntu-latest

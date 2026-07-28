@@ -90,7 +90,7 @@ export default function BlogPostPage({ params }: Params) {
           <QuickAnswer>{post.quickAnswer}</QuickAnswer>
         </header>
 
-        <div className="mt-10 max-w-prose">
+        <div className="mt-10 min-w-0 max-w-prose">
           {post.blocks.map((block, i) => (
             <Block key={i} block={block} />
           ))}

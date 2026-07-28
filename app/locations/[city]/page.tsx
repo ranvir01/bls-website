@@ -132,7 +132,7 @@ export default function CityPage({ params }: Params) {
         </header>
 
         <div className="shell grid gap-12 pb-16 pt-12 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-14 lg:col-span-7 xl:col-span-8">
+          <div className="min-w-0 space-y-14 lg:col-span-7 xl:col-span-8">
             <Reveal>
               <Prose paragraphs={content.body} />
             </Reveal>
@@ -180,7 +180,7 @@ export default function CityPage({ params }: Params) {
             </Reveal>
           </div>
 
-          <aside className="space-y-8 lg:col-span-5 xl:col-span-4">
+          <aside className="min-w-0 space-y-8 lg:col-span-5 xl:col-span-4">
             <div className="lg:sticky lg:top-28 lg:space-y-8">
               <QuoteForm />
               <NapBlock />
@@ -204,7 +204,7 @@ export default function CityPage({ params }: Params) {
               </p>
               <Link
                 href={`/portfolio?city=${content.slug}`}
-                className="mt-4 inline-flex text-body font-medium text-moss-700 underline underline-offset-4"
+                className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-moss-700 underline underline-offset-4"
               >
                 Projects near {content.name}
               </Link>

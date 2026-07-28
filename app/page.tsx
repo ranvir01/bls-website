@@ -58,7 +58,7 @@ export default function HomePage() {
                   <h3 className="text-h3">{category.name}</h3>
                   <Link
                     href={`/services/${category.slug}`}
-                    className="inline-flex items-center gap-1.5 text-caption font-semibold text-moss-700 underline underline-offset-4"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 text-caption font-semibold text-moss-700 underline underline-offset-4"
                   >
                     All {category.name.toLowerCase()}
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -95,7 +95,7 @@ export default function HomePage() {
             <ProjectGrid projects={featured} heading="Recent work" />
             <Link
               href="/portfolio"
-              className="mt-8 inline-flex items-center gap-1.5 text-body font-medium text-moss-700 underline underline-offset-4"
+              className="mt-8 inline-flex min-h-[44px] items-center gap-1.5 text-body font-medium text-moss-700 underline underline-offset-4"
             >
               See the full portfolio
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -144,7 +144,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/process"
-            className="mt-8 inline-flex items-center gap-1.5 text-body font-medium text-moss-700 underline underline-offset-4"
+            className="mt-8 inline-flex min-h-[44px] items-center gap-1.5 text-body font-medium text-moss-700 underline underline-offset-4"
           >
             More about how we work
             <ArrowRight className="h-4 w-4" aria-hidden="true" />

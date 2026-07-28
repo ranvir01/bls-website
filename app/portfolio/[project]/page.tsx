@@ -84,7 +84,7 @@ export default function ProjectPage({ params }: Params) {
         </div>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-12">
-          <div className="space-y-12 lg:col-span-8">
+          <div className="min-w-0 space-y-12 lg:col-span-8">
             <section>
               <h2 className="text-h2">The problem</h2>
               <p className="mt-4 max-w-prose text-body-lg text-stone-800">{project.challenge}</p>

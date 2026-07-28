@@ -47,7 +47,11 @@ export function buildMetadata({
   const ogImage = absoluteUrl(image);
 
   return {
-    title: full,
+    // `absolute` bypasses the root layout's `%s | Brand` template. Returning a
+    // plain string here would let the template append the brand a second time,
+    // which is the double-brand bug this function exists to prevent — and which
+    // the previous site shipped on every page.
+    title: { absolute: full },
     description,
     alternates: { canonical: url },
     robots: noindex
