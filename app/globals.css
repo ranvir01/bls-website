@@ -188,6 +188,9 @@
      "Call" instead of the button the user aimed at. Verified in a browser:
      the quote form's Continue button was being swallowed exactly this way. */
   .pb-action-bar {
-    padding-bottom: calc(var(--action-bar-h) + env(safe-area-inset-bottom));
+    /* The bar's own top border makes it 1px taller than --action-bar-h, so
+       reserving exactly that height left the last row of links a pixel short.
+       The extra 1rem is deliberate breathing room, not a fudge factor. */
+    padding-bottom: calc(var(--action-bar-h) + 1rem + env(safe-area-inset-bottom));
   }
 }

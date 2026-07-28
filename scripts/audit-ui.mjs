@@ -156,7 +156,14 @@ for (const width of WIDTHS) {
     // bottom and checks that nothing interactive is left underneath.
     if (width < 768) {
       const trapped = await page.evaluate(() => {
-        window.scrollTo(0, document.body.scrollHeight);
+        // Two details this check got wrong before, both of which produced
+        // false positives:
+        //   - documentElement, not body: with `overflow-x: clip` on body the
+        //     two scrollHeights differ and body's stops short of the bottom.
+        //   - behavior 'instant': the site sets `scroll-behavior: smooth`, so
+        //     a plain scrollTo animates. On a 10,000px page it was still
+        //     mid-flight when the measurement ran.
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' });
         return new Promise((resolve) => {
           setTimeout(() => {
             const bar = document.querySelector('.mobile-action-bar');
@@ -188,7 +195,7 @@ for (const width of WIDTHS) {
         report(path, width, `control trapped under the fixed action bar at page bottom: ${t}`);
       }
 
-      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
     }
 
     // ── Heading order ─────────────────────────────────────────────────────
