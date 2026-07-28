@@ -1,0 +1,309 @@
+import Link from 'next/link';
+import { ArrowRight, Check, Phone, ShieldCheck } from 'lucide-react';
+
+import { PHONE, TEL_HREF, business } from '@/data/business';
+import type { CostRow, Faq } from '@/data/types';
+import { cn } from '@/lib/utils';
+
+import { Reveal } from './motion/reveal';
+
+/**
+ * Shared page blocks.
+ *
+ * Server components throughout — none of these need interactivity, so none of
+ * them cost client JavaScript. Anything here that does need state lives in its
+ * own 'use client' file instead.
+ */
+
+export function SectionHeader({
+  eyebrow,
+  title,
+  lead,
+  align = 'left',
+  as: Heading = 'h2',
+}: {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  as?: 'h1' | 'h2';
+}) {
+  return (
+    <div className={cn('max-w-prose', align === 'center' && 'mx-auto text-center')}>
+      {eyebrow && (
+        <p className="mb-3 text-caption font-semibold uppercase tracking-wide text-moss-700">
+          {eyebrow}
+        </p>
+      )}
+      <Heading className={Heading === 'h1' ? 'text-h1' : 'text-h2'}>{title}</Heading>
+      {lead && <p className="mt-4 text-body-lg text-stone-500">{lead}</p>}
+    </div>
+  );
+}
+
+/**
+ * The Quick Answer block. 40–60 words, present on every service, location and
+ * blog page. This is the unit AI search engines extract and cite, so it is
+ * rendered high in the document and marked up as a standalone paragraph rather
+ * than being buried in prose.
+ */
+export function QuickAnswer({ children }: { children: string }) {
+  return (
+    <div className="quick-answer my-8">
+      <p className="mb-1 text-caption font-semibold uppercase tracking-wide text-moss-700">
+        Quick answer
+      </p>
+      <p>{children}</p>
+    </div>
+  );
+}
+
+export function Prose({ paragraphs, className }: { paragraphs: string[]; className?: string }) {
+  return (
+    <div className={cn('max-w-prose space-y-4 text-body-lg text-stone-800', className)}>
+      {paragraphs.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
+    </div>
+  );
+}
+
+export function CheckList({ items, columns = 1 }: { items: string[]; columns?: 1 | 2 }) {
+  return (
+    <ul className={cn('grid gap-3', columns === 2 && 'sm:grid-cols-2')}>
+      {items.map((item) => (
+        <li key={item} className="flex gap-3 text-body text-stone-800">
+          <Check className="mt-1 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * Cost table. Highly extractable by AI engines and by far the most-read block
+ * on a service page — homeowners scroll straight to it.
+ */
+export function CostTable({
+  rows,
+  note,
+  caption,
+}: {
+  rows: CostRow[];
+  note?: string;
+  caption?: string;
+}) {
+  if (!rows.length) return null;
+
+  return (
+    <div>
+      {/* Wide tables scroll inside their own container so the page body never
+          scrolls horizontally on a 360px phone. */}
+      <div className="overflow-x-auto rounded-sm border border-stone-200 bg-white">
+        <table className="w-full min-w-[34rem] border-collapse text-left">
+          {caption && <caption className="sr-only">{caption}</caption>}
+          <thead>
+            <tr className="border-b border-stone-200 bg-stone-50">
+              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-stone-500">
+                Item
+              </th>
+              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-stone-500">
+                Typical range
+              </th>
+              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-stone-500">
+                Unit
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.item} className="border-b border-stone-200 last:border-0">
+                <th scope="row" className="px-4 py-3 text-body font-medium text-stone-950">
+                  {row.item}
+                  {row.notes && <span className="mt-0.5 block text-caption font-normal text-stone-500">{row.notes}</span>}
+                </th>
+                <td className="whitespace-nowrap px-4 py-3 text-body font-semibold text-moss-700">{row.range}</td>
+                <td className="px-4 py-3 text-caption text-stone-500">{row.unit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {note && <p className="mt-3 max-w-prose text-caption text-stone-500">{note}</p>}
+    </div>
+  );
+}
+
+/**
+ * FAQ list with deep-linkable anchors.
+ *
+ * Rendered with <details>/<summary> rather than a JS accordion so every answer
+ * is in the initial HTML and readable with JavaScript disabled — which is the
+ * whole point of pairing this with FAQPage schema.
+ */
+export function FaqList({ faqs, title = 'Frequently asked questions' }: { faqs: Faq[]; title?: string }) {
+  if (!faqs.length) return null;
+
+  return (
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading" className="text-h2">
+        {title}
+      </h2>
+      <div className="mt-6 divide-y divide-stone-200 border-y border-stone-200">
+        {faqs.map((faq) => {
+          const id = slugifyQuestion(faq.question);
+          return (
+            <details key={faq.question} id={id} className="group py-4">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-body-lg font-medium text-stone-950 marker:hidden">
+                {faq.question}
+                <span
+                  aria-hidden="true"
+                  className="mt-1.5 h-2.5 w-2.5 shrink-0 rotate-45 border-b-2 border-r-2 border-stone-500 transition-transform duration-200 group-open:-rotate-135"
+                />
+              </summary>
+              <p className="mt-3 max-w-prose text-body text-stone-800">{faq.answer}</p>
+            </details>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+export function slugifyQuestion(q: string): string {
+  return (
+    'faq-' +
+    q
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .slice(0, 60)
+  );
+}
+
+/** Trust bar. Every claim here is verifiable — license, bond, insurance, year. */
+export function TrustBar() {
+  const items = [
+    { label: `WA Lic. ${business.license.number}`, detail: 'Verifiable with L&I' },
+    { label: 'Bonded & insured', detail: '$12k bond · $1M liability' },
+    { label: `Family-run since ${business.foundedYear}`, detail: 'Based in Kent, WA' },
+    { label: 'In-house design & build', detail: 'No subs on hardscape' },
+  ];
+
+  return (
+    <section aria-label="Credentials" className="border-y border-stone-200 bg-white">
+      <div className="shell grid grid-cols-2 gap-6 py-8 lg:grid-cols-4">
+        {items.map((item) => (
+          <div key={item.label} className="flex gap-3">
+            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-moss-700" aria-hidden="true" />
+            <div>
+              <p className="text-caption font-semibold text-stone-950">{item.label}</p>
+              <p className="text-caption text-stone-500">{item.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function CtaBand({
+  title = 'Get a real number from the crew that will build it',
+  body = 'Free on-site walkthrough, a written scope, and a range you can plan around. Most quotes go out the same day we visit.',
+  primaryHref = '/quote',
+  primaryLabel = 'Get your free quote',
+}: {
+  title?: string;
+  body?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+}) {
+  return (
+    <section className="bg-stone-950 text-moss-100">
+      <div className="shell section-tight">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <h2 className="text-h2 text-white">{title}</h2>
+          <p className="mx-auto mt-4 max-w-prose text-body-lg text-moss-100/80">{body}</p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href={primaryHref}
+              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-sm bg-clay-600 px-7 text-body font-semibold text-white transition-colors hover:bg-clay-600/90 sm:w-auto"
+            >
+              {primaryLabel}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <a
+              href={TEL_HREF}
+              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-sm border border-moss-100/30 px-7 text-body font-semibold text-white transition-colors hover:border-moss-100/70 sm:w-auto"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              {PHONE.display}
+            </a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/** A titled group of internal links. The internal-linking web is built of these. */
+export function LinkCluster({
+  title,
+  links,
+  columns = 2,
+}: {
+  title: string;
+  links: { label: string; href: string }[];
+  columns?: 2 | 3;
+}) {
+  if (!links.length) return null;
+
+  return (
+    <section>
+      <h2 className="text-h3">{title}</h2>
+      <ul
+        className={cn(
+          'mt-4 grid gap-x-6 gap-y-2',
+          columns === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3',
+        )}
+      >
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="group inline-flex items-center gap-1.5 text-body text-stone-800 transition-colors hover:text-moss-700"
+            >
+              <span className="underline decoration-stone-200 underline-offset-4 group-hover:decoration-moss-700">
+                {link.label}
+              </span>
+              <ArrowRight
+                className="h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
+                aria-hidden="true"
+              />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function ProcessSteps({ steps }: { steps: { title: string; description: string }[] }) {
+  if (!steps.length) return null;
+
+  return (
+    <ol className="grid gap-6 sm:grid-cols-2">
+      {steps.map((step, i) => (
+        <li key={step.title} className="border-l-2 border-moss-100 pl-5">
+          <span className="text-caption font-semibold uppercase tracking-wide text-clay-600">
+            Step {i + 1}
+          </span>
+          <h3 className="mt-1 text-body-lg font-semibold text-stone-950">{step.title}</h3>
+          <p className="mt-1.5 text-body text-stone-500">{step.description}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}

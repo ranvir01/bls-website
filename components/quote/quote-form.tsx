@@ -1,0 +1,561 @@
+'use client';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { ArrowLeft, ArrowRight, Check, Loader2, Phone } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useForm, type FieldPath } from 'react-hook-form';
+
+import { PHONE, TEL_HREF } from '@/data/business';
+import { trackEvent } from '@/lib/analytics';
+import {
+  BUDGET_OPTIONS,
+  PROJECT_TYPES,
+  SIZE_OPTIONS,
+  STEP_FIELDS,
+  STEP_TITLES,
+  TIMELINE_OPTIONS,
+  isInServiceArea,
+  leadSchema,
+  type LeadInput,
+} from '@/lib/lead-schema';
+import { ease } from '@/lib/motion';
+import { cn } from '@/lib/utils';
+
+const STORAGE_KEY = 'bls-quote-progress';
+const TOTAL_STEPS = STEP_FIELDS.length;
+
+/**
+ * Phase 7 multi-step quote form.
+ *
+ * Design decisions that matter for conversion, not just for looks:
+ *   - Step 1 is a single tap on a visual card, so the first interaction costs
+ *     nothing. Asking for a name first is what kills completion rates.
+ *   - Phone is required and asked BEFORE email. Phone leads convert far better
+ *     in home services; email is optional and never blocks a submit.
+ *   - Progress persists to sessionStorage, so a refresh or an accidental
+ *     back-swipe on mobile does not lose the answers.
+ *   - Each step validates only its own fields, so an error on step 5 never
+ *     blocks navigation on step 2.
+ */
+export function QuoteForm({
+  className,
+  defaultProjectType,
+  renderId,
+  compact = false,
+}: {
+  className?: string;
+  defaultProjectType?: string;
+  renderId?: string;
+  compact?: boolean;
+}) {
+  const [step, setStep] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [restored, setRestored] = useState(false);
+  const startedRef = useRef(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const pathname = usePathname();
+  const reduced = useReducedMotion();
+
+  const form = useForm<LeadInput>({
+    resolver: zodResolver(leadSchema),
+    mode: 'onTouched',
+    defaultValues: {
+      projectType: defaultProjectType ?? undefined,
+      city: '',
+      zip: '',
+      name: '',
+      phone: '',
+      email: '',
+      details: '',
+      company: '',
+    },
+  });
+
+  const { register, handleSubmit, trigger, setValue, watch, formState } = form;
+  const values = watch();
+
+  // ── Persist and restore progress ──────────────────────────────────────────
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as { values: Partial<LeadInput>; step: number };
+        for (const [key, value] of Object.entries(parsed.values)) {
+          if (value !== undefined && value !== '') {
+            setValue(key as FieldPath<LeadInput>, value as never);
+          }
+        }
+        if (typeof parsed.step === 'number') setStep(Math.min(parsed.step, TOTAL_STEPS - 1));
+      }
+    } catch {
+      // A corrupt or unavailable sessionStorage must never break the form.
+    }
+    setRestored(true);
+  }, [setValue]);
+
+  useEffect(() => {
+    if (!restored || submitted) return;
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ values, step }));
+    } catch {
+      /* private mode / quota — non-fatal */
+    }
+  }, [values, step, restored, submitted]);
+
+  // ── Analytics ─────────────────────────────────────────────────────────────
+  const markStarted = useCallback(() => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent('quote_form_start', { path: pathname });
+  }, [pathname]);
+
+  // ── Navigation ────────────────────────────────────────────────────────────
+  const goNext = useCallback(async () => {
+    markStarted();
+    const fields = STEP_FIELDS[step] as FieldPath<LeadInput>[];
+    const valid = await trigger(fields);
+    if (!valid) return;
+
+    trackEvent('quote_form_step', { step: step + 1, path: pathname });
+    setDirection(1);
+    setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+  }, [markStarted, pathname, step, trigger]);
+
+  const goBack = useCallback(() => {
+    setDirection(-1);
+    setStep((s) => Math.max(0, s - 1));
+  }, []);
+
+  // Move focus to the new step heading so keyboard and screen-reader users are
+  // not stranded at the top of the document after advancing.
+  useEffect(() => {
+    if (step > 0) headingRef.current?.focus();
+  }, [step]);
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+  const onSubmit = handleSubmit(async (data) => {
+    setSubmitting(true);
+    setServerError(null);
+
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, sourcePath: pathname, renderId }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        setServerError(json.error ?? 'Something went wrong. Please call us instead.');
+        return;
+      }
+
+      trackEvent('quote_form_submit', { path: pathname, project_type: data.projectType });
+      setSubmitted(true);
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* non-fatal */
+      }
+    } catch {
+      setServerError('We could not reach the server. Please call us instead.');
+    } finally {
+      setSubmitting(false);
+    }
+  });
+
+  if (submitted) {
+    return <SuccessPanel name={values.name} className={className} />;
+  }
+
+  const progress = ((step + 1) / TOTAL_STEPS) * 100;
+
+  return (
+    <LazyMotion features={domAnimation} strict>
+      <form
+        onSubmit={onSubmit}
+        onChange={markStarted}
+        noValidate
+        className={cn('rounded-sm border border-stone-200 bg-white p-5 shadow-card sm:p-7', className)}
+      >
+        {/* Honeypot. Hidden from sight and from assistive tech; bots fill it. */}
+        <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+          <label htmlFor="company-field">Company</label>
+          <input id="company-field" type="text" tabIndex={-1} autoComplete="off" {...register('company')} />
+        </div>
+
+        <div className="mb-6">
+          <div className="mb-2 flex items-baseline justify-between">
+            <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+              Step {step + 1} of {TOTAL_STEPS}
+            </p>
+            <p className="text-caption text-stone-500">Takes about a minute</p>
+          </div>
+          <div
+            role="progressbar"
+            aria-valuemin={1}
+            aria-valuemax={TOTAL_STEPS}
+            aria-valuenow={step + 1}
+            aria-label="Quote request progress"
+            className="h-1 w-full overflow-hidden rounded-sm bg-stone-200"
+          >
+            <m.div
+              className="h-full bg-moss-700"
+              initial={false}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: reduced ? 0 : 0.3, ease: ease.out }}
+            />
+          </div>
+        </div>
+
+        <h2
+          ref={headingRef}
+          tabIndex={-1}
+          className={cn('text-h3 outline-none', compact && 'text-body-lg font-semibold')}
+        >
+          {STEP_TITLES[step]}
+        </h2>
+
+        <AnimatePresence mode="wait" initial={false} custom={direction}>
+          <m.div
+            key={step}
+            custom={direction}
+            initial={reduced ? { opacity: 0 } : { opacity: 0, x: direction * 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={reduced ? { opacity: 0 } : { opacity: 0, x: direction * -24 }}
+            transition={{ duration: reduced ? 0.01 : 0.25, ease: ease.out }}
+            className="mt-5"
+          >
+            {step === 0 && (
+              <CardGroup
+                name="projectType"
+                options={PROJECT_TYPES}
+                value={values.projectType}
+                onSelect={(id) => {
+                  setValue('projectType', id, { shouldValidate: true });
+                  markStarted();
+                }}
+                error={formState.errors.projectType?.message}
+              />
+            )}
+
+            {step === 1 && (
+              <div className="space-y-5">
+                <CardGroup
+                  name="projectSize"
+                  options={SIZE_OPTIONS}
+                  value={values.projectSize}
+                  onSelect={(id) => setValue('projectSize', id, { shouldValidate: true })}
+                  error={formState.errors.projectSize?.message}
+                />
+                <Field label="Anything we should know? (optional)" htmlFor="details">
+                  <textarea
+                    id="details"
+                    rows={3}
+                    placeholder="Slope, drainage problems, access, a deadline…"
+                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    {...register('details')}
+                  />
+                </Field>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-4">
+                <Field label="City" htmlFor="city" error={formState.errors.city?.message}>
+                  <input
+                    id="city"
+                    type="text"
+                    autoComplete="address-level2"
+                    placeholder="Kent"
+                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    {...register('city')}
+                  />
+                </Field>
+                <Field label="ZIP code" htmlFor="zip" error={formState.errors.zip?.message}>
+                  <input
+                    id="zip"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="postal-code"
+                    maxLength={5}
+                    placeholder="98031"
+                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    {...register('zip')}
+                  />
+                </Field>
+                {/* Out of area is a note, never a block — the lead is still worth having. */}
+                {values.zip?.length === 5 && !isInServiceArea(values.zip) && (
+                  <p className="rounded-sm border border-warn/30 bg-warn/5 px-3 py-2.5 text-caption text-stone-800">
+                    That looks like it may be outside our usual service area. Send it anyway — if we
+                    cannot get out there, we will tell you straight and point you somewhere good.
+                  </p>
+                )}
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="space-y-6">
+                <ChipGroup
+                  legend="Timeline"
+                  options={TIMELINE_OPTIONS}
+                  value={values.timeline}
+                  onSelect={(id) => setValue('timeline', id)}
+                />
+                <ChipGroup
+                  legend="Budget range (optional)"
+                  options={BUDGET_OPTIONS}
+                  value={values.budget}
+                  onSelect={(id) => setValue('budget', id)}
+                />
+              </div>
+            )}
+
+            {step === 4 && (
+              <div className="space-y-4">
+                <Field label="Your name" htmlFor="name" error={formState.errors.name?.message}>
+                  <input
+                    id="name"
+                    type="text"
+                    autoComplete="name"
+                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 focus:border-moss-700"
+                    {...register('name')}
+                  />
+                </Field>
+                <Field label="Phone" htmlFor="phone" error={formState.errors.phone?.message}>
+                  <input
+                    id="phone"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    placeholder="(253) 555-0123"
+                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    {...register('phone')}
+                  />
+                </Field>
+                <Field label="Email (optional)" htmlFor="email" error={formState.errors.email?.message}>
+                  <input
+                    id="email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 focus:border-moss-700"
+                    {...register('email')}
+                  />
+                </Field>
+                <p className="text-caption text-stone-500">
+                  We call to confirm the details and book a free on-site walkthrough. No spam, no
+                  list-selling.
+                </p>
+              </div>
+            )}
+          </m.div>
+        </AnimatePresence>
+
+        {serverError && (
+          <p role="alert" aria-live="assertive" className="mt-4 rounded-sm border border-error/30 bg-error/5 px-3 py-2.5 text-caption text-stone-950">
+            {serverError}{' '}
+            <a href={TEL_HREF} className="font-semibold underline">
+              Call {PHONE.display}
+            </a>
+          </p>
+        )}
+
+        <div className="mt-7 flex items-center gap-3">
+          {step > 0 && (
+            <button
+              type="button"
+              onClick={goBack}
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-sm border border-stone-200 px-4 text-body font-medium text-stone-800 transition-colors hover:border-stone-500"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              Back
+            </button>
+          )}
+
+          {step < TOTAL_STEPS - 1 ? (
+            <button
+              type="button"
+              onClick={goNext}
+              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
+            >
+              Continue
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
+          ) : (
+            <button
+              type="submit"
+              disabled={submitting}
+              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90 disabled:opacity-70"
+            >
+              {submitting ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  Sending…
+                </>
+              ) : (
+                'Send my request'
+              )}
+            </button>
+          )}
+        </div>
+      </form>
+    </LazyMotion>
+  );
+}
+
+// ── Sub-components ───────────────────────────────────────────────────────────
+
+function CardGroup({
+  name,
+  options,
+  value,
+  onSelect,
+  error,
+}: {
+  name: string;
+  options: readonly { id: string; label: string; description?: string }[];
+  value?: string;
+  onSelect: (id: string) => void;
+  error?: string;
+}) {
+  return (
+    <fieldset>
+      <legend className="sr-only">{name}</legend>
+      <div className="grid gap-2.5 sm:grid-cols-2">
+        {options.map((option) => {
+          const selected = value === option.id;
+          return (
+            <button
+              key={option.id}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => onSelect(option.id)}
+              className={cn(
+                'min-h-[64px] rounded-sm border p-4 text-left transition-colors',
+                selected
+                  ? 'border-moss-700 bg-moss-100/50 ring-1 ring-moss-700'
+                  : 'border-stone-200 bg-white hover:border-stone-500',
+              )}
+            >
+              <span className="flex items-start justify-between gap-2">
+                <span className="text-body font-medium text-stone-950">{option.label}</span>
+                {selected && <Check className="mt-0.5 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />}
+              </span>
+              {option.description && (
+                <span className="mt-0.5 block text-caption text-stone-500">{option.description}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      {error && (
+        <p role="alert" aria-live="polite" className="mt-2 text-caption text-error">
+          {error}
+        </p>
+      )}
+    </fieldset>
+  );
+}
+
+function ChipGroup({
+  legend,
+  options,
+  value,
+  onSelect,
+}: {
+  legend: string;
+  options: readonly { id: string; label: string }[];
+  value?: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <fieldset>
+      <legend className="mb-2.5 text-caption font-semibold uppercase tracking-wide text-stone-500">
+        {legend}
+      </legend>
+      <div className="flex flex-wrap gap-2">
+        {options.map((option) => {
+          const selected = value === option.id;
+          return (
+            <button
+              key={option.id}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => onSelect(option.id)}
+              className={cn(
+                'min-h-[44px] rounded-sm border px-4 text-body transition-colors',
+                selected
+                  ? 'border-moss-700 bg-moss-100/50 font-medium text-stone-950 ring-1 ring-moss-700'
+                  : 'border-stone-200 bg-white text-stone-800 hover:border-stone-500',
+              )}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
+function Field({
+  label,
+  htmlFor,
+  error,
+  children,
+}: {
+  label: string;
+  htmlFor: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label htmlFor={htmlFor} className="mb-1.5 block text-caption font-medium text-stone-800">
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p role="alert" aria-live="polite" className="mt-1.5 text-caption text-error">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function SuccessPanel({ name, className }: { name?: string; className?: string }) {
+  const first = name?.split(' ')[0];
+
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className={cn('rounded-sm border border-moss-700/30 bg-moss-100/40 p-7 text-center', className)}
+    >
+      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-moss-700">
+        <Check className="h-6 w-6 text-white" aria-hidden="true" />
+      </div>
+      <h2 className="text-h3">{first ? `Thanks, ${first} — we have it.` : 'Thanks — we have it.'}</h2>
+      <p className="mx-auto mt-3 max-w-prose text-body text-stone-800">
+        An estimator will call you shortly to confirm the details and book your free on-site
+        walkthrough. If you would rather reach us now, we are on the phone.
+      </p>
+      <a
+        href={TEL_HREF}
+        onClick={() => trackEvent('click_to_call', { location: 'quote_success' })}
+        className="mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
+      >
+        <Phone className="h-4 w-4" aria-hidden="true" />
+        {PHONE.display}
+      </a>
+    </div>
+  );
+}

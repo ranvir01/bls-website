@@ -1,0 +1,96 @@
+import Link from 'next/link';
+
+import { PHONE, TEL_HREF } from '@/data/business';
+import { categories, cities, cityPath } from '@/data/taxonomy';
+
+/**
+ * Branded 404.
+ *
+ * A dead end is a lost lead, so this offers real routes onward rather than an
+ * apology — every service category and every primary city is one click away.
+ */
+export default function NotFound() {
+  return (
+    <div className="shell py-24 lg:py-32">
+      <div className="max-w-prose">
+        <p className="text-caption font-semibold uppercase tracking-wide text-clay-600">404</p>
+        <h1 className="mt-2 text-h1">That page is not here</h1>
+        <p className="mt-5 text-body-lg text-stone-500">
+          The link may be out of date — we reorganised this site, and some older URLs moved. Here is
+          everything, one click away.
+        </p>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
+          >
+            Back to the homepage
+          </Link>
+          <a
+            href={TEL_HREF}
+            className="inline-flex min-h-[48px] items-center justify-center rounded-sm border border-stone-200 px-6 text-body font-semibold text-stone-950 transition-colors hover:border-moss-700"
+          >
+            Call {PHONE.display}
+          </a>
+        </div>
+      </div>
+
+      <div className="mt-16 grid gap-10 md:grid-cols-2">
+        <nav aria-labelledby="nf-services">
+          <h2 id="nf-services" className="text-h3">
+            Services
+          </h2>
+          <ul className="mt-4 space-y-2">
+            {categories.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  href={`/services/${c.slug}`}
+                  className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+                >
+                  {c.name}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/services"
+                className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+              >
+                All services
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="nf-areas">
+          <h2 id="nf-areas" className="text-h3">
+            Service areas
+          </h2>
+          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
+            {cities
+              .filter((c) => c.tier === 'primary')
+              .map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    href={cityPath(c.slug)}
+                    className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+                  >
+                    {c.name}
+                  </Link>
+                </li>
+              ))}
+            <li>
+              <Link
+                href="/locations"
+                className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+              >
+                All areas
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
+}

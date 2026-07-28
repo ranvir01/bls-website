@@ -1,36 +1,137 @@
 [build]
-  command = "chmod +x netlify-build.sh && ./netlify-build.sh"
+  command = "npm run build:ci"
   publish = ".next"
 
 [build.environment]
-  NODE_ENV = "production"
-  NODE_VERSION = "18.17.0"
-  NPM_VERSION = "10.8.2"
+  NODE_VERSION = "20"
   NEXT_TELEMETRY_DISABLED = "1"
-  NEXT_CACHE = "true"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Simple redirect for client-side routing
+# ── Redirects ────────────────────────────────────────────────────────────────
+# The previous site used three URL patterns for the same idea (/localities,
+# /service-areas, /services/<service>). Everything now lives under one, and the
+# old paths 301 to it — single hop, no chains, verified by the link checker.
+#
+# NOTE: the old config had a catch-all `from = "/*" to = "/" status = 200`
+# rewrite. On a Next.js site that serves the homepage HTML at every URL, which
+# is why the location pages appeared to ship an empty body. It is gone and must
+# never come back — @netlify/plugin-nextjs handles routing.
+
 [[redirects]]
-  from = "/*"
-  to = "/"
-  status = 200
+  from = "/localities/*"
+  to = "/locations/:splat"
+  status = 301
+  force = true
 
-# Special rule for hero image
-[[headers]]
-  for = "/images/hero-home.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "image/jpeg"
+[[redirects]]
+  from = "/service-areas/*"
+  to = "/locations/:splat"
+  status = 301
+  force = true
 
-# Security headers for improved security
+[[redirects]]
+  from = "/service-areas"
+  to = "/locations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/localities"
+  to = "/locations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/testimonials"
+  to = "/reviews"
+  status = 301
+  force = true
+
+# Legacy service URLs → the /services/[category]/[service] pattern.
+[[redirects]]
+  from = "/services/hardscaping/patios"
+  to = "/services/hardscaping/paver-patios"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/hardscaping/patio-installation"
+  to = "/services/hardscaping/paver-patios"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/hardscaping/walkways-pathways"
+  to = "/services/hardscaping/walkways"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/hardscaping/driveway-paving"
+  to = "/services/hardscaping/driveways"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/hardscaping/steps"
+  to = "/services/hardscaping/outdoor-steps"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/hardscaping/seating"
+  to = "/services/hardscaping/seating-walls"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/lawn-care"
+  to = "/services/landscaping/lawn-maintenance"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/garden-design"
+  to = "/services/landscaping/planting-design"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/landscape-lighting"
+  to = "/services/hardscaping/walkways"
+  status = 301
+  force = true
+
+# ── Headers ──────────────────────────────────────────────────────────────────
+
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; img-src 'self' data: blob:; frame-ancestors 'none';"
+    Permissions-Policy = "camera=(self), microphone=(), geolocation=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    # 'unsafe-inline' on script-src is required by Next.js's inline bootstrap
+    # and by the JSON-LD blocks. frame-src allows the OpenStreetMap embed on
+    # /contact; img-src allows remote render URLs from the image provider.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.googletagmanager.com; frame-src https://www.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+
+# Next.js content-hashes everything under /_next/static, so it is safe to cache
+# these forever. Nothing else gets an immutable header.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

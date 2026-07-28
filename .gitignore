@@ -43,3 +43,7 @@ Thumbs.db
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Build/verification artifacts
+*.tsbuildinfo
+.netlify/
