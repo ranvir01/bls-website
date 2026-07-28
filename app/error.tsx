@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 
+import { Button } from '@/components/ui/button';
 import { PHONE, TEL_HREF } from '@/data/business';
 
 /**
@@ -32,25 +33,15 @@ export default function Error({
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <button
-            type="button"
-            onClick={reset}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
-          >
+          <Button type="button" onClick={reset}>
             Try again
-          </button>
-          <a
-            href={TEL_HREF}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-sm border border-stone-200 px-6 text-body font-semibold text-stone-950 transition-colors hover:border-moss-700"
-          >
-            Call {PHONE.display}
-          </a>
-          <Link
-            href="/"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-sm border border-stone-200 px-6 text-body font-semibold text-stone-950 transition-colors hover:border-moss-700"
-          >
-            Homepage
-          </Link>
+          </Button>
+          <Button asChild variant="outline">
+            <a href={TEL_HREF}>Call {PHONE.display}</a>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/">Homepage</Link>
+          </Button>
         </div>
 
         {error.digest && (

@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
+
 /**
  * Inline entry point to the yard visualizer.
  *
@@ -28,13 +30,12 @@ export function VisualizerTeaser({
           <h2 className="mt-2 text-h3 md:text-h2">{headline}</h2>
           <p className="mt-3 max-w-prose text-body-lg text-stone-800">{body}</p>
         </div>
-        <Link
-          href="/visualizer"
-          className="inline-flex min-h-[48px] items-center justify-center gap-2 self-start rounded-sm bg-clay-600 px-7 text-body font-semibold text-white transition-colors hover:bg-clay-600/90 md:self-center"
-        >
-          {cta}
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        <Button asChild size="lg" className="self-start md:self-center">
+          <Link href="/visualizer">
+            {cta}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </Button>
       </div>
     </section>
   );

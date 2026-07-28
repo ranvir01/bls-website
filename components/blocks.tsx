@@ -6,6 +6,7 @@ import type { CostRow, Faq } from '@/data/types';
 import { cn } from '@/lib/utils';
 
 import { Reveal } from './motion/reveal';
+import { Button } from './ui/button';
 
 /**
  * Shared page blocks.
@@ -227,20 +228,18 @@ export function CtaBand({
           <h2 className="text-h2 text-white">{title}</h2>
           <p className="mx-auto mt-4 max-w-prose text-body-lg text-moss-100/80">{body}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href={primaryHref}
-              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-sm bg-clay-600 px-7 text-body font-semibold text-white transition-colors hover:bg-clay-600/90 sm:w-auto"
-            >
-              {primaryLabel}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-            <a
-              href={TEL_HREF}
-              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-sm border border-moss-100/30 px-7 text-body font-semibold text-white transition-colors hover:border-moss-100/70 sm:w-auto"
-            >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              {PHONE.display}
-            </a>
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <Link href={primaryHref}>
+                {primaryLabel}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild variant="onDark" size="lg" className="w-full sm:w-auto">
+              <a href={TEL_HREF}>
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                {PHONE.display}
+              </a>
+            </Button>
           </div>
         </Reveal>
       </div>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { PHONE, TEL_HREF } from '@/data/business';
 import { categories, cities, cityPath } from '@/data/taxonomy';
+import { Button } from '@/components/ui/button';
 
 /**
  * Branded 404.
@@ -21,18 +22,12 @@ export default function NotFound() {
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
-          >
-            Back to the homepage
-          </Link>
-          <a
-            href={TEL_HREF}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-sm border border-stone-200 px-6 text-body font-semibold text-stone-950 transition-colors hover:border-moss-700"
-          >
-            Call {PHONE.display}
-          </a>
+          <Button asChild>
+            <Link href="/">Back to the homepage</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <a href={TEL_HREF}>Call {PHONE.display}</a>
+          </Button>
         </div>
       </div>
 

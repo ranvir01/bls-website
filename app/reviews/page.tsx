@@ -6,6 +6,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { ReviewsSection } from '@/components/reviews-section';
+import { Button } from '@/components/ui/button';
 import { PHONE, TEL_HREF } from '@/data/business';
 import { averageRating, reviews } from '@/data/reviews';
 import { buildMetadata, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
@@ -79,18 +80,12 @@ export default function ReviewsPage() {
                 </p>
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={TEL_HREF}
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
-                >
-                  Call {PHONE.display}
-                </a>
-                <Link
-                  href="/about"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-sm border border-stone-200 px-6 text-body font-semibold text-stone-950 transition-colors hover:border-moss-700"
-                >
-                  How we work
-                </Link>
+                <Button asChild>
+                  <a href={TEL_HREF}>Call {PHONE.display}</a>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/about">How we work</Link>
+                </Button>
               </div>
             </div>
           )}

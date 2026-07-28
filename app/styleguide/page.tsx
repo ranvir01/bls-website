@@ -12,6 +12,7 @@ import {
   SectionHeader,
   TrustBar,
 } from '@/components/blocks';
+import { Button } from '@/components/ui/button';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -78,22 +79,27 @@ export default function StyleguidePage() {
       </Section>
 
       <Section title="Buttons">
-        <div className="flex flex-wrap gap-3">
-          <button className="inline-flex min-h-[48px] items-center rounded-sm bg-clay-600 px-6 text-body font-semibold text-white">
-            Primary
-          </button>
-          <button className="inline-flex min-h-[48px] items-center rounded-sm border border-stone-200 bg-white px-6 text-body font-semibold text-stone-950">
-            Secondary
-          </button>
-          <button className="inline-flex min-h-[48px] items-center rounded-sm bg-moss-700 px-6 text-body font-semibold text-white">
-            Brand
-          </button>
-          <button
-            disabled
-            className="inline-flex min-h-[48px] items-center rounded-sm bg-clay-600 px-6 text-body font-semibold text-white opacity-60"
-          >
-            Disabled
-          </button>
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <Button>Primary</Button>
+            <Button variant="brand">Brand</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button disabled>Disabled</Button>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 rounded-sm bg-stone-950 p-4">
+            <Button variant="onDark">On dark</Button>
+            <Button variant="onHero">On hero</Button>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button size="sm">Small</Button>
+            <Button size="md">Medium</Button>
+            <Button size="lg">Large</Button>
+          </div>
+          <p className="text-caption text-stone-500">
+            Every CTA on the site renders through this component. Sizes are floored at 44px (48px
+            default) so no caller has to remember the touch-target rule.
+          </p>
         </div>
       </Section>
 

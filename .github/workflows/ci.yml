@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Typecheck, lint, build & link check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      # Static acceptance gate: fabricated claims, hotlinked images,
+      # placeholder copy, dead hrefs, ad-hoc hex colours, a second phone number.
+      - name: Acceptance checks
+        run: node scripts/verify.mjs
+
+      - name: Build
+        run: npm run build
+
+      # The crawl-based gate. Fails on internal 404s, redirect chains, orphan
+      # routes, images without alt text, and any page whose visible text falls
+      # under the minimum threshold — the check that catches an empty shell
+      # before it reaches production.
+      - name: Start server
+        run: |
+          npm start &
+          npx --yes wait-on http://localhost:3000 --timeout 90000
+
+      - name: Link check
+        run: node scripts/check-links.mjs --skip-external
+
+  external-links:
+    name: External link check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Outbound links break for reasons outside this repo, so this runs on a
+    # schedule and on main rather than blocking every pull request.
+    if: github.event_name != 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Start server
+        run: |
+          npm start &
+          npx --yes wait-on http://localhost:3000 --timeout 90000
+      - name: Full link check including outbound
+        run: node scripts/check-links.mjs

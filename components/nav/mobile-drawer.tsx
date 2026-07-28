@@ -12,6 +12,7 @@ import { companyLinks, locationColumns, servicesColumns } from '@/lib/nav';
 import { ease, spring } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
+import { Button } from '@/components/ui/button';
 
 /**
  * Full-screen mobile navigation.
@@ -107,20 +108,18 @@ export function MobileDrawer() {
 
                   {/* Thumb-reachable primary actions, pinned to the bottom. */}
                   <div className="shrink-0 space-y-2 border-t border-stone-200 bg-stone-50 px-5 py-4 safe-bottom">
-                    <Link
-                      href="/quote"
-                      className="flex min-h-[48px] w-full items-center justify-center rounded-sm bg-clay-600 px-5 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
-                    >
-                      Get Free Quote
-                    </Link>
-                    <a
-                      href={TEL_HREF}
-                      onClick={() => trackEvent('click_to_call', { location: 'mobile_drawer' })}
-                      className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-sm border border-stone-200 bg-white px-5 text-body font-semibold text-stone-950 transition-colors hover:border-moss-700"
-                    >
-                      <Phone className="h-4 w-4" aria-hidden="true" />
-                      Call {PHONE.display}
-                    </a>
+                    <Button asChild full>
+                      <Link href="/quote">Get Free Quote</Link>
+                    </Button>
+                    <Button asChild variant="outline" full>
+                      <a
+                        href={TEL_HREF}
+                        onClick={() => trackEvent('click_to_call', { location: 'mobile_drawer' })}
+                      >
+                        <Phone className="h-4 w-4" aria-hidden="true" />
+                        Call {PHONE.display}
+                      </a>
+                    </Button>
                   </div>
                 </m.div>
               </Dialog.Content>

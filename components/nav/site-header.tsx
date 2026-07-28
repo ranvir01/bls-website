@@ -12,6 +12,7 @@ import { trackEvent } from '@/lib/analytics';
 import { spring } from '@/lib/motion';
 import { locationColumns, servicesColumns } from '@/lib/nav';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 import { MegaMenu } from './mega-menu';
 import { MobileDrawer } from './mobile-drawer';
@@ -127,12 +128,9 @@ export function SiteHeader() {
               <Phone className="h-5 w-5" aria-hidden="true" />
             </a>
 
-            <Link
-              href="/quote"
-              className="hidden min-h-[44px] items-center rounded-sm bg-clay-600 px-5 text-caption font-semibold text-white transition-colors hover:bg-clay-600/90 sm:inline-flex"
-            >
-              Get Free Quote
-            </Link>
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <Link href="/quote">Get Free Quote</Link>
+            </Button>
 
             <div className="lg:hidden">
               <MobileDrawer />
