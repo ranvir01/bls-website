@@ -74,10 +74,21 @@ export const business = {
   ],
 
   /**
-   * Social / external profiles. Every entry here is rendered as an outbound
-   * link and is checked by the link checker — only add a URL once it resolves.
+   * External profiles. These feed `sameAs` in the Organization JSON-LD, which
+   * is how Google ties this site to the Business Profile — a real local-search
+   * signal, not decoration. They are structured data only; nothing renders
+   * them as links, so a share-style URL here is fine.
+   *
+   * Add Yelp, Houzz, Angi and the rest here as those profiles are created.
    */
-  profiles: [] as { label: string; url: string }[],
+  profiles: [
+    {
+      label: 'Google Business Profile',
+      // Short link as supplied. Replacing it with the canonical
+      // google.com/maps/place/... URL is a small improvement — see docs/GO-LIVE.md.
+      url: 'https://share.google/udIRuWuNg13lXgC5t',
+    },
+  ] as { label: string; url: string }[],
 } as const;
 
 export const SITE_URL = 'https://bluelandscapingservices.com';

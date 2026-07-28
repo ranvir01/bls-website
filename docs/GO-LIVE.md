@@ -8,19 +8,12 @@ combined.
 
 ---
 
-## 1. Confirm the phone number — 2 minutes, blocking
+## 1. ~~Confirm the phone number~~ — DONE
 
-`data/business.ts` uses **(253) 217-0814**. That was the number appearing 16
-times across the old site; the other candidate, 206-854-8929, appeared zero
-times, so this is the right default — but it has not been confirmed with the
-owner.
-
-If it is wrong, change `PHONE` in `data/business.ts`. That one edit updates the
-header, footer, every `tel:` link, the JSON-LD, the contact page, the email
-templates and the SMS templates. Nothing else needs touching.
-
-The same number must then be used on the Google Business Profile, character for
-character. A mismatch between the site and GBP actively costs local ranking.
+**(253) 217-0814** is confirmed and is the single number sitewide, driven by
+the `PHONE` constant in `data/business.ts`. It must match the Google Business
+Profile character for character; if the GBP shows it differently, change one of
+them so they agree.
 
 ## 2. Wire up lead delivery — 20 minutes, blocking
 
@@ -53,22 +46,43 @@ A Twilio number is about $1.15/month plus under a cent per message. The site
 already texts the owner within seconds of a submit and auto-replies to the
 customer; it just needs credentials.
 
-## 3. Create the Google Business Profile — 2 hours
+## 3. ~~Create the Google Business Profile~~ — DONE, but finish it
 
-There is currently no profile. That means the business does not appear in the
-map pack at all, which is where most "landscaper near me" searches end.
+The profile exists. Its URL is now in `data/business.ts` and feeds `sameAs` in
+the Organization JSON-LD, which is how Google ties this site to that profile.
 
-Full instructions in `docs/BACKLINKS.md`. This is the single highest-return item
-on the entire list.
+Two follow-ups worth doing, both quick:
+
+1. **Swap in the canonical URL.** The link stored is the `share.google/...`
+   short link you sent. Open the profile, copy the full
+   `google.com/maps/place/...` URL, and replace `profiles[0].url` in
+   `data/business.ts`. Google resolves the short link fine, but the canonical
+   one is unambiguous.
+2. **Check NAP agreement.** The profile's name, address and phone must match
+   `data/business.ts` exactly — Blue Landscaping Services, 11703 SE 229th Pl,
+   Kent, WA 98031, (253) 217-0814. A mismatch actively costs local ranking.
+
+Then work `docs/BACKLINKS.md` from the top: categories, service list, service
+area, photos as they are shot, and a weekly post.
 
 ---
 
-## 4. Deploy
+## 4. Deploy — merged to `main`, now check Netlify
 
-The branch is `claude/website-deploy-cleanup-3qe2sy`. Merge it to `main` and
-Netlify will build and deploy automatically.
+The work is merged to `main` and pushed. If the site is still showing the old
+version, Netlify is not building from this repo's `main` — check, in order:
 
-Before merging, check the Netlify build settings match `netlify.toml`:
+1. **Is the site connected to this repo at all?** Netlify → Site configuration →
+   Build & deploy → Continuous deployment. If it says "Not linked" or points at
+   a different repo, that is the whole problem.
+2. **Which branch does it deploy?** Same screen, "Production branch". It must be
+   `main`.
+3. **Did the build fail?** Netlify → Deploys. A failed build leaves the previous
+   version live, which looks exactly like nothing happening.
+4. **Is auto-publish paused?** Deploys → there is a "Stop auto publishing"
+   toggle that silently keeps the old deploy live.
+
+Build settings must match `netlify.toml`:
 
 - Build command: `npm run build:ci`
 - Publish directory: `.next`
