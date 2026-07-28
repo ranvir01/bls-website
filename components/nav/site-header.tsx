@@ -85,8 +85,8 @@ export function SiteHeader() {
 
           {/* Desktop navigation */}
           <nav aria-label="Main" className="hidden items-center lg:flex">
-            <MegaMenu label="Services" href="/services" columns={servicesColumns} />
-            <MegaMenu label="Service Areas" href="/locations" columns={locationColumns} />
+            <MegaMenu label="Services" href="/services" columns={servicesColumns} solid={solid} />
+            <MegaMenu label="Service Areas" href="/locations" columns={locationColumns} solid={solid} />
             {[
               { label: 'Portfolio', href: '/portfolio' },
               { label: 'Visualizer', href: '/visualizer' },

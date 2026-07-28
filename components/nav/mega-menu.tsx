@@ -29,11 +29,18 @@ export function MegaMenu({
   href,
   columns,
   footer,
+  /**
+   * Whether the header is currently solid. Over a photographic hero the
+   * trigger has to be white — hardcoding stone-800 rendered "Services" and
+   * "Service Areas" as dark text on a dark image, effectively invisible.
+   */
+  solid = true,
 }: {
   label: string;
   href: string;
   columns: NavColumn[];
   footer?: React.ReactNode;
+  solid?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
@@ -93,7 +100,10 @@ export function MegaMenu({
         href={href}
         aria-expanded={open}
         aria-controls={panelId}
-        className="inline-flex items-center gap-1 px-3 py-2 text-caption font-medium text-stone-800 transition-colors hover:text-moss-700"
+        className={cn(
+          'inline-flex items-center gap-1 px-3 py-2 text-caption font-medium transition-colors',
+          solid ? 'text-stone-800 hover:text-moss-700' : 'text-white/90 hover:text-white',
+        )}
       >
         {label}
         <ChevronDown
@@ -112,9 +122,12 @@ export function MegaMenu({
             : 'invisible -translate-y-1 opacity-0',
         )}
       >
-        <div className="shell grid gap-8 py-8 md:grid-cols-3 lg:grid-cols-4">
+        <div className="shell grid gap-x-8 gap-y-6 py-8 md:grid-cols-2 lg:grid-cols-4">
           {columns.map((col) => (
-            <div key={col.heading}>
+            // A column with more than six links flows into two, so one long
+            // category (hardscaping has eight) does not make the whole panel
+            // twice the height of the viewport.
+            <div key={col.heading} className={cn(col.links.length > 6 && 'lg:col-span-2')}>
               {col.href ? (
                 <Link
                   href={col.href}
@@ -127,9 +140,9 @@ export function MegaMenu({
                   {col.heading}
                 </p>
               )}
-              <ul className="space-y-1.5">
+              <ul className={cn('space-y-1.5', col.links.length > 6 && 'lg:columns-2 lg:gap-8 lg:space-y-0')}>
                 {col.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.href} className="break-inside-avoid pb-1.5">
                     <Link
                       href={link.href}
                       className="group block rounded-sm px-2 py-1.5 -mx-2 transition-colors hover:bg-moss-100/60"
