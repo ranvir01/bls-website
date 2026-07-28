@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Paver Patios in Covington, WA',
   metaTitle: 'Paver Patio Installation in Covington, WA',
   metaDescription:
-    'Covington paver patios built drainage first. Hardpan intercept drains, proofed subgrade, big Timberlane back yards and real installed ranges. Twelve minutes from Kent.',
+    'Covington paver patios built drainage first. Hardpan intercept drains, proofed subgrade, big Timberlane yards and real cost ranges. Twelve minutes from Kent.',
   quickAnswer:
     'Covington sits on a till plateau near 400 feet where winter rain perches on hardpan and travels sideways. A patio laid across that slope becomes a dam unless the base carries an intercept drain and a piped outlet. We build drainage first and the paver field second, twelve minutes out Kent-Kangley from the shop.',
   body: [

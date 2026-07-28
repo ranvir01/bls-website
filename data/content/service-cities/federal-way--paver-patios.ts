@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Paver Patios in Federal Way, WA',
   metaTitle: 'Federal Way WA Paver Patio Installation',
   metaDescription:
-    'Paver patios in Federal Way, WA. Closed-basin kettle lake drainage, Alderwood till over hardpan, sandy outwash on the west shoulder. In-house design, our own crew.',
+    'Paver patios in Federal Way, WA. Kettle lake basins with no outlet, Alderwood till over hardpan, sandy outwash on the west rim. In-house design and install.',
   quickAnswer:
     'The question that decides a Federal Way patio is where the water goes afterward. Steel, Mirror, North, Star and Twin Lakes are closed basins with no natural outlet, so a lot near one has no downhill to drain toward and the design becomes on-site storage or dispersal. We are about twenty minutes southwest of the Kent shop.',
   body: [

@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Paver Patios in Renton, WA',
   metaTitle: 'Renton WA Paver Patio Installation',
   metaDescription:
-    'Paver patios in Renton built on real grade. Bench cuts in the Highlands and Kennydale, aquifer protection rules, compacted base and drainage designed in-house.',
+    'Paver patios in Renton built on real grade. Bench cuts in the Highlands and Kennydale, aquifer protection rules, compacted base and drainage drawn in-house.',
   quickAnswer:
     'Renton has more usable relief than anywhere else in South King County, so a patio here usually begins as a grading question. Most back yards need a bench cut and a retained edge before there is a flat to pave. Aquifer protection zones and coal mine hazard mapping get checked at the parcel before we price anything.',
   body: [

@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Paver Patios in Maple Valley, WA',
   metaTitle: 'Maple Valley WA Paver Patio Installation',
   metaDescription:
-    'Paver patios in Maple Valley built for foothill rain, till hardpan and sloped wooded lots. Septic setbacks checked first, deeper base, in-house design and install.',
+    'Paver patios in Maple Valley built for foothill rain, till hardpan and sloped lots. Septic setbacks checked first, deeper base, in-house design and install.',
   quickAnswer:
     'Maple Valley patios get built to a wetter standard than valley-floor work, because the foothill edge takes 55 to 65 inches of rain a year over till hardpan. Slope means most yards need a bench cut first. On septic lots the drainfield and its reserve area are located before any layout is drawn.',
   body: [

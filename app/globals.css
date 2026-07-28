@@ -139,6 +139,14 @@
     filter: saturate(0.92) contrast(1.02) brightness(1.02);
   }
 
+  /* The sticky mobile action bar must not show through a modal scrim. Radix
+     marks the open dialog with data-state="open" — keying off that means the
+     bar and the drawer need no shared state. Verified against the real DOM;
+     Radix does not emit a `data-radix-dialog-content` attribute. */
+  body:has([role='dialog'][data-state='open']) .mobile-action-bar {
+    display: none;
+  }
+
   .shimmer {
     @apply relative overflow-hidden bg-stone-200;
   }

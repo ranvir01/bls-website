@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Paver Patios in Auburn, WA',
   metaTitle: 'Auburn WA Paver Patio Installation & Cost',
   metaDescription:
-    'Paver patios in Auburn, WA. Valley-floor alluvium over Osceola Mudflow, Lea Hill and Lakeland Hills bench cuts, in-house design and a self-performed install crew.',
+    'Paver patios in Auburn, WA. Valley alluvium over Osceola Mudflow, Lea Hill and Lakeland Hills bench cuts, in-house design and a self-performed crew.',
   quickAnswer:
     'Auburn patios divide at the valley wall. On the flats we build over deep alluvium with a shallow winter water table, which means over-excavation and a finished surface set slightly proud of the lawn. On Lea Hill and Lakeland Hills the patio starts as a bench cut into the slope. The shop is twenty minutes north.',
   body: [

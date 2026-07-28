@@ -18,10 +18,10 @@ const APPEAR_AFTER_PX = 400;
  * zone and follows the user down every page. It appears after 400px of scroll
  * so it never competes with the hero CTA.
  *
- * Hiding while an overlay is open is handled by the overlays themselves: Radix
- * Dialog sets `data-scroll-locked` / `overflow: hidden` on <body>, and the
- * `[body:has(...)]` rule below reacts to the drawer's presence without any
- * shared state between the two components.
+ * It hides whenever a modal is open. That is driven by a `:has()` rule in
+ * globals.css keyed on the `data-state="open"` attribute Radix actually sets,
+ * so the two components need no shared state. Without it the bar shows through
+ * the drawer's translucent scrim.
  */
 export function MobileActionBar() {
   const [visible, setVisible] = useState(false);
@@ -40,7 +40,7 @@ export function MobileActionBar() {
           <m.div
             role="group"
             aria-label="Quick actions"
-            className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-stone-200 bg-stone-50/95 backdrop-blur-md safe-bottom md:hidden [body:has([data-radix-dialog-content])_&]:hidden"
+            className="mobile-action-bar fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-stone-200 bg-stone-50/95 backdrop-blur-md safe-bottom md:hidden"
             initial={reduced ? { opacity: 0 } : { y: '100%' }}
             animate={reduced ? { opacity: 1 } : { y: 0 }}
             exit={reduced ? { opacity: 0 } : { y: '100%' }}

@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Paver Patios in Kent, WA',
   metaTitle: 'Paver Patio Installation in Kent, WA',
   metaDescription:
-    'Paver patios built in Kent by our own crew. East Hill hardpan, valley-floor water table, a compacted base pitched to a real outlet, and honest installed ranges.',
+    'Paver patios built in Kent by our own crew. East Hill hardpan, valley-floor water table, a compacted base pitched to a real outlet, plus real cost ranges.',
   quickAnswer:
     'A paver patio in Kent is a base problem before it is a paver problem. On East Hill, winter rain perches on Alderwood hardpan and travels sideways under the field, so an intercept drain goes into the section. Down on the valley floor the shallow water table sets base depth. Our shop is ten minutes away.',
   body: [
