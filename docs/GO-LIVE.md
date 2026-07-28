@@ -69,8 +69,12 @@ area, photos as they are shot, and a weekly post.
 
 ## 4. Deploy — merged to `main`, now check Netlify
 
-The work is merged to `main` and pushed. If the site is still showing the old
-version, Netlify is not building from this repo's `main` — check, in order:
+The work is merged to `main` and pushed. The build itself is verified: a clean
+`npm ci` from the lockfile followed by the exact Netlify build command succeeds
+from a bare checkout, so an install or compile failure is ruled out.
+
+If the site still shows the old version, the cause is on the Netlify side.
+Check in this order — the first two account for almost every case:
 
 1. **Is the site connected to this repo at all?** Netlify → Site configuration →
    Build & deploy → Continuous deployment. If it says "Not linked" or points at
