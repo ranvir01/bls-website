@@ -147,7 +147,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-stone-800">
-        <div className="shell pb-action-bar flex flex-col gap-3 py-6 text-caption text-stone-500 md:flex-row md:items-center md:justify-between md:pb-6">
+        <div className="shell pb-action-bar flex flex-col gap-3 pt-6 text-caption text-stone-500 md:flex-row md:items-center md:justify-between md:pb-6">
           <p>
             © {new Date().getFullYear()} {business.legalName}. Serving Greater Seattle from Kent, WA
             {years > 0 ? ` since ${business.foundedYear}.` : '.'}

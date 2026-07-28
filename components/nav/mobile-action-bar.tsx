@@ -2,6 +2,7 @@
 
 import { AnimatePresence, LazyMotion, domAnimation, m, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { MessageSquare, Phone, PencilRuler } from 'lucide-react';
 import { useState } from 'react';
 
@@ -22,21 +23,32 @@ const APPEAR_AFTER_PX = 400;
  * globals.css keyed on the `data-state="open"` attribute Radix actually sets,
  * so the two components need no shared state. Without it the bar shows through
  * the drawer's translucent scrim.
+ *
+ * It also hides on the pages whose whole job is the conversion it points at.
+ * Beyond being redundant there, a bar fixed over the bottom 57px of the
+ * viewport can sit on top of the form's own Continue and Submit buttons — a
+ * thumb aiming for Continue hits Call instead.
  */
+
+/** Routes where the bar would compete with, and occlude, the page's own form. */
+const SUPPRESSED_ROUTES = ['/quote', '/contact', '/visualizer'];
 export function MobileActionBar() {
   const [visible, setVisible] = useState(false);
   const { scrollY } = useScroll();
   const reduced = useReducedMotion();
+  const pathname = usePathname();
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const next = y > APPEAR_AFTER_PX;
     setVisible((prev) => (prev === next ? prev : next));
   });
 
+  const suppressed = SUPPRESSED_ROUTES.includes(pathname);
+
   return (
     <LazyMotion features={domAnimation} strict>
       <AnimatePresence>
-        {visible && (
+        {visible && !suppressed && (
           <m.div
             role="group"
             aria-label="Quick actions"

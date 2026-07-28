@@ -149,6 +149,18 @@ export function QuoteForm({
         const field = issue.path[0] as FieldPath<LeadInput>;
         setError(field, { type: 'manual', message: issue.message });
       }
+
+      // Bring the first problem into view and focus it. Without this the user
+      // can be looking at a button that just did nothing, with the reason
+      // rendered off-screen above or below the fold.
+      const firstField = result.error.issues[0]?.path[0];
+      if (typeof firstField === 'string') {
+        requestAnimationFrame(() => {
+          const el = document.getElementById(firstField);
+          el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          el?.focus({ preventScroll: true });
+        });
+      }
       return;
     }
 
