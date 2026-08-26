@@ -12,12 +12,12 @@ import {
   ProcessSteps,
   Prose,
   QuickAnswer,
-  SectionHeader,
 } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { Reveal } from '@/components/motion/reveal';
 import { ProjectGrid } from '@/components/portfolio/project-grid';
 import { QuoteForm } from '@/components/quote/quote-form';
+import { ServiceArt } from '@/components/service-art';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { getServiceContent } from '@/data/content/services';
 import { postsForService } from '@/data/content/blog';
@@ -129,6 +129,15 @@ export default function ServicePage({ params }: Params) {
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
           <QuickAnswer>{content.quickAnswer}</QuickAnswer>
+          <div className="mt-8 overflow-hidden rounded-lg border border-ink-200">
+            <ServiceArt
+              slug={content.slug}
+              name={ref.name}
+              className="aspect-[16/8] w-full"
+              sizes="(max-width: 1024px) 100vw, 1100px"
+              priority
+            />
+          </div>
         </header>
 
         {/* Editorial 12-col split: prose left, sticky quote form right. Avoids

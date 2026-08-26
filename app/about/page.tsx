@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Breadcrumbs } from '@/components/breadcrumbs';
@@ -7,6 +8,7 @@ import { JsonLd } from '@/components/json-ld';
 import { NapBlock } from '@/components/nap-block';
 import { Reveal } from '@/components/motion/reveal';
 import { business, yearsInBusiness } from '@/data/business';
+import { teamPhoto } from '@/data/work-photos';
 import { categories, cities, cityPath } from '@/data/taxonomy';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
@@ -29,9 +31,9 @@ export default function AboutPage() {
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
           <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">About us</p>
-          <h1 className="mt-2 text-h1">A Kent contractor that designs and builds its own work</h1>
+          <h1 className="mt-2 text-h1">A family crew in Kent that builds yards across Greater Seattle</h1>
           <QuickAnswer>
-            {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor based at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear}, owned by ${business.owner}, and operating under Washington contractor registration ${business.license.number} with a $12,000 bond and $1M liability coverage.`}
+            {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor based at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear} by ${business.owner}. We design and build retaining walls, paver patios, and irrigation under Washington contractor registration ${business.license.number}.`}
           </QuickAnswer>
         </header>
       </div>
@@ -41,19 +43,31 @@ export default function AboutPage() {
       <div className="shell grid gap-12 pb-16 pt-16 lg:grid-cols-12 lg:gap-16">
         <div className="min-w-0 space-y-12 lg:col-span-8">
           <Reveal as="section">
-            <h2 className="text-h2">How we work, and why it is set up this way</h2>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-ink-200">
+              <Image
+                src={teamPhoto.src}
+                alt={teamPhoto.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="img-grade object-cover object-top"
+              />
+            </div>
+            <p className="mt-3 text-caption text-ink-500">
+              {business.owner} and the Blue Landscaping Services crew.
+            </p>
+          </Reveal>
+
+          <Reveal as="section">
+            <h2 className="text-h2">How we work</h2>
             <div className="mt-5 max-w-prose space-y-4 text-body-lg text-ink-800">
               <p>
-                Most landscape projects in this market pass through at least three companies: a
-                designer who draws it, a general contractor who prices it, and whichever crew bid
-                lowest on the day. Every handoff is a place where the drawing and the build drift
-                apart, and the homeowner is the one who finds out.
+                A lot of yards around here get handed from a designer to a contractor to whoever
+                bid lowest. By the time someone is digging, the drawing and the price have already
+                drifted.
               </p>
               <p>
-                We collapse that. Design happens in-house, pricing happens in-house, and the
-                hardscape gets built by our own crew. That means what gets drawn is something we
-                already know how to construct at the price we quoted, there is no separate design
-                fee, and there is nobody to point at if something is not right.
+                We skip that. We draw it, we price it, and our crew builds it. No separate design
+                fee, and nobody else to call if something is not right.
               </p>
               <p>
                 {`We have been doing it that way since ${business.foundedYear}${years >= 5 ? `, which is ${years} years of watching what survives Puget Sound winters and what does not` : ''}. The short version of what we learned: almost every hardscape failure in this region traces back to base preparation or drainage, and both of those are invisible the day the job finishes.`}
@@ -65,17 +79,13 @@ export default function AboutPage() {
             <h2 className="text-h2">What we will not do</h2>
             <div className="mt-5 max-w-prose space-y-4 text-body-lg text-ink-800">
               <p>
-                We will not skip the base to hit a number. If a competing bid is meaningfully
-                cheaper on the same scope, the difference is almost always excavation depth,
-                compaction, or the drain rock and drain line behind a wall — the three things you
-                cannot inspect afterwards and the three things that determine whether the work is
-                still flat in ten years.
+                We will not skip the base to hit a number. If a competing bid is a lot cheaper on
+                the same scope, the difference is almost always excavation depth, compaction, or
+                the drain rock behind a wall — the three things you cannot inspect afterwards.
               </p>
               <p>
-                We will not publish other companies&rsquo; photographs, stock imagery, or invented
-                reviews. Our portfolio page is empty until our own before-and-after photography is
-                shot, and the reviews section stays hidden until real customers have left real
-                reviews. That is a slower way to build a website and a faster way to be trusted.
+                We put our own job photos on this site. The portfolio is real work we built, not
+                stock imagery and not someone else&rsquo;s yard.
               </p>
               <p>
                 We will not quote a wall over 4 feet without engineering. Western Washington

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -76,11 +77,24 @@ export default function ProjectPage({ params }: Params) {
         </header>
 
         <div className="mt-10">
-          <BeforeAfter
-            before={project.before}
-            after={project.after}
-            caption={`${project.title} — ${project.timeline}`}
-          />
+          {project.before ? (
+            <BeforeAfter
+              before={project.before}
+              after={project.after}
+              caption={`${project.title}${project.timeline ? ` — ${project.timeline}` : ''}`}
+            />
+          ) : (
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-ink-200 bg-ink-200">
+              <Image
+                src={project.after.src}
+                alt={project.after.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 1100px"
+                className="img-grade object-cover"
+                priority
+              />
+            </div>
+          )}
         </div>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-12">
@@ -131,7 +145,7 @@ export default function ProjectPage({ params }: Params) {
                 )}
               </Row>
               <Row label="Timeline">{project.timeline}</Row>
-              <Row label="Completed">{formatMonth(project.completedAt)}</Row>
+              {project.completedAt && <Row label="Completed">{formatMonth(project.completedAt)}</Row>}
               <Row label="Materials">
                 <ul className="space-y-1">
                   {project.materials.map((m) => (

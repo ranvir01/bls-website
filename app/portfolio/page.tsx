@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
 
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { CtaBand } from '@/components/blocks';
+import { CtaBand, SectionHeader } from '@/components/blocks';
+import { BeforeAfterShowcase } from '@/components/before-after-showcase';
 import { JsonLd } from '@/components/json-ld';
 import { PortfolioBrowser } from '@/components/portfolio/portfolio-browser';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
+import { WorkGallery } from '@/components/work-gallery';
 import { portfolioProjects } from '@/data/projects';
+import { allWorkPhotos } from '@/data/work-photos';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Portfolio — Completed Hardscape & Landscape Projects',
+  title: 'Portfolio — Landscaping & Hardscaping Projects in Seattle',
   description:
-    'Real completed retaining wall, paver patio, walkway and irrigation projects by Blue Landscaping Services across Kent, Auburn, Renton and Greater Seattle.',
+    'Real retaining wall, paver patio, walkway and irrigation projects by Blue Landscaping Services across Kent, Auburn, Renton and Greater Seattle.',
   path: '/portfolio',
 });
 
@@ -31,9 +34,9 @@ export default function PortfolioPage() {
           </p>
           <h1 className="mt-2 text-h1">Projects we have actually built</h1>
           <p className="mt-5 text-body-lg text-ink-500">
-            Every photograph here is a real Blue Landscaping job. No stock imagery, no AI renders —
-            design concepts from the visualizer live on their own page and are always labeled as
-            such.
+            These are photos from our jobs around Greater Seattle — retaining walls, patios,
+            walkways, irrigation, and planting. Design concepts from the visualizer are labeled
+            separately and never mixed in here.
           </p>
         </header>
 
@@ -41,28 +44,41 @@ export default function PortfolioPage() {
           {projects.length > 0 ? (
             <PortfolioBrowser projects={projects} />
           ) : (
-            /* Honest empty state. Better than inventing a portfolio, and it
-               points at the thing that IS available today. */
-            <div className="rounded-sm border border-ink-200 bg-white p-8">
-              <h2 className="text-h3">Photography is being shot now</h2>
-              <p className="mt-3 max-w-prose text-body text-ink-500">
-                We are photographing current jobs to a fixed before/after standard rather than
-                filling this page with stock images or other companies&rsquo; work. Until real pairs
-                are up here, the fastest way to see what we build is to ask — we will walk you
-                through recent jobs on the phone, or show you one in person near you.
-              </p>
-              <div className="mt-6">
-                <VisualizerTeaser
-                  headline="Or design your own yard right now"
-                  body="The visualizer uses the exact materials we install, so what it draws is what we can build."
-                />
-              </div>
-            </div>
+            <VisualizerTeaser
+              headline="Design your own yard right now"
+              body="The visualizer uses the materials we install, so what it draws is what we can build."
+            />
           )}
+        </div>
+
+        <div className="mt-16">
+          <SectionHeader
+            eyebrow="Before & after"
+            title="Slide to compare"
+            lead="A few yards before we started and after we finished."
+          />
+          <div className="mt-8">
+            <BeforeAfterShowcase limit={6} />
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <SectionHeader
+            eyebrow="More photos"
+            title="From the job"
+            lead="Hardscaping, irrigation, and landscaping. Click any photo to open it."
+          />
+          <div className="mt-8">
+            <WorkGallery photos={allWorkPhotos} />
+          </div>
         </div>
       </div>
 
-      <CtaBand />
+      <CtaBand
+        title="Want this in your yard?"
+        body="Free consultation. We will walk the site and send a written number for the work you actually want."
+        primaryLabel="Free Consultation"
+      />
     </>
   );
 }

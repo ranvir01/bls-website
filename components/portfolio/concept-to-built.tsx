@@ -33,6 +33,7 @@ export function ConceptToBuiltGallery({ projects }: { projects: Project[] }) {
 
         <ul className="mt-12 space-y-14">
           {projects.map((project) => {
+            if (!project.before) return null;
             const service = serviceBySlug.get(project.serviceSlug);
             const city = cityBySlug.get(project.citySlug);
 

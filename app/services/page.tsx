@@ -14,7 +14,7 @@ import { categories, cities, servicePath, services, servicesInCategory } from '@
 import { buildMetadata, graph, localBusinessSchema, serviceSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Landscaping, Hardscaping & Irrigation Services',
+  title: 'Expert Landscaping, Hardscaping & Irrigation in Seattle',
   description:
     'Every service Blue Landscaping Services offers in Kent and Greater Seattle: retaining walls, paver patios, walkways, driveways, irrigation, fencing, lawn care and planting.',
   path: '/services',
@@ -44,7 +44,7 @@ export default function ServicesPage() {
           <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             What we build
           </p>
-          <h1 className="mt-2 max-w-4xl text-h1">Services in Kent &amp; Greater Seattle</h1>
+          <h1 className="mt-2 max-w-4xl text-h1">Expert Landscaping, Hardscaping &amp; Irrigation in Seattle</h1>
           <QuickAnswer>
             {`Blue Landscaping Services offers ${services.length} services across three categories: hardscaping, irrigation and landscaping. Hardscape work is self-performed by our own crew under Washington license BLUELLS880K2 — design and construction both happen in-house, with no separate design fee.`}
           </QuickAnswer>

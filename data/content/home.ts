@@ -34,20 +34,20 @@ export const howItWorks: ProcessStep[] = [
 
 export const whyUs = [
   {
-    title: 'One company, start to finish',
-    body: "Most yards go through a designer, a general contractor and whichever crew bid lowest. Every handoff is somewhere the drawing and the build drift apart, and you're the one who finds out. We do both, so the plan is always something we already know how to build for the price we quoted.",
+    title: 'We draw it and we build it',
+    body: "You don't get a designer, a GC, and a low bidder handing your yard around. We sketch it, price it, and our crew installs it. If something is off, you call us — not a sub.",
   },
   {
-    title: 'No subs on hardscape',
-    body: "The crew that shows up is ours. That matters most for the parts nobody sees afterward: how deep we dug, how well the base got compacted, whether there's drain rock and a drain line behind the wall. Those are the first things a cheap bid cuts.",
+    title: 'Our crew does the hardscape',
+    body: "The people who show up are ours. That matters for the parts you can't see later: how deep we dug, how well the base got compacted, and whether there's drain rock behind the wall.",
   },
   {
     title: 'Licensed, bonded and insured',
-    body: 'Washington contractor license BLUELLS880K2, a $12,000 bond and $1M in liability coverage. You can check all of it with L&I in about thirty seconds. Do it for us and for anyone else you get a bid from.',
+    body: 'Washington contractor license BLUELLS880K2, a $12,000 bond and $1M in liability coverage. Check it with L&I. Check the other bids the same way.',
   },
   {
-    title: 'Built for our weather',
-    body: "Wet winters, glacial till, clay, and then a genuinely dry August. That changes real decisions: how deep the base goes, where the drain line runs, which plants are worth putting in the ground. Work specified for somewhere else doesn't last here.",
+    title: 'Built for Puget Sound weather',
+    body: "Wet winters, clay and till, then a dry August. We set base depth, drainage, and plants for this climate — not for a catalog photo from somewhere else.",
   },
 ];
 

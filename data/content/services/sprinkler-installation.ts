@@ -4,7 +4,7 @@ const content: ServiceContent = {
   slug: 'sprinkler-installation',
   category: 'irrigation',
   name: 'Sprinkler Installation',
-  h1: 'Sprinkler Installation in Kent & Greater Seattle',
+    h1: 'Sprinkler Installation in Seattle, Kent & Greater Seattle',
   metaTitle: 'Sprinkler System Installation in Kent, WA',
   metaDescription:
     'Zoned sprinkler systems designed and installed in Kent, Renton, Auburn and Greater Seattle. Permitted backflow, smart controllers, real 2026 cost ranges.',

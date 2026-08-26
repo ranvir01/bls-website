@@ -211,10 +211,10 @@ export function TrustBar() {
 }
 
 export function CtaBand({
-  title = 'Get a real number for your yard',
-  body = 'Free visit, a written scope and a price range you can plan around. Most quotes go out the same day we come look.',
+  title = 'Ready for a free consultation?',
+  body = 'Call or send the quote form. We walk the yard, talk through the work, and send a written number.',
   primaryHref = '/quote',
-  primaryLabel = 'Get your free quote',
+  primaryLabel = 'Free Consultation',
 }: {
   title?: string;
   body?: string;

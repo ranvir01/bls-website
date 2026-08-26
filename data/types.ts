@@ -145,11 +145,12 @@ export interface Project {
   title: string;
   serviceSlug: string;
   citySlug: string;
-  before: ImageAsset;
+  /** Present when we have a matching before frame. After-only jobs skip the slider. */
+  before?: ImageAsset;
   after: ImageAsset;
   caption: string;
-  /** ISO date, YYYY-MM-DD. */
-  completedAt: string;
+  /** ISO date, YYYY-MM-DD. Omit when the original job date was not recorded. */
+  completedAt?: string;
   assetType: AssetType;
   scope: string[];
   materials: string[];

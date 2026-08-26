@@ -39,10 +39,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     template: '%s | Blue Landscaping Services',
-    default: 'Landscaping & Hardscaping in Kent, WA | Blue Landscaping Services',
+    default: 'Expert Landscaping & Hardscaping in Seattle | Blue Landscaping Services',
   },
   description:
-    'Licensed hardscaping, irrigation and landscaping contractor in Kent, WA. Retaining walls, paver patios and sprinkler systems across South King County. Free on-site quotes.',
+    'Expert landscaping and hardscaping in Seattle and Kent, WA. Retaining walls, custom paver patios, and professional irrigation systems. Licensed, bonded, insured. Free consultation.',
   applicationName: 'Blue Landscaping Services',
   authors: [{ name: 'Blue Landscaping Services' }],
   formatDetection: { telephone: true, address: true },

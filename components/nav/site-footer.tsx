@@ -115,6 +115,12 @@ export function SiteFooter() {
             </address>
 
             <div className="mt-5 border-t border-ink-800 pt-4">
+              <p className="text-caption text-ink-200/80">
+                We take {business.paymentMethods.join(', ')}.
+              </p>
+            </div>
+
+            <div className="mt-5 border-t border-ink-800 pt-4">
               <p className="flex items-start gap-2.5 text-caption text-ink-200/80">
                 <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-50" aria-hidden="true" />
                 <span>
