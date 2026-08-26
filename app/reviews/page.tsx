@@ -1,20 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Star } from 'lucide-react';
+import { ExternalLink, Star } from 'lucide-react';
 
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { ReviewsSection } from '@/components/reviews-section';
 import { Button } from '@/components/ui/button';
-import { PHONE, TEL_HREF } from '@/data/business';
+import { PHONE, TEL_HREF, business, googleProfileUrl } from '@/data/business';
 import { averageRating, reviews } from '@/data/reviews';
 import { buildMetadata, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Reviews',
   description:
-    'Customer reviews for Blue Landscaping Services, a licensed hardscaping and landscaping contractor in Kent, WA. Every review shown is real and attributed to its source.',
+    'Customer reviews for Blue Landscaping Services in Kent, WA. Every review on this page is a real review from a real platform. Check our Google listing and WA license BLUELLS880K2 yourself.',
   path: '/reviews',
 });
 
@@ -51,8 +51,8 @@ export default function ReviewsPage() {
             </p>
           ) : (
             <p className="mt-5 text-body-lg text-ink-500">
-              Every review on this page is a real review left by a real customer on a real platform,
-              shown with its source. We do not write them ourselves and we do not buy them.
+              Every review on this page is copied from a real platform, with a link back so you can
+              read it in context. We do not write them and we do not buy them.
             </p>
           )}
         </header>
@@ -64,32 +64,66 @@ export default function ReviewsPage() {
             /* Honest empty state. The previous version of this site carried ten
                fabricated testimonials with stock-photo avatars; showing nothing
                is both legal and more credible than replacing them. */
-            <div className="rounded-sm border border-ink-200 bg-white p-8">
-              <h2 className="text-h3">No reviews published here yet</h2>
+            <div className="rounded-lg border border-ink-200 bg-white p-8">
+              <h2 className="text-h3">Nothing published here yet</h2>
               <div className="mt-4 max-w-prose space-y-4 text-body text-ink-500">
                 <p>
-                  We would rather show you nothing than show you something we wrote. This page fills
-                  up as customers leave genuine reviews, and every one will carry the platform it
-                  came from so you can go and read it in context.
+                  When a customer leaves a review on Google or another platform we can verify, it
+                  will show up here with the source. Until then we would rather leave this page
+                  empty than invent names and star ratings.
                 </p>
                 <p>
-                  In the meantime, the two things actually worth checking are the ones you can
-                  verify yourself: our Washington contractor registration with L&amp;I, and a
-                  conversation with us about recent jobs near you. We will give you the honest
-                  version of both.
+                  The useful checks are the ones you can do yourself: our Google listing, the
+                  Washington contractor registration, photos of jobs we actually built, or a call
+                  about work near you.
                 </p>
               </div>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button asChild>
-                  <a href={TEL_HREF}>Call {PHONE.display}</a>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                {googleProfileUrl && (
+                  <Button asChild>
+                    <a href={googleProfileUrl} target="_blank" rel="noopener noreferrer">
+                      Google listing
+                      <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                    </a>
+                  </Button>
+                )}
+                <Button asChild variant="outline">
+                  <a href={business.license.lookupUrl} target="_blank" rel="noopener noreferrer">
+                    Verify {business.license.number}
+                    <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <Link href="/about">How we work</Link>
+                  <Link href="/portfolio">See the work</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <a href={TEL_HREF}>Call {PHONE.display}</a>
                 </Button>
               </div>
             </div>
           )}
         </div>
+
+        {googleProfileUrl && (
+          <aside className="mt-10 max-w-3xl rounded-lg border border-ink-200 bg-ink-50 p-6">
+            <h2 className="text-h3">Finished a job with us?</h2>
+            <p className="mt-3 max-w-prose text-body text-ink-500">
+              A Google review helps the next homeowner more than anything we could write. Search
+              Blue Landscaping Services in Kent, or open the listing from here.
+            </p>
+            <p className="mt-4">
+              <a
+                href={googleProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center gap-1.5 text-body font-semibold text-brand-600 underline underline-offset-4"
+              >
+                Leave a Google review
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </p>
+          </aside>
+        )}
       </div>
 
       <CtaBand />

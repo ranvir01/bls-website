@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 
-import { PHONE, TEL_HREF, business, formattedAddress, yearsInBusiness } from '@/data/business';
+import { PHONE, TEL_HREF, business, formattedAddress, googleProfileUrl, yearsInBusiness } from '@/data/business';
 import { allCityLinks, allServiceLinks, companyLinks, legalLinks } from '@/lib/nav';
 
 /**
@@ -135,6 +135,19 @@ export function SiteFooter() {
                   </a>
                   <br />
                   Licensed, bonded &amp; insured
+                  {googleProfileUrl && (
+                    <>
+                      <br />
+                      <a
+                        href={googleProfileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-ink-500 underline-offset-2 transition-colors hover:text-white"
+                      >
+                        Google listing
+                      </a>
+                    </>
+                  )}
                 </span>
               </p>
             </div>

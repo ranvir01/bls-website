@@ -186,25 +186,47 @@ export function slugifyQuestion(q: string): string {
 
 /** Trust bar. Every claim here is verifiable — license, bond, insurance, year. */
 export function TrustBar() {
-  const items = [
-    { label: `WA Lic. ${business.license.number}`, detail: 'Verifiable with L&I' },
+  const items: { label: string; detail: string; href?: string }[] = [
+    {
+      label: `WA Lic. ${business.license.number}`,
+      detail: 'Check it with L&I',
+      href: business.license.lookupUrl,
+    },
     { label: 'Bonded & insured', detail: '$12k bond · $1M liability' },
     { label: `Family-run since ${business.foundedYear}`, detail: 'Based in Kent, WA' },
-    { label: 'In-house design & build', detail: 'No subs on hardscape' },
+    { label: 'In-house design & build', detail: 'Our crew on the hardscape' },
   ];
 
   return (
     <section aria-label="Credentials" className="border-y border-ink-200 bg-white">
       <div className="shell grid grid-cols-2 gap-6 py-8 lg:grid-cols-4">
-        {items.map((item) => (
-          <div key={item.label} className="flex gap-3">
-            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
-            <div>
-              <p className="text-caption font-semibold text-brand-900">{item.label}</p>
-              <p className="text-caption text-ink-500">{item.detail}</p>
+        {items.map((item) => {
+          const inner = (
+            <>
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
+              <div>
+                <p className="text-caption font-semibold text-brand-900">{item.label}</p>
+                <p className="text-caption text-ink-500">{item.detail}</p>
+              </div>
+            </>
+          );
+
+          return item.href ? (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-3 rounded-sm outline-offset-4 hover:text-brand-600"
+            >
+              {inner}
+            </a>
+          ) : (
+            <div key={item.label} className="flex gap-3">
+              {inner}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

@@ -94,6 +94,10 @@ export const business = {
   ] as { label: string; url: string }[],
 } as const;
 
+/** Google Business Profile URL, when one is listed. */
+export const googleProfileUrl =
+  business.profiles.find((p) => /google/i.test(p.label))?.url ?? null;
+
 export const SITE_URL = 'https://bluelandscapingservices.com';
 
 /** Years in business, computed — never hardcoded, never rounded up. */
