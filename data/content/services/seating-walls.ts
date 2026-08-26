@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'seating-walls',
   category: 'hardscaping',
   name: 'Seating Walls',
-  h1: 'Seating Walls in Kent & Greater Seattle',
-  metaTitle: 'Seating Wall Installation in Kent, WA',
+  h1: 'Seating Walls in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Seating Wall Installation in Seattle & Kent, WA',
   metaDescription:
     'Low seat walls that frame a patio and seat a crowd, designed in-house and built by our own crew in Kent, Renton and Greater Seattle. Real 2026 cost ranges.',
   quickAnswer:
@@ -13,7 +13,7 @@ const content: ServiceContent = {
   intro: [
     'Sit on a standard patio chair and measure from the floor to the underside of your knee. That is about 18 inches, and it is the whole design brief for a seating wall. Build it at 16 and people perch. Build it at 24 and their feet dangle. We set most seat walls between 18 and 20 inches to the top of the cap, with a cap at least 12 inches deep so there is somewhere to put a plate.',
     'A seating wall is freestanding, which makes it a different animal from a retaining wall even though the block looks similar. There is no soil load pushing on it, but there is also no soil holding it down, so it lives or dies on its base. Both faces are finished, both faces get looked at up close, and the core is either solid units or a hollow core filled and reinforced. Skimp on the base under a freestanding wall and it telegraphs every settlement crack straight through the cap joints.',
-    'Drawing the patio and the wall on the same sheet is what keeps the two from fighting. We plan the paver field first, then place the wall so the field runs into it with a clean cut line instead of a strip of slivers along the base. Our crew sets both, so the seat wall base goes in while the patio section is still open and the two share one compacted platform. That sequencing is not available when a mason shows up after the patio is already finished.',
+    'Drawing the patio and the wall on the same sheet is what keeps the two from fighting. We plan the paver field first, then place the wall so the field runs into it with a clean cut line instead of a strip of slivers along the base. The seat wall base goes in while the patio section is still open, so the two share one compacted platform.',
     'In a climate where the patio furniture spends five months under a cover, a seat wall is the seating that stays out. It also does quiet structural work: defining the edge of a patio that would otherwise bleed into the lawn, screening a hot tub from the neighbor in Renton, holding a raised planter of hydrangea and hebe at the back of a small Ballard yard. Twenty linear feet of wall seats ten people and never blows over in a November windstorm.',
   ],
   included: [

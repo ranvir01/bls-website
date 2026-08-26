@@ -34,12 +34,12 @@ export const howItWorks: ProcessStep[] = [
 
 export const whyUs = [
   {
-    title: 'We draw it and we build it',
-    body: "You don't get a designer, a GC, and a low bidder handing your yard around. We sketch it, price it, and our crew installs it. If something is off, you call us — not a sub.",
+    title: 'You talk to the people who dig',
+    body: "Jose and the crew run the visit, the quote, and the job. If something is off after we leave, you call the same number.",
   },
   {
-    title: 'Our crew does the hardscape',
-    body: "The people who show up are ours. That matters for the parts you can't see later: how deep we dug, how well the base got compacted, and whether there's drain rock behind the wall.",
+    title: 'The parts you cannot see get done right',
+    body: "Base depth, compaction, and drain rock behind a wall. That is what fails in a Puget Sound winter, and it is what we do not skip to hit a number.",
   },
   {
     title: 'Licensed, bonded and insured',
@@ -47,7 +47,7 @@ export const whyUs = [
   },
   {
     title: 'Built for Puget Sound weather',
-    body: "Wet winters, clay and till, then a dry August. We set base depth, drainage, and plants for this climate — not for a catalog photo from somewhere else.",
+    body: 'Wet winters, clay and till, then a dry August. We set base depth, drainage, and plants for this climate — not for a catalog photo from somewhere else.',
   },
 ];
 

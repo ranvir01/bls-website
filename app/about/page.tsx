@@ -15,7 +15,7 @@ import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 export const metadata: Metadata = buildMetadata({
   title: 'About Blue Landscaping Services — Kent, WA',
   description:
-    'Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor in Kent, WA, founded in 2012. In-house design, self-performed install, WA license BLUELLS880K2.',
+    'Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor in Kent, WA, founded in 2012. Retaining walls, paver patios, and irrigation. WA license BLUELLS880K2.',
   path: '/about',
 });
 
@@ -31,9 +31,9 @@ export default function AboutPage() {
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
           <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">About us</p>
-          <h1 className="mt-2 text-h1">A family crew in Kent that builds yards across Greater Seattle</h1>
+          <h1 className="mt-2 text-h1">A Kent crew that builds yards across Seattle</h1>
           <QuickAnswer>
-            {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor based at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear} by ${business.owner}. We design and build retaining walls, paver patios, and irrigation under Washington contractor registration ${business.license.number}.`}
+            {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear} by ${business.owner}. Retaining walls, paver patios, and irrigation under Washington contractor registration ${business.license.number}.`}
           </QuickAnswer>
         </header>
       </div>
@@ -66,8 +66,8 @@ export default function AboutPage() {
                 drifted.
               </p>
               <p>
-                We skip that. We draw it, we price it, and our crew builds it. No separate design
-                fee, and nobody else to call if something is not right.
+                We draw it, we price it, and our crew builds it. No separate design fee. If
+                something is not right, you call us.
               </p>
               <p>
                 {`We have been doing it that way since ${business.foundedYear}${years >= 5 ? `, which is ${years} years of watching what survives Puget Sound winters and what does not` : ''}. The short version of what we learned: almost every hardscape failure in this region traces back to base preparation or drainage, and both of those are invisible the day the job finishes.`}

@@ -27,7 +27,7 @@ const Visualizer = dynamicImport(
 export const metadata: Metadata = buildMetadata({
   title: 'Yard Design Visualizer — See Your Yard Redesigned',
   description:
-    'Upload a photo and see your yard redesigned in about 30 seconds, using materials Blue Landscaping actually installs. Free, instant, and the same crew builds it. Kent, WA.',
+    'Upload a photo and see your yard redesigned in about 30 seconds, using materials Blue Landscaping actually installs around Seattle and Kent, WA. Free, instant, no account.',
   path: '/visualizer',
 });
 
@@ -90,11 +90,9 @@ export default function VisualizerPage() {
           <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">
             Free tool
           </p>
-          <h1 className="mt-2 text-h1">
-            See your yard redesigned in 30 seconds — then we build it
-          </h1>
+          <h1 className="mt-2 text-h1">See your yard redesigned in about 30 seconds</h1>
           <QuickAnswer>
-            {`Upload a photo of your yard, pick a scope and a style, and get a photorealistic design built only from materials Blue Landscaping installs and stocks locally. Free, instant, no account. We designed it and we build it — same crew, Washington license ${business.license.number}.`}
+            {`Upload a photo, pick a scope and a style, and get a design drawn only from materials Blue Landscaping installs and stocks locally. Free, instant, no account. Washington license ${business.license.number}.`}
           </QuickAnswer>
         </header>
 
@@ -106,19 +104,17 @@ export default function VisualizerPage() {
       <section className="border-y border-ink-200 bg-white">
         <div className="shell section-tight grid gap-10 md:grid-cols-3">
           <div>
-            <h2 className="text-h3">Why this is different</h2>
+            <h2 className="text-h3">Only what we can build</h2>
             <p className="mt-3 text-body text-ink-500">
-              Most design tools generate whatever looks good and leave you to find someone who can
-              build it. This one can only draw what our crew installs, so the design is a proposal
-              rather than inspiration.
+              The tool can only draw materials we install and stock locally. No pools, no fantasy
+              pergolas, no 8-foot walls that would need an engineer first.
             </p>
           </div>
           <div>
-            <h2 className="text-h3">No separate design fee</h2>
+            <h2 className="text-h3">No design fee</h2>
             <p className="mt-3 text-body text-ink-500">
-              We design in-house and self-perform the hardscape install. Most competitors either
-              outsource design, charge for it up front, or route you to a landscape architect before
-              anyone talks about construction.
+              Play with options here, then book a free visit if you like what you see. The written
+              quote is still the number that matters.
             </p>
           </div>
           <div>

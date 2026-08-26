@@ -149,8 +149,8 @@ export default function HomePage() {
         <div className="shell section">
           <SectionHeader
             eyebrow="Why us"
-            title="A Kent crew that designs and builds the job"
-            lead="You talk to the people who will be in your yard. Same company from the first visit to the last cap."
+          title="A Kent crew that works Greater Seattle"
+          lead="You talk to the people who will be in your yard, from the first visit to the last cap."
           />
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {whyUs.map((item) => (

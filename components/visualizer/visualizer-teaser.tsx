@@ -6,14 +6,13 @@ import { Button } from '@/components/ui/button';
 /**
  * Inline entry point to the yard visualizer.
  *
- * Every headline here carries the design-build message deliberately: the render
- * is not a mood board, it is a proposal from the crew that will build it. That
- * framing is the whole reason the tool converts rather than just entertaining.
+ * The render uses the same material catalog we install. Keep the pitch short:
+ * upload a photo, see options, then talk if you want it built.
  */
 export function VisualizerTeaser({
-  headline = 'Design your yard. Same crew builds it.',
-  body = 'Upload a photo, pick a style, and see your yard rebuilt with materials we actually install and stock locally. Free, instant, no account.',
-  cta = 'See your yard redesigned',
+  headline = 'See your yard before anyone digs',
+  body = 'Upload a photo, pick a style, and see it with materials we actually install around Kent and Greater Seattle. Free, instant, no account.',
+  cta = 'Open the yard visualizer',
 }: {
   headline?: string;
   body?: string;

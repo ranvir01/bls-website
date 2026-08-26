@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'irrigation-maintenance',
   category: 'irrigation',
   name: 'Irrigation Maintenance',
-  h1: 'Irrigation Maintenance in Kent & Greater Seattle',
-  metaTitle: 'Irrigation Maintenance & Blowouts, Kent WA',
+  h1: 'Irrigation Maintenance in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Irrigation Maintenance & Blowouts in Seattle & Kent, WA',
   metaDescription:
     'Spring start-ups, mid-season audits, certified annual backflow tests and fall blowouts for sprinkler systems in Kent, Covington, Renton and Greater Seattle.',
   quickAnswer:

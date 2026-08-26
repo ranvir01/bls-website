@@ -11,7 +11,7 @@ import { buildMetadata, faqSchema, graph, localBusinessSchema } from '@/lib/seo'
 export const metadata: Metadata = buildMetadata({
   title: 'Our Process — Consultation to Final Walkthrough',
   description:
-    'How a Blue Landscaping project runs: free on-site walkthrough, in-house design and written scope, self-performed build, and a final walkthrough together.',
+    'How a Blue Landscaping project runs: free on-site visit, written scope, permits when the city requires them, our crew on the build, and a final walkthrough together.',
   path: '/process',
 });
 
@@ -24,10 +24,10 @@ const detail: { title: string; body: string[] }[] = [
     ],
   },
   {
-    title: 'In-house design and a written scope',
+    title: 'A written scope, with materials named',
     body: [
-      'We draw the design ourselves and price it ourselves. You get a written scope that names the actual materials, sets out the phases, gives a realistic schedule, and states a cost range rather than a number pulled tight enough to need walking back later.',
-      'There is no separate design fee, because design is not a separate company. If you want to see options before committing, the yard visualizer on this site will generate them instantly from the same material catalog we build from.',
+      'You get a written scope that names the materials, the phases, a realistic schedule, and a cost range you can plan around — not a number pulled so tight it has to get walked back later.',
+      'There is no separate design fee. If you want to see options before anyone visits, the yard visualizer on this site draws from the same material catalog we install.',
     ],
   },
   {
@@ -40,8 +40,8 @@ const detail: { title: string; body: string[] }[] = [
   {
     title: 'Our crew builds it',
     body: [
-      'Hardscape construction is self-performed. Excavation, base preparation, compaction in lifts, drainage, and the finish work are all done by our own people. We coordinate specialty trades only where the law requires it, such as a licensed electrician for anything beyond low-voltage.',
-      'The unglamorous parts get the most attention, because they are what determines the outcome. A patio is only as flat in year ten as its base was compacted in week one.',
+      'Our people do the excavation, the base, the drainage, and the finish work. We bring in a specialty trade only where the law requires it — a licensed electrician for anything past low-voltage, a gas fitter for a permitted fire feature.',
+      'The unglamorous parts get the most attention. A patio is only as flat in year ten as its base was compacted in week one.',
     ],
   },
   {
@@ -90,7 +90,7 @@ export default function ProcessPage() {
           </p>
           <h1 className="mt-2 text-h1">From first call to final walkthrough</h1>
           <QuickAnswer>
-            {`A Blue Landscaping project runs in ${howItWorks.length} steps: a free on-site walkthrough, in-house design with a written scope and cost range, permitting where required, a self-performed build by our own crew, and a final walkthrough together. No design fee, and no subcontractors on hardscape.`}
+            {`A Blue Landscaping project runs in ${howItWorks.length} steps: a free on-site visit, a written scope with a cost range, permits when your city requires them, our crew on the build, and a final walkthrough together. No design fee.`}
           </QuickAnswer>
         </header>
 

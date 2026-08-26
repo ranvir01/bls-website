@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'water-features',
   category: 'hardscaping',
   name: 'Water Features',
-  h1: 'Water Features in Kent & Greater Seattle',
-  metaTitle: 'Pondless Water Features in Kent & Seattle',
+  h1: 'Water Features in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Pondless Water Features in Seattle & Kent, WA',
   metaDescription:
     'Pondless fountains, basalt column sets and disappearing waterfalls installed across Kent, Renton and Greater Seattle. No open water, real cost ranges.',
   quickAnswer:
