@@ -16,11 +16,13 @@ import {
 import { JsonLd } from '@/components/json-ld';
 import { Reveal } from '@/components/motion/reveal';
 import { ProjectGrid } from '@/components/portfolio/project-grid';
+import { WorkGallery } from '@/components/work-gallery';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { ServiceArt } from '@/components/service-art';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { getServiceContent } from '@/data/content/services';
 import { postsForService } from '@/data/content/blog';
+import { workPhotosByCategory } from '@/data/work-photos';
 import { projectsForService } from '@/data/projects';
 import {
   categoryBySlug,
@@ -124,7 +126,7 @@ export default function ServicePage({ params }: Params) {
 
       <article>
         <header className="shell pt-8">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             {category.name}
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
@@ -197,7 +199,16 @@ export default function ServicePage({ params }: Params) {
               </div>
             </Reveal>
 
-            {/* Renders nothing until real project photography exists. */}
+            {/* The job photography for this discipline, self-hosted. */}
+            <Reveal as="div">
+              <WorkGallery
+                photos={workPhotosByCategory[ref.category]}
+                heading={`${ref.name} we have built`}
+                limit={12}
+              />
+            </Reveal>
+
+            {/* Documented before/after case studies, when any exist. */}
             <ProjectGrid
               projects={serviceProjects}
               heading={`Recent ${ref.name.toLowerCase()} projects`}

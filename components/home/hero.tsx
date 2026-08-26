@@ -118,7 +118,7 @@ export function Hero() {
               transition={{ delay: 0.45, duration: 0.5, ease: ease.out }}
               className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
             >
-              <Button asChild size="lg" variant="brand">
+              <Button asChild size="lg" variant="onPhoto">
                 <Link href="/quote">
                   Free Consultation
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />

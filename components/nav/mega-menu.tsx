@@ -131,12 +131,12 @@ export function MegaMenu({
               {col.href ? (
                 <Link
                   href={col.href}
-                  className="mb-3 block text-caption font-semibold uppercase tracking-wide text-brand-600 hover:underline"
+                  className="mb-3 block eyebrow text-brand-600 hover:underline"
                 >
                   {col.heading}
                 </Link>
               ) : (
-                <p className="mb-3 text-caption font-semibold uppercase tracking-wide text-brand-600">
+                <p className="mb-3 eyebrow text-brand-600">
                   {col.heading}
                 </p>
               )}

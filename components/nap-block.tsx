@@ -1,6 +1,6 @@
 import { Clock, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 
-import { PHONE, TEL_HREF, business, formattedAddress } from '@/data/business';
+import { GOOGLE_PROFILE_URL, PHONE, TEL_HREF, business, formattedAddress } from '@/data/business';
 
 /**
  * Name / Address / Phone block.
@@ -17,7 +17,22 @@ export function NapBlock({ heading = 'Blue Landscaping Services' }: { heading?: 
       <address className="mt-4 space-y-3 not-italic">
         <p className="flex items-start gap-2.5 text-body text-ink-800">
           <MapPin className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
-          <span>{formattedAddress}</span>
+          <span>
+            {formattedAddress}
+            {GOOGLE_PROFILE_URL && (
+              <>
+                <br />
+                <a
+                  href={GOOGLE_PROFILE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-caption text-brand-600 underline underline-offset-2"
+                >
+                  Open in Google Maps
+                </a>
+              </>
+            )}
+          </span>
         </p>
         <p className="flex items-start gap-2.5">
           <Phone className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
@@ -40,9 +55,9 @@ export function NapBlock({ heading = 'Blue Landscaping Services' }: { heading?: 
         <p className="flex items-start gap-2.5 text-caption text-ink-500">
           <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
           <span>
-            Mon–Fri 7am–6pm · Sat 8am–4pm
+            Open seven days
             <br />
-            Closed Sunday
+            7am – 6pm
           </span>
         </p>
         <p className="mt-3 flex items-start gap-2.5 text-caption text-ink-500">

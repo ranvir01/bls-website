@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Paver Patios in Tukwila, WA',
   metaTitle: 'Tukwila WA Paver Patio Installation',
   metaDescription:
-    'Paver patios in Tukwila built for Duwamish valley fill and hillside till. Proofed subgrade, floodplain-aware grading, in-house design and our own crew.',
+    'Paver patios in Tukwila built for Duwamish valley fill and hillside till. Proofed subgrade, floodplain-aware grading, and a published cost range per square foot.',
   quickAnswer:
     'Tukwila splits at the valley wall. Down in Allentown and Riverton the ground is Duwamish alluvium with undocumented fill and a winter water table two or three feet down, so the subgrade gets proofed and over-excavated. Up on Foster and Thorndyke it is ordinary till hardpan. Fifteen minutes from our Kent shop.',
   body: [

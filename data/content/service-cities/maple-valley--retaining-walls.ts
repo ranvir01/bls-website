@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Retaining Walls in Maple Valley, WA',
   metaTitle: 'Retaining Wall Contractor in Maple Valley, WA',
   metaDescription:
-    'Maple Valley retaining walls designed around NGPE tracts, septic drainfields and foothill rain. Block and quarried basalt, installed by our own crew.',
+    'Maple Valley retaining walls designed around NGPE tracts, septic drainfields and foothill rain. Block and quarried basalt, with a drain zone behind every course.',
   quickAnswer:
     'Maple Valley walls get designed backwards from the property, not the face. The geogrid zone reaches well into the slope, and out here that reinforced ground often runs toward a Native Growth Protection Easement or a septic drainfield. We settle those lines first, then build for 55 to 65 inches of foothill rain.',
   body: [

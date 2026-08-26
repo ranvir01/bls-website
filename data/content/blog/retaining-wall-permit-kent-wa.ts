@@ -167,7 +167,7 @@ const post: BlogPost = {
     {
       type: 'callout',
       title: 'Confirm your scope with the City of Kent before anyone digs',
-      text: 'Every figure above is a typical market range rather than a quote, and permit fees in particular come off a schedule the city revises. Code thresholds and critical-area maps get amended too, so no article substitutes for the permit counter. Take your parcel address and a rough section of what you want to build to the City of Kent Permit Center and get the answer in writing. Blue Landscaping Services designs walls in-house, sets every block with our own crew, and coordinates the engineer and the permit when a wall crosses the line. Registered in Washington as BLUELLS880K2, bonded at $12,000 and insured at $1 million. Call (253) 429-7052.',
+      text: 'Every figure above is a typical market range rather than a quote, and permit fees in particular come off a schedule the city revises. Code thresholds and critical-area maps get amended too, so no article substitutes for the permit counter. Take your parcel address and a rough section of what you want to build to the City of Kent Permit Center and get the answer in writing. Blue Landscaping Services coordinates the engineer and the permit when a wall crosses the four-foot line, and sets base, geogrid, filter fabric and a piped drain outlet on the ones that stay under it. Registered in Washington as BLUELLS880K2, bonded at $12,000 and insured at $1 million. Call (253) 429-7052.',
     },
   ],
   faqs: [

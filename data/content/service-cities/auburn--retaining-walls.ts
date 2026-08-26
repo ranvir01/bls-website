@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Retaining Walls in Auburn, WA',
   metaTitle: 'Retaining Wall Contractor in Auburn, WA',
   metaDescription:
-    'Auburn retaining walls: geogrid terraces on Lea Hill and Lakeland Hills, bearing-first design on the liquefaction-mapped valley floor. Built by our own crew.',
+    'Auburn retaining walls: geogrid terraces on Lea Hill and Lakeland Hills, bearing-first design on the liquefaction-mapped valley floor. Roughly $45 to $70 a face foot.',
   quickAnswer:
     'Auburn asks two different questions of a retaining wall. On Lea Hill and Lakeland Hills we terrace real grade with geogrid tied back into the slope. On the valley floor, soft alluvium over Osceola Mudflow and mapped liquefaction mean bearing gets designed before height does. Auburn is about twenty minutes from our Kent shop.',
   body: [

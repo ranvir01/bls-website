@@ -7,6 +7,36 @@ purpose.
 
 This is a field procedure. It lives in the repo so it actually gets followed.
 
+## What imagery this project actually has
+
+Audited against every blob ever committed under `public/images/`, across all
+branches (`git rev-list --all --objects -- 'public/images/*'`). The result, so
+nobody has to guess again:
+
+**Two real files have ever existed.**
+
+| File | Size | What it is |
+| --- | --- | --- |
+| `hero-home.jpg` | 566 KB | A genuine completed job: flagstone walkway, exposed-aggregate patio circle, laceleaf Japanese maple, boxwood, groundcover, fresh mulch |
+| `logo.png` | 40 KB | The wordmark — Seattle skyline, laurel wreath, "Blue Landscaping" |
+
+Everything else that looked like a photo was not one:
+
+- `hardscaping.jpg`, `hardscaping-service.jpg`, `irrigation-service.jpg`,
+  `landscaping-service.jpg`, `project2.jpg`, `project3.jpg`, `project4.jpg` —
+  each a **90-byte text file** holding an `images.unsplash.com` URL. Not
+  images. The site hotlinked them at runtime.
+- Worse, `project2/3/4.jpg` held IDs `…f02`, `…f03`, `…f04` — the real photo ID
+  `…f01` with the last digits bumped. Those Unsplash photos do not exist, so
+  the three "recent projects" on the old site were broken images.
+- 24 files under `cities/` and `hardscaping/` — ~300-byte SVGs, each a flat
+  coloured rectangle with a caption. Placeholders.
+
+`hero-home-mobile.jpg`, `og-default.jpg`, `services/walkways.jpg`,
+`services/planting-design.jpg` and `services/landscaping.jpg` are all crops of
+`hero-home.jpg`. One photo is doing the work of six surfaces, which is exactly
+why the shot list below matters.
+
 ## Before every job — 6 shots, fixed positions
 
 1. Stand at the six positions that between them cover the whole work area.

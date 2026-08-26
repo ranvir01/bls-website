@@ -65,7 +65,8 @@ The owner asked to restore the **old look and real photos** while **keeping the 
 - Shop: 11703 SE 229th Pl, Kent, WA 98031
 - Email: blue_landscaping@yahoo.com
 - License: BLUELLS880K2 (WA L&I)
-- Google Business Profile: https://share.google/udIRuWuNg13lXgC5t
+- Google Business Profile: https://share.google/rqx6Hs2RgAzSXmHuz
+- Formspree (live lead floor): `https://formspree.io/f/xzzdagdw` via `FORMSPREE_ENDPOINT` / `lib/notify.ts`
 - Payments: Zelle, Venmo, PayPal, Cash, Visa, Mastercard
 
 ## Do this next, in order

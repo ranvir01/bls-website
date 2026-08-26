@@ -15,7 +15,7 @@ import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 export const metadata: Metadata = buildMetadata({
   title: 'About Blue Landscaping Services — Kent, WA',
   description:
-    'Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor in Kent, WA, founded in 2012. Retaining walls, paver patios, and irrigation. WA license BLUELLS880K2.',
+    'Licensed, family-run hardscaping and landscaping contractor in Kent, WA, founded in 2012. Washington registration BLUELLS880K2, a $12,000 bond and $1M liability cover.',
   path: '/about',
 });
 
@@ -31,9 +31,9 @@ export default function AboutPage() {
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
           <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">About us</p>
-          <h1 className="mt-2 text-h1">A Kent crew that builds yards across Seattle</h1>
+          <h1 className="mt-2 text-h1">A family crew in Kent that builds yards across Greater Seattle</h1>
           <QuickAnswer>
-            {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear} by ${business.owner}. Retaining walls, paver patios, and irrigation under Washington contractor registration ${business.license.number}.`}
+            {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor based at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear} by ${business.owner}. We design and build retaining walls, paver patios, and irrigation under Washington contractor registration ${business.license.number}.`}
           </QuickAnswer>
         </header>
       </div>
@@ -61,16 +61,16 @@ export default function AboutPage() {
             <h2 className="text-h2">How we work</h2>
             <div className="mt-5 max-w-prose space-y-4 text-body-lg text-ink-800">
               <p>
-                A lot of yards around here get handed from a designer to a contractor to whoever
-                bid lowest. By the time someone is digging, the drawing and the price have already
-                drifted.
+                Most yards around here get handed off. Designer to contractor, then to whoever bid
+                lowest. By the time somebody is actually digging, the drawing and the price have
+                both drifted.
               </p>
               <p>
-                We draw it, we price it, and our crew builds it. No separate design fee. If
-                something is not right, you call us.
+                We draw it, we price it, we build it. No separate design fee. One phone number if
+                something isn&rsquo;t right.
               </p>
               <p>
-                {`We have been doing it that way since ${business.foundedYear}${years >= 5 ? `, which is ${years} years of watching what survives Puget Sound winters and what does not` : ''}. The short version of what we learned: almost every hardscape failure in this region traces back to base preparation or drainage, and both of those are invisible the day the job finishes.`}
+                {`We've worked that way since ${business.foundedYear}${years >= 5 ? `. That's ${years} years of watching what survives a Puget Sound winter and what doesn't` : ''}. Here's what it taught us. Almost every hardscape failure in this region comes back to base prep or drainage. You can't see either one the day the job finishes.`}
               </p>
             </div>
           </Reveal>
@@ -79,18 +79,19 @@ export default function AboutPage() {
             <h2 className="text-h2">What we will not do</h2>
             <div className="mt-5 max-w-prose space-y-4 text-body-lg text-ink-800">
               <p>
-                We will not skip the base to hit a number. If a competing bid is a lot cheaper on
-                the same scope, the difference is almost always excavation depth, compaction, or
-                the drain rock behind a wall — the three things you cannot inspect afterwards.
+                We won&rsquo;t skip the base to hit a number. When another bid comes in a lot
+                cheaper on the same scope, the difference is usually excavation depth, compaction,
+                or the drain rock behind a wall. You can&rsquo;t inspect any of that once the job
+                is done.
               </p>
               <p>
-                We put our own job photos on this site. The portfolio is real work we built, not
-                stock imagery and not someone else&rsquo;s yard.
+                The photos on this site are our own jobs. No stock imagery. Nobody else&rsquo;s
+                yard.
               </p>
               <p>
-                We will not quote a wall over 4 feet without engineering. Western Washington
-                jurisdictions require it, and the ones that build without it are the reason so much
-                of our repair work exists.
+                We won&rsquo;t quote a wall over 4 feet without engineering. Western Washington
+                jurisdictions require it. The crews that build without it are why we get so much
+                repair work.
               </p>
             </div>
           </Reveal>
@@ -108,14 +109,14 @@ export default function AboutPage() {
                 >
                   {business.license.number}
                 </a>
-                , a $12,000 contractor bond, and $1,000,000 in general liability coverage. You can
-                verify all of it directly with the Department of Labor &amp; Industries, and you
-                should — for us and for anyone else you are considering.
+                , a $12,000 contractor bond, and $1,000,000 in general liability coverage. Check
+                all of it yourself with the Department of Labor &amp; Industries. Do it for us. Do
+                it for whoever else is bidding your job.
               </p>
               <p>
-                Hiring an unregistered contractor in Washington means no bond to claim against and
-                no lien protection. It takes about thirty seconds to check, and it is the single
-                most useful thing a homeowner can do before signing anything.
+                Hire an unregistered contractor in Washington and there&rsquo;s no bond to claim
+                against and no lien protection. The lookup takes about thirty seconds. It&rsquo;s
+                the most useful thirty seconds you&rsquo;ll spend before you sign anything.
               </p>
             </div>
           </Reveal>
@@ -134,8 +135,8 @@ export default function AboutPage() {
             <div className="rounded-sm border border-ink-200 bg-white p-6">
               <h2 className="text-h3">Home turf</h2>
               <p className="mt-3 text-body text-ink-500">
-                We work out of Kent. These are the cities closest to the shop, and where we can get
-                out for a walkthrough fastest.
+                We work out of Kent. These cities are closest to the shop, so we can get out for a
+                walkthrough fastest.
               </p>
               <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5">
                 {cities

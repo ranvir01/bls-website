@@ -87,7 +87,7 @@ export default function VisualizerPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">
+          <p className="eyebrow text-leaf-600">
             Free tool
           </p>
           <h1 className="mt-2 text-h1">See your yard redesigned in about 30 seconds</h1>

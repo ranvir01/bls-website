@@ -13,41 +13,41 @@ export const howItWorks: ProcessStep[] = [
   {
     title: 'We come look at it',
     description:
-      "Free visit, no obligation. We walk the yard, check the grade, and find out where the water goes. You talk to the person who'll run the job, not a salesman.",
+      "It's a free visit and there's no obligation. We walk the yard, look at the grade, and figure out where the water goes when it rains. The person who shows up is the one who'll run your job.",
   },
   {
     title: 'You get a real number',
     description:
-      "We draw it and price it ourselves. The quote names the materials, the phases and a schedule. There's no design fee, because design isn't a separate company here.",
+      "We draw it and price it. The quote names the materials, the phases and a schedule. There's no design fee. Sit on the number as long as you want.",
   },
   {
-    title: 'Our crew builds it',
+    title: 'We build it',
     description:
-      "Our own people do the digging, the base, the drainage and the finish work. Nobody subs out the hardscape. That's the part you can't inspect later, so it's the part we don't hand off.",
+      "We dig it, set the base, run the drainage and do the finish work. Most of the days on site go into the part that ends up buried. Once the pavers are down, nobody can see whether the base was done right. So that's where we spend the time.",
   },
   {
     title: 'We walk it with you',
     description:
-      "We go over the finished job together and fix anything that isn't right before we leave. You get the paperwork, including the backflow test certificate on irrigation work.",
+      "We walk the finished job with you. Anything that isn't right gets fixed before we pull off the site. You get the paperwork too, including the backflow test certificate on irrigation work.",
   },
 ];
 
 export const whyUs = [
   {
-    title: 'You talk to the people who dig',
-    body: "Jose and the crew run the visit, the quote, and the job. If something is off after we leave, you call the same number.",
+    title: 'You call the same number later',
+    body: "Same shop in Kent since 2012, same phone number. If something needs looking at a year from now, the person who answers is the person who built it. Nobody has moved on, folded, or handed your file to whoever bought the customer list.",
   },
   {
-    title: 'The parts you cannot see get done right',
-    body: "Base depth, compaction, and drain rock behind a wall. That is what fails in a Puget Sound winter, and it is what we do not skip to hit a number.",
+    title: 'What a cheap bid skips',
+    body: "A cheap bid has to save the money somewhere, and it's almost always underground. Shallow excavation. Base that never got compacted properly. No drain rock behind the wall. None of that shows up the week the job finishes. It shows up a few winters later, when the wall starts leaning.",
   },
   {
     title: 'Licensed, bonded and insured',
-    body: 'Washington contractor license BLUELLS880K2, a $12,000 bond and $1M in liability coverage. Check it with L&I. Check the other bids the same way.',
+    body: "Washington contractor license BLUELLS880K2, a $12,000 bond and $1M in liability coverage. You don't have to take our word for any of it. Type the number into the L&I verify page and you'll see the license status, the bond and the insurance. Takes a minute. Do it for every bid you get, not just ours.",
   },
   {
     title: 'Built for Puget Sound weather',
-    body: 'Wet winters, clay and till, then a dry August. We set base depth, drainage, and plants for this climate — not for a catalog photo from somewhere else.',
+    body: "Wet winters, clay and till underneath, then a dry August. That changes what we build. We set base depth for ground that stays wet half the year. Drainage gets figured out before anything else starts. Plants have to sit through a soaked February and then a month without rain.",
   },
 ];
 
@@ -55,51 +55,51 @@ export const homeFaqs: Faq[] = [
   {
     question: 'How much does a typical project cost?',
     answer:
-      'Paver patios usually run $18 to $32 a square foot installed. A segmental retaining wall under 4 feet runs $45 to $70 per face square foot. Most residential jobs land between $8,000 and $40,000. Every service page here publishes its own cost table, so you can get a real number before anyone visits.',
+      "Paver patios usually run $18 to $32 a square foot installed. A segmental retaining wall under 4 feet runs $45 to $70 per face square foot. Most residential jobs land between $8,000 and $40,000. Every service page here has its own cost table. You can work out a real number before anyone comes to the house.",
   },
   {
     question: 'Do you charge for estimates?',
     answer:
-      "No. The site visit and the written quote are both free, and there's no design fee either. Design happens in-house as part of the build. That's the main difference between us and firms that farm it out.",
+      "No. The site visit is free and so is the written quote. There's no design fee either. You get the whole number in writing before you decide anything.",
   },
   {
     question: 'What areas do you serve?',
     answer:
-      'We work out of Kent and cover South King County closely: Kent, Auburn, Renton, Covington, Maple Valley, Federal Way, Des Moines, Tukwila, Burien and SeaTac. We also take work on the Eastside and in Seattle. Outside that, ask anyway and we will tell you straight.',
+      "We work out of Kent. South King County is our home ground: Kent, Auburn, Renton, Covington, Maple Valley, Federal Way, Des Moines, Tukwila, Burien and SeaTac. We take work on the Eastside and in Seattle too. If you're outside all that, call anyway. We'll tell you straight.",
   },
   {
     question: 'How long does a project take?',
     answer:
-      'A straightforward paver patio takes three to six working days. A retaining wall runs four days to two weeks depending on height and how much digging it needs. Irrigation installs are two to three days. Winter adds time, because we will not build on saturated base.',
+      "A straightforward paver patio takes three to six working days. A retaining wall runs four days to two weeks, depending on the height and how much digging it needs. Irrigation installs are two to three days. Winter adds time. We won't build on saturated base.",
   },
   {
     question: 'Are you licensed and insured?',
     answer:
-      'Yes. Washington contractor registration BLUELLS880K2, a $12,000 bond and $1M general liability. The license number in the footer links straight to the L&I verification page.',
+      "Yes. Washington contractor registration BLUELLS880K2, a $12,000 bond and $1M general liability. Click the license number down in the footer and it takes you straight to the L&I verification page.",
   },
   {
     question: 'Do you do the work yourselves or sub it out?',
     answer:
-      'Hardscape is all our own crew. We bring in specialty trades only where the law requires it, like a licensed electrician for anything past low-voltage. Walls, patios, walkways and steps are ours.',
+      "Hardscape is all our own crew: walls, patios, walkways and steps. We bring in a specialty trade only where the law requires it. Anything past low-voltage needs a licensed electrician, so we hire one for that.",
   },
   {
     question: 'When is the best time of year to start?',
     answer:
-      'Late spring through early fall gives the most reliable weather, and that is when the calendar fills up. Hardscape can go in year-round here as long as the base can be compacted dry, so winter jobs are possible and usually get scheduled sooner.',
+      "Late spring through early fall has the most reliable weather. That's also when the calendar fills up. Hardscape can go in year-round here, as long as we can get the base compacted dry. Winter jobs work fine and they usually get scheduled sooner.",
   },
   {
     question: 'Will my project need a permit?',
     answer:
-      'Patios and walkways at grade usually do not. Retaining walls over 4 feet need engineering and a permit almost everywhere in Western Washington, and some cities trigger lower for tiered or surcharged walls. We check with your city before we dig and handle the paperwork.',
+      "Patios and walkways at grade usually don't. A retaining wall over 4 feet needs engineering and a permit almost everywhere in Western Washington. Some cities trigger lower than that for tiered or surcharged walls. We check with your city before we dig, and we handle the paperwork.",
   },
   {
     question: 'Can you fix work another contractor did badly?',
     answer:
-      'Often, and a good share of our work is exactly that. Settling pavers, leaning walls, irrigation that never worked right. We will tell you honestly whether it is a repair or whether it has to come out and be rebuilt. Sometimes it is the second one.',
+      "Often, yes. A good share of our work is exactly that. Settling pavers, leaning walls, irrigation that never worked right. We'll tell you honestly whether it's a repair or whether the whole thing has to come out and be rebuilt. Sometimes it's the second one.",
   },
   {
     question: 'How fast will you get back to me?',
     answer:
-      'Same day on almost everything. A quote request texts and emails the owner within seconds, so during working hours the call usually comes back inside the hour.',
+      "Same day on almost everything. A quote request off this site texts and emails the owner within seconds. During working hours you'll usually hear back inside the hour.",
   },
 ];

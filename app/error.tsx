@@ -26,7 +26,7 @@ export default function Error({
   return (
     <div className="shell py-24 lg:py-32">
       <div className="max-w-prose">
-        <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">Error</p>
+        <p className="eyebrow text-leaf-600">Error</p>
         <h1 className="mt-2 text-h1">Something went wrong on our end</h1>
         <p className="mt-5 text-body-lg text-ink-500">
           This is our problem, not yours. Try again, or just call — we answer the phone.

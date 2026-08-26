@@ -1,4 +1,4 @@
-import type { ImageAsset } from '@/data/types';
+import type { CategorySlug, ImageAsset } from '@/data/types';
 
 /** Self-hosted job photos restored from the original site. Tiny Imgur thumbs are filtered out. */
 
@@ -68,6 +68,13 @@ export const landscapingPhotos: ImageAsset[] = [
     { src: '/images/work/landscaping/37.jpg', width: 1400, height: 1050, alt: 'Blue Landscaping Services completed work in Greater Seattle', assetType: 'photo' },
     { src: '/images/work/landscaping/48.jpg', width: 1400, height: 1050, alt: 'Blue Landscaping Services completed work in Greater Seattle', assetType: 'photo' },
 ];
+
+/** Category lookup, so a service page can ask for its own discipline. */
+export const workPhotosByCategory: Record<CategorySlug, ImageAsset[]> = {
+  hardscaping: hardscapingPhotos,
+  irrigation: irrigationPhotos,
+  landscaping: landscapingPhotos,
+};
 
 export const allWorkPhotos: ImageAsset[] = [
   ...hardscapingPhotos,

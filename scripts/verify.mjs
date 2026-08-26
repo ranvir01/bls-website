@@ -80,8 +80,20 @@ const RULES = [
   },
   {
     id: 'hotlinked-images',
-    pattern: /https?:\/\/(images\.unsplash\.com|images\.pexels\.com|i\.imgur\.com)/i,
-    message: 'third-party hotlinked image — all imagery must be self-hosted',
+    /*
+     * Every photograph on this site is a file in public/images.
+     *
+     * The job library used to live on Imgur and was briefly re-linked from
+     * there; it is now downloaded and self-hosted, which is better in every
+     * way — next/image can actually optimise it, and a third party cannot
+     * take the company's portfolio offline. This rule keeps it that way, and
+     * it also catches the older failure mode: dropping a stock photograph on
+     * a service page so the page looks finished.
+     */
+    pattern:
+      /https?:\/\/(images\.unsplash\.com|images\.pexels\.com|i\.imgur\.com|(?:\w+\.)?pixabay\.com|(?:\w+\.)?shutterstock\.com|(?:\w+\.)?istockphoto\.com|(?:\w+\.)?gettyimages\.com)/i,
+    message: 'third-party hotlinked image — every image must be a file in public/images',
+    allow: ['docs/'],
   },
   {
     id: 'fabricated-rating',

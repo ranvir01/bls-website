@@ -66,14 +66,21 @@ export const business = {
     insuranceAmount: 1000000,
   },
 
+  /**
+   * Open seven days, the same hours every day. Confirmed by the owner.
+   *
+   * These must match the Google Business Profile exactly — Google cross-checks
+   * hours between the profile and the site, and a mismatch is a live local-SEO
+   * penalty as well as a customer standing in a driveway on a Sunday.
+   */
   hours: [
     { day: 'Monday', opens: '07:00', closes: '18:00' },
     { day: 'Tuesday', opens: '07:00', closes: '18:00' },
     { day: 'Wednesday', opens: '07:00', closes: '18:00' },
     { day: 'Thursday', opens: '07:00', closes: '18:00' },
     { day: 'Friday', opens: '07:00', closes: '18:00' },
-    { day: 'Saturday', opens: '08:00', closes: '16:00' },
-    { day: 'Sunday', opens: null, closes: null },
+    { day: 'Saturday', opens: '07:00', closes: '18:00' },
+    { day: 'Sunday', opens: '07:00', closes: '18:00' },
   ],
 
   /**
@@ -87,16 +94,39 @@ export const business = {
   profiles: [
     {
       label: 'Google Business Profile',
-      // Short link as supplied. Replacing it with the canonical
+      // Short link as supplied by the owner. Replacing it with the canonical
       // google.com/maps/place/... URL is a small improvement — see docs/GO-LIVE.md.
-      url: 'https://share.google/udIRuWuNg13lXgC5t',
+      url: 'https://share.google/rqx6Hs2RgAzSXmHuz',
     },
   ] as { label: string; url: string }[],
 } as const;
 
-/** Google Business Profile URL, when one is listed. */
-export const googleProfileUrl =
-  business.profiles.find((p) => /google/i.test(p.label))?.url ?? null;
+/**
+ * The Google Business Profile, as a link the site can actually render.
+ *
+ * For a local contractor the Google profile is where the reviews live and
+ * where the map pin is, so burying it in `sameAs` and never linking to it
+ * wastes the strongest trust signal available. Null-safe: every consumer must
+ * handle the profile not existing rather than rendering a dead link.
+ */
+export const GOOGLE_PROFILE_URL: string | null =
+  business.profiles.find((p) => p.label === 'Google Business Profile')?.url ?? null;
+
+/**
+ * Formspree, where the leads actually land.
+ *
+ * This is the form the business has always used — the previous site posted the
+ * quote modal and the contact form straight to it. The rebuild replaced it with
+ * an SMTP-and-Twilio pipeline, which is better in every way except the one that
+ * matters: SMTP and Twilio need credentials in the Netlify environment, and
+ * until those exist every channel fails and the lead reaches nobody. Formspree
+ * needs no configuration at all. It is the floor under the other two.
+ *
+ * Override with FORMSPREE_ENDPOINT if the form ID ever changes; there is no
+ * reason to redeploy for that.
+ */
+export const FORMSPREE_ENDPOINT =
+  process.env.FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/xzzdagdw';
 
 export const SITE_URL = 'https://bluelandscapingservices.com';
 

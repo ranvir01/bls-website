@@ -97,7 +97,7 @@ export default function ServiceCityPage({ params }: Params) {
 
       <article>
         <header className="shell pt-8">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             {city.region}
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>

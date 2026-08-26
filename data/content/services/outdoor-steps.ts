@@ -7,13 +7,13 @@ const content: ServiceContent = {
   h1: 'Outdoor Steps & Garden Stairs in Seattle, Kent & Greater Seattle',
   metaTitle: 'Outdoor Steps & Stone Stairs in Seattle & Kent, WA',
   metaDescription:
-    'Block, slab and natural stone outdoor steps built by our own crew across Kent, Renton, Auburn and Greater Seattle. Even risers, real drainage, code handrails.',
+    'Block, slab and natural stone outdoor steps across Kent, Renton, Auburn and Greater Seattle. Even risers, real drainage, code handrails, from $250 a tread foot.',
   quickAnswer:
     'Outdoor steps turn a slope into a route you can carry groceries up. In the Puget Sound market, block-and-cap steps typically run $250 to $450 per linear foot of tread installed, and solid granite or basalt slab treads run higher. Rise and run must stay consistent, and any flight of four or more risers needs a graspable handrail.',
   intro: [
     'Grade changes are the reason half the backyards in this region go unused. A lawn that drops five feet from the deck to the fence line is not a yard, it is a hill with grass on it. Steps solve that, and badly built steps make it worse. Inconsistent risers are the single most common defect we find in South King County: somebody built to the dirt instead of to a layout, and now every third step is an inch taller than the one below it.',
     'Getting a flight right starts with arithmetic, not with block. We measure total rise from finish grade to finish grade, divide it into equal risers between 5 and 7 inches, then set a tread depth of 12 to 18 inches. Outdoors, shallower risers and deeper treads read better than an indoor stair, because people carry things and wear boots. Once that number is fixed, the whole flight is built to it, and the last riser at the top lands flush instead of surprising someone in the dark.',
-    'Because we draw the flight and set the block, the stair and whatever it connects to get built as one piece of work. Cheek walls line up with the retaining wall beside them. A landing lands where the patio actually ends, not where a drawing guessed it would.',
+    'Because we draw the flight and set the block with the same crew, the stair and whatever it connects to get built as one piece of work. Cheek walls line up with the retaining wall beside them, sharing one layout and one drain outlet. A landing lands where the patio actually ends, not where a drawing guessed it would, and the perforated line behind the flight runs to the same daylight point as the wall it ties into.',
     'Material choice here has a wet-season job to do. Nine months of the year a north-facing flight in Federal Way or Burien stays damp, grows a film of algae and turns slick. We steer people toward textured block caps, thermal-finished granite or sawn basalt treads rather than anything polished, and we pitch every tread about a quarter inch forward so water leaves instead of standing. Low-voltage riser lights do more for real safety on those stairs than the handrail does.',
   ],
   included: [
@@ -154,7 +154,7 @@ const content: ServiceContent = {
     {
       question: 'Can steps and a retaining wall be built at the same time?',
       answer:
-        'They should be. When the stair cuts through a wall, the cheek walls, the wall courses and the drainage all need to share one layout and one drain outlet. Building them as separate jobs is how you end up with a seam that leaks and caps that do not align. We design both together and self-perform both, so the flight and the wall are the same build.',
+        'They should be. When the stair cuts through a wall, the cheek walls, the wall courses and the drainage all need to share one layout and one drain outlet. Building them as separate jobs is how you end up with a seam that leaks and caps that do not align. It also settles the permit question in one pass: if the cheek walls or the adjacent retaining exceed 4 feet, the wall triggers engineering and a building permit even though the stair does not.',
     },
     {
       question: 'What if my slope is too steep for a straight flight?',

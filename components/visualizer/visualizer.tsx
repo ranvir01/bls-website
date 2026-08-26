@@ -11,6 +11,7 @@ import { catalogGroups, elementToggles, scopes, styles } from '@/data/buildable'
 import { formatRange, type Estimate, type RenderSpec } from '@/data/pricing';
 import { trackEvent } from '@/lib/analytics';
 import { ease } from '@/lib/motion';
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const MAX_UPLOAD_PX = 1600;
@@ -283,7 +284,7 @@ export function Visualizer() {
                   if (!group) return null;
                   return (
                     <fieldset key={group.id}>
-                      <legend className="mb-2 text-caption font-semibold uppercase tracking-wide text-ink-500">
+                      <legend className="mb-2 eyebrow text-ink-500">
                         {group.label}
                       </legend>
                       <div className="flex flex-wrap gap-2">
@@ -347,7 +348,7 @@ export function Visualizer() {
             type="button"
             onClick={() => void generate()}
             disabled={!canGenerate}
-            className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-sm bg-leaf-600 px-7 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90 disabled:cursor-not-allowed disabled:opacity-60"
+            className={cn(buttonVariants({ variant: 'primary', size: 'lg', full: true }), 'disabled:cursor-not-allowed')}
           >
             {busy ? (
               <>
@@ -456,7 +457,7 @@ export function Visualizer() {
 
                     {/* Element toggles */}
                     <fieldset>
-                      <legend className="mb-2 text-caption font-semibold uppercase tracking-wide text-ink-500">
+                      <legend className="mb-2 eyebrow text-ink-500">
                         Change something
                       </legend>
                       <div className="flex flex-wrap gap-2">

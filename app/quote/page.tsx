@@ -8,7 +8,7 @@ import { QuoteForm } from '@/components/quote/quote-form';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Get a Free Quote',
+  title: 'Free Landscaping & Hardscaping Quote — Kent & Seattle',
   description:
     'Tell us about your project and a Blue Landscaping estimator will call you the same day. Free on-site walkthrough, written scope and a real cost range. Kent, WA and Greater Seattle.',
   path: '/quote',

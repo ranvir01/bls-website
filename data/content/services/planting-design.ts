@@ -7,19 +7,19 @@ const content: ServiceContent = {
   h1: 'Planting Design & Installation in Seattle, Kent & Greater Seattle',
   metaTitle: 'Planting Design & Installation in Seattle & Kent, WA',
   metaDescription:
-    'Zone 8b planting plans drawn in-house and installed by our own crew across Kent, Renton and Greater Seattle. Plant palettes, soil prep and real cost ranges.',
+    'Zone 8b planting plans for Kent, Renton and Greater Seattle. Plant palettes, soil prep and mulch, from $18 to $45 a square foot of finished bed.',
   quickAnswer:
-    'Planting design is a drawn plan and installed plant palette matched to Zone 8b conditions: wet winters, dry Augusts and till subsoil. We design in house, then prep beds, plant and mulch. Typical Puget Sound bed installations run $18 to $45 per square foot depending on plant size and soil work.',
+    'Planting design is a drawn plan and installed plant palette matched to Zone 8b conditions: wet winters, dry Augusts and till subsoil. We draw the plan, then prep beds, plant and mulch. Typical Puget Sound bed installations run $18 to $45 per square foot depending on plant size and soil work.',
   intro: [
     'Plants die here for one reason far more often than any other, and it is not cold. It is a planting hole dug into cemented glacial till, backfilled with fluffy compost, that fills with water in November and holds it until March. The roots sit in that bathtub and drown. A rhododendron that looked fine all summer collapses the following spring and everyone blames the winter. Design in this region starts underground, with how a bed drains, and only then moves to what looks good next to the front door.',
-    'The plan gets drawn in house. Sun and shade are mapped through the actual day on your lot, not assumed from a satellite photo, because a west-facing Kent East Hill bed and a north-side Ballard strip under a mature maple are two entirely different growing environments 20 miles apart. We put a scaled plan and a plant schedule in your hands, with mature sizes noted, so you know what the bed looks like in year seven rather than the week it goes in. Then our own crew installs it.',
+    'Sun and shade are mapped through the actual day on your lot, not assumed from a satellite photo, because a west-facing Kent East Hill bed and a north-side Ballard strip under a mature maple are two entirely different growing environments 20 miles apart. We put a scaled plan and a plant schedule in your hands, with mature sizes noted, so you know what the bed looks like in year seven rather than the week it goes in.',
     'Zone 8b gives us an unusually long list to work from. Sword fern, salal and evergreen huckleberry hold the shaded structure through winter. Vine maple and Japanese maple carry the fall color and the branch pattern that matters in a January garden. Dwarf conifers give year-round mass without becoming a hedge you fight. Hydrangea, rhododendron and hebe do the flowering work, carex softens edges, red twig dogwood lights up the dormant months, and lavender earns its place only in the hottest, sharpest-draining spot you have.',
     'The honest part of the conversation is what your site cannot support. Full sun Mediterranean planting on a flat lot in the Kent valley with silt soil is a slow failure no matter how good the design looks on paper. Deer in Maple Valley and Issaquah will strip a new hosta bed in one night. We would rather say that at the walkthrough, adjust the palette, and give you something that reads well in February than sell you a photo that looks great for one June.',
   ],
   included: [
     'Site read covering sun exposure through the day, existing tree canopy, drainage patterns and any wind-exposed edges',
     'Percolation check and soil assessment in each proposed bed, including how deep the till or hardpan sits',
-    'Scaled planting plan drawn in house with a plant schedule listing species, size at install and mature dimensions',
+    'Scaled planting plan with a plant schedule listing species, size at install and mature dimensions',
     'Bed shaping and edge definition, with beds cut to a line that a mower can follow cleanly',
     'Soil work across the entire bed rather than hole by hole, amending and decompacting to real rooting depth',
     'Plant sourcing from Puget Sound wholesale growers, with substitutions cleared with you before install day',
@@ -44,9 +44,9 @@ const content: ServiceContent = {
         'We spend real time on the lot before drawing anything. Where the sun actually lands in July and in December, which roots are already claiming the bed, where water sheets during a downpour, how far down the shovel goes before it stops. A hole gets dug and filled with water in each major bed area to see how fast it drains, because that single test rules out or unlocks half the plant list.',
     },
     {
-      title: 'Draw the plan in house',
+      title: 'Draw the plan',
       description:
-        'The plan is produced by us, not a template and not a subcontracted designer. You get a scaled layout, a plant schedule with species and install sizes, and mature spread noted so nothing gets planted at a spacing that looks generous now and becomes a thicket in five years. We design for winter first. If the bed reads well in mid-January, it will look after itself in June.',
+        'You get a scaled layout, a plant schedule with species and install sizes, and mature spread noted so nothing gets planted at a spacing that looks generous now and becomes a thicket in five years. We design for winter first. If the bed reads well in mid-January, it will look after itself in June.',
     },
     {
       title: 'Build the bed, not the hole',

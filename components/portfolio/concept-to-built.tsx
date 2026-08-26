@@ -23,7 +23,7 @@ export function ConceptToBuiltGallery({ projects }: { projects: Project[] }) {
     <section className="border-y border-ink-200 bg-white">
       <div className="shell section">
         <div className="max-w-prose">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Proof</p>
+          <p className="eyebrow text-brand-600">Proof</p>
           <h2 className="mt-2 text-h2">From concept to built</h2>
           <p className="mt-4 text-body-lg text-ink-500">
             The design the visualizer produced, next to the finished job — same yard, same camera
@@ -53,7 +53,7 @@ export function ConceptToBuiltGallery({ projects }: { projects: Project[] }) {
                         <AiConceptBadge />
                       </div>
                     </div>
-                    <figcaption className="mt-2 text-caption font-semibold uppercase tracking-wide text-ink-500">
+                    <figcaption className="mt-2 eyebrow text-ink-500">
                       The concept
                     </figcaption>
                   </figure>
@@ -71,7 +71,7 @@ export function ConceptToBuiltGallery({ projects }: { projects: Project[] }) {
                         Built — real photo
                       </span>
                     </div>
-                    <figcaption className="mt-2 text-caption font-semibold uppercase tracking-wide text-ink-500">
+                    <figcaption className="mt-2 eyebrow text-ink-500">
                       The finished job
                     </figcaption>
                   </figure>

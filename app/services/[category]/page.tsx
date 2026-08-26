@@ -71,7 +71,7 @@ export default function CategoryPage({ params }: Params) {
 
       <article className="shell pb-16 pt-8">
         <header>
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Services</p>
+          <p className="eyebrow text-brand-600">Services</p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
           <QuickAnswer>{content.quickAnswer}</QuickAnswer>
         </header>
@@ -94,7 +94,7 @@ export default function CategoryPage({ params }: Params) {
                     <ServiceArt
                       slug={service.slug}
                       name={service.name}
-                      className="aspect-[16/9] w-full [&_img]:group-hover:scale-105"
+                      className="aspect-[16/9] w-full"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="flex flex-1 flex-col p-6">

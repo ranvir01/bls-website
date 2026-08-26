@@ -41,12 +41,12 @@ export default function ServicesPage() {
 
       <div className="shell pb-16 pt-8">
         <header>
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             What we build
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">Expert Landscaping, Hardscaping &amp; Irrigation in Seattle</h1>
           <QuickAnswer>
-            {`Blue Landscaping Services offers ${services.length} services across three categories: hardscaping, irrigation and landscaping. Hardscape work is self-performed by our own crew under Washington license BLUELLS880K2 — design and construction both happen in-house, with no separate design fee.`}
+            {`Blue Landscaping Services offers ${services.length} services across three categories: hardscaping, irrigation and landscaping. Our own crew builds the hardscape, under Washington license BLUELLS880K2. Every service page below publishes its installed cost range and a real timeline.`}
           </QuickAnswer>
         </header>
 
@@ -81,7 +81,7 @@ export default function ServicesPage() {
                         <ServiceArt
                           slug={service.slug}
                           name={service.name}
-                          className="aspect-[16/10] w-full [&_img]:group-hover:scale-105"
+                          className="aspect-[16/10] w-full"
                         />
                         <div className="flex flex-1 flex-col p-5">
                           <h3 className="text-body-lg font-semibold text-brand-900 group-hover:text-brand-600">

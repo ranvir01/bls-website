@@ -28,6 +28,7 @@ export function BeforeAfter({
   /** Shows the AI badge over the "after" layer when it is a render. */
   showConceptBadge = false,
   initial = 50,
+  aspect: aspectOverride,
 }: {
   before: ImageAsset;
   after: ImageAsset;
@@ -35,9 +36,22 @@ export function BeforeAfter({
   className?: string;
   showConceptBadge?: boolean;
   initial?: number;
+  /**
+   * Frame aspect ratio, when the pair's intrinsic size is not known — which is
+   * the case for every photo hosted remotely. Both layers are `object-cover`,
+   * so the frame decides the shape and the photos fill it.
+   */
+  aspect?: number;
 }) {
   const [position, setPosition] = useState(initial);
   const [dragging, setDragging] = useState(false);
+  // A remote host is not ours to guarantee. If either layer fails to load, the
+  // frame keeps its shape and its colour rather than showing the browser's
+  // broken-image glyph with the alt text sprawled across the slider.
+  const [broken, setBroken] = useState<{ before: boolean; after: boolean }>({
+    before: false,
+    after: false,
+  });
   const [nudged, setNudged] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -118,13 +132,13 @@ export function BeforeAfter({
     return () => observer.disconnect();
   }, [initial, nudged, reduced]);
 
-  const aspect = before.width / before.height;
+  const aspect = aspectOverride ?? before.width / before.height;
 
   return (
     <figure className={cn('w-full', className)}>
       <div
         ref={containerRef}
-        className="relative w-full select-none overflow-hidden rounded-sm border border-ink-200 bg-ink-200"
+        className="relative w-full select-none overflow-hidden rounded-lg border border-ink-200 bg-brand-800"
         style={{ aspectRatio: String(aspect) }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -132,28 +146,34 @@ export function BeforeAfter({
         onPointerCancel={endDrag}
       >
         {/* After layer — the full-width base */}
-        <Image
-          src={after.src}
-          alt={after.alt}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1100px"
-          className="img-grade object-cover"
-          draggable={false}
-        />
+        {!broken.after && (
+          <Image
+            src={after.src}
+            alt={after.alt}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1100px"
+            onError={() => setBroken((b) => ({ ...b, after: true }))}
+            className="img-grade object-cover"
+            draggable={false}
+          />
+        )}
 
         {/* Before layer — clipped to the handle position */}
         <div
           className="absolute inset-0 overflow-hidden"
           style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
         >
-          <Image
-            src={before.src}
-            alt={before.alt}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1100px"
-            className="img-grade object-cover"
-            draggable={false}
-          />
+          {!broken.before && (
+            <Image
+              src={before.src}
+              alt={before.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1100px"
+              onError={() => setBroken((b) => ({ ...b, before: true }))}
+              className="img-grade object-cover"
+              draggable={false}
+            />
+          )}
         </div>
 
         <span className="pointer-events-none absolute left-3 top-3 rounded-sm bg-brand-900/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">

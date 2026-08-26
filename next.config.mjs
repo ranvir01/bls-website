@@ -24,7 +24,13 @@ const nextConfig = {
     deviceSizes: [360, 414, 640, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
-    remotePatterns: [],
+    // The job photography is hosted on Imgur. Components render it through
+    // `imgurLoader` (lib/imgur.ts), which returns an Imgur CDN URL directly and
+    // never touches the optimizer — but next/image still validates `src`
+    // against this list, so the host has to be declared.
+    remotePatterns: [
+      { protocol: 'https', hostname: 'i.imgur.com', pathname: '/**' },
+    ],
   },
 
   experimental: {

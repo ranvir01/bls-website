@@ -211,7 +211,7 @@ export function buildEstimate(spec: RenderSpec): Estimate {
 
   if (spec.wallOver4ft) {
     notes.push(
-      'A wall over 4 ft needs engineering and a permit. We handle both — it adds cost and about two to four weeks to the schedule.',
+      'A wall over 4 ft needs stamped engineering and a permit. Budget roughly $1,600–$4,200 for a straightforward residential wall, and up to about $10,000 where a geotechnical report, a surcharge from a driveway or a mapped steep slope is involved. We handle the whole package, and it adds about two to four weeks to the schedule.',
     );
   }
 

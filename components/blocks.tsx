@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { ArrowRight, Check, Phone, ShieldCheck } from 'lucide-react';
 
 import { PHONE, TEL_HREF, business } from '@/data/business';
+import { allWorkPhotos } from '@/data/work-photos';
+import { projects } from '@/data/projects';
 import type { CostRow, Faq } from '@/data/types';
 import { cn } from '@/lib/utils';
 
@@ -31,11 +33,7 @@ export function SectionHeader({
 }) {
   return (
     <div className={cn('max-w-prose', align === 'center' && 'mx-auto text-center')}>
-      {eyebrow && (
-        <p className="mb-3 text-caption font-semibold uppercase tracking-wide text-brand-600">
-          {eyebrow}
-        </p>
-      )}
+      {eyebrow && <p className="mb-3 eyebrow text-brand-600">{eyebrow}</p>}
       <Heading className={Heading === 'h1' ? 'text-h1' : 'text-h2'}>{title}</Heading>
       {lead && <p className="mt-4 text-body-lg text-ink-500">{lead}</p>}
     </div>
@@ -51,7 +49,7 @@ export function SectionHeader({
 export function QuickAnswer({ children }: { children: string }) {
   return (
     <div className="quick-answer my-8">
-      <p className="mb-1 text-caption font-semibold uppercase tracking-wide text-brand-600">
+      <p className="mb-1 eyebrow text-brand-600">
         Quick answer
       </p>
       <p>{children}</p>
@@ -74,7 +72,10 @@ export function CheckList({ items, columns = 1 }: { items: string[]; columns?: 1
     <ul className={cn('grid gap-3', columns === 2 && 'sm:grid-cols-2')}>
       {items.map((item) => (
         <li key={item} className="flex gap-3 text-body text-ink-800">
-          <Check className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+          {/* leaf, not brand. Green is the semantic colour now — this tick
+              means "included", and it is the one place the landscaping half of
+              the name gets to show. */}
+          <Check className="mt-1 h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}
@@ -106,13 +107,13 @@ export function CostTable({
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead>
             <tr className="border-b border-ink-200 bg-ink-50">
-              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-ink-500">
+              <th scope="col" className="px-4 py-3 eyebrow text-ink-500">
                 Item
               </th>
-              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-ink-500">
+              <th scope="col" className="px-4 py-3 eyebrow text-ink-500">
                 Typical range
               </th>
-              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-ink-500">
+              <th scope="col" className="px-4 py-3 eyebrow text-ink-500">
                 Unit
               </th>
             </tr>
@@ -124,7 +125,9 @@ export function CostTable({
                   {row.item}
                   {row.notes && <span className="mt-0.5 block text-caption font-normal text-ink-500">{row.notes}</span>}
                 </th>
-                <td className="whitespace-nowrap px-4 py-3 text-body font-semibold text-brand-600">{row.range}</td>
+                <td className="nums whitespace-nowrap px-4 py-3 text-body font-semibold text-brand-800">
+                  {row.range}
+                </td>
                 <td className="px-4 py-3 text-caption text-ink-500">{row.unit}</td>
               </tr>
             ))}
@@ -184,7 +187,16 @@ export function slugifyQuestion(q: string): string {
   );
 }
 
-/** Trust bar. Every claim here is verifiable — license, bond, insurance, year. */
+/**
+ * Trust bar. Every claim here is verifiable, and the one that matters most is
+ * a link.
+ *
+ * With zero published reviews, a credential a stranger can check in one tap is
+ * worth more than any number of testimonials — and it is the thing a competitor
+ * with five hundred reviews cannot copy off you. So the licence number is an
+ * outbound link to L&I rather than inert text, and each item leads with a
+ * countable fact instead of an adjective.
+ */
 export function TrustBar() {
   const items: { label: string; detail: string; href?: string }[] = [
     {
@@ -192,22 +204,31 @@ export function TrustBar() {
       detail: 'Check it with L&I',
       href: business.license.lookupUrl,
     },
-    { label: 'Bonded & insured', detail: '$12k bond · $1M liability' },
-    { label: `Family-run since ${business.foundedYear}`, detail: 'Based in Kent, WA' },
-    { label: 'In-house design & build', detail: 'Our crew on the hardscape' },
+    {
+      label: `$${business.license.bondAmount.toLocaleString('en-US')} bond · $1M liability`,
+      detail: 'Bonded and insured',
+    },
+    {
+      label: `${allWorkPhotos.length + projects.length} photos of our own work`,
+      detail: 'No stock imagery anywhere',
+    },
+    {
+      label: `Family-run since ${business.foundedYear}`,
+      detail: 'Kent, WA · no subs on hardscape',
+    },
   ];
 
   return (
-    <section aria-label="Credentials" className="border-y border-ink-200 bg-white">
-      <div className="shell grid grid-cols-2 gap-6 py-8 lg:grid-cols-4">
+    <section aria-label="Credentials" className="border-b border-ink-200 bg-white">
+      <div className="shell grid grid-cols-2 gap-x-6 gap-y-5 py-8 lg:grid-cols-4">
         {items.map((item) => {
-          const inner = (
+          const body = (
             <>
-              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
-              <div>
-                <p className="text-caption font-semibold text-brand-900">{item.label}</p>
-                <p className="text-caption text-ink-500">{item.detail}</p>
-              </div>
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-leaf-600" aria-hidden="true" />
+              <span>
+                <span className="block text-caption font-semibold text-brand-900">{item.label}</span>
+                <span className="block text-caption text-ink-500">{item.detail}</span>
+              </span>
             </>
           );
 
@@ -217,13 +238,13 @@ export function TrustBar() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-3 rounded-sm outline-offset-4 hover:text-brand-600"
+              className="-m-1 flex min-h-[44px] items-start gap-3 rounded-lg p-1 transition-colors hover:bg-brand-50"
             >
-              {inner}
+              {body}
             </a>
           ) : (
-            <div key={item.label} className="flex gap-3">
-              {inner}
+            <div key={item.label} className="flex items-start gap-3">
+              {body}
             </div>
           );
         })}
@@ -250,13 +271,17 @@ export function CtaBand({
           <h2 className="text-h2 text-white">{title}</h2>
           <p className="mx-auto mt-4 max-w-prose text-body-lg text-brand-50/80">{body}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg" className="w-full sm:w-auto">
+            {/* This band is brand-900, so the primary takes the dark-surface
+                step of the green and the phone number takes the filled ghost.
+                leaf-600, the fill used on light pages, is 2.91:1 here —
+                legible label, invisible button. */}
+            <Button asChild variant="onDark" size="lg" className="w-full sm:w-auto">
               <Link href={primaryHref}>
                 {primaryLabel}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
-            <Button asChild variant="onDark" size="lg" className="w-full sm:w-auto">
+            <Button asChild variant="ghostDark" size="lg" className="w-full sm:w-auto">
               <a href={TEL_HREF}>
                 <Phone className="h-4 w-4" aria-hidden="true" />
                 {PHONE.display}
@@ -318,9 +343,7 @@ export function ProcessSteps({ steps }: { steps: { title: string; description: s
     <ol className="grid gap-6 sm:grid-cols-2">
       {steps.map((step, i) => (
         <li key={step.title} className="border-l-2 border-brand-50 pl-5">
-          <span className="text-caption font-semibold uppercase tracking-wide text-leaf-600">
-            Step {i + 1}
-          </span>
+          <span className="eyebrow text-brand-600">Step {i + 1}</span>
           <h3 className="mt-1 text-body-lg font-semibold text-brand-900">{step.title}</h3>
           <p className="mt-1.5 text-body text-ink-500">{step.description}</p>
         </li>

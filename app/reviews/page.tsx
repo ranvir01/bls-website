@@ -7,12 +7,12 @@ import { CtaBand } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { ReviewsSection } from '@/components/reviews-section';
 import { Button } from '@/components/ui/button';
-import { PHONE, TEL_HREF, business, googleProfileUrl } from '@/data/business';
+import { GOOGLE_PROFILE_URL, PHONE, TEL_HREF, business } from '@/data/business';
 import { averageRating, reviews } from '@/data/reviews';
 import { buildMetadata, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Reviews',
+  title: 'Reviews — Kent Landscaping & Hardscaping Contractor',
   description:
     'Customer reviews for Blue Landscaping Services in Kent, WA. Every review on this page is a real review from a real platform. Check our Google listing and WA license BLUELLS880K2 yourself.',
   path: '/reviews',
@@ -29,7 +29,7 @@ export default function ReviewsPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Reviews</p>
+          <p className="eyebrow text-brand-600">Reviews</p>
           <h1 className="mt-2 text-h1">What customers say</h1>
 
           {average !== null ? (
@@ -68,9 +68,9 @@ export default function ReviewsPage() {
               <h2 className="text-h3">Nothing published here yet</h2>
               <div className="mt-4 max-w-prose space-y-4 text-body text-ink-500">
                 <p>
-                  When a customer leaves a review on Google or another platform we can verify, it
-                  will show up here with the source. Until then we would rather leave this page
-                  empty than invent names and star ratings.
+                  We would rather show you nothing than show you something we wrote. This page fills
+                  up as customers leave genuine reviews, and every one will carry the platform it
+                  came from so you can go and read it in context.
                 </p>
                 <p>
                   The useful checks are the ones you can do yourself: our Google listing, the
@@ -79,10 +79,10 @@ export default function ReviewsPage() {
                 </p>
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                {googleProfileUrl && (
+                {GOOGLE_PROFILE_URL && (
                   <Button asChild>
-                    <a href={googleProfileUrl} target="_blank" rel="noopener noreferrer">
-                      Google listing
+                    <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+                      Find us on Google
                       <ExternalLink className="h-4 w-4" aria-hidden="true" />
                     </a>
                   </Button>
@@ -104,16 +104,17 @@ export default function ReviewsPage() {
           )}
         </div>
 
-        {googleProfileUrl && (
+        {GOOGLE_PROFILE_URL && (
           <aside className="mt-10 max-w-3xl rounded-lg border border-ink-200 bg-ink-50 p-6">
             <h2 className="text-h3">Finished a job with us?</h2>
             <p className="mt-3 max-w-prose text-body text-ink-500">
               A Google review helps the next homeowner more than anything we could write. Search
-              Blue Landscaping Services in Kent, or open the listing from here.
+              Blue Landscaping Services in Kent, or open the listing from here. It is also the
+              place we cannot edit, which is why it is worth reading.
             </p>
             <p className="mt-4">
               <a
-                href={googleProfileUrl}
+                href={GOOGLE_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-[44px] items-center gap-1.5 text-body font-semibold text-brand-600 underline underline-offset-4"

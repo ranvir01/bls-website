@@ -7,7 +7,7 @@ const content: ServiceContent = {
   h1: 'Seating Walls in Seattle, Kent & Greater Seattle',
   metaTitle: 'Seating Wall Installation in Seattle & Kent, WA',
   metaDescription:
-    'Low seat walls that frame a patio and seat a crowd, designed in-house and built by our own crew in Kent, Renton and Greater Seattle. Real 2026 cost ranges.',
+    'Low seat walls that frame a patio and seat a crowd, in Kent, Renton and Greater Seattle. From $80 a linear foot, built new or added to a patio you already have.',
   quickAnswer:
     'A seating wall is a low freestanding wall, usually 18 to 20 inches tall, that edges a patio and doubles as permanent bench space. Around Seattle, installed cost typically falls between $80 and $150 per linear foot depending on cap material and whether the wall carries a fire table or lighting.',
   intro: [

@@ -69,7 +69,7 @@ export default function ProjectPage({ params }: Params) {
 
       <article className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             {[service?.name, city?.name].filter(Boolean).join(' · ')}
           </p>
           <h1 className="mt-2 text-h1">{project.title}</h1>
@@ -181,7 +181,7 @@ export default function ProjectPage({ params }: Params) {
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <dt className="text-caption font-semibold uppercase tracking-wide text-ink-500">{label}</dt>
+      <dt className="eyebrow text-ink-500">{label}</dt>
       <dd className="mt-1 text-body text-brand-900">{children}</dd>
     </div>
   );

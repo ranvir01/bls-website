@@ -29,7 +29,7 @@ export default function ContactPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Contact</p>
+          <p className="eyebrow text-brand-600">Contact</p>
           <h1 className="mt-2 text-h1">Call us about your yard</h1>
           <QuickAnswer>
             {`Blue Landscaping Services is at ${formattedAddress}. Call or text ${PHONE.display}, or send a request through the form below. We respond the same day on almost every enquiry during working hours, and the on-site walkthrough is free.`}
@@ -41,7 +41,7 @@ export default function ContactPage() {
             href={TEL_HREF}
             className="flex min-h-[88px] flex-col justify-center gap-1 rounded-sm border border-ink-200 bg-white p-5 transition-colors hover:border-brand-600"
           >
-            <span className="flex items-center gap-2 text-caption font-semibold uppercase tracking-wide text-brand-600">
+            <span className="flex items-center gap-2 eyebrow text-brand-600">
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call
             </span>
@@ -51,14 +51,14 @@ export default function ContactPage() {
             href={SMS_HREF}
             className="flex min-h-[88px] flex-col justify-center gap-1 rounded-sm border border-ink-200 bg-white p-5 transition-colors hover:border-brand-600"
           >
-            <span className="flex items-center gap-2 text-caption font-semibold uppercase tracking-wide text-brand-600">
+            <span className="flex items-center gap-2 eyebrow text-brand-600">
               <MessageSquare className="h-4 w-4" aria-hidden="true" />
               Text
             </span>
             <span className="text-body-lg font-semibold text-brand-900">{PHONE.display}</span>
           </a>
           <div className="flex min-h-[88px] flex-col justify-center gap-1 rounded-sm border border-ink-200 bg-white p-5">
-            <span className="flex items-center gap-2 text-caption font-semibold uppercase tracking-wide text-brand-600">
+            <span className="flex items-center gap-2 eyebrow text-brand-600">
               <Clock className="h-4 w-4" aria-hidden="true" />
               Response time
             </span>
@@ -85,7 +85,7 @@ export default function ContactPage() {
               <div className="mt-4 space-y-4">
                 {regions.map((region) => (
                   <div key={region}>
-                    <h3 className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+                    <h3 className="eyebrow text-brand-600">
                       {region}
                     </h3>
                     <p className="mt-1.5 text-caption text-ink-500">

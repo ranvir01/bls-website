@@ -151,23 +151,45 @@ async function fetchPage(path) {
   return record;
 }
 
+/**
+ * Returns 'ok' | 'dead' | 'unverified'.
+ *
+ * These used to be one boolean, which made the check useless in practice.
+ * Only 404 and 410 actually prove a link is wrong. Everything else that is not
+ * a success is the *checker* being blocked rather than the link being broken:
+ *
+ *   - 401 / 403 — a bot wall, or an egress proxy refusing the host outright.
+ *     CI runners and sandboxes are routinely fenced this way, and the 403 comes
+ *     from the proxy, not from the site.
+ *   - 429      — rate limited. Says nothing about the URL.
+ *   - 5xx      — the far end is having a bad day, probably not permanently.
+ *   - a throw  — DNS, TLS or timeout. This machine could not get there at all.
+ *
+ * Treating all of those as fatal is how a team ends up passing
+ * --skip-external permanently, and then a genuinely dead link sails through.
+ * So they warn, and only a real 404/410 fails the build.
+ */
 async function checkExternal(url) {
   if (externalSeen.has(url)) return externalSeen.get(url);
 
-  let ok = false;
+  let result;
   try {
     // HEAD first; a good number of servers reject it, so fall back to GET.
     let res = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(15000) });
     if (res.status === 405 || res.status === 403 || res.status === 501) {
       res = await fetch(url, { method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(15000) });
     }
-    ok = res.status < 400;
-  } catch {
-    ok = false;
+    if (res.status < 400) result = 'ok';
+    else if (res.status === 404 || res.status === 410) result = 'dead';
+    else result = `unverified (HTTP ${res.status})`;
+  } catch (e) {
+    // fetch only throws for transport-level problems; an HTTP error status
+    // resolves normally and is handled above.
+    result = `unverified (${e.cause?.code ?? e.name})`;
   }
 
-  externalSeen.set(url, ok);
-  return ok;
+  externalSeen.set(url, result);
+  return result;
 }
 
 // ── Crawl ────────────────────────────────────────────────────────────────────
@@ -280,8 +302,12 @@ async function main() {
   if (!SKIP_EXTERNAL && externalQueue.size) {
     console.log(`\nChecking ${externalQueue.size} external link(s)…`);
     for (const url of externalQueue) {
-      const ok = await checkExternal(url);
-      if (!ok) err('(external)', `dead outbound link: ${url}`);
+      const status = await checkExternal(url);
+      if (status === 'dead') {
+        err('(external)', `dead outbound link: ${url}`);
+      } else if (status !== 'ok') {
+        warn('(external)', `could not verify ${url} — ${status}. Check it by hand.`);
+      }
     }
   } else if (externalQueue.size) {
     console.log(`\nSkipping ${externalQueue.size} external link(s) (--skip-external)`);
