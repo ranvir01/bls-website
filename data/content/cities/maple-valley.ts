@@ -8,7 +8,7 @@ const content: CityContent = {
   h1: 'Landscaping & Hardscaping in Maple Valley, WA',
   metaTitle: 'Maple Valley Landscaping & Hardscaping Contractor',
   metaDescription:
-    'Retaining walls, paver patios, fencing and irrigation in Maple Valley, WA. In-house design, self-performed installs, built for foothill rain and till hardpan.',
+    'Retaining walls, paver patios, fencing and irrigation in Maple Valley, WA. Built for foothill rain and till hardpan. Permits go through Maple Valley, not King County.',
   quickAnswer:
     'Blue Landscaping Services builds retaining walls, paver patios and irrigation across Maple Valley, about 25 minutes east of our Kent shop. Foothill lots here take 55 to 65 inches of rain a year over glacial till hardpan, so every wall and patio we set starts with drainage and a compacted base.',
   body: [

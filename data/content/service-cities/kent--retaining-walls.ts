@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Retaining Walls in Kent, WA',
   metaTitle: 'Retaining Wall Contractor in Kent, WA',
   metaDescription:
-    'Retaining walls built in Kent by our own crew. East Hill hardpan, Green River valley silt, a real drain zone behind every course, engineering over 4 feet.',
+    'Retaining walls in Kent, WA. East Hill hardpan, Green River valley silt, a real drain zone behind every course, and stamped engineering over 4 feet.',
   quickAnswer:
     'Retaining wall work in Kent splits by elevation. On East Hill we cut the leveling pad into Alderwood till and route perched water into the drain zone before it ever reaches the block. On the Green River valley floor, soft silt and a shallow winter water table drive the design. Our shop is ten minutes from both.',
   body: [

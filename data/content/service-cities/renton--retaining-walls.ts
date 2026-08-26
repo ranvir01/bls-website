@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Retaining Walls in Renton, WA',
   metaTitle: 'Retaining Wall Contractor in Renton, WA',
   metaDescription:
-    'Retaining walls in Renton for Kennydale bluffs, Talbot Hill and Highlands lots. Coal mine and aquifer overlays checked before pricing. Designed in-house.',
+    'Retaining walls in Renton for Kennydale bluffs, Talbot Hill and Highlands lots. Coal mine and aquifer overlays checked before pricing, engineering over 4 feet.',
   quickAnswer:
     'Renton has more usable grade than anywhere else in South King County, so most yards here start with a wall rather than a patio. We terrace Kennydale, Talbot Hill, Benson Hill and the Highlands in geogrid-reinforced block, and we check the coal mine and aquifer overlays on the parcel before quoting anything.',
   body: [

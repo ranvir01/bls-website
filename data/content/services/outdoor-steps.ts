@@ -7,7 +7,7 @@ const content: ServiceContent = {
   h1: 'Outdoor Steps & Garden Stairs in Kent & Greater Seattle',
   metaTitle: 'Outdoor Steps & Stone Stairs in Kent, WA',
   metaDescription:
-    'Block, slab and natural stone outdoor steps built by our own crew across Kent, Renton, Auburn and Greater Seattle. Even risers, real drainage, code handrails.',
+    'Block, slab and natural stone outdoor steps across Kent, Renton, Auburn and Greater Seattle. Even risers, real drainage, code handrails, from $250 a tread foot.',
   quickAnswer:
     'Outdoor steps turn a slope into a route you can carry groceries up. In the Puget Sound market, block-and-cap steps typically run $250 to $450 per linear foot of tread installed, and solid granite or basalt slab treads run higher. Rise and run must stay consistent, and any flight of four or more risers needs a graspable handrail.',
   intro: [

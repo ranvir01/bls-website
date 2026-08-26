@@ -6,7 +6,7 @@ const content: ServiceCityContent = {
   h1: 'Sprinkler Installation in Kent, WA',
   metaTitle: 'Sprinkler Installation Contractor in Kent, WA',
   metaDescription:
-    'Sprinkler systems installed in Kent by our own crew. East Hill hardpan trenching, valley valve boxes set above the winter water table, backflow tested.',
+    'Sprinkler systems in Kent, WA. East Hill hardpan trenching, valley valve boxes set above the winter water table, and a backflow test certificate in your hand.',
   quickAnswer:
     'Sprinkler installation in Kent gets designed twice: once for East Hill, once for the valley floor. Up on the hill the till hardpan stops a vibratory plow and sheds water sideways, so zones run in split cycles. Down in the valley the winter water table decides how valve boxes get bedded. Our shop sits ten minutes from both.',
   body: [

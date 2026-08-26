@@ -11,10 +11,10 @@ const content: ServiceContent = {
   quickAnswer:
     'Sprinkler installation puts a zoned automatic watering system underground: mainline, valves, heads and a controller, plus the backflow assembly Washington requires at the point of connection. In the Puget Sound market a residential system typically runs $850 to $1,400 per zone installed, and most city lots need four to eight zones.',
   intro: [
-    'People move here and assume a yard in Seattle waters itself. Then they live through their first July. From about the Fourth of July to the middle of September this region gets almost nothing, and the lawn that was drowning in February goes crisp inside six weeks. A hose-end sprinkler on a dial timer covers for a while, right up until you travel for ten days. A fixed system runs at four in the morning before wind and evaporation take half of it, and it waters shrub beds on a completely different schedule than turf.',
-    'Every design we draw starts at the hose bib with a pressure gauge and a five-gallon bucket on a stopwatch. Static pressure and available flow decide everything downstream: how many heads can share a valve, whether rotors or MP Rotator nozzles make sense, and what the mainline has to be. Valley-floor lots in Kent and Auburn often read 70 psi with volume to spare. A hillside service in Newcastle or up above Issaquah can show 45 psi on a three-quarter-inch meter, and that yard gets a different zone count or it will never cover.',
-    'The backflow assembly is not a line item to shop on price. Washington cross-connection rules require an irrigation system to be isolated from the drinking water supply, which in practice means a double check valve assembly or a pressure vacuum breaker at the point of connection, installed under your water purveyor and tested by a state-certified assembly tester before the system is considered done. Kent, Covington Water District, Soos Creek and Highline all want that first report on file, and they follow up when it does not arrive.',
-    'We draw the plan in our own office and dig the trenches with our own crew. Nothing gets handed to a sub on a system that will sit buried under your lawn for the next twenty years, because the person who set the head height is the person you call when it sinks. In loose valley loam a vibratory plow pulls pipe with almost no scarring. Up on the plateau in Alderwood till the plow skips off hardpan, so we trench and build the turf restoration into the schedule instead of leaving you a striped yard.',
+    'People move here and figure a yard in Seattle waters itself. Then they live through their first July. From about the Fourth of July to the middle of September we get almost nothing. The lawn that was drowning in February goes crisp in six weeks. A hose-end sprinkler on a dial timer gets you by. Then you travel for ten days. A fixed system runs at four in the morning, before wind and evaporation take half of it. And it waters shrub beds on a different schedule than turf.',
+    'Every design starts at the hose bib with a pressure gauge and a five-gallon bucket on a stopwatch. Static pressure and available flow decide everything after that. How many heads can share a valve, and whether rotors or MP Rotator nozzles make sense. It also sets the mainline size. Valley-floor lots in Kent and Auburn often read 70 psi with volume to spare. A hillside service in Newcastle or up above Issaquah can show 45 psi on a three-quarter-inch meter. That yard gets a different zone count, or it will never cover.',
+    "Don't shop the backflow assembly on price. Washington cross-connection rules say an irrigation system has to be isolated from the drinking water supply. In practice that means a double check valve assembly or a pressure vacuum breaker at the point of connection. It gets installed under your water purveyor and tested by a state-certified assembly tester before the system is done. Kent, Covington Water District, Soos Creek and Highline all want that first report on file. They follow up when it doesn't arrive.",
+    "Soil decides how we get the pipe in the ground. In loose valley loam a vibratory plow pulls pipe through with almost no scarring. Up on the plateau in Alderwood till the plow skips off hardpan. Those yards get trenched, and we build the turf restoration into the schedule instead of leaving you a striped lawn.",
   ],
   included: [
     'Static pressure and flow test at the point of connection, measured with a gauge and a timed bucket fill before any layout is drawn',
@@ -41,37 +41,37 @@ const content: ServiceContent = {
     {
       title: 'Walk the yard and test the water',
       description:
-        'We start with the meter and the hose bib. Gauge on, bucket timed, meter size and service line material noted. Then we walk the property looking at sun exposure, slope, existing planting and where the dog runs. That hour decides whether the yard is a four-zone job or a nine-zone job, and it is the difference between a system that covers and one that leaves a brown arc every August.',
+        'We start at the meter and the hose bib. Gauge on, bucket timed, meter size and service line material written down. Then we walk the property. Sun exposure, slope, what is already planted, where the dog runs. That hour tells us whether the yard is a four-zone job or a nine-zone job. It is also why you do not end up with a brown arc every August.',
     },
     {
       title: 'Draw the zones in-house',
       description:
-        'The plan comes off our own desk, not a supplier catalog. Turf gets rotors or MP Rotators; beds get dripline; anything on a south-facing slope gets separated from the flat shady side of the house because it will need twice the run time. Zone flow is kept under about 75 percent of measured capacity so the last head on the line still throws its full radius.',
+        'The plan comes off our own desk. Turf gets rotors or MP Rotators. Beds get dripline. Anything on a south-facing slope gets its own valve, separate from the flat shady side of the house, because it needs twice the run time. We keep zone flow under about 75 percent of measured capacity. That way the last head on the line still throws its full radius.',
     },
     {
       title: 'Locate utilities and open the ground',
       description:
-        'A public locate ticket goes in before a shovel moves, and we hand-pothole around gas services and unmarked private lines like the run to a detached garage. Loose soil gets vibratory plowed. Till and rocky ground gets trenched with a walk-behind. Sod is cut and rolled where we can save it, and the spoils are kept on boards so the lawn does not end up buried in subsoil.',
+        "A public locate ticket goes in before a shovel moves. We hand-pothole around gas services and unmarked private lines, like the run out to a detached garage. Loose soil gets vibratory plowed. Till and rocky ground gets trenched with a walk-behind. We cut and roll the sod where we can save it, and the spoils stay on boards so your lawn doesn't end up buried in subsoil.",
     },
     {
       title: 'Set the point of connection and the backflow',
       description:
-        'We tap the domestic line downstream of the meter, add a brass isolation valve so the whole system can be shut off without killing water to the house, and set the backflow assembly at the height the code requires. Pressure vacuum breakers go a foot above the highest head. Double checks get a drainable box. The assembly is placed where a tester can reach it and where a freeze cover fits.',
+        'We tap the domestic line downstream of the meter. A brass isolation valve goes in there, so the whole system can be shut off without killing water to the house. Then the backflow assembly gets set at the height code requires. Pressure vacuum breakers go a foot above the highest head. Double checks get a drainable box. We put the assembly where a tester can reach it and where a freeze cover fits.',
     },
     {
       title: 'Assemble heads, valves and wire',
       description:
-        'Laterals get glued or clamped, heads go on swing joints so a mower strike bends the joint instead of snapping the pipe, and every head is set flush with finish grade rather than proud of it. Valves land in one or two manifolds instead of scattered singles, which keeps future service to one box. Wire runs with the mainline, with a spare conductor pulled to every manifold.',
+        'Laterals get glued or clamped. Heads go on swing joints, so a mower strike bends the joint instead of snapping the pipe. Every head gets set flush with finish grade. Valves land in one or two manifolds instead of scattered singles, which keeps future service down to one box. Wire runs with the mainline, and we pull a spare conductor to every manifold.',
     },
     {
       title: 'Flush, program and tune the coverage',
       description:
-        'Zones get flushed before nozzles go in so glue chips and grit do not park in a screen. Then the controller is programmed by hydrozone with cycle-and-soak splits on heavy ground, and we run every zone while watching it. Arcs get set, radii get adjusted, and any head that is throwing onto the driveway or the neighbor fence is re-nozzled on the spot.',
+        "We flush the zones before nozzles go in, so glue chips and grit don't park in a screen. Then the controller gets programmed by hydrozone, with cycle-and-soak splits on heavy ground. We run every zone and stand there watching it. Arcs get set, radii get adjusted. Any head throwing onto the driveway or the neighbor fence gets re-nozzled right then.",
     },
     {
       title: 'Certify, restore and hand it over',
       description:
-        'A certified tester runs the assembly and the report goes to your water district. Trenches are backfilled, tamped and either re-sodded or seeded, and we come back to top-dress any settling. Last, we sit at the controller with you, show the seasonal adjust, the rain sensor bypass and the master shutoff, and leave a zone map taped inside the cabinet door.',
+        'A certified tester runs the assembly and the report goes to your water district. We backfill and tamp the trenches, then re-sod or seed them. If anything settles later, we come back and top-dress it. Last thing, we sit at the controller with you and go through the seasonal adjust, the rain sensor bypass and the master shutoff. Then we tape a zone map inside the cabinet door.',
     },
   ],
   timeline:
@@ -116,51 +116,51 @@ const content: ServiceContent = {
   pnwConsiderations: [
     {
       title: 'Where the water goes when the zone shuts off',
-      body: 'Every head below the elevation of its valve will drain the lateral out through itself after each cycle. On a sloped Renton or Newcastle lot that means the bottom head weeps a puddle twice a day all summer and a soggy patch that never dries. We spec check valves in the head bodies on any zone with more than a couple of feet of fall. Valve boxes get a gravel sump underneath, because on the Kent and Auburn valley floor the winter water table can sit high enough to fill an unbedded box and leave the solenoids submerged for months.',
+      body: 'Any head sitting below its valve will drain the whole lateral out through itself after each cycle. On a sloped Renton or Newcastle lot that means the bottom head weeps a puddle twice a day all summer. You get a soggy patch that never dries. So we spec check valves in the head bodies on any zone with more than a couple of feet of fall. Valve boxes get a gravel sump under them too. On the Kent and Auburn valley floor the winter water table can sit high enough to fill an unbedded box, and then the solenoids are underwater for months.',
     },
     {
       title: 'Trenching and watering glacial till',
-      body: 'Above the valley, Alderwood and Everett series soils put a cemented hardpan layer within a couple of feet of the surface. It stops a vibratory plow dead, so those yards get trenched and priced accordingly. The same hardpan changes how the system has to run: water applied faster than about a third of an inch per hour sheets downhill off compacted till instead of soaking in, so we build cycle-and-soak schedules into the controller and hold zone precipitation rates low rather than trying to finish a zone in one long run.',
+      body: 'Above the valley, Alderwood and Everett series soils have a cemented hardpan layer within a couple of feet of the surface. It stops a vibratory plow dead. Those yards get trenched, and we price them that way. The hardpan also changes how the system has to run. Water applied faster than about a third of an inch per hour sheets downhill off compacted till instead of soaking in. So we build cycle-and-soak schedules into the controller and hold zone precipitation rates low. A zone gets watered in short passes, not one long run.',
     },
     {
       title: 'Designing for a freeze you will forget about',
-      body: 'Winters here are mild until an east wind event drops us below freezing for four or five days in December or January. The first casualty is always an above-grade pressure vacuum breaker with water still in the bonnet. We locate the assembly where an insulated cover actually fits, put a drainable isolation valve ahead of it, and add a blowout port so the whole system can be cleared with compressed air in the fall. A system designed without that port costs more to winterize every single year.',
+      body: 'Winters here are mild until an east wind event drops us below freezing for four or five days in December or January. The first thing to go is always an above-grade pressure vacuum breaker with water still in the bonnet. We put the assembly where an insulated cover actually fits. A drainable isolation valve goes in ahead of it, plus a blowout port so the whole system can be cleared with compressed air in the fall. Leave that port out and you pay more to winterize every single year.',
     },
     {
       title: 'Permits, purveyors and the annual test',
-      body: 'No building permit is needed for the sprinkler system itself anywhere in King County. The backflow assembly is a different matter: it falls under WAC 246-290-490 cross-connection control, so your water purveyor has to be notified, the assembly has to be an approved model installed at the correct orientation and height, and a Washington-certified backflow assembly tester has to pass it on installation and again every twelve months. Some districts, including Covington Water District and Soos Creek, will also quote you a separate irrigation meter, which usually pays for itself by keeping summer watering off your sewer volume charge.',
+      body: "You don't need a building permit for the sprinkler system itself anywhere in King County. The backflow assembly is another story. It falls under WAC 246-290-490 cross-connection control. Your water purveyor has to be notified. The assembly has to be an approved model, installed at the correct orientation and height. A Washington-certified backflow assembly tester has to pass it on installation and again every twelve months. Some districts, including Covington Water District and Soos Creek, will also quote you a separate irrigation meter. That one usually pays for itself by keeping summer watering off your sewer volume charge.",
     },
   ],
   faqs: [
     {
       question: 'How many zones will my yard need?',
       answer:
-        'Zone count comes from available flow, not lot size. A typical 6,000 square foot city lot in Kent or Burien with a front and back lawn and two bed areas usually lands at four to six zones. A half-acre in Maple Valley with a slope and mature planting is more often seven to ten. If your service reads low pressure, the same yard needs more zones with fewer heads on each, which raises the total.',
+        'Zone count comes from available flow, not lot size. A typical 6,000 square foot city lot in Kent or Burien with a front and back lawn and two bed areas usually lands at four to six zones. A half-acre in Maple Valley with a slope and mature planting runs seven to ten. If your service reads low pressure, that same yard needs more zones with fewer heads on each. That pushes the total up.',
     },
     {
       question: 'Do I actually have to install a backflow preventer?',
       answer:
-        'Yes. Washington cross-connection control rules treat every lawn irrigation system as a health hazard to the potable supply, because a pressure drop in the main can pull fertilizer-laden standing water backward out of your pipes. Your water purveyor requires an approved assembly, correctly installed, tested at installation and retested annually by a certified tester. Skipping it can get your water service shut off, and it makes any future home sale inspection awkward.',
+        'Yes. Washington cross-connection control rules treat every lawn irrigation system as a health hazard to the potable supply. Drop the pressure in the main and it can pull fertilizer-laden standing water backward out of your pipes. Your water purveyor requires an approved assembly, installed correctly, tested at installation and retested every year by a certified tester. Skip it and they can shut off your water service. It also makes a future home sale inspection awkward.',
     },
     {
       question: 'Will you tear up my lawn to put it in?',
       answer:
-        'Less than you expect. A vibratory plow slices a narrow slit and pulls the pipe through it, which leaves a seam that closes over in two or three weeks of growth. Where soil is too hard or too rocky to plow, we trench a four-inch wide cut, keep the sod in rolls and lay it back down the same day. Either way we return to top-dress settled lines once the ground has taken its first rain.',
+        'Less than you expect. A vibratory plow slices a narrow slit and pulls the pipe through it. That seam closes over in two or three weeks of growth. Where the soil is too hard or too rocky to plow, we trench a four-inch wide cut, keep the sod in rolls and lay it back down the same day. Either way we come back and top-dress the settled lines once the ground has taken its first rain.',
     },
     {
       question: 'What is the best time of year to install a system?',
       answer:
-        'March through June is the sweet spot. The ground is workable, sod and seed take hold quickly, and the system is commissioned before the dry stretch starts. September and early October also work well and often have better scheduling. We install through the winter when soil conditions allow, but saturated clay compacts badly under equipment, so on wet valley lots we would rather wait a few weeks than leave you with ruts.',
+        "March through June is the sweet spot. The ground is workable, sod and seed take hold fast, and the system is commissioned before the dry stretch starts. September and early October work well too, and scheduling is usually easier. We install through the winter when soil conditions allow. But saturated clay compacts badly under equipment. On a wet valley lot we'd rather wait a few weeks than leave you with ruts.",
     },
     {
       question: 'Can the same system water native and drought-tolerant beds?',
       answer:
-        'It should, but not on the same valve as the lawn. Sword fern, salal, kinnikinnick and evergreen huckleberry need deep infrequent water while they establish and then very little. Putting them on lawn spray heads either drowns them or trains shallow roots. We run those beds on their own dripline zone at a low emitter rate, then dial the run time back sharply after the second summer once the plants are rooted.',
+        'It should. Just not on the same valve as the lawn. Sword fern, salal, kinnikinnick and evergreen huckleberry want deep infrequent water while they establish, then very little after that. Put them on lawn spray heads and you either drown them or train shallow roots. Those beds go on their own dripline zone at a low emitter rate. After the second summer, once the plants are rooted, we dial the run time way back.',
     },
     {
       question: 'How much will it add to my water bill?',
       answer:
-        'A well-designed system usually costs less than hand watering, because it applies water at the rate the soil accepts it and it runs before sunrise. On an average Kent lot expect roughly $40 to $90 a month across the three genuinely dry months, and close to nothing the rest of the year. A weather-based controller and a rain sensor typically shave another 20 to 30 percent off that.',
+        'A well-designed system usually costs less than hand watering. It applies water at the rate the soil accepts it, and it runs before sunrise. On an average Kent lot, expect roughly $40 to $90 a month across the three genuinely dry months. Close to nothing the rest of the year. A weather-based controller and a rain sensor typically shave another 20 to 30 percent off that.',
     },
   ],
   relatedServices: ['sprinkler-repair', 'irrigation-maintenance', 'sod-installation'],
