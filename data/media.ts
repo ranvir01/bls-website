@@ -198,11 +198,6 @@ export const featuredProjects: FeaturedProject[] = [
   },
 ];
 
-/** Every distinct tag across the featured projects, for the portfolio filter. */
-export const projectTags: string[] = Array.from(
-  new Set(featuredProjects.flatMap((p) => p.tags)),
-).sort();
-
 const hardscapingGallery = [
   'https://i.imgur.com/gNOWitQ.jpg',
   'https://i.imgur.com/S0SCwEP.jpg',

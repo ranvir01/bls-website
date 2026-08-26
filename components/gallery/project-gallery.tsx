@@ -6,7 +6,9 @@ import { useMemo, useState } from 'react';
 
 import { Lightbox, type LightboxItem } from '@/components/gallery/lightbox';
 import { Photo } from '@/components/gallery/photo';
-import { featuredProjects, projectTags } from '@/data/media';
+import { featuredProjects } from '@/data/media';
+import { categories } from '@/data/taxonomy';
+import type { CategorySlug } from '@/data/types';
 import { servicePath } from '@/data/taxonomy';
 import { cn } from '@/lib/utils';
 
@@ -36,14 +38,13 @@ export function ProjectGallery({
   lead?: string;
 }) {
   const [query, setQuery] = useState('');
-  const [tag, setTag] = useState<string | null>(null);
+  const [category, setCategory] = useState<CategorySlug | null>(null);
   const [index, setIndex] = useState<number | null>(null);
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     const filtered = featuredProjects.filter((p) => {
-      const matchesTag = tag ? p.tags.includes(tag) : true;
-      if (!matchesTag) return false;
+      if (category && p.category !== category) return false;
       if (!q) return true;
       return (
         p.title.toLowerCase().includes(q) ||
@@ -52,7 +53,7 @@ export function ProjectGallery({
       );
     });
     return limit ? filtered.slice(0, limit) : filtered;
-  }, [query, tag, limit]);
+  }, [query, category, limit]);
 
   const lightboxItems: LightboxItem[] = visible.map((p) => ({
     src: p.src,
@@ -87,15 +88,35 @@ export function ProjectGallery({
             />
           </div>
 
+          {/*
+            Filter by discipline, not by tag.
+
+            Every distinct tag across these projects is thirty-eight chips —
+            four rows of them, which pushed the photographs off the screen, and
+            most matched exactly one project. Three categories is how a
+            homeowner actually thinks about this ("do you do patios"), and the
+            tags stay searchable through the box above and readable on each
+            card.
+          */}
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by type of work">
-            <Chip active={tag === null} onClick={() => setTag(null)}>
+            <Chip active={category === null} onClick={() => setCategory(null)}>
               All work
+              <Count n={featuredProjects.length} active={category === null} />
             </Chip>
-            {projectTags.map((t) => (
-              <Chip key={t} active={tag === t} onClick={() => setTag(tag === t ? null : t)}>
-                {t}
-              </Chip>
-            ))}
+            {categories.map((c) => {
+              const n = featuredProjects.filter((p) => p.category === c.slug).length;
+              if (n === 0) return null;
+              return (
+                <Chip
+                  key={c.slug}
+                  active={category === c.slug}
+                  onClick={() => setCategory(category === c.slug ? null : c.slug)}
+                >
+                  {c.name}
+                  <Count n={n} active={category === c.slug} />
+                </Chip>
+              );
+            })}
           </div>
         </div>
       )}
@@ -107,7 +128,7 @@ export function ProjectGallery({
             type="button"
             onClick={() => {
               setQuery('');
-              setTag(null);
+              setCategory(null);
             }}
             className="font-semibold text-brand-700 underline underline-offset-4"
           >
@@ -191,7 +212,7 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        'inline-flex min-h-[44px] items-center rounded-full border px-4 text-caption font-semibold transition-colors',
+        'inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 text-caption font-semibold transition-colors',
         active
           ? 'border-brand-700 bg-brand-700 text-white'
           : 'border-ink-200 bg-white text-ink-800 hover:border-brand-600 hover:text-brand-700',
@@ -199,5 +220,11 @@ function Chip({
     >
       {children}
     </button>
+  );
+}
+
+function Count({ n, active }: { n: number; active: boolean }) {
+  return (
+    <span className={cn('nums', active ? 'text-white/70' : 'text-ink-400')}>{n}</span>
   );
 }

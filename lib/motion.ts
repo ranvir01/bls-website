@@ -42,7 +42,11 @@ export function staggerDelay(index: number, step = STAGGER_CHILD): number {
 // ── Shared variant sets ──────────────────────────────────────────────────────
 
 export const revealVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  // 12px, not 24. A scroll reveal that travels a full line-height reads as
+  // the element arriving from somewhere else; half that reads as it settling.
+  // Long travel on every element in a long page is one of the named
+  // fingerprints of generated UI.
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
@@ -63,7 +67,7 @@ export const staggerParent: Variants = {
 };
 
 export const fadeUpChild: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
