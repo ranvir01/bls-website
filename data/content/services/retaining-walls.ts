@@ -4,7 +4,7 @@ const content: ServiceContent = {
   slug: 'retaining-walls',
   category: 'hardscaping',
   name: 'Retaining Walls',
-  h1: 'Retaining Walls in Kent & Greater Seattle',
+    h1: 'Retaining Walls in Seattle, Kent & South King County',
   metaTitle: 'Retaining Wall Contractor in Kent & Seattle',
   metaDescription:
     'Engineered and gravity retaining walls built by our own crew across Kent, Renton, Auburn and Greater Seattle. Drainage done right, permits handled.',

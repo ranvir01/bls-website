@@ -33,6 +33,9 @@ export const business = {
   phone: PHONE,
   email: 'blue_landscaping@yahoo.com',
 
+  /** Accepted on-site. Shown in the hero and footer so homeowners know before they call. */
+  paymentMethods: ['Zelle', 'Venmo', 'PayPal', 'Cash', 'Visa', 'Mastercard'] as const,
+
   address: {
     street: '11703 SE 229th Pl',
     city: 'Kent',

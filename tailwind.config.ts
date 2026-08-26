@@ -10,42 +10,43 @@ import type { Config } from 'tailwindcss';
  * PALETTE: the original Blue Landscaping identity. The company is called Blue
  * Landscaping, so blue leads and everything else supports it:
  *
- *   brand  — the blues. Headers, links, dark sections, the whole IDENTITY.
+ *   brand  — the blues. Headers, links, dark sections, the whole identity.
  *   sky    — the teals. Secondary accents and gradient partners for brand.
- *   ember  — the warm accent. This and only this is the ACTION colour.
- *   leaf   — the greens. SEMANTIC only now: trust ticks, "licensed and
- *            insured", success states, anything that means growing things.
+ *   leaf   — the greens. Calls to action, and the "landscaping" half of the
+ *            name. Green on blue is the strongest pull available here without
+ *            leaving the original palette.
  *   ink    — neutrals from near-white through slate to the darkest text.
  *
- * WHY GREEN STOPPED BEING THE BUTTON COLOUR
- * -----------------------------------------
- * leaf-600 #257f52 against the brand-900 #002566 band is 2.91:1. WCAG 1.4.11
- * wants 3:1 for a control's fill to separate from what is behind it, so on
- * every dark section of this site the button's SHAPE was invisible — the label
- * was legible and the button was not. White-on-green is 4.96:1, which passes,
- * which is exactly why an audit that only measures label contrast found
- * nothing wrong. It also read muddy: in OKLCH the green sits within three L*
- * points of the brand blue with less than half its chroma, so it looked like a
- * washed-out version of the identity rather than a deliberate accent.
+ * THE ACTION COLOUR IS GREEN, IN TWO STEPS
+ * ----------------------------------------
+ * WCAG 1.4.11 wants 3:1 between a control's fill and what is behind it, or the
+ * button's SHAPE is invisible even when its label reads perfectly. leaf-600
+ * #257f52 on a white page is 4.74:1 and fine. The same green on the brand-900
+ * #002566 band is 2.91:1 and is not, which is why the CTA on every dark
+ * section used to look like floating text. Same for a dark blue fill on a dark
+ * photo scrim: 1.5:1, legible label, no button.
  *
- * WHY THERE ARE TWO ACTION FILLS AND NOT ONE
- * ------------------------------------------
- * No single fill can clear 3:1 against BOTH a white page and a navy band while
- * also carrying a 4.5:1 label — the window is arithmetically almost empty.
- * So the accent flips by surface, the way Material 3 swaps primary/onPrimary
- * between light and dark schemes:
+ * So the action colour moves along its own scale by surface, the way Material 3
+ * swaps primary/onPrimary between light and dark schemes:
  *
- *   light surfaces  →  ember-700 #b8500a with WHITE text   (5.01:1 both axes)
- *   dark surfaces   →  ember-400 #ffc53d with BRAND-900 text (9.14:1 both axes)
+ *   light surfaces  →  leaf-600 #257f52 with WHITE text     (4.96:1 label)
+ *   dark surfaces   →  leaf-400 #58b88e with BRAND-900 text (5.95:1 both)
  *
- * Gold with navy text sitting on a navy band is also just a better-looking
- * pairing than white-on-green, and warm-on-blue is near-complementary (144°
- * apart) where green-on-blue was only 105°.
+ * It is the green button everywhere. Only the step changes.
  *
- * An earlier revision replaced this whole palette with stone-and-moss plus a
- * clay accent. That failed because it threw away the IDENTITY, not because it
- * was warm. Adding one warm accent while blue keeps the identity is the
- * opposite move. Do not confuse the two.
+ * TWO THINGS ALREADY TRIED THAT WERE WRONG
+ * ----------------------------------------
+ * 1. Replacing this palette with stone-and-moss plus a warm clay accent. It
+ *    looked fine in isolation and had nothing to do with a company called Blue
+ *    Landscaping.
+ * 2. Keeping the blues but adding an amber/gold "ember" accent for the CTAs,
+ *    because no single fill clears 3:1 on both white and navy. The premise is
+ *    true; the conclusion did not follow. leaf-400 clears it at 5.95:1, so the
+ *    answer was inside the palette all along, and the change put an orange
+ *    into a blue-and-green identity for nothing.
+ *
+ * The rule: fix contrast by moving along a scale that is already here, never by
+ * adding a hue that is not.
  */
 const config: Config = {
   darkMode: ['class'],
@@ -90,25 +91,6 @@ const config: Config = {
           700: '#007ab8',
           800: '#005c8f',
           900: '#003d66',
-        },
-        /**
-         * The action colour. Two solids, one per surface class:
-         *   400 — on navy bands and photo heroes, with brand-900 text (9.14:1)
-         *   700 — on white and ink-50 pages, with white text (5.01:1)
-         * The steps between them exist for hover and active states, not for
-         * decoration. Nothing else on the site should be ember.
-         */
-        ember: {
-          50: '#fff8ed',
-          100: '#ffecd1',
-          200: '#ffe0ad',
-          300: '#ffd177',
-          400: '#ffc53d',
-          500: '#f0a01a',
-          600: '#d1770c',
-          700: '#b8500a',
-          800: '#93400c',
-          900: '#78350f',
         },
         leaf: {
           50: '#f3faf7',
@@ -176,11 +158,16 @@ const config: Config = {
       },
 
       fontFamily: {
-        // Montserrat carries the headings and the brand. Figtree does the
-        // reading — see the note in app/layout.tsx for why it replaced
-        // Quicksand, which has no italic at any weight.
+        // The original pairing. Montserrat carries the headings, Quicksand's
+        // rounded terminals keep the body approachable rather than corporate.
+        //
+        // A previous revision swapped Quicksand for Figtree, arguing that
+        // Quicksand ships no italic so every <em> renders as a synthesised
+        // oblique. True of the typeface and irrelevant here: this site contains
+        // no <em> at all. A real defect in general, absent in this codebase,
+        // and it cost a distinctive brand face to fix.
         display: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-figtree)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-quicksand)', 'system-ui', 'sans-serif'],
       },
 
       fontSize: {
@@ -239,9 +226,6 @@ const config: Config = {
         /* The focus ring. White inside, navy outside — see the note in
            app/globals.css for why it has to be two colours. */
         focus: '0 0 0 2px #ffffff, 0 0 0 4px #002566',
-        /* The primary CTA carries a touch of its own colour, so it sits on the
-           page rather than being stamped onto it. */
-        ember: '0 1px 1px rgba(0,37,102,.16), 0 2px 6px rgba(184,80,10,.30)',
       },
 
       spacing: {

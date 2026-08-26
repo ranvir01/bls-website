@@ -1,29 +1,26 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { CtaBand } from '@/components/blocks';
+import { CtaBand, SectionHeader } from '@/components/blocks';
+import { BeforeAfterShowcase } from '@/components/before-after-showcase';
 import { JsonLd } from '@/components/json-ld';
-import { PhotoWall } from '@/components/gallery/photo-wall';
 import { PortfolioBrowser } from '@/components/portfolio/portfolio-browser';
-import { ProjectGallery } from '@/components/gallery/project-gallery';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
-import { allGalleryPhotos, beforeAfterPairs, featuredProjects } from '@/data/media';
+import { WorkGallery } from '@/components/work-gallery';
 import { portfolioProjects } from '@/data/projects';
+import { allWorkPhotos } from '@/data/work-photos';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Portfolio — Completed Hardscape & Landscape Projects',
+  title: 'Portfolio — Landscaping & Hardscaping Projects in Seattle',
   description:
-    'Real completed retaining wall, paver patio, walkway and irrigation projects by Blue Landscaping Services across Kent, Auburn, Renton and Greater Seattle.',
+    'Real retaining wall, paver patio, walkway and irrigation projects by Blue Landscaping Services across Kent, Auburn, Renton and Greater Seattle.',
   path: '/portfolio',
 });
 
-const PHOTO_TOTAL =
-  allGalleryPhotos.length + featuredProjects.length + beforeAfterPairs.length * 2;
-
 export default function PortfolioPage() {
-  /** Documented before/after case studies, once any exist in data/projects.ts. */
-  const caseStudies = portfolioProjects();
+  const projects = portfolioProjects();
 
   return (
     <>
@@ -33,61 +30,58 @@ export default function PortfolioPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="eyebrow text-brand-600">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             Completed work
           </p>
           <h1 className="mt-2 text-h1">Projects we have actually built</h1>
           <p className="mt-5 text-body-lg text-ink-500">
-            {PHOTO_TOTAL} photographs of real Blue Landscaping jobs across Kent, Renton, Auburn and
-            Greater Seattle. No stock imagery and no AI renders — design concepts from the
-            visualizer live on their own page and are always labeled as such.
+            These are photos from our jobs around Greater Seattle — retaining walls, patios,
+            walkways, irrigation, and planting. Design concepts from the visualizer are labeled
+            separately and never mixed in here.
           </p>
         </header>
-      </div>
 
-      {/* Titled projects, with the filter */}
-      <section className="shell pb-16">
-        <ProjectGallery
-          heading="Featured projects"
-          lead="Filter by the kind of work, or search. Tap a photograph to see it full size."
-        />
-      </section>
+        <div className="mt-12">
+          {projects.length > 0 ? (
+            <Suspense fallback={<p className="text-body text-ink-500">Loading projects…</p>}>
+              <PortfolioBrowser projects={projects} />
+            </Suspense>
+          ) : (
+            <VisualizerTeaser
+              headline="Design your own yard right now"
+              body="The visualizer uses the materials we install, so what it draws is what we can build."
+            />
+          )}
+        </div>
 
-      {/* Documented before/after case studies, when they exist */}
-      {caseStudies.length > 0 && (
-        <section className="border-y border-ink-200 bg-white">
-          <div className="shell section">
-            <h2 className="text-h2">Before and after, documented</h2>
-            <div className="mt-8">
-              <PortfolioBrowser projects={caseStudies} />
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* The whole library */}
-      <section id="every-photo" className="scroll-mt-24 bg-ink-50">
-        <div className="shell section">
-          <div className="max-w-prose">
-            <h2 className="text-h2">Every photo</h2>
-            <p className="mt-4 text-body-lg text-ink-500">
-              The full library, straight off the jobs. Filter by the kind of work.
-            </p>
-          </div>
+        <div className="mt-16">
+          <SectionHeader
+            eyebrow="Before & after"
+            title="Slide to compare"
+            lead="A few yards before we started and after we finished."
+          />
           <div className="mt-8">
-            <PhotoWall />
+            <BeforeAfterShowcase limit={6} />
           </div>
         </div>
-      </section>
 
-      <section className="shell section-tight">
-        <VisualizerTeaser
-          headline="Or design your own yard right now"
-          body="The visualizer uses the exact materials we install, so what it draws is what we can build."
-        />
-      </section>
+        <div className="mt-16">
+          <SectionHeader
+            eyebrow="More photos"
+            title="From the job"
+            lead="Hardscaping, irrigation, and landscaping. Click any photo to open it."
+          />
+          <div className="mt-8">
+            <WorkGallery photos={allWorkPhotos} />
+          </div>
+        </div>
+      </div>
 
-      <CtaBand />
+      <CtaBand
+        title="Want this in your yard?"
+        body="Free consultation. We will walk the site and send a written number for the work you actually want."
+        primaryLabel="Free Consultation"
+      />
     </>
   );
 }

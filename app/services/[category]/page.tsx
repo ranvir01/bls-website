@@ -94,7 +94,6 @@ export default function CategoryPage({ params }: Params) {
                     <ServiceArt
                       slug={service.slug}
                       name={service.name}
-                      category={service.category}
                       className="aspect-[16/9] w-full"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />

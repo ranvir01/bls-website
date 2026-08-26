@@ -12,9 +12,9 @@ import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 import Link from 'next/link';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contact a Kent Landscaping & Hardscaping Contractor',
+  title: 'Contact Blue Landscaping in Seattle & Kent, WA',
   description:
-    'Call, text or send a request to Blue Landscaping Services in Kent, WA. Same-day response on most enquiries. Serving South King County, the Eastside and Seattle.',
+    'Call (253) 429-7052 or send a request. Blue Landscaping Services in Kent, WA. Free consultation for retaining walls, paver patios, and irrigation across Greater Seattle.',
   path: '/contact',
 });
 
@@ -30,7 +30,7 @@ export default function ContactPage() {
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
           <p className="eyebrow text-brand-600">Contact</p>
-          <h1 className="mt-2 text-h1">Contact Blue Landscaping Services in Kent, WA</h1>
+          <h1 className="mt-2 text-h1">Call us about your yard</h1>
           <QuickAnswer>
             {`Blue Landscaping Services is at ${formattedAddress}. Call or text ${PHONE.display}, or send a request through the form below. We respond the same day on almost every enquiry during working hours, and the on-site walkthrough is free.`}
           </QuickAnswer>

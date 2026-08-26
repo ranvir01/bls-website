@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Figtree, Montserrat } from 'next/font/google';
+import { Montserrat, Quicksand } from 'next/font/google';
 import Script from 'next/script';
 
 import './globals.css';
@@ -13,19 +13,9 @@ import { GA_MEASUREMENT_ID } from '@/lib/analytics';
 import { graph, organizationSchema, websiteSchema } from '@/lib/seo';
 
 /**
- * Montserrat for headings, Figtree for everything else.
- *
- * Montserrat stays because the display face is the half of a pairing that
- * carries brand recognition, and it is what this company has always looked
- * like.
- *
- * Quicksand was the body face and has been swapped, for one concrete reason
- * rather than taste: it ships no italic at any weight, so every <em> across
- * 107,000 words of cost and permit content rendered as a browser-synthesised
- * oblique. Its low x-height and near-circular bowls also blur a/o/e/c at 16px,
- * which is the size most of this site is read at. Figtree keeps the warm
- * geometric character — the reason Quicksand was chosen — and adds true
- * italics, a taller x-height and a variable weight axis.
+ * The original type pairing, restored. Montserrat carries the headings;
+ * Quicksand's rounded terminals keep the body approachable rather than
+ * corporate, which is the tone the business actually has.
  *
  * Self-hosted by next/font, so there is no third-party font request, no FOUT
  * and no layout shift.
@@ -38,10 +28,10 @@ const montserrat = Montserrat({
 });
 
 /** Body/UI face. Only the display face is preloaded. */
-const figtree = Figtree({
+const quicksand = Quicksand({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-figtree',
+  variable: '--font-quicksand',
   preload: false,
 });
 
@@ -49,10 +39,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     template: '%s | Blue Landscaping Services',
-    default: 'Landscaping & Hardscaping in Kent, WA | Blue Landscaping Services',
+    default: 'Expert Landscaping & Hardscaping in Seattle | Blue Landscaping Services',
   },
   description:
-    'Licensed hardscaping, irrigation and landscaping contractor in Kent, WA. Retaining walls, paver patios and sprinkler systems across South King County. Free on-site quotes.',
+    'Expert landscaping and hardscaping in Seattle and Kent, WA. Retaining walls, custom paver patios, and professional irrigation systems. Licensed, bonded, insured. Free consultation.',
   applicationName: 'Blue Landscaping Services',
   authors: [{ name: 'Blue Landscaping Services' }],
   formatDetection: { telephone: true, address: true },
@@ -79,7 +69,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${figtree.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${quicksand.variable}`}>
       <body className="flex min-h-screen flex-col bg-background text-foreground">
         {/* Sitewide structured data. Page-level schema is added per route. */}
         <JsonLd data={graph([organizationSchema(), websiteSchema()])} />

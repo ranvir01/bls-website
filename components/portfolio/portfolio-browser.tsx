@@ -88,6 +88,11 @@ export function PortfolioBrowser({ projects }: { projects: Project[] }) {
           Nothing matches that combination yet. Clear a filter to see everything.
         </p>
       ) : (
+        <>
+        {/* The cards are h3. Without an h2 between them and the page's h1 the
+            outline skips a level, which is exactly the kind of thing a screen
+            reader user navigates by. Visually redundant, so sr-only. */}
+        <h2 className="sr-only">Completed projects</h2>
         <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((project) => (
             <m.li
@@ -100,6 +105,7 @@ export function PortfolioBrowser({ projects }: { projects: Project[] }) {
             </m.li>
           ))}
         </ul>
+        </>
       )}
     </LazyMotion>
   );
@@ -151,7 +157,9 @@ function Chip({
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        'min-h-[40px] rounded-sm border px-3.5 text-caption transition-colors',
+        // 44px, not 40. Below that these are a coin-flip to tap on a phone,
+        // and they are the only way to filter this page.
+        'min-h-[44px] rounded-sm border px-3.5 text-caption transition-colors',
         active
           ? 'border-brand-600 bg-brand-50/60 font-semibold text-brand-900'
           : 'border-ink-200 bg-white text-ink-800 hover:border-ink-500',

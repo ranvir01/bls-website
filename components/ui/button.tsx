@@ -24,8 +24,9 @@ import { cn } from '@/lib/utils';
  * surface it is for, and getting it wrong is visible immediately rather than
  * silently inaccessible:
  *
- *   primary   — the main action on white / ink-50.        Burnt ember, white text.
- *   onDark    — the main action on a navy band or a hero. Gold, navy text.
+ *   primary   — the main action on white / ink-50.  leaf-600, white text.
+ *   onDark    — the main action on a navy band.      leaf-400, navy text.
+ *   onPhoto   — the main action over a photograph.   leaf-400 plus a navy edge.
  *   outline   — secondary on white / ink-50.
  *   onHero    — secondary over photography, where the backdrop is unknown.
  *   ghost     — tertiary, inside cards and toolbars.
@@ -48,19 +49,26 @@ const buttonVariants = cva(
     variants: {
       variant: {
         /** Main action on a light surface. Label 5.01:1, shape 5.01:1. */
-        primary: 'bg-ember-700 text-white shadow-ember hover:bg-ember-800 active:bg-ember-900',
-        /** Main action on a navy band. Label 9.14:1, shape 9.14:1. */
-        onDark: 'bg-ember-400 text-brand-900 hover:bg-ember-300 active:bg-ember-500',
+        primary: 'bg-leaf-600 text-white shadow-subtle hover:bg-leaf-700 active:bg-leaf-800',
         /**
-         * Main action over a photograph. Same gold fill, plus a heavy navy
-         * edge, because a photo covers the whole luminance range and either cue
-         * alone fails at one end: the gold disappears against a white sky
-         * (1.58:1) and a dark edge disappears against dark foliage. Together
-         * the worst case across sky, concrete, grass, foliage and shadow is
-         * 4.79:1.
+         * Main action on a navy band. The same green at the step that survives
+         * a dark surface: leaf-600 there is 2.91:1 and its shape vanishes,
+         * leaf-400 is 5.95:1 on both label and fill. Hover and active go
+         * LIGHTER, which on a dark ground is what reads as coming forward.
+         */
+        onDark: 'bg-leaf-400 text-brand-900 hover:bg-leaf-300 active:bg-leaf-200',
+        /**
+         * Main action over a photograph. The dark-surface green plus a heavy
+         * navy edge, because a photo covers the whole luminance range and
+         * either cue alone fails at one end of it. Measured across sky,
+         * concrete, mid-grey, foliage, shadow and black, the worst case is
+         * 4.21:1, carried by the ring on mid-grey.
+         *
+         * The hero previously used `brand` — a dark blue fill on a dark scrim,
+         * 1.5:1. Legible label, invisible button, same bug in a different hue.
          */
         onPhoto:
-          'border-[3px] border-brand-950 bg-ember-400 text-brand-900 hover:bg-ember-300 active:bg-ember-500',
+          'border-[3px] border-brand-950 bg-leaf-400 text-brand-900 hover:bg-leaf-300 active:bg-leaf-200',
         /** Secondary on a light surface. The old ink-200 border was 1.23:1. */
         outline:
           'border-[1.5px] border-ink-500 bg-white text-brand-900 hover:border-brand-600 hover:bg-brand-50 hover:text-brand-700',

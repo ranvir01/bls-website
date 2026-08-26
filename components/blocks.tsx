@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { ArrowRight, Check, Phone, ShieldCheck } from 'lucide-react';
 
 import { PHONE, TEL_HREF, business } from '@/data/business';
-import { PHOTO_COUNT } from '@/data/media';
+import { allWorkPhotos } from '@/data/work-photos';
+import { projects } from '@/data/projects';
 import type { CostRow, Faq } from '@/data/types';
 import { cn } from '@/lib/utils';
 
@@ -208,7 +209,7 @@ export function TrustBar() {
       detail: 'Bonded and insured',
     },
     {
-      label: `${PHOTO_COUNT} photos of our own work`,
+      label: `${allWorkPhotos.length + projects.length} photos of our own work`,
       detail: 'No stock imagery anywhere',
     },
     {
@@ -253,10 +254,10 @@ export function TrustBar() {
 }
 
 export function CtaBand({
-  title = 'Get a real number for your yard',
-  body = 'Free visit, a written scope and a price range you can plan around. Most quotes go out the same day we come look.',
+  title = 'Ready for a free consultation?',
+  body = 'Call or send the quote form. We walk the yard, talk through the work, and send a written number.',
   primaryHref = '/quote',
-  primaryLabel = 'Get your free quote',
+  primaryLabel = 'Free Consultation',
 }: {
   title?: string;
   body?: string;
@@ -270,9 +271,9 @@ export function CtaBand({
           <h2 className="text-h2 text-white">{title}</h2>
           <p className="mx-auto mt-4 max-w-prose text-body-lg text-brand-50/80">{body}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            {/* This band is brand-900, so the primary takes the gold-on-navy
-                fill and the phone number takes the filled ghost. The burnt
-                ember used on light pages is 2.88:1 against this background —
+            {/* This band is brand-900, so the primary takes the dark-surface
+                step of the green and the phone number takes the filled ghost.
+                leaf-600, the fill used on light pages, is 2.91:1 here —
                 legible label, invisible button. */}
             <Button asChild variant="onDark" size="lg" className="w-full sm:w-auto">
               <Link href={primaryHref}>

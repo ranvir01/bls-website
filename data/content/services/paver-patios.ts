@@ -4,7 +4,7 @@ const content: ServiceContent = {
   slug: 'paver-patios',
   category: 'hardscaping',
   name: 'Paver Patios',
-  h1: 'Paver Patios in Kent & Greater Seattle',
+    h1: 'Paver Patios in Seattle, Kent & Greater Seattle',
   metaTitle: 'Paver Patio Installation in Kent & Seattle',
   metaDescription:
     'Paver patio installation in Kent, Renton, Auburn and Greater Seattle. Compacted base built for wet winters, in-house design, and real installed cost ranges.',

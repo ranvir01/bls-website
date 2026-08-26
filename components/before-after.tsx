@@ -5,7 +5,6 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
 import type { ImageAsset } from '@/data/types';
-import { imgurLoader, isImgur } from '@/lib/imgur';
 import { cn } from '@/lib/utils';
 
 import { AiConceptBadge } from './ai-concept-badge';
@@ -153,7 +152,6 @@ export function BeforeAfter({
             alt={after.alt}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1100px"
-            loader={isImgur(after.src) ? imgurLoader : undefined}
             onError={() => setBroken((b) => ({ ...b, after: true }))}
             className="img-grade object-cover"
             draggable={false}
@@ -171,7 +169,6 @@ export function BeforeAfter({
               alt={before.alt}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1100px"
-              loader={isImgur(before.src) ? imgurLoader : undefined}
               onError={() => setBroken((b) => ({ ...b, before: true }))}
               className="img-grade object-cover"
               draggable={false}

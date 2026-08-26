@@ -8,10 +8,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   hardscaping: {
     slug: 'hardscaping',
     name: 'Hardscaping',
-    h1: 'Hardscaping in Kent & Greater Seattle',
-    metaTitle: 'Hardscaping Contractor in Kent & Greater Seattle',
+    h1: 'Expert Hardscaping in Seattle, Kent & South King County',
+    metaTitle: 'Hardscaping Contractor in Seattle & Kent, WA',
     metaDescription:
-      'Licensed hardscaping contractor in Kent, WA. Retaining walls, paver patios, walkways, driveways, fire features and steps built in-house across South King County.',
+      'Licensed hardscaping in Seattle and Kent, WA. Retaining walls, custom paver patios, walkways, driveways, fire features and steps built in-house across South King County.',
     quickAnswer:
       'Blue Landscaping Services builds retaining walls, paver patios, walkways, driveways, outdoor steps, seating walls, fire features and water features across South King County. All hardscape work is self-performed by our own crew under Washington contractor license BLUELLS880K2 — no subcontractors on the build.',
     intro: [
@@ -46,10 +46,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   irrigation: {
     slug: 'irrigation',
     name: 'Irrigation',
-    h1: 'Irrigation Systems in Kent & Greater Seattle',
-    metaTitle: 'Sprinkler & Irrigation Contractor in Kent, WA',
+    h1: 'Irrigation & Sprinkler Systems in Seattle & Kent, WA',
+    metaTitle: 'Sprinkler & Irrigation Contractor in Seattle & Kent, WA',
     metaDescription:
-      'Sprinkler installation, repair and winterization in Kent and South King County. Zoned systems with backflow prevention, installed and serviced by a licensed WA contractor.',
+      'Sprinkler installation, repair and winterization in Seattle, Kent and South King County. Zoned systems with backflow prevention, installed and serviced by a licensed WA contractor.',
     quickAnswer:
       'Blue Landscaping Services installs, repairs and winterizes residential sprinkler systems across South King County. New systems are zoned by sun exposure and plant type, include a code-required backflow assembly, and are pressure-tested before backfill. Fall blowouts run September through November, before the first hard freeze.',
     intro: [
@@ -84,10 +84,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   landscaping: {
     slug: 'landscaping',
     name: 'Landscaping',
-    h1: 'Landscaping in Kent & Greater Seattle',
-    metaTitle: 'Landscaping Contractor in Kent & South King County',
+    h1: 'Landscaping in Seattle, Kent & South King County',
+    metaTitle: 'Landscaping Contractor in Seattle & Kent, WA',
     metaDescription:
-      'Fencing, lawn maintenance, planting design and sod installation in Kent, WA and across South King County. Zone 8b plant selection from a licensed local contractor.',
+      'Fencing, lawn maintenance, planting design and sod installation in Seattle, Kent, WA and across South King County. Zone 8b plant selection from a licensed local contractor.',
     quickAnswer:
       'Blue Landscaping Services handles fencing, scheduled lawn maintenance, planting design and sod installation throughout South King County. Planting plans use USDA zone 8b material that survives wet winters and dry Augusts here, and lawn installs start with grading and soil amendment rather than sod laid over compacted subgrade.',
     intro: [
