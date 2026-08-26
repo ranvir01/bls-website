@@ -53,7 +53,11 @@ export function SiteHeader() {
           'fixed inset-x-0 top-0 z-40',
           solid
             ? 'border-b border-ink-200 bg-ink-50/95 backdrop-blur-md'
-            : 'border-b border-transparent bg-transparent',
+            : // Transparent, but never truly bare. A hero photo is not a
+              // controlled backdrop — the mobile crop puts bright green siding
+              // directly behind the logo — so a short top-down scrim keeps the
+              // mark and the nav legible whatever the picture is doing.
+              'border-b border-transparent bg-gradient-to-b from-black/65 via-black/30 to-transparent',
         )}
         initial={false}
         animate={{ y: 0 }}
@@ -65,22 +69,26 @@ export function SiteHeader() {
             className="flex min-h-[44px] shrink-0 items-center gap-2.5"
             aria-label="Blue Landscaping Services — home"
           >
+            {/* The logo file is a 480×284 wordmark, not a square icon. It used
+                to be boxed into h-9 w-9, which letterboxed the whole lockup —
+                skyline, laurels and both words — into a 36×21 smudge, and then
+                the company name was set again in text right beside it. The
+                wordmark is the name, so it carries the header on its own at a
+                size where it can be read. The link's aria-label supplies the
+                accessible name. */}
             <Image
               src="/images/logo.png"
               alt=""
-              width={40}
-              height={40}
+              width={480}
+              height={284}
               priority
-              className="h-9 w-9 object-contain lg:h-10 lg:w-10"
-            />
-            <span
               className={cn(
-                'hidden font-display text-lg leading-tight sm:block',
-                solid ? 'text-brand-900' : 'text-white',
+                'h-11 w-auto lg:h-14',
+                // The skyline in the mark is dark navy. Over the hero photo it
+                // needs a shadow to separate; on the solid bar it does not.
+                !solid && 'drop-shadow-[0_1px_6px_rgba(0,0,0,0.55)]',
               )}
-            >
-              Blue Landscaping
-            </span>
+            />
           </Link>
 
           {/* Desktop navigation */}

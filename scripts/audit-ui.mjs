@@ -198,6 +198,61 @@ for (const width of WIDTHS) {
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
     }
 
+    // ── Text contrast on solid CTAs ───────────────────────────────────────
+    //
+    // This exists because of a real bug that a full visual pass missed: the
+    // custom type scale (text-body, text-caption) looks like a text *colour*
+    // to tailwind-merge, so it silently dropped `text-white` from every button
+    // variant. Every CTA on the site inherited ink-800 instead — dark slate on
+    // leaf-600, about 2:1. It read as a deliberate dark-on-green treatment.
+    //
+    // Only elements with their own opaque background are checked: anything
+    // sitting on a photo or a translucent scrim cannot be measured this way,
+    // and a guess there would be a false positive.
+    if (width === 1280) {
+      const lowContrast = await page.evaluate(() => {
+        const parse = (s) => (s.match(/[\d.]+/g) || []).map(Number);
+        const lum = ([r, g, b]) => {
+          const f = (c) => {
+            c /= 255;
+            return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+          };
+          return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+        };
+        const ratio = (a, b) => {
+          const [hi, lo] = lum(a) >= lum(b) ? [lum(a), lum(b)] : [lum(b), lum(a)];
+          return (hi + 0.05) / (lo + 0.05);
+        };
+
+        const out = [];
+        for (const el of document.querySelectorAll('a, button')) {
+          const r = el.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) continue;
+          const s = getComputedStyle(el);
+          const bg = parse(s.backgroundColor);
+          // Skip transparent and translucent backgrounds — not measurable here.
+          if (bg.length < 3 || (bg.length === 4 && bg[3] < 1)) continue;
+          const fg = parse(s.color);
+          if (fg.length < 3) continue;
+
+          const size = parseFloat(s.fontSize);
+          const bold = Number(s.fontWeight) >= 700;
+          // WCAG "large text": 24px, or 18.66px when bold.
+          const min = size >= 24 || (bold && size >= 18.66) ? 3 : 4.5;
+          const got = ratio(fg.slice(0, 3), bg.slice(0, 3));
+          if (got < min) {
+            out.push(
+              `${(el.textContent || '').trim().slice(0, 30)} — ${got.toFixed(2)}:1 (needs ${min}:1), ${s.color} on ${s.backgroundColor}`,
+            );
+          }
+          if (out.length >= 4) break;
+        }
+        return out;
+      });
+
+      for (const c of lowContrast) report(path, width, `low text contrast: ${c}`);
+    }
+
     // ── Heading order ─────────────────────────────────────────────────────
     const headings = await page.evaluate(() => {
       const hs = [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map((h) =>

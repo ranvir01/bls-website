@@ -110,7 +110,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market and include labor, base, and materials; the number that ends up on your proposal comes from a site walkthrough where we can see access, grade, and what the subgrade is actually made of.',
+    'These are typical installed ranges for the Puget Sound market and include labor, base, and materials; the number that ends up on your proposal comes from a site walkthrough where we can see access, grade, and what the subgrade is actually made of. Bids around $15 a square foot exist here and they are usually the same pavers over four inches of base instead of eight to twelve, laid on fabric-free subgrade. On Alderwood till that is the difference between a flat patio and a wavy one by the third winter.',
   pnwConsiderations: [
     {
       title: 'Water has to leave the patio, not just soak through it',
@@ -134,6 +134,11 @@ const content: ServiceContent = {
       question: 'Will a paver patio sink or heave through our winters?',
       answer:
         'Not if the base is right. Settlement almost always traces back to thin rock, lifts placed too deep to compact, or a subgrade that was never proofed. A properly built 9 to 12 inch compacted section on separation fabric, pitched to a real outlet, holds its shape. The advantage of pavers is that if a corner ever does move, we lift that section, correct the base, and reset the same units.',
+    },
+    {
+      question: 'How do I compare two patio bids that are thousands apart?',
+      answer:
+        'Ignore the totals for a minute and ask both contractors the same four questions: how many inches of compacted base, in how many lifts, is there separation fabric under it, and where does the water go. A bid that says nine to twelve inches on fabric with a pitched outlet is doing different work from a bid that says four inches on native soil, and the price gap is that difference rather than a discount. Get both answers in writing on the proposal — anyone unwilling to put base depth on paper is telling you something.',
     },
     {
       question: 'Pavers or a poured concrete slab?',

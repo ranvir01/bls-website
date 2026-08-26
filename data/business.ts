@@ -91,6 +91,17 @@ export const business = {
   ] as { label: string; url: string }[],
 } as const;
 
+/**
+ * The Google Business Profile, as a link the site can actually render.
+ *
+ * For a local contractor the Google profile is where the reviews live and
+ * where the map pin is, so burying it in `sameAs` and never linking to it
+ * wastes the strongest trust signal available. Null-safe: every consumer must
+ * handle the profile not existing rather than rendering a dead link.
+ */
+export const GOOGLE_PROFILE_URL: string | null =
+  business.profiles.find((p) => p.label === 'Google Business Profile')?.url ?? null;
+
 export const SITE_URL = 'https://bluelandscapingservices.com';
 
 /** Years in business, computed — never hardcoded, never rounded up. */

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
+import { Mail, MapPin, Phone, ShieldCheck, Star } from 'lucide-react';
 
-import { PHONE, TEL_HREF, business, formattedAddress, yearsInBusiness } from '@/data/business';
+import { GOOGLE_PROFILE_URL, PHONE, TEL_HREF, business, formattedAddress, yearsInBusiness } from '@/data/business';
 import { allCityLinks, allServiceLinks, companyLinks, legalLinks } from '@/lib/nav';
 
 /**
@@ -81,15 +81,14 @@ export function SiteFooter() {
 
           {/* NAP block — must match the JSON-LD and the Google Business Profile */}
           <div>
-            <Link href="/" className="mb-4 flex min-h-[44px] items-center gap-2.5">
-              <Image
-                src="/images/logo.png"
-                alt=""
-                width={36}
-                height={36}
-                className="h-9 w-9 object-contain"
-              />
-              <span className="font-display text-lg text-white">Blue Landscaping</span>
+            <Link
+              href="/"
+              className="mb-4 flex min-h-[44px] items-center"
+              aria-label="Blue Landscaping Services — home"
+            >
+              {/* Same 480×284 wordmark as the header, at its own aspect. The
+                  mark already says the company name, so no text beside it. */}
+              <Image src="/images/logo.png" alt="" width={480} height={284} className="h-14 w-auto" />
             </Link>
 
             <address className="space-y-3 not-italic">
@@ -131,6 +130,22 @@ export function SiteFooter() {
                   Licensed, bonded &amp; insured
                 </span>
               </p>
+
+              {/* The Google profile is where the reviews and the map pin live.
+                  Linking it here puts it on every page of the site. */}
+              {GOOGLE_PROFILE_URL && (
+                <p className="mt-3 flex items-start gap-2.5 text-caption text-ink-200/80">
+                  <Star className="mt-0.5 h-4 w-4 shrink-0 text-brand-50" aria-hidden="true" />
+                  <a
+                    href={GOOGLE_PROFILE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-ink-500 underline-offset-2 transition-colors hover:text-white"
+                  >
+                    Find us on Google
+                  </a>
+                </p>
+              )}
             </div>
 
             <h2 className="mb-2 mt-5 text-caption font-semibold uppercase tracking-wide text-brand-50">Hours</h2>

@@ -7,12 +7,12 @@ import { CtaBand } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { ReviewsSection } from '@/components/reviews-section';
 import { Button } from '@/components/ui/button';
-import { PHONE, TEL_HREF } from '@/data/business';
+import { GOOGLE_PROFILE_URL, PHONE, TEL_HREF } from '@/data/business';
 import { averageRating, reviews } from '@/data/reviews';
 import { buildMetadata, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Reviews',
+  title: 'Reviews — Kent Landscaping & Hardscaping Contractor',
   description:
     'Customer reviews for Blue Landscaping Services, a licensed hardscaping and landscaping contractor in Kent, WA. Every review shown is real and attributed to its source.',
   path: '/reviews',
@@ -70,17 +70,33 @@ export default function ReviewsPage() {
                 <p>
                   We would rather show you nothing than show you something we wrote. This page fills
                   up as customers leave genuine reviews, and every one will carry the platform it
-                  came from so you can go and read it in context.
+                  came from so you can go and read it in context. Nothing gets copied here without
+                  a link back to where it was written.
                 </p>
                 <p>
-                  In the meantime, the two things actually worth checking are the ones you can
-                  verify yourself: our Washington contractor registration with L&amp;I, and a
-                  conversation with us about recent jobs near you. We will give you the honest
-                  version of both.
+                  In the meantime, the three things actually worth checking are the ones you can
+                  verify yourself: our Google Business Profile, our Washington contractor
+                  registration with L&amp;I, and a conversation with us about recent jobs near you.
+                  We will give you the honest version of all three.
                 </p>
+                {GOOGLE_PROFILE_URL && (
+                  <p>
+                    If we have worked on your yard, leaving a review on our Google profile is the
+                    single most useful thing you can do for us. It is also the place we will never
+                    be able to edit, which is exactly why it is worth reading.
+                  </p>
+                )}
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button asChild>
+                {GOOGLE_PROFILE_URL && (
+                  <Button asChild>
+                    <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+                      <Star className="h-4 w-4" aria-hidden="true" />
+                      Find us on Google
+                    </a>
+                  </Button>
+                )}
+                <Button asChild variant={GOOGLE_PROFILE_URL ? 'outline' : 'primary'}>
                   <a href={TEL_HREF}>Call {PHONE.display}</a>
                 </Button>
                 <Button asChild variant="outline">

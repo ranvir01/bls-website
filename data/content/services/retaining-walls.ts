@@ -107,13 +107,20 @@ const content: ServiceContent = {
       notes: 'Higher on tight lots with no equipment access',
     },
     {
-      item: 'Structural engineering plus jurisdiction permit',
-      range: '$1,600-$4,200',
+      item: 'Stamped structural engineering',
+      range: '$1,600-$3,500',
       unit: 'per wall',
+      notes: 'Up to $10,000 where a geotechnical report or a steep-slope review is required',
+    },
+    {
+      item: 'Jurisdiction permit and plan review',
+      range: '$500-$2,000',
+      unit: 'per permit',
+      notes: 'Kent, Auburn, Renton and unincorporated King County all price this differently',
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market in 2026, not a quote; the actual number comes out of a site walkthrough where we can see the grade, the soil, the access and where the water goes.',
+    'These are typical installed ranges for the Puget Sound market in 2026, not a quote; the actual number comes out of a site walkthrough where we can see the grade, the soil, the access and where the water goes. You will find local bids starting nearer $25 per face square foot. That number is real, and it usually means no drain rock, no filter fabric and a base course laid on native soil — a wall that looks identical on day one and leans by year five. Our range starts where a full drainage assembly starts.',
   pnwConsiderations: [
     {
       title: 'Drainage is the wall, not an accessory',
@@ -137,6 +144,11 @@ const content: ServiceContent = {
       question: 'How long should a retaining wall last in Western Washington?',
       answer:
         'A segmental block wall with a compacted base, a proper drain zone and correct backfill should hold its line for 40 years or more. The block itself outlasts everyone. What kills walls here is water, so the honest answer is that the drainage detail sets the lifespan, not the brand of block. Walls we are called out to replace almost always turn out to have no drain rock behind them.',
+    },
+    {
+      question: 'Why is your price higher than the bid I got for $25 a square foot?',
+      answer:
+        'Because of what is behind the block. At the bottom of the market the wall is block, native backfill and a cap. There is no filter fabric, no clean drain rock zone and no perforated line going anywhere. That wall stands for a few winters and then starts to lean, and the rebuild costs more than the difference. Ask any bid you are holding three questions: how deep is the drain rock, where does the pipe daylight, and is the base compacted in lifts. The answers sort the bids faster than the totals do.',
     },
     {
       question: 'Do I need a permit for a retaining wall in Kent or Renton?',

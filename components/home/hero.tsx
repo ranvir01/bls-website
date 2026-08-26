@@ -11,7 +11,17 @@ import { trackEvent } from '@/lib/analytics';
 import { ease, heroWord } from '@/lib/motion';
 import { Button } from '@/components/ui/button';
 
-const HEADLINE = 'Retaining walls, patios and irrigation built to last a Puget Sound winter.';
+/**
+ * The homepage H1 leads with the primary keywords and the geography, because
+ * this is the single most important heading on the site and the terms people
+ * actually type are "landscaping" and "hardscaping" plus a place name.
+ *
+ * An earlier revision used "Retaining walls, patios and irrigation built to
+ * last a Puget Sound winter" here. Better voice, but it contained none of the
+ * primary keywords — that line now does its work in the subhead instead, where
+ * it costs nothing.
+ */
+const HEADLINE = 'Landscaping & Hardscaping in Kent & Greater Seattle';
 
 /**
  * Homepage hero.
@@ -56,7 +66,6 @@ export function Hero() {
               className="img-grade object-cover"
             />
           </picture>
-          {/* Gradient scrim so the headline holds 4.5:1 contrast over any crop. */}
           {/* Two layers, deliberately. A neutral black gradient does the
               legibility work without tinting the greens in the photo, and a
               light brand wash underneath ties it to the palette. A single
@@ -104,8 +113,9 @@ export function Hero() {
               transition={{ delay: 0.35, duration: 0.5, ease: ease.out }}
               className="mt-6 max-w-prose text-body-lg text-ink-200"
             >
-              We draw the plan and we build it. Same crew start to finish, no subs on the
-              hardscape. Kent, Auburn, Renton and the rest of Greater Seattle.
+              Retaining walls, patios and irrigation built to last a Puget Sound winter. We
+              draw the plan and our own crew builds it, with no subs on the hardscape. Serving
+              Kent, Auburn, Renton and the rest of Greater Seattle.
             </m.p>
 
             <m.div

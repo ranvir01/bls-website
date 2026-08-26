@@ -47,3 +47,6 @@ next-env.d.ts
 # Build/verification artifacts
 *.tsbuildinfo
 .netlify/
+
+# UI audit screenshots
+.audit/
