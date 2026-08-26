@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { PHONE, TEL_HREF, business, yearsInBusiness } from '@/data/business';
 import { OWNER_PHOTO, beforeAfterPairs } from '@/data/media';
 import { BeforeAfter } from '@/components/before-after';
+import { RunningHead } from '@/components/home/running-head';
 import { trackEvent } from '@/lib/analytics';
 
 /**
@@ -33,7 +34,8 @@ export function OwnerShowcase() {
 
   return (
     <section className="bg-white">
-      <div className="shell section">
+      <div className="shell section-lg">
+        <RunningHead index={1} label="Who you are hiring" className="mb-12" />
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* The photograph */}
           <div className="min-w-0">
@@ -68,10 +70,7 @@ export function OwnerShowcase() {
 
           {/* The argument */}
           <div className="min-w-0">
-            <p className="eyebrow text-brand-600">
-              Who you are hiring
-            </p>
-            <h2 className="mt-3 text-h2">
+            <h2 className="text-h2">
               A family crew out of Kent, on the tools since {business.foundedYear}
             </h2>
 

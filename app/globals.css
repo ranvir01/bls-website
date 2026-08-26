@@ -109,13 +109,43 @@
 }
 
 @layer components {
-  /* Standard section rhythm. */
+  /*
+   * Section rhythm, in four tiers.
+   *
+   * One value used to govern the whole site, and a page whose every band is
+   * exactly as tall as the last cannot look composed — uniform spacing is the
+   * single loudest signal that a layout was generated rather than designed.
+   * Pick the tier by how much weight the section is carrying:
+   *
+   *   xs  strips and utility bands — trust bar, service areas, FAQ
+   *   ——  the default
+   *   lg  the sections doing the persuading — owner, services, portfolio
+   *   xl  a page's own feature block, used sparingly
+   */
+  .section-xs {
+    @apply py-12 md:py-16;
+  }
+
   .section {
     @apply py-16 md:py-24;
   }
 
+  .section-lg {
+    @apply py-24 md:py-32;
+  }
+
+  .section-xl {
+    @apply py-28 md:py-40;
+  }
+
+  /* Kept as an alias so existing callers do not break. */
   .section-tight {
     @apply py-12 md:py-16;
+  }
+
+  /* The gap between a section's header and its content. */
+  .section-head {
+    @apply mb-10 md:mb-14;
   }
 
   /*
@@ -128,6 +158,23 @@
    */
   .eyebrow {
     @apply text-caption font-semibold uppercase tracking-[0.08em];
+  }
+
+  /* The same label on a navy band. sky-300 is 9.34:1 there; brand-600 is 2.3. */
+  .eyebrow-dark {
+    @apply text-caption font-semibold uppercase tracking-[0.08em] text-sky-300;
+  }
+
+  /*
+   * Figures that have to line up in a column, or stay put while they change.
+   *
+   * Proportional lining numerals put a narrow 1 and a wide 8 in the same slot,
+   * so $3,200-$6,800 will not align row to row — and the cost table is the
+   * most-read block on a service page. `slashed-zero` because a phone number
+   * with an unslashed zero next to an O is a support call.
+   */
+  .nums {
+    font-variant-numeric: tabular-nums slashed-zero;
   }
 
   /* Content column. */

@@ -28,7 +28,22 @@ const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
       // Mirrors theme.extend.fontSize in tailwind.config.ts.
-      'font-size': [{ text: ['display', 'h1', 'h2', 'h3', 'body-lg', 'body', 'caption'] }],
+      'font-size': [
+        {
+          text: [
+            'display',
+            'h1',
+            'h2',
+            'h3',
+            'h4',
+            'body-lg',
+            'body',
+            'body-sm',
+            'caption',
+            'overline',
+          ],
+        },
+      ],
       // Mirrors theme.extend.boxShadow.
       shadow: [{ shadow: ['subtle', 'card', 'lifted', 'header', 'ember', 'focus'] }],
       // Mirrors theme.extend.backgroundImage — a gradient, not a colour.

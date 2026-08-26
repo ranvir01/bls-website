@@ -9,6 +9,7 @@ import { Photo } from '@/components/gallery/photo';
 import type { GalleryPhoto } from '@/data/media';
 import { galleries } from '@/data/media';
 import type { CategorySlug } from '@/data/types';
+import { RunningHead } from '@/components/home/running-head';
 
 /**
  * What we build, shown rather than listed.
@@ -39,12 +40,10 @@ export function ServicesShowcase({
 
   return (
     <section className="bg-ink-50">
-      <div className="shell section">
+      <div className="shell section-lg">
+        <RunningHead index={2} label="What we build" className="mb-12" />
         <div className="max-w-prose">
-          <p className="eyebrow text-brand-600">
-            What we build
-          </p>
-          <h2 className="mt-3 text-h2">Hardscaping, irrigation and landscaping</h2>
+          <h2 className="text-h2">Hardscaping, irrigation and landscaping</h2>
           <p className="mt-4 text-body-lg text-ink-500">
             Every photograph below is a Blue Landscaping job. Tap any of them to look closely.
           </p>

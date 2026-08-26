@@ -9,6 +9,7 @@ import { OwnerShowcase } from '@/components/home/owner-showcase';
 import { ProjectGallery } from '@/components/gallery/project-gallery';
 import { Reveal } from '@/components/motion/reveal';
 import { ReviewsSection } from '@/components/reviews-section';
+import { RunningHead } from '@/components/home/running-head';
 import { ServicesShowcase } from '@/components/home/services-showcase';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { homeFaqs, howItWorks, whyUs } from '@/data/content/home';
@@ -70,8 +71,9 @@ export default function HomePage() {
       <ServicesShowcase categories={showcaseCategories} />
 
       {/* ── Work we have done ──────────────────────────────────────────────── */}
-      <section className="border-y border-ink-200 bg-white">
-        <div className="shell section">
+      <section className="bg-white">
+        <div className="shell section-lg">
+          <RunningHead index={3} label="Work we have done" className="mb-10" />
           <ProjectGallery
             limit={6}
             showFilters={false}
@@ -91,6 +93,7 @@ export default function HomePage() {
       {/* ── Why homeowners pick us ─────────────────────────────────────────── */}
       <section className="bg-ink-50">
         <div className="shell section">
+          <RunningHead index={4} label="Why us" className="mb-10" />
           <SectionHeader
             eyebrow="Why us"
             title="Why homeowners pick us"
@@ -116,8 +119,9 @@ export default function HomePage() {
       <ConceptToBuiltGallery projects={conceptToBuiltProjects()} />
 
       {/* ── Process ────────────────────────────────────────────────────────── */}
-      <section className="border-y border-ink-200 bg-white">
+      <section className="bg-white">
         <div className="shell section">
+          <RunningHead index={5} label="How a job runs" className="mb-10" />
           <SectionHeader
             eyebrow="How it works"
             title="How a job runs"
@@ -137,7 +141,8 @@ export default function HomePage() {
       </section>
 
       {/* ── Service areas ──────────────────────────────────────────────────── */}
-      <section className="shell section">
+      <section className="shell section-xs">
+        <RunningHead index={6} label="Where we work" className="mb-10" />
         <SectionHeader
           eyebrow="Service areas"
           title="Where we work"
@@ -178,7 +183,8 @@ export default function HomePage() {
       )}
 
       {/* ── FAQ ────────────────────────────────────────────────────────────── */}
-      <section className="shell section">
+      <section className="shell section-xs">
+        <RunningHead index={7} label="Questions we get asked" className="mb-10" />
         <FaqList faqs={homeFaqs} />
       </section>
 

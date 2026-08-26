@@ -136,7 +136,7 @@ export function SiteHeader() {
               )}
             >
               <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-              <span className="whitespace-nowrap">{PHONE.display}</span>
+              <span className="nums whitespace-nowrap">{PHONE.display}</span>
             </a>
 
             {/* The header changes surface as you scroll — transparent over

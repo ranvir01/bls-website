@@ -176,21 +176,31 @@ const config: Config = {
       },
 
       fontFamily: {
-        // The original pairing. Montserrat carries the headings, Quicksand's
-        // rounded terminals keep the body approachable rather than corporate.
+        // Montserrat carries the headings and the brand. Figtree does the
+        // reading — see the note in app/layout.tsx for why it replaced
+        // Quicksand, which has no italic at any weight.
         display: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-quicksand)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-figtree)', 'system-ui', 'sans-serif'],
       },
 
       fontSize: {
         // Fluid scale. Clamp means no breakpoint jumps and no layout shift.
+        //
+        // Tracking tightens as the size grows: letterforms set at 64px need
+        // less air between them than the same forms at 16px, and leaving
+        // headline tracking at zero is one of the reliable tells of type that
+        // was never looked at. h3 was a hard 1.375rem, which made it the one
+        // step in the scale that did not respond to the viewport.
         display: ['clamp(2.25rem, 5vw, 4rem)', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
         h1: ['clamp(2rem, 4vw, 3rem)', { lineHeight: '1.15', letterSpacing: '-0.015em' }],
-        h2: ['clamp(1.625rem, 2.6vw, 2.25rem)', { lineHeight: '1.2' }],
-        h3: ['1.375rem', { lineHeight: '1.3' }],
+        h2: ['clamp(1.625rem, 2.6vw, 2.25rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        h3: ['clamp(1.25rem, 1.6vw, 1.5rem)', { lineHeight: '1.3', letterSpacing: '-0.005em' }],
+        h4: ['1.0625rem', { lineHeight: '1.4' }],
         'body-lg': ['1.125rem', { lineHeight: '1.65' }],
         body: ['1rem', { lineHeight: '1.7' }],
+        'body-sm': ['0.9375rem', { lineHeight: '1.6' }],
         caption: ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
+        overline: ['0.6875rem', { lineHeight: '1', letterSpacing: '0.14em' }],
       },
 
       maxWidth: {

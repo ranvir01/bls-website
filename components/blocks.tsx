@@ -32,11 +32,7 @@ export function SectionHeader({
 }) {
   return (
     <div className={cn('max-w-prose', align === 'center' && 'mx-auto text-center')}>
-      {eyebrow && (
-        <p className="mb-3 eyebrow text-brand-600">
-          {eyebrow}
-        </p>
-      )}
+      {eyebrow && <p className="mb-3 eyebrow text-brand-600">{eyebrow}</p>}
       <Heading className={Heading === 'h1' ? 'text-h1' : 'text-h2'}>{title}</Heading>
       {lead && <p className="mt-4 text-body-lg text-ink-500">{lead}</p>}
     </div>
@@ -75,7 +71,10 @@ export function CheckList({ items, columns = 1 }: { items: string[]; columns?: 1
     <ul className={cn('grid gap-3', columns === 2 && 'sm:grid-cols-2')}>
       {items.map((item) => (
         <li key={item} className="flex gap-3 text-body text-ink-800">
-          <Check className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+          {/* leaf, not brand. Green is the semantic colour now — this tick
+              means "included", and it is the one place the landscaping half of
+              the name gets to show. */}
+          <Check className="mt-1 h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}
@@ -125,7 +124,9 @@ export function CostTable({
                   {row.item}
                   {row.notes && <span className="mt-0.5 block text-caption font-normal text-ink-500">{row.notes}</span>}
                 </th>
-                <td className="whitespace-nowrap px-4 py-3 text-body font-semibold text-brand-600">{row.range}</td>
+                <td className="nums whitespace-nowrap px-4 py-3 text-body font-semibold text-brand-800">
+                  {row.range}
+                </td>
                 <td className="px-4 py-3 text-caption text-ink-500">{row.unit}</td>
               </tr>
             ))}
