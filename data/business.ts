@@ -112,6 +112,22 @@ export const business = {
 export const GOOGLE_PROFILE_URL: string | null =
   business.profiles.find((p) => p.label === 'Google Business Profile')?.url ?? null;
 
+/**
+ * Formspree, where the leads actually land.
+ *
+ * This is the form the business has always used — the previous site posted the
+ * quote modal and the contact form straight to it. The rebuild replaced it with
+ * an SMTP-and-Twilio pipeline, which is better in every way except the one that
+ * matters: SMTP and Twilio need credentials in the Netlify environment, and
+ * until those exist every channel fails and the lead reaches nobody. Formspree
+ * needs no configuration at all. It is the floor under the other two.
+ *
+ * Override with FORMSPREE_ENDPOINT if the form ID ever changes; there is no
+ * reason to redeploy for that.
+ */
+export const FORMSPREE_ENDPOINT =
+  process.env.FORMSPREE_ENDPOINT ?? 'https://formspree.io/f/xzzdagdw';
+
 export const SITE_URL = 'https://bluelandscapingservices.com';
 
 /** Years in business, computed — never hardcoded, never rounded up. */

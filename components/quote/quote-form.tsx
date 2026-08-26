@@ -56,6 +56,16 @@ export function QuoteForm({
   const [direction, setDirection] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  /**
+   * Whether the server got the lead out to anyone.
+   *
+   * The route answers 200 as soon as a valid lead reaches it, because a lead
+   * that arrived must never be thrown away over a mail outage. But if every
+   * delivery channel failed, the submission exists only in a server log, and
+   * telling the customer "an estimator will call you shortly" would be a lie.
+   * On that path the panel says so and asks them to ring.
+   */
+  const [delivered, setDelivered] = useState(true);
   const [serverError, setServerError] = useState<string | null>(null);
   const [restored, setRestored] = useState(false);
   const startedRef = useRef(false);
@@ -202,6 +212,7 @@ export function QuoteForm({
       }
 
       trackEvent('quote_form_submit', { path: pathname, project_type: data.projectType });
+      setDelivered(json.delivered !== false);
       setSubmitted(true);
       try {
         sessionStorage.removeItem(STORAGE_KEY);
@@ -216,7 +227,7 @@ export function QuoteForm({
   });
 
   if (submitted) {
-    return <SuccessPanel name={values.name} className={className} />;
+    return <SuccessPanel name={values.name} delivered={delivered} className={className} />;
   }
 
   const progress = ((step + 1) / TOTAL_STEPS) * 100;
@@ -576,7 +587,15 @@ function Field({
   );
 }
 
-function SuccessPanel({ name, className }: { name?: string; className?: string }) {
+function SuccessPanel({
+  name,
+  delivered = true,
+  className,
+}: {
+  name?: string;
+  delivered?: boolean;
+  className?: string;
+}) {
   const first = name?.split(' ')[0];
 
   return (
@@ -589,10 +608,18 @@ function SuccessPanel({ name, className }: { name?: string; className?: string }
         <Check className="h-6 w-6 text-white" aria-hidden="true" />
       </div>
       <h2 className="text-h3">{first ? `Thanks, ${first} — we have it.` : 'Thanks — we have it.'}</h2>
-      <p className="mx-auto mt-3 max-w-prose text-body text-ink-800">
-        An estimator will call you shortly to confirm the details and book your free on-site
-        walkthrough. If you would rather reach us now, we are on the phone.
-      </p>
+      {delivered ? (
+        <p className="mx-auto mt-3 max-w-prose text-body text-ink-800">
+          An estimator will call you shortly to confirm the details and book your free on-site
+          walkthrough. If you would rather reach us now, we are on the phone.
+        </p>
+      ) : (
+        <p className="mx-auto mt-3 max-w-prose text-body text-ink-800">
+          Your details are saved, but our notifications are not getting through right now, so we
+          cannot promise anyone has seen this yet. Please give us a ring so we know you are
+          waiting.
+        </p>
+      )}
       <a
         href={TEL_HREF}
         onClick={() => trackEvent('click_to_call', { location: 'quote_success' })}

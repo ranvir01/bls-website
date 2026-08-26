@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-import { PHONE, business, formattedAddress } from '@/data/business';
+import { FORMSPREE_ENDPOINT, PHONE, business, formattedAddress } from '@/data/business';
 import {
   BUDGET_OPTIONS,
   SIZE_OPTIONS,
@@ -202,6 +202,77 @@ function customerHtml(ctx: LeadContext): string {
 
 // ── Senders ──────────────────────────────────────────────────────────────────
 
+/**
+ * Formspree — the channel that works with nothing configured.
+ *
+ * SMTP and Twilio are better once they have credentials: the owner gets a
+ * formatted email and an SMS inside seconds. Until then they both fail, and a
+ * lead that fails every channel is a lead the business never hears about. This
+ * one needs no environment at all, so it is the floor: whatever else is or is
+ * not set up, the submission lands in the inbox behind the form the company
+ * has always used.
+ *
+ * Keys are written as human sentences rather than camelCase field names,
+ * because Formspree renders them verbatim as the labels in the notification
+ * email. `_replyto` and `_subject` are Formspree's own reserved fields.
+ */
+async function sendFormspree(ctx: LeadContext): Promise<void> {
+  const { lead, estimate, renderUrl, leadId, receivedAt } = ctx;
+
+  const payload: Record<string, string> = {
+    _subject: ownerSubject(ctx),
+    Name: lead.name,
+    Phone: formatPhone(lead.phone),
+    Project: projectTypeLabel(lead.projectType),
+    Location: `${lead.city}, WA ${lead.zip}`,
+    'Lead ID': leadId,
+    Received: receivedAt,
+  };
+
+  if (lead.email) {
+    payload._replyto = lead.email;
+    payload.Email = lead.email;
+  }
+
+  const size = labelFor(SIZE_OPTIONS, lead.projectSize);
+  if (size) payload.Size = size;
+
+  const when = labelFor(TIMELINE_OPTIONS, lead.timeline);
+  if (when) payload.Timeline = when;
+
+  const budget = labelFor(BUDGET_OPTIONS, lead.budget);
+  if (budget) payload.Budget = budget;
+
+  if (lead.details) payload.Details = lead.details;
+  if (lead.sourcePath) payload['Came from'] = lead.sourcePath;
+  if (renderUrl) payload['Render'] = renderUrl;
+
+  if (estimate) {
+    payload['Draft estimate'] = formatRange(estimate.totalLow, estimate.totalHigh);
+    payload['Draft scope'] = estimate.lineItems
+      .map((i) => `${i.label} (${i.detail}): ${formatRange(i.low, i.high)}`)
+      .join('\n');
+  }
+
+  if (!isInServiceArea(lead.zip)) {
+    payload['Service area'] = 'OUTSIDE the usual service area — check before booking';
+  }
+
+  // Formspree has no published timeout and this runs inside the request, so
+  // cap it. A slow third party must not hold the customer on a spinner.
+  const res = await fetch(FORMSPREE_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(8000),
+  });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => '');
+    throw new Error(`formspree ${res.status} ${detail.slice(0, 200)}`);
+  }
+}
+
 async function sendSms(to: string, body: string): Promise<void> {
   const sid = process.env.TWILIO_ACCOUNT_SID!;
   const token = process.env.TWILIO_AUTH_TOKEN!;
@@ -228,6 +299,8 @@ export interface NotifyResult {
   ownerSms: boolean;
   customerEmail: boolean;
   customerSms: boolean;
+  /** The no-configuration channel. If this is false the lead reached nobody. */
+  formspree: boolean;
   errors: string[];
 }
 
@@ -242,6 +315,7 @@ export async function notifyLead(ctx: LeadContext): Promise<NotifyResult> {
     ownerSms: false,
     customerEmail: false,
     customerSms: false,
+    formspree: false,
     errors,
   };
 
@@ -250,6 +324,18 @@ export async function notifyLead(ctx: LeadContext): Promise<NotifyResult> {
   const fromAddress = process.env.EMAIL_FROM ?? process.env.EMAIL_USER ?? business.email;
 
   const tasks: Promise<void>[] = [];
+
+  // Always. This is the one that does not depend on the environment being set
+  // up, so it goes out whether or not anything else is configured.
+  tasks.push(
+    sendFormspree(ctx)
+      .then(() => {
+        result.formspree = true;
+      })
+      .catch((e) => {
+        errors.push(`formspree: ${e.message}`);
+      }),
+  );
 
   if (mailer) {
     tasks.push(

@@ -14,13 +14,36 @@ combined.
 constant in `data/business.ts`. It must match the Google Business Profile
 character for character; if the GBP still shows the old number, update it there.
 
-## 2. Wire up lead delivery — 20 minutes, blocking
+## 2. ~~Wire up lead delivery~~ — DONE, no longer blocking
 
-**Until this is done, form submissions reach nobody.** The API validates them,
-logs them, and returns success to the customer — which is worse than a broken
-form, because the customer believes it went through.
+Leads go to **Formspree**, at `https://formspree.io/f/xzzdagdw` — the form this
+business has always used. It needs no configuration, no credentials and no
+environment variables. Every submission from `/quote`, the contact page and the
+visualizer gate lands in that inbox.
 
-In **Netlify → Site configuration → Environment variables**:
+This was broken for a while and is worth understanding so it does not happen
+again. The rebuild replaced Formspree with an SMTP-plus-Twilio pipeline, which
+is genuinely better — a formatted email and an SMS to the owner within seconds.
+But both need credentials in the Netlify environment, and until those exist
+every channel fails. The route still answered 200, so the customer was told
+"an estimator will call you shortly" while the lead existed only as a line in a
+server log. A silently broken form is worse than a visibly broken one.
+
+Formspree is now the floor under the other two: it goes out on every submission
+whether or not anything else is configured. `FORMSPREE_ENDPOINT` overrides the
+form ID if it ever changes.
+
+The quote form also reads `delivered` off the response now. In the case where
+every channel fails, the confirmation panel says so and asks the customer to
+ring, instead of promising a callback nobody is coming.
+
+### Optional upgrades
+
+Neither of these is required. Both make the response faster.
+
+**Email** — a formatted lead sheet in the inbox, with the scope and any draft
+estimate laid out, rather than Formspree's field list. In **Netlify → Site
+configuration → Environment variables**:
 
 | Variable | Value |
 |---|---|
@@ -30,9 +53,9 @@ In **Netlify → Site configuration → Environment variables**:
 | `EMAIL_PASSWORD` | **Gmail App Password**, not the account password |
 | `EMAIL_TO` | where leads should land |
 
-Then send a test through `/quote` and confirm it arrives.
-
-**SMS (do this too — it is the difference between a lead and a sale):**
+**SMS** — the real upgrade. A text to the owner within seconds of a submit, and
+an auto-reply to the customer. Speed of first contact decides most of these
+jobs.
 
 | Variable | Value |
 |---|---|
@@ -41,9 +64,10 @@ Then send a test through `/quote` and confirm it arrives.
 | `TWILIO_PHONE_NUMBER` | the Twilio number, E.164 (`+1253…`) |
 | `OWNER_PHONE_NUMBER` | the owner's mobile, E.164 |
 
-A Twilio number is about $1.15/month plus under a cent per message. The site
-already texts the owner within seconds of a submit and auto-replies to the
-customer; it just needs credentials.
+A Twilio number is about $1.15/month plus under a cent per message. The code is
+already written; it only needs the credentials.
+
+After adding either, send a test through `/quote` and confirm it arrives.
 
 ## 3. ~~Create the Google Business Profile~~ — DONE, two follow-ups
 

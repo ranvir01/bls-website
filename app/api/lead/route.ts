@@ -86,9 +86,12 @@ export async function POST(req: Request) {
   }
 
   // If nothing at all got out, the owner will never see this lead. Surface it
-  // loudly in the logs and tell the user to call — losing it silently is worse
-  // than admitting the problem.
-  const delivered = notify.ownerEmail || notify.ownerSms;
+  // loudly in the logs — losing it silently is worse than admitting the problem.
+  //
+  // Formspree counts. It is the channel that needs no environment variables, so
+  // in the common case where SMTP and Twilio are not yet configured it is the
+  // only thing standing between a submitted form and a lost customer.
+  const delivered = notify.formspree || notify.ownerEmail || notify.ownerSms;
   if (!delivered) {
     console.error('[lead] NOT DELIVERED — captured only in logs', { leadId: ctx.leadId, lead });
   }
