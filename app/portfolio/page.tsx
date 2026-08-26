@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand, SectionHeader } from '@/components/blocks';
@@ -42,7 +43,9 @@ export default function PortfolioPage() {
 
         <div className="mt-12">
           {projects.length > 0 ? (
-            <PortfolioBrowser projects={projects} />
+            <Suspense fallback={<p className="text-body text-ink-500">Loading projects…</p>}>
+              <PortfolioBrowser projects={projects} />
+            </Suspense>
           ) : (
             <VisualizerTeaser
               headline="Design your own yard right now"
