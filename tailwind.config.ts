@@ -10,16 +10,42 @@ import type { Config } from 'tailwindcss';
  * PALETTE: the original Blue Landscaping identity. The company is called Blue
  * Landscaping, so blue leads and everything else supports it:
  *
- *   brand  — the blues. Headers, links, dark sections, the whole identity.
+ *   brand  — the blues. Headers, links, dark sections, the whole IDENTITY.
  *   sky    — the teals. Secondary accents and gradient partners for brand.
- *   leaf   — the greens. Calls to action, and the "landscaping" half of the
- *            name. Green on blue is the strongest pull available here without
- *            leaving the original palette.
+ *   ember  — the warm accent. This and only this is the ACTION colour.
+ *   leaf   — the greens. SEMANTIC only now: trust ticks, "licensed and
+ *            insured", success states, anything that means growing things.
  *   ink    — neutrals from near-white through slate to the darkest text.
  *
- * An earlier revision replaced all of this with a stone-and-moss palette and a
- * warm clay accent. It looked fine in isolation and had nothing to do with the
- * business, which is the whole problem. Do not do that again.
+ * WHY GREEN STOPPED BEING THE BUTTON COLOUR
+ * -----------------------------------------
+ * leaf-600 #257f52 against the brand-900 #002566 band is 2.91:1. WCAG 1.4.11
+ * wants 3:1 for a control's fill to separate from what is behind it, so on
+ * every dark section of this site the button's SHAPE was invisible — the label
+ * was legible and the button was not. White-on-green is 4.96:1, which passes,
+ * which is exactly why an audit that only measures label contrast found
+ * nothing wrong. It also read muddy: in OKLCH the green sits within three L*
+ * points of the brand blue with less than half its chroma, so it looked like a
+ * washed-out version of the identity rather than a deliberate accent.
+ *
+ * WHY THERE ARE TWO ACTION FILLS AND NOT ONE
+ * ------------------------------------------
+ * No single fill can clear 3:1 against BOTH a white page and a navy band while
+ * also carrying a 4.5:1 label — the window is arithmetically almost empty.
+ * So the accent flips by surface, the way Material 3 swaps primary/onPrimary
+ * between light and dark schemes:
+ *
+ *   light surfaces  →  ember-700 #b8500a with WHITE text   (5.01:1 both axes)
+ *   dark surfaces   →  ember-400 #ffc53d with BRAND-900 text (9.14:1 both axes)
+ *
+ * Gold with navy text sitting on a navy band is also just a better-looking
+ * pairing than white-on-green, and warm-on-blue is near-complementary (144°
+ * apart) where green-on-blue was only 105°.
+ *
+ * An earlier revision replaced this whole palette with stone-and-moss plus a
+ * clay accent. That failed because it threw away the IDENTITY, not because it
+ * was warm. Adding one warm accent while blue keeps the identity is the
+ * opposite move. Do not confuse the two.
  */
 const config: Config = {
   darkMode: ['class'],
@@ -48,6 +74,10 @@ const config: Config = {
           700: '#0042b8',
           800: '#00348f',
           900: '#002566',
+          /* Darker than 900 and used for exactly one thing: the heavy edge on
+             a CTA sitting over a photograph, where the ring has to hold its own
+             against a blown-out sky. */
+          950: '#001b4d',
         },
         sky: {
           50: '#eefbff',
@@ -60,6 +90,25 @@ const config: Config = {
           700: '#007ab8',
           800: '#005c8f',
           900: '#003d66',
+        },
+        /**
+         * The action colour. Two solids, one per surface class:
+         *   400 — on navy bands and photo heroes, with brand-900 text (9.14:1)
+         *   700 — on white and ink-50 pages, with white text (5.01:1)
+         * The steps between them exist for hover and active states, not for
+         * decoration. Nothing else on the site should be ember.
+         */
+        ember: {
+          50: '#fff8ed',
+          100: '#ffecd1',
+          200: '#ffe0ad',
+          300: '#ffd177',
+          400: '#ffc53d',
+          500: '#f0a01a',
+          600: '#d1770c',
+          700: '#b8500a',
+          800: '#93400c',
+          900: '#78350f',
         },
         leaf: {
           50: '#f3faf7',
@@ -162,11 +211,27 @@ const config: Config = {
         full: '9999px',
       },
 
+      /*
+       * Shadows tinted to brand-900 rather than neutral slate.
+       *
+       * A grey shadow under a saturated blue brand reads as haze: the shadow
+       * desaturates everything it touches and the whole page goes flat. Tinting
+       * the ramp to the darkest brand colour is the difference between a page
+       * that looks lit and one that looks dusty. Three layers, not one, because
+       * real light falls off gradually.
+       */
       boxShadow: {
-        subtle: '0 1px 2px rgba(15,23,42,.06)',
-        card: '0 1px 3px rgba(15,23,42,.08), 0 8px 24px rgba(15,23,42,.06)',
-        lifted: '0 4px 12px rgba(15,23,42,.10), 0 20px 40px rgba(15,23,42,.10)',
-        header: '0 1px 3px rgba(15,23,42,.08)',
+        subtle: '0 1px 2px rgba(0,37,102,.07)',
+        card: '0 1px 2px rgba(0,37,102,.06), 0 4px 12px rgba(0,37,102,.05), 0 12px 32px rgba(0,37,102,.05)',
+        lifted:
+          '0 1px 2px rgba(0,37,102,.08), 0 8px 20px rgba(0,37,102,.09), 0 24px 56px rgba(0,37,102,.10)',
+        header: '0 1px 0 rgba(0,37,102,.08)',
+        /* The focus ring. White inside, navy outside — see the note in
+           app/globals.css for why it has to be two colours. */
+        focus: '0 0 0 2px #ffffff, 0 0 0 4px #002566',
+        /* The primary CTA carries a touch of its own colour, so it sits on the
+           page rather than being stamped onto it. */
+        ember: '0 1px 1px rgba(0,37,102,.16), 0 2px 6px rgba(184,80,10,.30)',
       },
 
       spacing: {

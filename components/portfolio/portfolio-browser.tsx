@@ -121,7 +121,7 @@ function FilterRow({
   return (
     <fieldset className="flex flex-wrap items-center gap-2">
       <legend className="sr-only">Filter by {label.toLowerCase()}</legend>
-      <span aria-hidden="true" className="mr-1 text-caption font-semibold uppercase tracking-wide text-ink-500">
+      <span aria-hidden="true" className="mr-1 eyebrow text-ink-500">
         {label}
       </span>
       <Chip active={!value} onClick={() => onChange('')}>

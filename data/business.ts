@@ -63,14 +63,21 @@ export const business = {
     insuranceAmount: 1000000,
   },
 
+  /**
+   * Open seven days, the same hours every day. Confirmed by the owner.
+   *
+   * These must match the Google Business Profile exactly — Google cross-checks
+   * hours between the profile and the site, and a mismatch is a live local-SEO
+   * penalty as well as a customer standing in a driveway on a Sunday.
+   */
   hours: [
     { day: 'Monday', opens: '07:00', closes: '18:00' },
     { day: 'Tuesday', opens: '07:00', closes: '18:00' },
     { day: 'Wednesday', opens: '07:00', closes: '18:00' },
     { day: 'Thursday', opens: '07:00', closes: '18:00' },
     { day: 'Friday', opens: '07:00', closes: '18:00' },
-    { day: 'Saturday', opens: '08:00', closes: '16:00' },
-    { day: 'Sunday', opens: null, closes: null },
+    { day: 'Saturday', opens: '07:00', closes: '18:00' },
+    { day: 'Sunday', opens: '07:00', closes: '18:00' },
   ],
 
   /**
@@ -84,9 +91,9 @@ export const business = {
   profiles: [
     {
       label: 'Google Business Profile',
-      // Short link as supplied. Replacing it with the canonical
+      // Short link as supplied by the owner. Replacing it with the canonical
       // google.com/maps/place/... URL is a small improvement — see docs/GO-LIVE.md.
-      url: 'https://share.google/udIRuWuNg13lXgC5t',
+      url: 'https://share.google/rqx6Hs2RgAzSXmHuz',
     },
   ] as { label: string; url: string }[],
 } as const;

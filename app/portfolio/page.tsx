@@ -3,8 +3,11 @@ import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
+import { PhotoWall } from '@/components/gallery/photo-wall';
 import { PortfolioBrowser } from '@/components/portfolio/portfolio-browser';
+import { ProjectGallery } from '@/components/gallery/project-gallery';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
+import { allGalleryPhotos, beforeAfterPairs, featuredProjects } from '@/data/media';
 import { portfolioProjects } from '@/data/projects';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
@@ -15,8 +18,12 @@ export const metadata: Metadata = buildMetadata({
   path: '/portfolio',
 });
 
+const PHOTO_TOTAL =
+  allGalleryPhotos.length + featuredProjects.length + beforeAfterPairs.length * 2;
+
 export default function PortfolioPage() {
-  const projects = portfolioProjects();
+  /** Documented before/after case studies, once any exist in data/projects.ts. */
+  const caseStudies = portfolioProjects();
 
   return (
     <>
@@ -26,41 +33,59 @@ export default function PortfolioPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             Completed work
           </p>
           <h1 className="mt-2 text-h1">Projects we have actually built</h1>
           <p className="mt-5 text-body-lg text-ink-500">
-            Every photograph here is a real Blue Landscaping job. No stock imagery, no AI renders —
-            design concepts from the visualizer live on their own page and are always labeled as
-            such.
+            {PHOTO_TOTAL} photographs of real Blue Landscaping jobs across Kent, Renton, Auburn and
+            Greater Seattle. No stock imagery and no AI renders — design concepts from the
+            visualizer live on their own page and are always labeled as such.
           </p>
         </header>
-
-        <div className="mt-12">
-          {projects.length > 0 ? (
-            <PortfolioBrowser projects={projects} />
-          ) : (
-            /* Honest empty state. Better than inventing a portfolio, and it
-               points at the thing that IS available today. */
-            <div className="rounded-sm border border-ink-200 bg-white p-8">
-              <h2 className="text-h3">Photography is being shot now</h2>
-              <p className="mt-3 max-w-prose text-body text-ink-500">
-                We are photographing current jobs to a fixed before/after standard rather than
-                filling this page with stock images or other companies&rsquo; work. Until real pairs
-                are up here, the fastest way to see what we build is to ask — we will walk you
-                through recent jobs on the phone, or show you one in person near you.
-              </p>
-              <div className="mt-6">
-                <VisualizerTeaser
-                  headline="Or design your own yard right now"
-                  body="The visualizer uses the exact materials we install, so what it draws is what we can build."
-                />
-              </div>
-            </div>
-          )}
-        </div>
       </div>
+
+      {/* Titled projects, with the filter */}
+      <section className="shell pb-16">
+        <ProjectGallery
+          heading="Featured projects"
+          lead="Filter by the kind of work, or search. Tap a photograph to see it full size."
+        />
+      </section>
+
+      {/* Documented before/after case studies, when they exist */}
+      {caseStudies.length > 0 && (
+        <section className="border-y border-ink-200 bg-white">
+          <div className="shell section">
+            <h2 className="text-h2">Before and after, documented</h2>
+            <div className="mt-8">
+              <PortfolioBrowser projects={caseStudies} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* The whole library */}
+      <section id="every-photo" className="scroll-mt-24 bg-ink-50">
+        <div className="shell section">
+          <div className="max-w-prose">
+            <h2 className="text-h2">Every photo</h2>
+            <p className="mt-4 text-body-lg text-ink-500">
+              The full library, straight off the jobs. Filter by the kind of work.
+            </p>
+          </div>
+          <div className="mt-8">
+            <PhotoWall />
+          </div>
+        </div>
+      </section>
+
+      <section className="shell section-tight">
+        <VisualizerTeaser
+          headline="Or design your own yard right now"
+          body="The visualizer uses the exact materials we install, so what it draws is what we can build."
+        />
+      </section>
 
       <CtaBand />
     </>

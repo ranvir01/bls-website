@@ -87,7 +87,7 @@ export function Hero() {
               initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: ease.out }}
-              className="text-caption font-semibold uppercase tracking-wide text-brand-50"
+              className="eyebrow text-brand-50"
             >
               Kent, WA · Licensed &amp; insured · Since {business.foundedYear}
             </m.p>
@@ -124,7 +124,7 @@ export function Hero() {
               transition={{ delay: 0.45, duration: 0.5, ease: ease.out }}
               className="mt-9 flex flex-col gap-3 sm:flex-row"
             >
-              <Button asChild size="lg">
+              <Button asChild variant="onPhoto" size="lg">
                 <Link href="/quote">
                   Get your free quote
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />

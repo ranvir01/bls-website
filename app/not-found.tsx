@@ -14,7 +14,7 @@ export default function NotFound() {
   return (
     <div className="shell py-24 lg:py-32">
       <div className="max-w-prose">
-        <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">404</p>
+        <p className="eyebrow text-leaf-600">404</p>
         <h1 className="mt-2 text-h1">That page is not here</h1>
         <p className="mt-5 text-body-lg text-ink-500">
           The link may be out of date — we reorganised this site, and some older URLs moved. Here is

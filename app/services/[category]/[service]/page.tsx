@@ -17,6 +17,7 @@ import {
 import { JsonLd } from '@/components/json-ld';
 import { Reveal } from '@/components/motion/reveal';
 import { ProjectGrid } from '@/components/portfolio/project-grid';
+import { ServiceGallery } from '@/components/gallery/service-gallery';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { getServiceContent } from '@/data/content/services';
@@ -124,7 +125,7 @@ export default function ServicePage({ params }: Params) {
 
       <article>
         <header className="shell pt-8">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             {category.name}
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
@@ -188,7 +189,16 @@ export default function ServicePage({ params }: Params) {
               </div>
             </Reveal>
 
-            {/* Renders nothing until real project photography exists. */}
+            {/* The job photography for this discipline. */}
+            <Reveal as="div">
+              <ServiceGallery
+                serviceSlug={ref.slug}
+                serviceName={ref.name}
+                category={ref.category}
+              />
+            </Reveal>
+
+            {/* Documented before/after case studies, when any exist. */}
             <ProjectGrid
               projects={serviceProjects}
               heading={`Recent ${ref.name.toLowerCase()} projects`}

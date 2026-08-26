@@ -78,7 +78,7 @@ export function MobileActionBar() {
 
             <Link
               href="/quote"
-              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 bg-leaf-600 text-white transition-colors active:bg-leaf-600/90"
+              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 bg-ember-700 text-white transition-colors active:bg-ember-800"
             >
               <PencilRuler className="h-5 w-5" aria-hidden="true" />
               <span className="text-[11px] font-semibold uppercase tracking-wide">Free Quote</span>

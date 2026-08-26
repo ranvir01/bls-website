@@ -153,7 +153,7 @@ function Block({ block }: { block: BlogBlock }) {
     case 'callout':
       return (
         <aside className="mt-8 border-l-2 border-leaf-600 bg-white py-4 pl-5 pr-4">
-          <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">
+          <p className="eyebrow text-leaf-600">
             {block.title}
           </p>
           <p className="mt-2 text-body text-ink-800">{block.text}</p>
@@ -178,7 +178,7 @@ function Block({ block }: { block: BlogBlock }) {
                     <th
                       key={cell}
                       scope="col"
-                      className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-ink-500"
+                      className="px-4 py-3 eyebrow text-ink-500"
                     >
                       {cell}
                     </th>

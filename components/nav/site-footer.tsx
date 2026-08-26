@@ -15,6 +15,17 @@ import { allCityLinks, allServiceLinks, companyLinks, legalLinks } from '@/lib/n
  *
  * Server component: no interactivity, so none of this costs client JS.
  */
+/**
+ * The one set of hours, when every day of the week shares it. Null the moment
+ * any day differs, which puts the per-day list back automatically.
+ */
+const uniformHours = (() => {
+  const [first, ...rest] = business.hours;
+  if (!first?.opens || !first.closes) return null;
+  const same = rest.every((h) => h.opens === first.opens && h.closes === first.closes);
+  return same ? { opens: first.opens, closes: first.closes } : null;
+})();
+
 export function SiteFooter() {
   const years = yearsInBusiness();
 
@@ -24,7 +35,7 @@ export function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Services — all of them */}
           <nav aria-labelledby="footer-services">
-            <h2 id="footer-services" className="mb-4 text-caption font-semibold uppercase tracking-wide text-brand-50">
+            <h2 id="footer-services" className="mb-4 eyebrow text-brand-50">
               Services
             </h2>
             <ul className="space-y-2">
@@ -43,7 +54,7 @@ export function SiteFooter() {
 
           {/* Service areas — all of them */}
           <nav aria-labelledby="footer-areas">
-            <h2 id="footer-areas" className="mb-4 text-caption font-semibold uppercase tracking-wide text-brand-50">
+            <h2 id="footer-areas" className="mb-4 eyebrow text-brand-50">
               Service Areas
             </h2>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -62,7 +73,7 @@ export function SiteFooter() {
 
           {/* Company */}
           <nav aria-labelledby="footer-company">
-            <h2 id="footer-company" className="mb-4 text-caption font-semibold uppercase tracking-wide text-brand-50">
+            <h2 id="footer-company" className="mb-4 eyebrow text-brand-50">
               Company
             </h2>
             <ul className="space-y-2">
@@ -148,15 +159,26 @@ export function SiteFooter() {
               )}
             </div>
 
-            <h2 className="mb-2 mt-5 text-caption font-semibold uppercase tracking-wide text-brand-50">Hours</h2>
-            <ul className="space-y-1">
-              {business.hours.map((h) => (
-                <li key={h.day} className="flex justify-between gap-4 text-caption text-ink-200/70">
-                  <span>{h.day.slice(0, 3)}</span>
-                  <span>{h.opens && h.closes ? `${to12h(h.opens)} – ${to12h(h.closes)}` : 'Closed'}</span>
-                </li>
-              ))}
-            </ul>
+            <h2 className="mb-2 mt-5 eyebrow text-brand-50">Hours</h2>
+            {/* Seven identical rows is a table nobody reads. When every day is
+                the same, say that in one line; the per-day list only comes back
+                if the hours ever diverge again. */}
+            {uniformHours ? (
+              <p className="text-caption text-ink-200/70">
+                Open seven days
+                <br />
+                {to12h(uniformHours.opens)} – {to12h(uniformHours.closes)}
+              </p>
+            ) : (
+              <ul className="space-y-1">
+                {business.hours.map((h) => (
+                  <li key={h.day} className="flex justify-between gap-4 text-caption text-ink-200/70">
+                    <span>{h.day.slice(0, 3)}</span>
+                    <span>{h.opens && h.closes ? `${to12h(h.opens)} – ${to12h(h.closes)}` : 'Closed'}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>

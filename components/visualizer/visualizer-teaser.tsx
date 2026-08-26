@@ -23,7 +23,7 @@ export function VisualizerTeaser({
     <section className="overflow-hidden rounded-sm border border-brand-600/25 bg-brand-50/40">
       <div className="grid gap-6 p-7 md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:p-10">
         <div>
-          <p className="inline-flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-leaf-600">
+          <p className="inline-flex items-center gap-1.5 eyebrow text-leaf-600">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
             Yard visualizer
           </p>

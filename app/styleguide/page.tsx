@@ -33,7 +33,7 @@ export default function StyleguidePage() {
   return (
     <div className="shell space-y-16 py-24 lg:py-32">
       <header>
-        <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">Internal</p>
+        <p className="eyebrow text-leaf-600">Internal</p>
         <h1 className="mt-2 text-h1">Design system</h1>
         <p className="mt-4 max-w-prose text-body-lg text-ink-500">
           Every token and primitive on the site. This page is noindex and disallowed in robots.txt.

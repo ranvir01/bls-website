@@ -5,6 +5,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand, LinkCluster, QuickAnswer, TrustBar } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { NapBlock } from '@/components/nap-block';
+import { OwnerPortrait } from '@/components/gallery/owner-portrait';
 import { Reveal } from '@/components/motion/reveal';
 import { business, yearsInBusiness } from '@/data/business';
 import { categories, cities, cityPath } from '@/data/taxonomy';
@@ -28,7 +29,7 @@ export default function AboutPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">About us</p>
+          <p className="eyebrow text-brand-600">About us</p>
           <h1 className="mt-2 text-h1">A Kent contractor that designs and builds its own work</h1>
           <QuickAnswer>
             {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor based at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear}, owned by ${business.owner}, and operating under Washington contractor registration ${business.license.number} with a $12,000 bond and $1M liability coverage.`}
@@ -37,6 +38,15 @@ export default function AboutPage() {
       </div>
 
       <TrustBar />
+
+      {/* The crew. On an About page this is the whole point — a homeowner is
+          deciding whether to trust these particular people with a trench next
+          to their foundation. */}
+      <section className="bg-ink-50">
+        <div className="shell section-tight">
+          <OwnerPortrait />
+        </div>
+      </section>
 
       <div className="shell grid gap-12 pb-16 pt-16 lg:grid-cols-12 lg:gap-16">
         <div className="min-w-0 space-y-12 lg:col-span-8">

@@ -22,6 +22,7 @@ import {
   type LeadInput,
 } from '@/lib/lead-schema';
 import { ease } from '@/lib/motion';
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const STORAGE_KEY = 'bls-quote-progress';
@@ -236,7 +237,7 @@ export function QuoteForm({
 
         <div className="mb-6">
           <div className="mb-2 flex items-baseline justify-between">
-            <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+            <p className="eyebrow text-brand-600">
               Step {step + 1} of {TOTAL_STEPS}
             </p>
             <p className="text-caption text-ink-500">Takes about a minute</p>
@@ -427,7 +428,7 @@ export function QuoteForm({
             <button
               type="button"
               onClick={goNext}
-              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-leaf-600 px-6 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90"
+              className={cn(buttonVariants({ variant: 'primary', size: 'md' }), 'flex-1')}
             >
               Continue
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -436,7 +437,7 @@ export function QuoteForm({
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-leaf-600 px-6 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90 disabled:opacity-70"
+              className={cn(buttonVariants({ variant: 'primary', size: 'md' }), 'flex-1')}
             >
               {submitting ? (
                 <>
@@ -521,7 +522,7 @@ function ChipGroup({
 }) {
   return (
     <fieldset>
-      <legend className="mb-2.5 text-caption font-semibold uppercase tracking-wide text-ink-500">
+      <legend className="mb-2.5 eyebrow text-ink-500">
         {legend}
       </legend>
       <div className="flex flex-wrap gap-2">
@@ -595,7 +596,7 @@ function SuccessPanel({ name, className }: { name?: string; className?: string }
       <a
         href={TEL_HREF}
         onClick={() => trackEvent('click_to_call', { location: 'quote_success' })}
-        className="mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-sm bg-leaf-600 px-6 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90"
+        className={cn(buttonVariants({ variant: 'primary', size: 'md' }), 'mt-5')}
       >
         <Phone className="h-4 w-4" aria-hidden="true" />
         {PHONE.display}

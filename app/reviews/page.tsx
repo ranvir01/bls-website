@@ -29,7 +29,7 @@ export default function ReviewsPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Reviews</p>
+          <p className="eyebrow text-brand-600">Reviews</p>
           <h1 className="mt-2 text-h1">What customers say</h1>
 
           {average !== null ? (

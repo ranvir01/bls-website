@@ -30,7 +30,7 @@ export default function LocationsPage() {
 
       <div className="shell pb-16 pt-8">
         <header>
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             Where we work
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">Service areas across Greater Seattle</h1>

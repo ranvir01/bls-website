@@ -41,7 +41,7 @@ export default function ServicesPage() {
 
       <div className="shell pb-16 pt-8">
         <header>
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             What we build
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">Services in Kent &amp; Greater Seattle</h1>
@@ -81,7 +81,8 @@ export default function ServicesPage() {
                         <ServiceArt
                           slug={service.slug}
                           name={service.name}
-                          className="aspect-[16/10] w-full [&_img]:group-hover:scale-105"
+                          category={service.category}
+                          className="aspect-[16/10] w-full"
                         />
                         <div className="flex flex-1 flex-col p-5">
                           <h3 className="text-body-lg font-semibold text-brand-900 group-hover:text-brand-600">

@@ -55,9 +55,9 @@ export function NapBlock({ heading = 'Blue Landscaping Services' }: { heading?: 
         <p className="flex items-start gap-2.5 text-caption text-ink-500">
           <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
           <span>
-            Mon–Fri 7am–6pm · Sat 8am–4pm
+            Open seven days
             <br />
-            Closed Sunday
+            7am – 6pm
           </span>
         </p>
         <p className="mt-3 flex items-start gap-2.5 text-caption text-ink-500">

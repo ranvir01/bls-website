@@ -79,9 +79,41 @@ const RULES = [
     allow: ['scripts/verify.mjs'],
   },
   {
-    id: 'hotlinked-images',
-    pattern: /https?:\/\/(images\.unsplash\.com|images\.pexels\.com|i\.imgur\.com)/i,
-    message: 'third-party hotlinked image — all imagery must be self-hosted',
+    id: 'stock-photo-hosts',
+    /*
+     * Stock libraries only.
+     *
+     * This rule used to include i.imgur.com, on the assumption that any
+     * remote image host was a smell. That was wrong, and it was wrong in a way
+     * that mattered: the company's entire photo library — 136 photographs of
+     * their own completed jobs — is hosted on Imgur, and banning the host
+     * banned the work. Imgur is declared in next.config.mjs remotePatterns and
+     * served through lib/imgur.ts, which is a first-party asset host, not a
+     * hotlink.
+     *
+     * What this rule is actually for is the thing the old site did: dropping
+     * somebody else's stock photograph onto a service page so the page looked
+     * finished. That is still forbidden, and always will be.
+     */
+    pattern:
+      /https?:\/\/(images\.unsplash\.com|images\.pexels\.com|(?:\w+\.)?pixabay\.com|(?:\w+\.)?shutterstock\.com|(?:\w+\.)?istockphoto\.com|(?:\w+\.)?gettyimages\.com|(?:\w+\.)?freepik\.com)/i,
+    message: 'stock photo host — every image on this site must be real Blue Landscaping work',
+  },
+  {
+    id: 'undeclared-remote-image-host',
+    /*
+     * Any OTHER remote image host is still a smell, because it will not be in
+     * remotePatterns and next/image will refuse it at runtime. Imgur is the one
+     * declared exception; adding a second host means adding it in three places
+     * and this check is the reminder.
+     */
+    pattern: /https?:\/\/[\w.-]+\/[^\s'"`)]*\.(?:jpe?g|png|webp|avif|gif)\b/i,
+    match(text) {
+      const urls = text.match(/https?:\/\/[\w.-]+\/[^\s'"`)]*\.(?:jpe?g|png|webp|avif|gif)\b/gi) ?? [];
+      return urls.some((u) => !/^https:\/\/i\.imgur\.com\//i.test(u));
+    },
+    message: 'remote image host that is not declared in next.config.mjs remotePatterns',
+    allow: ['scripts/verify.mjs', 'docs/'],
   },
   {
     id: 'fabricated-rating',
@@ -158,7 +190,7 @@ async function main() {
   }
 
   for (const n of notes) console.log(`  ${n}`);
-  console.log('\nAcceptance checks passed: no fabricated claims, no hotlinked images, no placeholders.');
+  console.log('\nAcceptance checks passed: no fabricated claims, no stock imagery, no placeholders.');
 }
 
 await main();

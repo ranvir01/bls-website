@@ -5,14 +5,15 @@ import { CtaBand, FaqList, ProcessSteps, SectionHeader, TrustBar } from '@/compo
 import { ConceptToBuiltGallery } from '@/components/portfolio/concept-to-built';
 import { Hero } from '@/components/home/hero';
 import { JsonLd } from '@/components/json-ld';
+import { OwnerShowcase } from '@/components/home/owner-showcase';
+import { ProjectGallery } from '@/components/gallery/project-gallery';
 import { Reveal } from '@/components/motion/reveal';
-import { ProjectGrid } from '@/components/portfolio/project-grid';
 import { ReviewsSection } from '@/components/reviews-section';
-import { ServiceArt } from '@/components/service-art';
+import { ServicesShowcase } from '@/components/home/services-showcase';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { homeFaqs, howItWorks, whyUs } from '@/data/content/home';
 import { getCategoryContent } from '@/data/content/categories';
-import { conceptToBuiltProjects, portfolioProjects } from '@/data/projects';
+import { conceptToBuiltProjects } from '@/data/projects';
 import { reviews } from '@/data/reviews';
 import {
   categories,
@@ -24,8 +25,30 @@ import {
 } from '@/data/taxonomy';
 import { faqSchema, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
 
+/**
+ * Homepage.
+ *
+ * Section order is deliberate and was set by the owner:
+ *
+ *   hero → who you are hiring → what we build → work we have done → …
+ *
+ * That is also what the research says converts for home services. A homeowner
+ * arriving here is deciding whether to let strangers dig next to their house.
+ * They want to see a face, then see the work, then read the details — in that
+ * order. Credentials and process come after the proof, not before it.
+ */
 export default function HomePage() {
-  const featured = portfolioProjects().slice(0, 3);
+  const showcaseCategories = categories.map((category) => ({
+    slug: category.slug,
+    name: category.name,
+    lead: getCategoryContent(category.slug)?.quickAnswer.split('. ')[0] + '.' || category.blurb,
+    services: servicesInCategory(category.slug).map((service) => ({
+      slug: service.slug,
+      name: service.name,
+      blurb: service.blurb,
+      href: servicePath(service.slug),
+    })),
+  }));
 
   return (
     <>
@@ -40,80 +63,33 @@ export default function HomePage() {
       <Hero />
       <TrustBar />
 
-      {/* ── Services ───────────────────────────────────────────────────────── */}
-      <section className="shell section">
-        <SectionHeader
-          eyebrow="What we build"
-          title="What we build"
-          lead="Hardscaping, irrigation and landscaping. All of it built by our own crew, all of it specified for this climate."
-        />
+      {/* ── Who you are hiring ─────────────────────────────────────────────── */}
+      <OwnerShowcase />
 
-        <div className="mt-12 space-y-12">
-          {categories.map((category) => {
-            const content = getCategoryContent(category.slug);
-            const children = servicesInCategory(category.slug);
+      {/* ── What we build, with the job photography ────────────────────────── */}
+      <ServicesShowcase categories={showcaseCategories} />
 
-            return (
-              <Reveal as="section" key={category.slug}>
-                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-ink-200 pb-3">
-                  <h3 className="text-h3">{category.name}</h3>
-                  <Link
-                    href={`/services/${category.slug}`}
-                    className="inline-flex min-h-[44px] items-center gap-1.5 text-caption font-semibold text-brand-600 underline underline-offset-4"
-                  >
-                    All {category.name.toLowerCase()}
-                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
-                </div>
-                <p className="mt-3 max-w-prose text-body text-ink-500">
-                  {content?.quickAnswer.split('. ')[0]}.
-                </p>
-                <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  {children.map((service) => (
-                    <li key={service.slug}>
-                      <Link
-                        href={servicePath(service.slug)}
-                        className="group flex h-full flex-col overflow-hidden rounded-lg border border-ink-200 bg-white transition-shadow hover:shadow-card"
-                      >
-                        <ServiceArt
-                          slug={service.slug}
-                          name={service.name}
-                          className="aspect-[16/10] w-full [&_img]:group-hover:scale-105"
-                        />
-                        <span className="flex flex-1 flex-col p-4">
-                          <span className="text-body font-semibold text-brand-900 group-hover:text-brand-600">
-                            {service.name}
-                          </span>
-                          <span className="mt-1.5 text-caption text-ink-500">{service.blurb}</span>
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            );
-          })}
+      {/* ── Work we have done ──────────────────────────────────────────────── */}
+      <section className="border-y border-ink-200 bg-white">
+        <div className="shell section">
+          <ProjectGallery
+            limit={6}
+            showFilters={false}
+            heading="Work we have done"
+            lead="Real projects across Kent, Renton, Auburn and Greater Seattle. Tap any photograph to see it full size."
+          />
+          <Link
+            href="/portfolio"
+            className="mt-10 inline-flex min-h-[44px] items-center gap-1.5 text-body font-semibold text-brand-700 underline underline-offset-4 hover:text-brand-600"
+          >
+            See the full portfolio
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
-      {/* ── Featured work — hidden entirely until real photos exist ─────────── */}
-      {featured.length > 0 && (
-        <section className="border-y border-ink-200 bg-white">
-          <div className="shell section">
-            <ProjectGrid projects={featured} heading="Recent work" />
-            <Link
-              href="/portfolio"
-              className="mt-8 inline-flex min-h-[44px] items-center gap-1.5 text-body font-medium text-brand-600 underline underline-offset-4"
-            >
-              See the full portfolio
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </div>
-        </section>
-      )}
-
-      {/* ── Designed and built by the same crew ────────────────────────────── */}
-      <section className="bg-white">
+      {/* ── Why homeowners pick us ─────────────────────────────────────────── */}
+      <section className="bg-ink-50">
         <div className="shell section">
           <SectionHeader
             eyebrow="Why us"
@@ -122,7 +98,7 @@ export default function HomePage() {
           />
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {whyUs.map((item) => (
-              <Reveal key={item.title} className="border-l-2 border-brand-50 pl-6">
+              <Reveal key={item.title} className="border-l-2 border-brand-100 pl-6">
                 <h3 className="text-body-lg font-semibold text-brand-900">{item.title}</h3>
                 <p className="mt-2 text-body text-ink-500">{item.body}</p>
               </Reveal>
@@ -152,7 +128,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/process"
-            className="mt-8 inline-flex min-h-[44px] items-center gap-1.5 text-body font-medium text-brand-600 underline underline-offset-4"
+            className="mt-8 inline-flex min-h-[44px] items-center gap-1.5 text-body font-semibold text-brand-700 underline underline-offset-4 hover:text-brand-600"
           >
             More about how we work
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -170,7 +146,7 @@ export default function HomePage() {
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {regions.map((region) => (
             <div key={region}>
-              <h3 className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+              <h3 className="eyebrow text-brand-600">
                 {region}
               </h3>
               <ul className="mt-3 space-y-1.5">

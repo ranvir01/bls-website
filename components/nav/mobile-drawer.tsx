@@ -172,12 +172,12 @@ function DrawerAccordion({
                   {col.href ? (
                     <Link
                       href={col.href}
-                      className="mb-1 block px-2 text-caption font-semibold uppercase tracking-wide text-brand-600"
+                      className="mb-1 block px-2 eyebrow text-brand-600"
                     >
                       {col.heading}
                     </Link>
                   ) : (
-                    <p className="mb-1 px-2 text-caption font-semibold uppercase tracking-wide text-brand-600">
+                    <p className="mb-1 px-2 eyebrow text-brand-600">
                       {col.heading}
                     </p>
                   )}

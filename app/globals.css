@@ -26,7 +26,7 @@
     --muted: 214 32% 91%; /* ink-200 */
     --muted-foreground: 215 16% 47%; /* ink-500 */
 
-    --accent: 150 55% 32%; /* leaf-600 — calls to action */
+    --accent: 22 91% 38%; /* ember-700 — the action colour */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 42%;
@@ -73,10 +73,27 @@
     text-wrap: pretty;
   }
 
-  /* Focus ring on everything focusable, offset so it clears the element's own
-     border. Never remove this without a replacement. */
+  /*
+   * Focus ring. Never remove this without a replacement.
+   *
+   * Two stacked shadows, white inside and navy outside, rather than a single
+   * ring with an offset colour. The site has four surface types — white pages,
+   * the navy band, a gold button fill and a photograph — and no single ring
+   * colour clears 3:1 on all of them; the best single colour manages 1.35:1
+   * somewhere. White and navy contrast 14.42:1 with EACH OTHER, so whichever
+   * surface the control lands on, one of the two rings is always visible.
+   *
+   * This has to be a box-shadow and not Tailwind's `ring-*`, because the
+   * buttons set their own focus shadow. Both compile to `box-shadow`, so the
+   * previous `ring-2 ring-brand-600` here stacked on top of the button's ring
+   * rather than being overridden by it — and brand-600 on the navy band is
+   * 2.30:1, so the outer, visible ring was the failing one.
+   */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-background;
+    outline: none;
+    box-shadow:
+      0 0 0 2px #ffffff,
+      0 0 0 4px #002566;
   }
 
   /* iOS zooms the viewport when a focused input is under 16px. Never allow it. */
@@ -99,6 +116,18 @@
 
   .section-tight {
     @apply py-12 md:py-16;
+  }
+
+  /*
+   * The small uppercase label above a heading.
+   *
+   * The pattern was duplicated across fifteen-plus files with `tracking-wide`,
+   * which is 0.025em. Uppercase at 14px needs roughly three times that or the
+   * letterforms crowd — small caps are the one place where generous tracking
+   * is not a stylistic choice but a legibility requirement.
+   */
+  .eyebrow {
+    @apply text-caption font-semibold uppercase tracking-[0.08em];
   }
 
   /* Content column. */
@@ -128,6 +157,32 @@
      Radix does not emit a `data-radix-dialog-content` attribute. */
   body:has([role='dialog'][data-state='open']) .mobile-action-bar {
     display: none;
+  }
+
+  /* Horizontal photo strips. A scroll container with a hidden scrollbar is a
+     usability trap on desktop — there is then nothing on screen saying the
+     content continues. This keeps a thin one, tinted so it reads as part of
+     the design rather than a browser default. */
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.ink.300') transparent;
+  }
+
+  .scrollbar-slim::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scrollbar-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: theme('colors.ink.300');
+  }
+
+  .scrollbar-slim:hover::-webkit-scrollbar-thumb {
+    background: theme('colors.ink.400');
   }
 
   .shimmer {

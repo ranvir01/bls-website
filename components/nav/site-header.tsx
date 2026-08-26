@@ -35,9 +35,13 @@ export function SiteHeader() {
   const { scrollY } = useScroll();
   const pathname = usePathname();
 
-  // Only the homepage and other hero pages start transparent; content pages
-  // need a solid bar from the top or the logo lands on body text.
-  const overHero = pathname === '/' || pathname === '/visualizer';
+  // Only pages that actually open with a full-bleed photograph start
+  // transparent. /visualizer used to be in this list and is a plain white
+  // page: the scrim painted a grey band across the top of it, the nav links
+  // were white-on-near-white, and the gold CTA — which is sized for a dark
+  // backdrop — sat at 1.58:1. If a page here ever loses its hero, take it out
+  // of this list at the same time.
+  const overHero = pathname === '/';
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const next = y > SCROLL_THRESHOLD;
@@ -115,32 +119,36 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            {/* Click-to-call is always visible, on every breakpoint. */}
+            {/*
+              Click-to-call, with the digits visible at every breakpoint.
+              This used to collapse to a bare handset glyph under 768px. An
+              unlabelled icon is a guess, and calling is the single highest-value
+              action on a contractor site — the number itself is the call to
+              action, so it stays readable on a phone even if it costs the
+              layout some room.
+            */}
             <a
               href={TEL_HREF}
               onClick={() => trackEvent('click_to_call', { location: 'header' })}
               className={cn(
-                'hidden items-center gap-2 rounded-sm px-3 py-2 text-caption font-semibold transition-colors md:inline-flex',
-                solid ? 'text-brand-900 hover:text-brand-600' : 'text-white hover:text-brand-50',
+                'inline-flex min-h-[44px] items-center gap-1.5 rounded-lg px-2 text-caption font-semibold transition-colors sm:gap-2 sm:px-3',
+                solid ? 'text-brand-900 hover:bg-brand-50' : 'text-white hover:bg-white/10',
               )}
             >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              {PHONE.display}
+              <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <span className="whitespace-nowrap">{PHONE.display}</span>
             </a>
 
-            <a
-              href={TEL_HREF}
-              aria-label={`Call ${PHONE.display}`}
-              onClick={() => trackEvent('click_to_call', { location: 'header_icon' })}
-              className={cn(
-                'inline-flex h-11 w-11 items-center justify-center rounded-sm transition-colors md:hidden',
-                solid ? 'text-brand-900 hover:bg-ink-200/60' : 'text-white hover:bg-white/10',
-              )}
+            {/* The header changes surface as you scroll — transparent over
+                the hero photo, near-white once it goes solid. The action
+                colour has to follow it, or the button is 2.9:1 against one of
+                the two states. */}
+            <Button
+              asChild
+              variant={solid ? 'primary' : 'onDark'}
+              size="sm"
+              className="hidden sm:inline-flex"
             >
-              <Phone className="h-5 w-5" aria-hidden="true" />
-            </a>
-
-            <Button asChild size="sm" className="hidden sm:inline-flex">
               <Link href="/quote">Get Free Quote</Link>
             </Button>
 

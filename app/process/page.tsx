@@ -85,7 +85,7 @@ export default function ProcessPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
+          <p className="eyebrow text-brand-600">
             How we work
           </p>
           <h1 className="mt-2 text-h1">From first call to final walkthrough</h1>

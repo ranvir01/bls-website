@@ -24,7 +24,7 @@ export default function BlogIndexPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Guides</p>
+          <p className="eyebrow text-brand-600">Guides</p>
           <h1 className="mt-2 text-h1">Real numbers and straight answers</h1>
           <p className="mt-5 text-body-lg text-ink-500">
             What things actually cost in King County, which permits you actually need, and what
