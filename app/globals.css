@@ -4,54 +4,37 @@
 
 @layer base {
   :root {
-    /* ── Phase 1 palette: PNW stone-and-moss ──────────────────────────────
-       Declared as HSL triplets so Tailwind's <alpha-value> syntax works.  */
+    /* Semantic aliases for the ui/ primitives, expressed as HSL triplets so
+       Tailwind's <alpha-value> syntax works. The literal scales (brand, sky,
+       leaf, ink) live in tailwind.config.ts. */
 
-    --stone-950: 90 9% 6%;    /* #10120F — near-black, primary text          */
-    --stone-800: 100 7% 17%;  /* #2A2E28                                     */
-    --stone-500: 96 5% 43%;   /* #6E7468                                     */
-    --stone-200: 77 8% 84%;   /* #D8DAD3                                     */
-    --stone-50: 60 14% 96%;   /* #F7F7F4 — warm off-white, never pure white  */
-
-    --moss-700: 130 22% 29%;  /* #3A5A40 — primary brand                     */
-    --moss-500: 118 19% 42%;  /* #588157                                     */
-    --moss-100: 108 18% 87%;  /* #DAE4D8                                     */
-
-    --clay-600: 20 48% 44%;   /* #A65D3A — accent, CTAs                      */
-    --clay-400: 24 48% 59%;   /* #C98A63                                     */
-
-    --success: 130 22% 29%;
-    --warn: 35 78% 42%;
-    --error: 5 62% 44%;
-
-    /* ── Semantic aliases for the Radix ui/ primitives ─────────────────── */
-    --background: var(--stone-50);
-    --foreground: var(--stone-950);
+    --background: 0 0% 100%;
+    --foreground: 217 33% 17%; /* ink-800 */
 
     --card: 0 0% 100%;
-    --card-foreground: var(--stone-950);
+    --card-foreground: 217 33% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: var(--stone-950);
+    --popover-foreground: 217 33% 17%;
 
-    --primary: var(--moss-700);
-    --primary-foreground: var(--stone-50);
+    --primary: 219 100% 45%; /* brand-600 */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: var(--moss-100);
-    --secondary-foreground: var(--stone-950);
+    --secondary: 213 100% 93%; /* brand-100 */
+    --secondary-foreground: 218 100% 20%; /* brand-900 */
 
-    --muted: var(--stone-200);
-    --muted-foreground: var(--stone-500);
+    --muted: 214 32% 91%; /* ink-200 */
+    --muted-foreground: 215 16% 47%; /* ink-500 */
 
-    --accent: var(--clay-600);
+    --accent: 150 55% 32%; /* leaf-600 — calls to action */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: var(--error);
+    --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: var(--stone-200);
-    --input: var(--stone-200);
-    --ring: var(--moss-700);
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 219 100% 45%;
 
     /* Height of the sticky mobile action bar, so page bottoms can clear it. */
     --action-bar-h: 56px;
@@ -71,10 +54,10 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    /* Horizontal overflow is a bug to be fixed at the source, not clipped
-       globally — but a hard guard keeps one bad section from breaking every
-       page on a 360px phone. */
+    @apply bg-background text-ink-800 font-sans antialiased;
+    /* Horizontal overflow is a bug to fix at the source, not clip globally —
+       but a hard guard keeps one bad section from breaking every page on a
+       360px phone. */
     overflow-x: clip;
   }
 
@@ -82,7 +65,7 @@
   h2,
   h3,
   h4 {
-    @apply font-display text-stone-950;
+    @apply font-display font-bold text-brand-900;
     text-wrap: balance;
   }
 
@@ -90,10 +73,10 @@
     text-wrap: pretty;
   }
 
-  /* 2px moss focus ring on everything focusable, offset so it clears the
-     element's own border. Never remove this without a replacement. */
+  /* Focus ring on everything focusable, offset so it clears the element's own
+     border. Never remove this without a replacement. */
   :focus-visible {
-    @apply outline-none ring-2 ring-moss-700 ring-offset-2 ring-offset-background;
+    @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-background;
   }
 
   /* iOS zooms the viewport when a focused input is under 16px. Never allow it. */
@@ -104,21 +87,21 @@
   }
 
   ::selection {
-    @apply bg-moss-100 text-stone-950;
+    @apply bg-brand-100 text-brand-900;
   }
 }
 
 @layer components {
-  /* Standard section rhythm: py-20 mobile / py-32 desktop. */
+  /* Standard section rhythm. */
   .section {
-    @apply py-20 md:py-30;
+    @apply py-16 md:py-24;
   }
 
   .section-tight {
-    @apply py-14 md:py-20;
+    @apply py-12 md:py-16;
   }
 
-  /* Content column. Wider than .container's inner width would be alone. */
+  /* Content column. */
   .shell {
     @apply mx-auto w-full max-w-container px-5 lg:px-10;
   }
@@ -130,13 +113,13 @@
   /* The Quick Answer block — the unit AI search engines extract. Visually
      distinct so human readers treat it as the summary too. */
   .quick-answer {
-    @apply border-l-2 border-moss-700 bg-moss-100/40 py-4 pl-5 pr-4 text-body-lg text-stone-800;
+    @apply rounded-lg border-l-4 border-brand-600 bg-brand-50 px-5 py-4 text-body-lg text-ink-800;
   }
 
-  /* Shared photographic grade. Applied to every project/site photo so the
-     gallery reads as one shoot rather than a folder of phone pictures. */
+  /* Shared photographic grade, so imagery across the site reads as one set
+     rather than a folder of unrelated pictures. */
   .img-grade {
-    filter: saturate(0.92) contrast(1.02) brightness(1.02);
+    filter: saturate(1.02) contrast(1.02);
   }
 
   /* The sticky mobile action bar must not show through a modal scrim. Radix
@@ -148,7 +131,7 @@
   }
 
   .shimmer {
-    @apply relative overflow-hidden bg-stone-200;
+    @apply relative overflow-hidden bg-ink-200;
   }
 
   .shimmer::after {
@@ -165,8 +148,8 @@
 
 @layer utilities {
   /* Respect the OS setting. This is the single switch that satisfies the
-     Phase 3 accessibility rule for CSS-driven motion; Framer Motion is
-     handled separately via useReducedMotion in lib/motion.ts. */
+     accessibility rule for CSS-driven motion; Framer Motion is handled
+     separately via useReducedMotion in lib/motion.ts. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -183,14 +166,10 @@
   }
 
   /* Reserve room for the mobile action bar at the foot of the page.
-     Without this the bottom 56px of the document sits permanently under the
-     fixed bar, and any control that lands there is un-tappable — a tap hits
-     "Call" instead of the button the user aimed at. Verified in a browser:
-     the quote form's Continue button was being swallowed exactly this way. */
+     The bar's own top border makes it 1px taller than --action-bar-h, so
+     reserving exactly that height left the last row of links a pixel short.
+     The extra 1rem is deliberate breathing room, not a fudge factor. */
   .pb-action-bar {
-    /* The bar's own top border makes it 1px taller than --action-bar-h, so
-       reserving exactly that height left the last row of links a pixel short.
-       The extra 1rem is deliberate breathing room, not a fudge factor. */
     padding-bottom: calc(var(--action-bar-h) + 1rem + env(safe-area-inset-bottom));
   }
 }

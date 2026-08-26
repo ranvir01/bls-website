@@ -196,7 +196,7 @@ export function Visualizer() {
             />
             {photo ? (
               <div className="space-y-3">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-stone-200">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-ink-200">
                   {/* User-supplied data URL — next/image cannot optimize it. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={photo} alt="Your yard" className="h-full w-full object-cover" />
@@ -204,7 +204,7 @@ export function Visualizer() {
                 <button
                   type="button"
                   onClick={() => fileInput.current?.click()}
-                  className="text-caption font-medium text-moss-700 underline underline-offset-4"
+                  className="text-caption font-medium text-brand-600 underline underline-offset-4"
                 >
                   Use a different photo
                 </button>
@@ -213,21 +213,21 @@ export function Visualizer() {
               <button
                 type="button"
                 onClick={() => fileInput.current?.click()}
-                className="flex min-h-[140px] w-full flex-col items-center justify-center gap-2 rounded-sm border border-dashed border-stone-500 bg-white p-6 text-center transition-colors hover:border-moss-700"
+                className="flex min-h-[140px] w-full flex-col items-center justify-center gap-2 rounded-sm border border-dashed border-ink-500 bg-white p-6 text-center transition-colors hover:border-brand-600"
               >
-                <span className="flex gap-2 text-moss-700">
+                <span className="flex gap-2 text-brand-600">
                   <Camera className="h-5 w-5" aria-hidden="true" />
                   <Upload className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <span className="text-body font-medium text-stone-950">
+                <span className="text-body font-medium text-brand-900">
                   Take a photo or choose one
                 </span>
-                <span className="text-caption text-stone-500">
+                <span className="text-caption text-ink-500">
                   Stand back far enough to get the whole area in frame
                 </span>
               </button>
             )}
-            <p className="mt-2 text-caption text-stone-500">
+            <p className="mt-2 text-caption text-ink-500">
               Your photo stays in this session and is not stored unless you send us the design.
             </p>
           </Step>
@@ -261,14 +261,14 @@ export function Visualizer() {
                   className={cn(
                     'min-h-[44px] rounded-sm border px-4 text-body transition-colors',
                     styleId === s.id
-                      ? 'border-moss-700 bg-moss-100/50 font-medium ring-1 ring-moss-700'
-                      : 'border-stone-200 bg-white hover:border-stone-500',
-                    results[s.id] && styleId !== s.id && 'border-moss-500',
+                      ? 'border-brand-600 bg-brand-50/50 font-medium ring-1 ring-brand-600'
+                      : 'border-ink-200 bg-white hover:border-ink-500',
+                    results[s.id] && styleId !== s.id && 'border-sky-600',
                   )}
                 >
                   {s.label}
                   {results[s.id] && styleId !== s.id && (
-                    <span className="ml-1.5 text-caption text-moss-700">ready</span>
+                    <span className="ml-1.5 text-caption text-brand-600">ready</span>
                   )}
                 </button>
               ))}
@@ -283,7 +283,7 @@ export function Visualizer() {
                   if (!group) return null;
                   return (
                     <fieldset key={group.id}>
-                      <legend className="mb-2 text-caption font-semibold uppercase tracking-wide text-stone-500">
+                      <legend className="mb-2 text-caption font-semibold uppercase tracking-wide text-ink-500">
                         {group.label}
                       </legend>
                       <div className="flex flex-wrap gap-2">
@@ -307,8 +307,8 @@ export function Visualizer() {
                               className={cn(
                                 'min-h-[40px] rounded-sm border px-3 text-caption transition-colors',
                                 selected
-                                  ? 'border-moss-700 bg-moss-100/50 font-medium'
-                                  : 'border-stone-200 bg-white hover:border-stone-500',
+                                  ? 'border-brand-600 bg-brand-50/50 font-medium'
+                                  : 'border-ink-200 bg-white hover:border-ink-500',
                               )}
                             >
                               {option.label}
@@ -324,7 +324,7 @@ export function Visualizer() {
           )}
 
           <Step n={5} title="One measurement makes the estimate real">
-            <label htmlFor="ref-width" className="mb-1.5 block text-caption text-stone-500">
+            <label htmlFor="ref-width" className="mb-1.5 block text-caption text-ink-500">
               Roughly how wide is the back of your house, in feet?
             </label>
             <input
@@ -336,9 +336,9 @@ export function Visualizer() {
               value={referenceWidth}
               onChange={(e) => setReferenceWidth(e.target.value)}
               placeholder="32"
-              className="w-full max-w-[10rem] rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body focus:border-moss-700"
+              className="w-full max-w-[10rem] rounded-sm border border-ink-200 bg-white px-3 py-2.5 text-body focus:border-brand-600"
             />
-            <p className="mt-2 text-caption text-stone-500">
+            <p className="mt-2 text-caption text-ink-500">
               A rough number is fine. It is what lets us size the quantities instead of guessing.
             </p>
           </Step>
@@ -347,7 +347,7 @@ export function Visualizer() {
             type="button"
             onClick={() => void generate()}
             disabled={!canGenerate}
-            className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-sm bg-clay-600 px-7 text-body font-semibold text-white transition-colors hover:bg-clay-600/90 disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-sm bg-leaf-600 px-7 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {busy ? (
               <>
@@ -383,7 +383,7 @@ export function Visualizer() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: reduced ? 0.01 : 0.2, ease: ease.out }}
-                    className="shimmer aspect-[4/3] w-full rounded-sm border border-stone-200"
+                    className="shimmer aspect-[4/3] w-full rounded-sm border border-ink-200"
                   >
                     <span className="sr-only">Generating your design</span>
                   </m.div>
@@ -395,12 +395,12 @@ export function Visualizer() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex aspect-[4/3] w-full flex-col items-center justify-center rounded-sm border border-dashed border-stone-200 bg-white p-8 text-center"
+                    className="flex aspect-[4/3] w-full flex-col items-center justify-center rounded-sm border border-dashed border-ink-200 bg-white p-8 text-center"
                   >
-                    <p className="text-body-lg font-medium text-stone-950">
+                    <p className="text-body-lg font-medium text-brand-900">
                       Your design appears here
                     </p>
-                    <p className="mt-2 max-w-sm text-body text-stone-500">
+                    <p className="mt-2 max-w-sm text-body text-ink-500">
                       Pick a scope and a style, then hit the button. It takes about thirty seconds.
                     </p>
                   </m.div>
@@ -417,7 +417,7 @@ export function Visualizer() {
                   >
                     {current.image ? (
                       <figure className="relative">
-                        <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-stone-200 bg-stone-200">
+                        <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-ink-200 bg-ink-200">
                           {/* Provider output: either a remote URL or a data URL,
                               neither of which next/image can optimize. */}
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -433,10 +433,10 @@ export function Visualizer() {
                       </figure>
                     ) : (
                       <div className="rounded-sm border border-warn/30 bg-warn/5 p-6">
-                        <p className="text-body font-medium text-stone-950">
+                        <p className="text-body font-medium text-brand-900">
                           {current.message ?? 'Rendering is unavailable right now.'}
                         </p>
-                        <p className="mt-2 text-body text-stone-500">
+                        <p className="mt-2 text-body text-ink-500">
                           Your scope and cost range are below — that is the part that matters, and
                           it is built from the same selections.
                         </p>
@@ -448,7 +448,7 @@ export function Visualizer() {
                     {current.notices.map((notice) => (
                       <p
                         key={notice}
-                        className="rounded-sm border border-stone-200 bg-white px-4 py-3 text-caption text-stone-800"
+                        className="rounded-sm border border-ink-200 bg-white px-4 py-3 text-caption text-ink-800"
                       >
                         {notice}
                       </p>
@@ -456,7 +456,7 @@ export function Visualizer() {
 
                     {/* Element toggles */}
                     <fieldset>
-                      <legend className="mb-2 text-caption font-semibold uppercase tracking-wide text-stone-500">
+                      <legend className="mb-2 text-caption font-semibold uppercase tracking-wide text-ink-500">
                         Change something
                       </legend>
                       <div className="flex flex-wrap gap-2">
@@ -472,8 +472,8 @@ export function Visualizer() {
                               className={cn(
                                 'inline-flex min-h-[40px] items-center gap-1.5 rounded-sm border px-3 text-caption transition-colors disabled:opacity-60',
                                 on
-                                  ? 'border-moss-700 bg-moss-100/50 font-medium'
-                                  : 'border-stone-200 bg-white hover:border-stone-500',
+                                  ? 'border-brand-600 bg-brand-50/50 font-medium'
+                                  : 'border-ink-200 bg-white hover:border-ink-500',
                               )}
                             >
                               {on && <Check className="h-3.5 w-3.5" aria-hidden="true" />}
@@ -487,11 +487,11 @@ export function Visualizer() {
                     <ScopeSheet estimate={current.estimate} gated={!gateOpen} />
 
                     {!gateOpen ? (
-                      <div className="rounded-sm border border-moss-700/30 bg-moss-100/40 p-6">
+                      <div className="rounded-sm border border-brand-600/30 bg-brand-50/40 p-6">
                         <h3 className="text-h3">
                           Get the full-resolution design + written scope and cost range
                         </h3>
-                        <p className="mt-2 max-w-prose text-body text-stone-800">
+                        <p className="mt-2 max-w-prose text-body text-ink-800">
                           We will send the un-watermarked render along with a written scope sheet,
                           and an estimator will call to confirm the site details.
                         </p>
@@ -520,8 +520,8 @@ export function Visualizer() {
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="mb-3 flex items-center gap-2.5 text-body-lg font-semibold text-stone-950">
-        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-moss-700 text-[12px] font-bold text-white">
+      <h2 className="mb-3 flex items-center gap-2.5 text-body-lg font-semibold text-brand-900">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-[12px] font-bold text-white">
           {n}
         </span>
         {title}
@@ -550,30 +550,30 @@ function SelectCard({
       className={cn(
         'min-h-[64px] rounded-sm border p-4 text-left transition-colors',
         selected
-          ? 'border-moss-700 bg-moss-100/50 ring-1 ring-moss-700'
-          : 'border-stone-200 bg-white hover:border-stone-500',
+          ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600'
+          : 'border-ink-200 bg-white hover:border-ink-500',
       )}
     >
-      <span className="block text-body font-medium text-stone-950">{title}</span>
-      <span className="mt-0.5 block text-caption text-stone-500">{description}</span>
+      <span className="block text-body font-medium text-brand-900">{title}</span>
+      <span className="mt-0.5 block text-caption text-ink-500">{description}</span>
     </button>
   );
 }
 
 function ScopeSheet({ estimate, gated }: { estimate: Estimate; gated: boolean }) {
   return (
-    <section className="rounded-sm border border-stone-200 bg-white p-5">
+    <section className="rounded-sm border border-ink-200 bg-white p-5">
       <h3 className="text-h3">Scope &amp; cost range</h3>
-      <ul className="mt-4 divide-y divide-stone-200">
+      <ul className="mt-4 divide-y divide-ink-200">
         {estimate.lineItems.map((item) => (
           <li key={item.label} className="flex items-baseline justify-between gap-4 py-2.5">
             <span>
-              <span className="block text-body text-stone-950">{item.label}</span>
-              <span className="block text-caption text-stone-500">{item.detail}</span>
+              <span className="block text-body text-brand-900">{item.label}</span>
+              <span className="block text-caption text-ink-500">{item.detail}</span>
             </span>
             <span
               className={cn(
-                'shrink-0 whitespace-nowrap text-body font-semibold text-moss-700',
+                'shrink-0 whitespace-nowrap text-body font-semibold text-brand-600',
                 gated && 'select-none blur-[5px]',
               )}
               aria-hidden={gated}
@@ -584,11 +584,11 @@ function ScopeSheet({ estimate, gated }: { estimate: Estimate; gated: boolean })
         ))}
       </ul>
 
-      <div className="mt-4 flex items-baseline justify-between gap-4 border-t border-stone-200 pt-4">
-        <span className="text-body font-semibold text-stone-950">Total range</span>
+      <div className="mt-4 flex items-baseline justify-between gap-4 border-t border-ink-200 pt-4">
+        <span className="text-body font-semibold text-brand-900">Total range</span>
         <span
           className={cn(
-            'whitespace-nowrap text-body-lg font-bold text-stone-950',
+            'whitespace-nowrap text-body-lg font-bold text-brand-900',
             gated && 'select-none blur-[6px]',
           )}
           aria-hidden={gated}
@@ -597,10 +597,10 @@ function ScopeSheet({ estimate, gated }: { estimate: Estimate; gated: boolean })
         </span>
       </div>
 
-      <p className="mt-3 text-caption text-stone-500">{estimate.timeline}</p>
+      <p className="mt-3 text-caption text-ink-500">{estimate.timeline}</p>
       <ul className="mt-3 space-y-1.5">
         {estimate.notes.map((note) => (
-          <li key={note} className="text-caption text-stone-500">
+          <li key={note} className="text-caption text-ink-500">
             {note}
           </li>
         ))}

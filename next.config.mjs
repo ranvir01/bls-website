@@ -13,6 +13,14 @@ const nextConfig = {
     // All imagery is self-hosted. The old config set `unoptimized: true`, which
     // meant a 5MB phone photo was served verbatim to every mobile visitor.
     formats: ['image/avif', 'image/webp'],
+    // The generated service panels are SVG. next/image blocks SVG by default
+    // because a user-supplied SVG can carry script; these are first-party files
+    // produced by scripts/generate-service-art.mjs and served from /public, so
+    // the risk does not apply. The sandbox CSP and attachment disposition stay
+    // on regardless.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     deviceSizes: [360, 414, 640, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,

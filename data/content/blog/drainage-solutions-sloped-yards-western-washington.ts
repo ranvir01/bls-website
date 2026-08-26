@@ -162,7 +162,7 @@ const post: BlogPost = {
     {
       type: 'callout',
       title: 'One crew, from the diagnosis to the backfill',
-      text: 'Blue Landscaping Services designs in-house and self-performs the excavation, drainage and hardscape out of a Kent shop, which means the person who read your slope in the rain is the person who sets the fall on the pipe. Ranges above are typical installed figures for the Puget Sound market in 2026, not quotes. Licensed, bonded and insured in Washington, registration BLUELLS880K2. Call (253) 217-0814 to get on the schedule for a wet-weather site visit.',
+      text: 'Blue Landscaping Services designs in-house and self-performs the excavation, drainage and hardscape out of a Kent shop, which means the person who read your slope in the rain is the person who sets the fall on the pipe. Ranges above are typical installed figures for the Puget Sound market in 2026, not quotes. Licensed, bonded and insured in Washington, registration BLUELLS880K2. Call (253) 429-7052 to get on the schedule for a wet-weather site visit.',
     },
   ],
   faqs: [

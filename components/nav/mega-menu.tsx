@@ -31,7 +31,7 @@ export function MegaMenu({
   footer,
   /**
    * Whether the header is currently solid. Over a photographic hero the
-   * trigger has to be white — hardcoding stone-800 rendered "Services" and
+   * trigger has to be white — hardcoding ink-800 rendered "Services" and
    * "Service Areas" as dark text on a dark image, effectively invisible.
    */
   solid = true,
@@ -102,7 +102,7 @@ export function MegaMenu({
         aria-controls={panelId}
         className={cn(
           'inline-flex items-center gap-1 px-3 py-2 text-caption font-medium transition-colors',
-          solid ? 'text-stone-800 hover:text-moss-700' : 'text-white/90 hover:text-white',
+          solid ? 'text-ink-800 hover:text-brand-600' : 'text-white/90 hover:text-white',
         )}
       >
         {label}
@@ -115,7 +115,7 @@ export function MegaMenu({
       <div
         id={panelId}
         className={cn(
-          'absolute left-0 right-0 top-full border-b border-stone-200 bg-stone-50 shadow-card',
+          'absolute left-0 right-0 top-full border-b border-ink-200 bg-ink-50 shadow-card',
           'transition-[opacity,transform] duration-200 ease-out',
           open
             ? 'visible translate-y-0 opacity-100'
@@ -131,12 +131,12 @@ export function MegaMenu({
               {col.href ? (
                 <Link
                   href={col.href}
-                  className="mb-3 block text-caption font-semibold uppercase tracking-wide text-moss-700 hover:underline"
+                  className="mb-3 block text-caption font-semibold uppercase tracking-wide text-brand-600 hover:underline"
                 >
                   {col.heading}
                 </Link>
               ) : (
-                <p className="mb-3 text-caption font-semibold uppercase tracking-wide text-moss-700">
+                <p className="mb-3 text-caption font-semibold uppercase tracking-wide text-brand-600">
                   {col.heading}
                 </p>
               )}
@@ -145,13 +145,13 @@ export function MegaMenu({
                   <li key={link.href} className="break-inside-avoid pb-1.5">
                     <Link
                       href={link.href}
-                      className="group block rounded-sm px-2 py-1.5 -mx-2 transition-colors hover:bg-moss-100/60"
+                      className="group block rounded-sm px-2 py-1.5 -mx-2 transition-colors hover:bg-brand-50/60"
                     >
-                      <span className="block text-body text-stone-950 group-hover:text-moss-700">
+                      <span className="block text-body text-brand-900 group-hover:text-brand-600">
                         {link.label}
                       </span>
                       {link.description && (
-                        <span className="block text-caption text-stone-500">{link.description}</span>
+                        <span className="block text-caption text-ink-500">{link.description}</span>
                       )}
                     </Link>
                   </li>

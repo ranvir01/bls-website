@@ -52,7 +52,7 @@ export function MobileActionBar() {
           <m.div
             role="group"
             aria-label="Quick actions"
-            className="mobile-action-bar fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-stone-200 bg-stone-50/95 backdrop-blur-md safe-bottom md:hidden"
+            className="mobile-action-bar fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-ink-200 bg-ink-50/95 backdrop-blur-md safe-bottom md:hidden"
             initial={reduced ? { opacity: 0 } : { y: '100%' }}
             animate={reduced ? { opacity: 1 } : { y: 0 }}
             exit={reduced ? { opacity: 0 } : { y: '100%' }}
@@ -61,7 +61,7 @@ export function MobileActionBar() {
             <a
               href={TEL_HREF}
               onClick={() => trackEvent('click_to_call', { location: 'action_bar' })}
-              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 border-r border-stone-200 text-stone-950 transition-colors active:bg-stone-200/60"
+              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 border-r border-ink-200 text-brand-900 transition-colors active:bg-ink-200/60"
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
               <span className="text-[11px] font-semibold uppercase tracking-wide">Call</span>
@@ -70,7 +70,7 @@ export function MobileActionBar() {
             <a
               href={SMS_HREF}
               onClick={() => trackEvent('click_to_text', { location: 'action_bar' })}
-              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 border-r border-stone-200 text-stone-950 transition-colors active:bg-stone-200/60"
+              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 border-r border-ink-200 text-brand-900 transition-colors active:bg-ink-200/60"
             >
               <MessageSquare className="h-5 w-5" aria-hidden="true" />
               <span className="text-[11px] font-semibold uppercase tracking-wide">Text</span>
@@ -78,7 +78,7 @@ export function MobileActionBar() {
 
             <Link
               href="/quote"
-              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 bg-clay-600 text-white transition-colors active:bg-clay-600/90"
+              className="flex min-h-[56px] flex-col items-center justify-center gap-0.5 bg-leaf-600 text-white transition-colors active:bg-leaf-600/90"
             >
               <PencilRuler className="h-5 w-5" aria-hidden="true" />
               <span className="text-[11px] font-semibold uppercase tracking-wide">Free Quote</span>

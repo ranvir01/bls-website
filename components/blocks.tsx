@@ -32,12 +32,12 @@ export function SectionHeader({
   return (
     <div className={cn('max-w-prose', align === 'center' && 'mx-auto text-center')}>
       {eyebrow && (
-        <p className="mb-3 text-caption font-semibold uppercase tracking-wide text-moss-700">
+        <p className="mb-3 text-caption font-semibold uppercase tracking-wide text-brand-600">
           {eyebrow}
         </p>
       )}
       <Heading className={Heading === 'h1' ? 'text-h1' : 'text-h2'}>{title}</Heading>
-      {lead && <p className="mt-4 text-body-lg text-stone-500">{lead}</p>}
+      {lead && <p className="mt-4 text-body-lg text-ink-500">{lead}</p>}
     </div>
   );
 }
@@ -51,7 +51,7 @@ export function SectionHeader({
 export function QuickAnswer({ children }: { children: string }) {
   return (
     <div className="quick-answer my-8">
-      <p className="mb-1 text-caption font-semibold uppercase tracking-wide text-moss-700">
+      <p className="mb-1 text-caption font-semibold uppercase tracking-wide text-brand-600">
         Quick answer
       </p>
       <p>{children}</p>
@@ -61,7 +61,7 @@ export function QuickAnswer({ children }: { children: string }) {
 
 export function Prose({ paragraphs, className }: { paragraphs: string[]; className?: string }) {
   return (
-    <div className={cn('max-w-prose space-y-4 text-body-lg text-stone-800', className)}>
+    <div className={cn('max-w-prose space-y-4 text-body-lg text-ink-800', className)}>
       {paragraphs.map((p, i) => (
         <p key={i}>{p}</p>
       ))}
@@ -73,8 +73,8 @@ export function CheckList({ items, columns = 1 }: { items: string[]; columns?: 1
   return (
     <ul className={cn('grid gap-3', columns === 2 && 'sm:grid-cols-2')}>
       {items.map((item) => (
-        <li key={item} className="flex gap-3 text-body text-stone-800">
-          <Check className="mt-1 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+        <li key={item} className="flex gap-3 text-body text-ink-800">
+          <Check className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}
@@ -101,37 +101,37 @@ export function CostTable({
     <div>
       {/* Wide tables scroll inside their own container so the page body never
           scrolls horizontally on a 360px phone. */}
-      <div className="overflow-x-auto rounded-sm border border-stone-200 bg-white">
+      <div className="overflow-x-auto rounded-sm border border-ink-200 bg-white">
         <table className="w-full min-w-[34rem] border-collapse text-left">
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead>
-            <tr className="border-b border-stone-200 bg-stone-50">
-              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-stone-500">
+            <tr className="border-b border-ink-200 bg-ink-50">
+              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-ink-500">
                 Item
               </th>
-              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-stone-500">
+              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-ink-500">
                 Typical range
               </th>
-              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-stone-500">
+              <th scope="col" className="px-4 py-3 text-caption font-semibold uppercase tracking-wide text-ink-500">
                 Unit
               </th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.item} className="border-b border-stone-200 last:border-0">
-                <th scope="row" className="px-4 py-3 text-body font-medium text-stone-950">
+              <tr key={row.item} className="border-b border-ink-200 last:border-0">
+                <th scope="row" className="px-4 py-3 text-body font-medium text-brand-900">
                   {row.item}
-                  {row.notes && <span className="mt-0.5 block text-caption font-normal text-stone-500">{row.notes}</span>}
+                  {row.notes && <span className="mt-0.5 block text-caption font-normal text-ink-500">{row.notes}</span>}
                 </th>
-                <td className="whitespace-nowrap px-4 py-3 text-body font-semibold text-moss-700">{row.range}</td>
-                <td className="px-4 py-3 text-caption text-stone-500">{row.unit}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-body font-semibold text-brand-600">{row.range}</td>
+                <td className="px-4 py-3 text-caption text-ink-500">{row.unit}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {note && <p className="mt-3 max-w-prose text-caption text-stone-500">{note}</p>}
+      {note && <p className="mt-3 max-w-prose text-caption text-ink-500">{note}</p>}
     </div>
   );
 }
@@ -151,19 +151,19 @@ export function FaqList({ faqs, title = 'Frequently asked questions' }: { faqs: 
       <h2 id="faq-heading" className="text-h2">
         {title}
       </h2>
-      <div className="mt-6 divide-y divide-stone-200 border-y border-stone-200">
+      <div className="mt-6 divide-y divide-ink-200 border-y border-ink-200">
         {faqs.map((faq) => {
           const id = slugifyQuestion(faq.question);
           return (
             <details key={faq.question} id={id} className="group py-4">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-body-lg font-medium text-stone-950 marker:hidden">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-body-lg font-medium text-brand-900 marker:hidden">
                 {faq.question}
                 <span
                   aria-hidden="true"
-                  className="mt-1.5 h-2.5 w-2.5 shrink-0 rotate-45 border-b-2 border-r-2 border-stone-500 transition-transform duration-200 group-open:-rotate-135"
+                  className="mt-1.5 h-2.5 w-2.5 shrink-0 rotate-45 border-b-2 border-r-2 border-ink-500 transition-transform duration-200 group-open:-rotate-135"
                 />
               </summary>
-              <p className="mt-3 max-w-prose text-body text-stone-800">{faq.answer}</p>
+              <p className="mt-3 max-w-prose text-body text-ink-800">{faq.answer}</p>
             </details>
           );
         })}
@@ -194,14 +194,14 @@ export function TrustBar() {
   ];
 
   return (
-    <section aria-label="Credentials" className="border-y border-stone-200 bg-white">
+    <section aria-label="Credentials" className="border-y border-ink-200 bg-white">
       <div className="shell grid grid-cols-2 gap-6 py-8 lg:grid-cols-4">
         {items.map((item) => (
           <div key={item.label} className="flex gap-3">
-            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-moss-700" aria-hidden="true" />
+            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
             <div>
-              <p className="text-caption font-semibold text-stone-950">{item.label}</p>
-              <p className="text-caption text-stone-500">{item.detail}</p>
+              <p className="text-caption font-semibold text-brand-900">{item.label}</p>
+              <p className="text-caption text-ink-500">{item.detail}</p>
             </div>
           </div>
         ))}
@@ -211,8 +211,8 @@ export function TrustBar() {
 }
 
 export function CtaBand({
-  title = 'Get a real number from the crew that will build it',
-  body = 'Free on-site walkthrough, a written scope, and a range you can plan around. Most quotes go out the same day we visit.',
+  title = 'Get a real number for your yard',
+  body = 'Free visit, a written scope and a price range you can plan around. Most quotes go out the same day we come look.',
   primaryHref = '/quote',
   primaryLabel = 'Get your free quote',
 }: {
@@ -222,11 +222,11 @@ export function CtaBand({
   primaryLabel?: string;
 }) {
   return (
-    <section className="bg-stone-950 text-moss-100">
+    <section className="bg-brand-900 text-brand-50">
       <div className="shell section-tight">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-h2 text-white">{title}</h2>
-          <p className="mx-auto mt-4 max-w-prose text-body-lg text-moss-100/80">{body}</p>
+          <p className="mx-auto mt-4 max-w-prose text-body-lg text-brand-50/80">{body}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href={primaryHref}>
@@ -272,9 +272,9 @@ export function LinkCluster({
           <li key={link.href}>
             <Link
               href={link.href}
-              className="group inline-flex items-center gap-1.5 text-body text-stone-800 transition-colors hover:text-moss-700"
+              className="group inline-flex items-center gap-1.5 text-body text-ink-800 transition-colors hover:text-brand-600"
             >
-              <span className="underline decoration-stone-200 underline-offset-4 group-hover:decoration-moss-700">
+              <span className="underline decoration-ink-200 underline-offset-4 group-hover:decoration-brand-600">
                 {link.label}
               </span>
               <ArrowRight
@@ -295,12 +295,12 @@ export function ProcessSteps({ steps }: { steps: { title: string; description: s
   return (
     <ol className="grid gap-6 sm:grid-cols-2">
       {steps.map((step, i) => (
-        <li key={step.title} className="border-l-2 border-moss-100 pl-5">
-          <span className="text-caption font-semibold uppercase tracking-wide text-clay-600">
+        <li key={step.title} className="border-l-2 border-brand-50 pl-5">
+          <span className="text-caption font-semibold uppercase tracking-wide text-leaf-600">
             Step {i + 1}
           </span>
-          <h3 className="mt-1 text-body-lg font-semibold text-stone-950">{step.title}</h3>
-          <p className="mt-1.5 text-body text-stone-500">{step.description}</p>
+          <h3 className="mt-1 text-body-lg font-semibold text-brand-900">{step.title}</h3>
+          <p className="mt-1.5 text-body text-ink-500">{step.description}</p>
         </li>
       ))}
     </ol>

@@ -33,9 +33,9 @@ export default function StyleguidePage() {
   return (
     <div className="shell space-y-16 py-24 lg:py-32">
       <header>
-        <p className="text-caption font-semibold uppercase tracking-wide text-clay-600">Internal</p>
+        <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">Internal</p>
         <h1 className="mt-2 text-h1">Design system</h1>
-        <p className="mt-4 max-w-prose text-body-lg text-stone-500">
+        <p className="mt-4 max-w-prose text-body-lg text-ink-500">
           Every token and primitive on the site. This page is noindex and disallowed in robots.txt.
           Components consume tokens only — an ad-hoc hex value in a component is a bug.
         </p>
@@ -44,21 +44,21 @@ export default function StyleguidePage() {
       <Section title="Colour">
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {[
-            ['stone-950', 'bg-stone-950', 'Primary text, dark sections'],
-            ['stone-800', 'bg-stone-800', 'Body copy'],
-            ['stone-500', 'bg-stone-500', 'Secondary text'],
-            ['stone-200', 'bg-stone-200', 'Borders, rules'],
-            ['stone-50', 'bg-stone-50', 'Page background'],
-            ['moss-700', 'bg-moss-700', 'Brand, links, focus ring'],
-            ['moss-500', 'bg-moss-500', 'Brand secondary'],
-            ['moss-100', 'bg-moss-100', 'Tints, dark-section text'],
-            ['clay-600', 'bg-clay-600', 'CTAs, accents'],
-            ['clay-400', 'bg-clay-400', 'Accent secondary'],
+            ['brand-900', 'bg-brand-900', 'Primary text, dark sections'],
+            ['ink-800', 'bg-ink-800', 'Body copy'],
+            ['ink-500', 'bg-ink-500', 'Secondary text'],
+            ['ink-200', 'bg-ink-200', 'Borders, rules'],
+            ['ink-50', 'bg-ink-50', 'Page background'],
+            ['brand-600', 'bg-brand-600', 'Brand, links, focus ring'],
+            ['sky-600', 'bg-sky-600', 'Brand secondary'],
+            ['brand-50', 'bg-brand-50', 'Tints, dark-section text'],
+            ['leaf-600', 'bg-leaf-600', 'CTAs, accents'],
+            ['leaf-400', 'bg-leaf-400', 'Accent secondary'],
           ].map(([name, cls, use]) => (
             <div key={name}>
-              <div className={`h-16 rounded-sm border border-stone-200 ${cls}`} />
-              <p className="mt-2 text-caption font-semibold text-stone-950">{name}</p>
-              <p className="text-caption text-stone-500">{use}</p>
+              <div className={`h-16 rounded-sm border border-ink-200 ${cls}`} />
+              <p className="mt-2 text-caption font-semibold text-brand-900">{name}</p>
+              <p className="text-caption text-ink-500">{use}</p>
             </div>
           ))}
         </div>
@@ -70,9 +70,9 @@ export default function StyleguidePage() {
           <p className="text-h1">Heading 1 — clamp(2.25rem, 4.5vw, 3.5rem)</p>
           <p className="text-h2">Heading 2 — clamp(1.75rem, 3vw, 2.5rem)</p>
           <p className="text-h3">Heading 3 — 1.5rem</p>
-          <p className="text-body-lg text-stone-800">Body large — 1.125rem / 1.6</p>
-          <p className="text-body text-stone-800">Body — 1rem / 1.65</p>
-          <p className="text-caption uppercase tracking-wide text-stone-500">
+          <p className="text-body-lg text-ink-800">Body large — 1.125rem / 1.6</p>
+          <p className="text-body text-ink-800">Body — 1rem / 1.65</p>
+          <p className="text-caption uppercase tracking-wide text-ink-500">
             Caption — 0.875rem, uppercase, tracked
           </p>
         </div>
@@ -87,7 +87,7 @@ export default function StyleguidePage() {
             <Button variant="ghost">Ghost</Button>
             <Button disabled>Disabled</Button>
           </div>
-          <div className="flex flex-wrap items-center gap-3 rounded-sm bg-stone-950 p-4">
+          <div className="flex flex-wrap items-center gap-3 rounded-sm bg-brand-900 p-4">
             <Button variant="onDark">On dark</Button>
             <Button variant="onHero">On hero</Button>
           </div>
@@ -96,7 +96,7 @@ export default function StyleguidePage() {
             <Button size="md">Medium</Button>
             <Button size="lg">Large</Button>
           </div>
-          <p className="text-caption text-stone-500">
+          <p className="text-caption text-ink-500">
             Every CTA on the site renders through this component. Sizes are floored at 44px (48px
             default) so no caller has to remember the touch-target rule.
           </p>
@@ -167,11 +167,11 @@ export default function StyleguidePage() {
 
       <Section title="AI concept labelling">
         <div className="space-y-4">
-          <div className="relative inline-block rounded-sm bg-stone-800 p-8">
+          <div className="relative inline-block rounded-sm bg-ink-800 p-8">
             <AiConceptBadge />
           </div>
           <AiConceptNote />
-          <p className="text-caption text-stone-500">
+          <p className="text-caption text-ink-500">
             Mandatory on every image with assetType &lsquo;concept-render&rsquo;. Renders never
             appear in /portfolio.
           </p>
@@ -190,7 +190,7 @@ export default function StyleguidePage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="mb-6 border-b border-stone-200 pb-2 text-h3">{title}</h2>
+      <h2 className="mb-6 border-b border-ink-200 pb-2 text-h3">{title}</h2>
       {children}
     </section>
   );

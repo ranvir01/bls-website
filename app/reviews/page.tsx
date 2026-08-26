@@ -29,17 +29,17 @@ export default function ReviewsPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">Reviews</p>
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Reviews</p>
           <h1 className="mt-2 text-h1">What customers say</h1>
 
           {average !== null ? (
-            <p className="mt-5 flex items-center gap-3 text-body-lg text-stone-800">
+            <p className="mt-5 flex items-center gap-3 text-body-lg text-ink-800">
               <span className="flex" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, i) => (
                   <Star
                     key={i}
                     className={
-                      i < Math.round(average) ? 'h-5 w-5 fill-clay-600 text-clay-600' : 'h-5 w-5 text-stone-200'
+                      i < Math.round(average) ? 'h-5 w-5 fill-leaf-600 text-leaf-600' : 'h-5 w-5 text-ink-200'
                     }
                   />
                 ))}
@@ -50,7 +50,7 @@ export default function ReviewsPage() {
               </span>
             </p>
           ) : (
-            <p className="mt-5 text-body-lg text-stone-500">
+            <p className="mt-5 text-body-lg text-ink-500">
               Every review on this page is a real review left by a real customer on a real platform,
               shown with its source. We do not write them ourselves and we do not buy them.
             </p>
@@ -64,9 +64,9 @@ export default function ReviewsPage() {
             /* Honest empty state. The previous version of this site carried ten
                fabricated testimonials with stock-photo avatars; showing nothing
                is both legal and more credible than replacing them. */
-            <div className="rounded-sm border border-stone-200 bg-white p-8">
+            <div className="rounded-sm border border-ink-200 bg-white p-8">
               <h2 className="text-h3">No reviews published here yet</h2>
-              <div className="mt-4 max-w-prose space-y-4 text-body text-stone-500">
+              <div className="mt-4 max-w-prose space-y-4 text-body text-ink-500">
                 <p>
                   We would rather show you nothing than show you something we wrote. This page fills
                   up as customers leave genuine reviews, and every one will carry the platform it

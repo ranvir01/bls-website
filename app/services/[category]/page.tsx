@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand, FaqList, LinkCluster, Prose, QuickAnswer } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { Reveal } from '@/components/motion/reveal';
+import { ServiceArt } from '@/components/service-art';
 import { getCategoryContent } from '@/data/content/categories';
 import { getServiceContent } from '@/data/content/services';
 import { categories, cities, cityPath, servicePath, servicesInCategory } from '@/data/taxonomy';
@@ -70,7 +71,7 @@ export default function CategoryPage({ params }: Params) {
 
       <article className="shell pb-16 pt-8">
         <header>
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">Services</p>
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">Services</p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
           <QuickAnswer>{content.quickAnswer}</QuickAnswer>
         </header>
@@ -88,18 +89,26 @@ export default function CategoryPage({ params }: Params) {
                 <li key={service.slug}>
                   <Link
                     href={servicePath(service.slug)}
-                    className="group flex h-full flex-col rounded-sm border border-stone-200 bg-white p-6 transition-shadow hover:shadow-card"
+                    className="group flex h-full flex-col overflow-hidden rounded-lg border border-ink-200 bg-white transition-shadow hover:shadow-card"
                   >
-                    <h3 className="text-body-lg font-semibold text-stone-950 group-hover:text-moss-700">
-                      {service.name}
-                    </h3>
-                    <p className="mt-2 flex-1 text-body text-stone-500">
-                      {detail?.quickAnswer.split('. ').slice(0, 2).join('. ') ?? service.blurb}
-                    </p>
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-caption font-semibold text-moss-700">
-                      Details &amp; cost
-                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                    </span>
+                    <ServiceArt
+                      slug={service.slug}
+                      name={service.name}
+                      className="aspect-[16/9] w-full [&_img]:group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="flex flex-1 flex-col p-6">
+                      <h3 className="text-body-lg font-semibold text-brand-900 group-hover:text-brand-600">
+                        {service.name}
+                      </h3>
+                      <p className="mt-2 flex-1 text-body text-ink-500">
+                        {detail?.quickAnswer.split('. ').slice(0, 2).join('. ') ?? service.blurb}
+                      </p>
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-caption font-semibold text-brand-600">
+                        Details &amp; cost
+                        <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      </span>
+                    </div>
                   </Link>
                 </li>
               );

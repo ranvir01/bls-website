@@ -31,14 +31,14 @@ export function ReviewsSection({
         {reviews.map((review) => (
           <li
             key={`${review.author}-${review.publishedAt}`}
-            className="rounded-sm border border-stone-200 bg-white p-6"
+            className="rounded-sm border border-ink-200 bg-white p-6"
           >
             <Stars rating={review.rating} />
-            <blockquote className="mt-3 text-body text-stone-800">
+            <blockquote className="mt-3 text-body text-ink-800">
               <p>&ldquo;{review.text}&rdquo;</p>
             </blockquote>
-            <footer className="mt-4 text-caption text-stone-500">
-              <span className="font-semibold text-stone-950">{review.author}</span>
+            <footer className="mt-4 text-caption text-ink-500">
+              <span className="font-semibold text-brand-900">{review.author}</span>
               {' · '}
               {review.sourceUrl ? (
                 <a
@@ -67,7 +67,7 @@ function Stars({ rating }: { rating: number }) {
         <Star
           key={i}
           aria-hidden="true"
-          className={i < rating ? 'h-4 w-4 fill-clay-600 text-clay-600' : 'h-4 w-4 text-stone-200'}
+          className={i < rating ? 'h-4 w-4 fill-leaf-600 text-leaf-600' : 'h-4 w-4 text-ink-200'}
         />
       ))}
     </p>

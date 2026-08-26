@@ -14,9 +14,9 @@ export default function NotFound() {
   return (
     <div className="shell py-24 lg:py-32">
       <div className="max-w-prose">
-        <p className="text-caption font-semibold uppercase tracking-wide text-clay-600">404</p>
+        <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">404</p>
         <h1 className="mt-2 text-h1">That page is not here</h1>
-        <p className="mt-5 text-body-lg text-stone-500">
+        <p className="mt-5 text-body-lg text-ink-500">
           The link may be out of date — we reorganised this site, and some older URLs moved. Here is
           everything, one click away.
         </p>
@@ -41,7 +41,7 @@ export default function NotFound() {
               <li key={c.slug}>
                 <Link
                   href={`/services/${c.slug}`}
-                  className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+                  className="text-body text-ink-800 underline decoration-ink-200 underline-offset-4 hover:text-brand-600"
                 >
                   {c.name}
                 </Link>
@@ -50,7 +50,7 @@ export default function NotFound() {
             <li>
               <Link
                 href="/services"
-                className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+                className="text-body text-ink-800 underline decoration-ink-200 underline-offset-4 hover:text-brand-600"
               >
                 All services
               </Link>
@@ -69,7 +69,7 @@ export default function NotFound() {
                 <li key={c.slug}>
                   <Link
                     href={cityPath(c.slug)}
-                    className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+                    className="text-body text-ink-800 underline decoration-ink-200 underline-offset-4 hover:text-brand-600"
                   >
                     {c.name}
                   </Link>
@@ -78,7 +78,7 @@ export default function NotFound() {
             <li>
               <Link
                 href="/locations"
-                className="text-body text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+                className="text-body text-ink-800 underline decoration-ink-200 underline-offset-4 hover:text-brand-600"
               >
                 All areas
               </Link>

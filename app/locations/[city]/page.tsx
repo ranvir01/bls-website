@@ -100,32 +100,32 @@ export default function CityPage({ params }: Params) {
 
       <article>
         <header className="shell pt-8">
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             {content.region}
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
           <QuickAnswer>{content.quickAnswer}</QuickAnswer>
 
           <dl className="mt-6 grid gap-4 sm:grid-cols-3">
-            <div className="flex gap-3 rounded-sm border border-stone-200 bg-white p-4">
-              <Clock className="mt-0.5 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+            <div className="flex gap-3 rounded-sm border border-ink-200 bg-white p-4">
+              <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
               <div>
-                <dt className="text-caption font-semibold text-stone-950">From our Kent shop</dt>
-                <dd className="text-caption text-stone-500">{content.driveTimeFromKent}</dd>
+                <dt className="text-caption font-semibold text-brand-900">From our Kent shop</dt>
+                <dd className="text-caption text-ink-500">{content.driveTimeFromKent}</dd>
               </div>
             </div>
-            <div className="flex gap-3 rounded-sm border border-stone-200 bg-white p-4">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+            <div className="flex gap-3 rounded-sm border border-ink-200 bg-white p-4">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
               <div>
-                <dt className="text-caption font-semibold text-stone-950">ZIP codes served</dt>
-                <dd className="text-caption text-stone-500">{content.zips.join(', ')}</dd>
+                <dt className="text-caption font-semibold text-brand-900">ZIP codes served</dt>
+                <dd className="text-caption text-ink-500">{content.zips.join(', ')}</dd>
               </div>
             </div>
-            <div className="flex gap-3 rounded-sm border border-stone-200 bg-white p-4">
-              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+            <div className="flex gap-3 rounded-sm border border-ink-200 bg-white p-4">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
               <div>
-                <dt className="text-caption font-semibold text-stone-950">Licensed in WA</dt>
-                <dd className="text-caption text-stone-500">Bonded &amp; insured</dd>
+                <dt className="text-caption font-semibold text-brand-900">Licensed in WA</dt>
+                <dd className="text-caption text-ink-500">Bonded &amp; insured</dd>
               </div>
             </div>
           </dl>
@@ -139,10 +139,10 @@ export default function CityPage({ params }: Params) {
 
             <Reveal as="section">
               <h2 className="text-h2">Ground conditions in {content.name}</h2>
-              <p className="mt-4 max-w-prose text-body-lg text-stone-800">{content.siteConditions}</p>
+              <p className="mt-4 max-w-prose text-body-lg text-ink-800">{content.siteConditions}</p>
 
               <h3 className="mt-8 text-h3">Permits</h3>
-              <p className="mt-3 max-w-prose text-body text-stone-800">{content.permitNotes}</p>
+              <p className="mt-3 max-w-prose text-body text-ink-800">{content.permitNotes}</p>
             </Reveal>
 
             {content.neighborhoods.length > 0 && (
@@ -152,7 +152,7 @@ export default function CityPage({ params }: Params) {
                   {content.neighborhoods.map((hood) => (
                     <li
                       key={hood}
-                      className="rounded-sm border border-stone-200 bg-white px-3 py-1.5 text-caption text-stone-800"
+                      className="rounded-sm border border-ink-200 bg-white px-3 py-1.5 text-caption text-ink-800"
                     >
                       {hood}
                     </li>
@@ -188,7 +188,7 @@ export default function CityPage({ params }: Params) {
           </aside>
         </div>
 
-        <section className="border-t border-stone-200 bg-white">
+        <section className="border-t border-ink-200 bg-white">
           <div className="shell section-tight grid gap-10 md:grid-cols-3">
             <LinkCluster title="Nearby areas" links={nearby} />
             {posts.length > 0 && (
@@ -199,12 +199,12 @@ export default function CityPage({ params }: Params) {
             )}
             <div>
               <h2 className="text-h3">See our work</h2>
-              <p className="mt-3 text-body text-stone-500">
+              <p className="mt-3 text-body text-ink-500">
                 Filter the portfolio by the projects closest to you.
               </p>
               <Link
                 href={`/portfolio?city=${content.slug}`}
-                className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-moss-700 underline underline-offset-4"
+                className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-brand-600 underline underline-offset-4"
               >
                 Projects near {content.name}
               </Link>

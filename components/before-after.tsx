@@ -124,7 +124,7 @@ export function BeforeAfter({
     <figure className={cn('w-full', className)}>
       <div
         ref={containerRef}
-        className="relative w-full select-none overflow-hidden rounded-sm border border-stone-200 bg-stone-200"
+        className="relative w-full select-none overflow-hidden rounded-sm border border-ink-200 bg-ink-200"
         style={{ aspectRatio: String(aspect) }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -156,10 +156,10 @@ export function BeforeAfter({
           />
         </div>
 
-        <span className="pointer-events-none absolute left-3 top-3 rounded-sm bg-stone-950/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+        <span className="pointer-events-none absolute left-3 top-3 rounded-sm bg-brand-900/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
           Before
         </span>
-        <span className="pointer-events-none absolute right-3 top-3 rounded-sm bg-stone-950/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+        <span className="pointer-events-none absolute right-3 top-3 rounded-sm bg-brand-900/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
           After
         </span>
 
@@ -188,9 +188,9 @@ export function BeforeAfter({
             aria-valuetext={`${Math.round(position)}% before, ${100 - Math.round(position)}% after`}
             aria-orientation="horizontal"
             onKeyDown={onKeyDown}
-            className="absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-stone-200 bg-white shadow-card"
+            className="absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-ink-200 bg-white shadow-card"
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5 text-stone-800" aria-hidden="true" fill="currentColor">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-ink-800" aria-hidden="true" fill="currentColor">
               <path d="M9.5 7 5 12l4.5 5V7Zm5 0v10l4.5-5-4.5-5Z" />
             </svg>
           </button>
@@ -198,7 +198,7 @@ export function BeforeAfter({
       </div>
 
       {caption && (
-        <figcaption id={labelId} className="mt-3 text-caption text-stone-500">
+        <figcaption id={labelId} className="mt-3 text-caption text-ink-500">
           {caption}
         </figcaption>
       )}

@@ -44,9 +44,9 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/portfolio/${project.slug}`}
-      className="group block overflow-hidden rounded-sm border border-stone-200 bg-white transition-shadow hover:shadow-card"
+      className="group block overflow-hidden rounded-sm border border-ink-200 bg-white transition-shadow hover:shadow-card"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-stone-200">
+      <div className="relative aspect-[4/3] overflow-hidden bg-ink-200">
         <Image
           src={project.after.src}
           alt={project.after.alt}
@@ -56,10 +56,10 @@ export function ProjectCard({ project }: { project: Project }) {
         />
       </div>
       <div className="p-5">
-        <h3 className="text-body-lg font-semibold text-stone-950 group-hover:text-moss-700">
+        <h3 className="text-body-lg font-semibold text-brand-900 group-hover:text-brand-600">
           {project.title}
         </h3>
-        <p className="mt-1 text-caption text-stone-500">
+        <p className="mt-1 text-caption text-ink-500">
           {[service?.name, city?.name].filter(Boolean).join(' · ')}
         </p>
       </div>

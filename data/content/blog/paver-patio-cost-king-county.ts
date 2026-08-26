@@ -157,7 +157,7 @@ const post: BlogPost = {
     {
       type: 'callout',
       title: 'These are market ranges, not a quote',
-      text: 'Every figure above is a typical installed range for the Puget Sound market in 2026. Your actual number comes out of a walkthrough where we can see access, grade and what the subgrade is made of. Blue Landscaping Services designs in-house and self-performs every hardscape install from our Kent shop, licensed and bonded in Washington under BLUELLS880K2. Call (253) 217-0814 to get a real number for your yard.',
+      text: 'Every figure above is a typical installed range for the Puget Sound market in 2026. Your actual number comes out of a walkthrough where we can see access, grade and what the subgrade is made of. Blue Landscaping Services designs in-house and self-performs every hardscape install from our Kent shop, licensed and bonded in Washington under BLUELLS880K2. Call (253) 429-7052 to get a real number for your yard.',
     },
   ],
   faqs: [

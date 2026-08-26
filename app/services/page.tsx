@@ -6,6 +6,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand, QuickAnswer } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { Reveal } from '@/components/motion/reveal';
+import { ServiceArt } from '@/components/service-art';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { getCategoryContent } from '@/data/content/categories';
 import { getServiceContent } from '@/data/content/services';
@@ -40,7 +41,7 @@ export default function ServicesPage() {
 
       <div className="shell pb-16 pt-8">
         <header>
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             What we build
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">Services in Kent &amp; Greater Seattle</h1>
@@ -60,13 +61,13 @@ export default function ServicesPage() {
                   <h2 className="text-h2">{category.name}</h2>
                   <Link
                     href={`/services/${category.slug}`}
-                    className="inline-flex min-h-[44px] items-center gap-1.5 text-caption font-semibold text-moss-700 underline underline-offset-4"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 text-caption font-semibold text-brand-600 underline underline-offset-4"
                   >
                     All {category.name.toLowerCase()}
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </Link>
                 </div>
-                <p className="mt-2 max-w-prose text-body-lg text-stone-500">
+                <p className="mt-2 max-w-prose text-body-lg text-ink-500">
                   {content?.quickAnswer.split('. ')[0] ?? category.blurb}.
                 </p>
 
@@ -75,13 +76,20 @@ export default function ServicesPage() {
                     <li key={service.slug}>
                       <Link
                         href={servicePath(service.slug)}
-                        className="group flex h-full flex-col rounded-sm border border-stone-200 bg-white p-5 transition-shadow hover:shadow-card"
+                        className="group flex h-full flex-col overflow-hidden rounded-lg border border-ink-200 bg-white transition-shadow hover:shadow-card"
                       >
-                        <h3 className="text-body-lg font-semibold text-stone-950 group-hover:text-moss-700">
-                          {service.name}
-                        </h3>
-                        <p className="mt-2 flex-1 text-body text-stone-500">{service.blurb}</p>
-                        <StartingPrice slug={service.slug} />
+                        <ServiceArt
+                          slug={service.slug}
+                          name={service.name}
+                          className="aspect-[16/10] w-full [&_img]:group-hover:scale-105"
+                        />
+                        <div className="flex flex-1 flex-col p-5">
+                          <h3 className="text-body-lg font-semibold text-brand-900 group-hover:text-brand-600">
+                            {service.name}
+                          </h3>
+                          <p className="mt-2 flex-1 text-body text-ink-500">{service.blurb}</p>
+                          <StartingPrice slug={service.slug} />
+                        </div>
                       </Link>
                     </li>
                   ))}
@@ -113,8 +121,8 @@ function StartingPrice({ slug }: { slug: string }) {
   const low = first.range.split(/[–-]/)[0].trim();
 
   return (
-    <p className="mt-3 text-caption font-semibold text-clay-600">
-      From {low} <span className="font-normal text-stone-500">{first.unit}</span>
+    <p className="mt-3 text-caption font-semibold text-leaf-600">
+      From {low} <span className="font-normal text-ink-500">{first.unit}</span>
     </p>
   );
 }

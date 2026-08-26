@@ -24,7 +24,7 @@ near me" searches return.
 - Category: **Landscaper**. Secondary: *Landscape designer*, *Paving
   contractor*, *Lawn sprinkler system contractor*, *Fence contractor*
 - NAP must match `data/business.ts` **character for character**:
-  Blue Landscaping Services · 11703 SE 229th Pl, Kent, WA 98031 · (253) 217-0814
+  Blue Landscaping Services · 11703 SE 229th Pl, Kent, WA 98031 · (253) 429-7052
 - Service area: list the primary cities from the taxonomy
 - Add every service as a GBP service item
 - Upload the real job photos as they are shot (see `docs/PHOTO-SOP.md`)

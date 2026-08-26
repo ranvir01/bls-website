@@ -15,9 +15,9 @@ export const categoryContent: Record<string, CategoryContent> = {
     quickAnswer:
       'Blue Landscaping Services builds retaining walls, paver patios, walkways, driveways, outdoor steps, seating walls, fire features and water features across South King County. All hardscape work is self-performed by our own crew under Washington contractor license BLUELLS880K2 — no subcontractors on the build.',
     intro: [
-      'Hardscaping is the part of a yard that has to survive Puget Sound winters. A patio that was never compacted properly will telegraph every rut by its second February. A wall built without drain rock and a drain line behind it becomes a hydrostatic pressure problem, not a landscape feature. Most of the repair work we get called into is the result of one of those two shortcuts.',
-      'We build the base the way it should be built: excavate to competent soil, lay and compact crushed rock in lifts, and give water somewhere to go before it finds its own route. That is unglamorous and it is most of the cost, and it is the entire reason a install still looks right after ten winters.',
-      'Design and construction both happen in-house. You are not paying a separate design fee, waiting on a landscape architect, and then handing the drawings to whichever crew bid lowest. The people who draw it are the people who build it, which means what gets drawn is something we already know how to construct at that price.',
+      'Hardscaping has to get through a Puget Sound winter. A patio that was never compacted right will show every rut by its second February. Put up a wall with no drain rock behind it and water pushes on it until it leans. Almost every repair we get called out for started as one of those two shortcuts.',
+      'So we build the base properly. Dig down to soil that will hold, put crushed rock in and compact it in layers, and give the water a route out before it picks its own. None of that is interesting to look at and most of your money goes into it. It is also the only reason the job still looks right ten winters later.',
+      'We draw the plan and we build it. No design fee, no waiting on an architect, no handing the drawings to whoever bid lowest. It also means we never draw something we do not already know how to build at the price we quoted.',
     ],
     faqs: [
       {
@@ -53,9 +53,9 @@ export const categoryContent: Record<string, CategoryContent> = {
     quickAnswer:
       'Blue Landscaping Services installs, repairs and winterizes residential sprinkler systems across South King County. New systems are zoned by sun exposure and plant type, include a code-required backflow assembly, and are pressure-tested before backfill. Fall blowouts run September through November, before the first hard freeze.',
     intro: [
-      'People assume a region this wet does not need irrigation. Then July arrives, six weeks pass without meaningful rain, and the lawn that looked perfect in May goes dormant and brown. Puget Sound summers are genuinely dry — the rain is concentrated in the winter half of the year — and anything planted in the last two seasons will not survive that stretch on its own.',
-      'A system that works is a system that is zoned correctly. Full-sun turf, shaded beds and new plantings all want different amounts of water on different schedules, and putting them on one valve guarantees that something is being drowned while something else is dying. We separate them, then set a controller schedule you can actually leave alone.',
-      'Washington requires backflow prevention on any irrigation system tied into potable supply, and in most local jurisdictions the assembly has to be tested by a certified tester after install and annually after that. We install to code and hand you the paperwork rather than leaving you to find out at the first city notice.',
+      'Everyone assumes a place this wet does not need sprinklers. Then July shows up, six weeks go by without real rain, and the lawn that looked great in May turns brown. Our rain nearly all falls in the winter half of the year. Anything you planted in the last two seasons will not make it through that stretch on its own.',
+      'The difference between a system that works and one that does not is zoning. Sunny turf, shaded beds and new plants all want different amounts of water on different days. Put them on one valve and you will drown something while something else dies. We split them up and set a schedule you can leave alone.',
+      'Washington requires a backflow assembly on any system tied into your drinking water, and most cities here want it tested by a certified tester after install and once a year after that. We install to code and hand you the paperwork, instead of letting you find out when the city sends a notice.'
     ],
     faqs: [
       {
@@ -91,9 +91,9 @@ export const categoryContent: Record<string, CategoryContent> = {
     quickAnswer:
       'Blue Landscaping Services handles fencing, scheduled lawn maintenance, planting design and sod installation throughout South King County. Planting plans use USDA zone 8b material that survives wet winters and dry Augusts here, and lawn installs start with grading and soil amendment rather than sod laid over compacted subgrade.',
     intro: [
-      'Most failed planting in this region fails for the same reason: something was chosen for how it looked at the nursery rather than for whether it tolerates a winter with its roots in saturated soil. Zone 8b is generous on paper — the winters are mild — but the combination of heavy clay, months of rain, and then a genuinely dry August is a narrower window than the hardiness map suggests.',
-      'We plant what survives that. Sword fern, salal, evergreen huckleberry, vine maple, hydrangea, hebe, carex, red twig dogwood, rhododendron and the dwarf conifers do well here with very little intervention once established. That is not a limitation; it is what a yard looks like when it still looks good in year five without constant replacement.',
-      'The same thinking applies to lawns. Sod rolled over compacted construction subgrade will look excellent for a month and then thin out, because the roots cannot get anywhere. Grading, decompaction and a real amended topsoil layer are what determine whether a lawn establishes, and they are what we do before any sod arrives.',
+      'Nearly every planting job that fails around here failed for one reason: somebody picked a plant for how it looked at the nursery, not for whether it can sit with wet roots all winter. Zone 8b sounds generous because our winters are mild. Heavy clay plus months of rain plus a genuinely dry August is a much narrower window than the map suggests.',
+      'So we plant what actually lives through it. Sword fern, salal, evergreen huckleberry, vine maple, hydrangea, hebe, carex, red twig dogwood, rhododendron, dwarf conifers. Once established they mostly look after themselves. That is not settling for less. That is what a yard looks like in year five when nothing had to be replaced.',
+      'Lawns work the same way. Roll sod over compacted construction subgrade and it looks great for a month, then thins out, because the roots have nowhere to go. Whether a lawn takes comes down to grading, breaking up the compaction, and a real layer of amended topsoil. We do all three before any sod shows up.',
     ],
     faqs: [
       {

@@ -40,7 +40,7 @@ export function MobileDrawer() {
         <button
           type="button"
           aria-label="Open menu"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-stone-950 transition-colors hover:bg-stone-200/60"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-brand-900 transition-colors hover:bg-ink-200/60"
         >
           <Menu className="h-6 w-6" aria-hidden="true" />
         </button>
@@ -52,7 +52,7 @@ export function MobileDrawer() {
             <LazyMotion features={domAnimation} strict>
               <Dialog.Overlay asChild forceMount>
                 <m.div
-                  className="fixed inset-0 z-50 bg-stone-950/40"
+                  className="fixed inset-0 z-50 bg-brand-900/40"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -62,7 +62,7 @@ export function MobileDrawer() {
 
               <Dialog.Content asChild forceMount aria-label="Site navigation">
                 <m.div
-                  className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-stone-50 shadow-lifted"
+                  className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-ink-50 shadow-lifted"
                   initial={{ x: reduced ? 0 : '100%', opacity: reduced ? 0 : 1 }}
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: reduced ? 0 : '100%', opacity: reduced ? 0 : 1 }}
@@ -70,13 +70,13 @@ export function MobileDrawer() {
                 >
                   <Dialog.Title className="sr-only">Site navigation</Dialog.Title>
 
-                  <div className="flex h-16 shrink-0 items-center justify-between border-b border-stone-200 px-5">
-                    <span className="font-display text-lg text-stone-950">Menu</span>
+                  <div className="flex h-16 shrink-0 items-center justify-between border-b border-ink-200 px-5">
+                    <span className="font-display text-lg text-brand-900">Menu</span>
                     <Dialog.Close asChild>
                       <button
                         type="button"
                         aria-label="Close menu"
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-stone-950 transition-colors hover:bg-stone-200/60"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-brand-900 transition-colors hover:bg-ink-200/60"
                       >
                         <X className="h-5 w-5" aria-hidden="true" />
                       </button>
@@ -87,7 +87,7 @@ export function MobileDrawer() {
                     <DrawerAccordion title="Services" columns={servicesColumns} reduced={!!reduced} />
                     <DrawerAccordion title="Service Areas" columns={locationColumns} reduced={!!reduced} />
 
-                    <ul className="mt-2 space-y-0.5 border-t border-stone-200 pt-3">
+                    <ul className="mt-2 space-y-0.5 border-t border-ink-200 pt-3">
                       {companyLinks.map((link, i) => (
                         <m.li
                           key={link.href}
@@ -97,7 +97,7 @@ export function MobileDrawer() {
                         >
                           <Link
                             href={link.href}
-                            className="block min-h-[44px] rounded-sm px-2 py-2.5 text-body-lg text-stone-950 transition-colors hover:bg-moss-100/60"
+                            className="block min-h-[44px] rounded-sm px-2 py-2.5 text-body-lg text-brand-900 transition-colors hover:bg-brand-50/60"
                           >
                             {link.label}
                           </Link>
@@ -107,7 +107,7 @@ export function MobileDrawer() {
                   </nav>
 
                   {/* Thumb-reachable primary actions, pinned to the bottom. */}
-                  <div className="shrink-0 space-y-2 border-t border-stone-200 bg-stone-50 px-5 py-4 safe-bottom">
+                  <div className="shrink-0 space-y-2 border-t border-ink-200 bg-ink-50 px-5 py-4 safe-bottom">
                     <Button asChild full>
                       <Link href="/quote">Get Free Quote</Link>
                     </Button>
@@ -143,12 +143,12 @@ function DrawerAccordion({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-stone-200">
+    <div className="border-b border-ink-200">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex min-h-[48px] w-full items-center justify-between px-2 py-2.5 text-body-lg font-medium text-stone-950"
+        className="flex min-h-[48px] w-full items-center justify-between px-2 py-2.5 text-body-lg font-medium text-brand-900"
       >
         {title}
         <ChevronDown
@@ -172,12 +172,12 @@ function DrawerAccordion({
                   {col.href ? (
                     <Link
                       href={col.href}
-                      className="mb-1 block px-2 text-caption font-semibold uppercase tracking-wide text-moss-700"
+                      className="mb-1 block px-2 text-caption font-semibold uppercase tracking-wide text-brand-600"
                     >
                       {col.heading}
                     </Link>
                   ) : (
-                    <p className="mb-1 px-2 text-caption font-semibold uppercase tracking-wide text-moss-700">
+                    <p className="mb-1 px-2 text-caption font-semibold uppercase tracking-wide text-brand-600">
                       {col.heading}
                     </p>
                   )}
@@ -186,7 +186,7 @@ function DrawerAccordion({
                       <li key={link.href}>
                         <Link
                           href={link.href}
-                          className="block min-h-[44px] rounded-sm px-2 py-2 text-body text-stone-800 transition-colors hover:bg-moss-100/60"
+                          className="block min-h-[44px] rounded-sm px-2 py-2 text-body text-ink-800 transition-colors hover:bg-brand-50/60"
                         >
                           {link.label}
                         </Link>

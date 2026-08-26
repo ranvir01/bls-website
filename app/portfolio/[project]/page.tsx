@@ -68,11 +68,11 @@ export default function ProjectPage({ params }: Params) {
 
       <article className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             {[service?.name, city?.name].filter(Boolean).join(' · ')}
           </p>
           <h1 className="mt-2 text-h1">{project.title}</h1>
-          <p className="mt-4 text-body-lg text-stone-500">{project.caption}</p>
+          <p className="mt-4 text-body-lg text-ink-500">{project.caption}</p>
         </header>
 
         <div className="mt-10">
@@ -87,23 +87,23 @@ export default function ProjectPage({ params }: Params) {
           <div className="min-w-0 space-y-12 lg:col-span-8">
             <section>
               <h2 className="text-h2">The problem</h2>
-              <p className="mt-4 max-w-prose text-body-lg text-stone-800">{project.challenge}</p>
+              <p className="mt-4 max-w-prose text-body-lg text-ink-800">{project.challenge}</p>
             </section>
 
             <section>
               <h2 className="text-h2">What we did</h2>
-              <p className="mt-4 max-w-prose text-body-lg text-stone-800">{project.solution}</p>
+              <p className="mt-4 max-w-prose text-body-lg text-ink-800">{project.solution}</p>
               <div className="mt-6">
                 <CheckList items={project.scope} columns={2} />
               </div>
             </section>
 
             {project.clientQuote && (
-              <blockquote className="border-l-2 border-clay-600 bg-white py-5 pl-6 pr-5">
-                <p className="text-body-lg text-stone-800">
+              <blockquote className="border-l-2 border-leaf-600 bg-white py-5 pl-6 pr-5">
+                <p className="text-body-lg text-ink-800">
                   &ldquo;{project.clientQuote.text}&rdquo;
                 </p>
-                <footer className="mt-3 text-caption text-stone-500">
+                <footer className="mt-3 text-caption text-ink-500">
                   — {project.clientQuote.attribution}
                 </footer>
               </blockquote>
@@ -111,10 +111,10 @@ export default function ProjectPage({ params }: Params) {
           </div>
 
           <aside className="lg:col-span-4">
-            <dl className="space-y-4 rounded-sm border border-stone-200 bg-white p-6">
+            <dl className="space-y-4 rounded-sm border border-ink-200 bg-white p-6">
               <Row label="Service">
                 {service ? (
-                  <Link href={servicePath(service.slug)} className="text-moss-700 underline underline-offset-4">
+                  <Link href={servicePath(service.slug)} className="text-brand-600 underline underline-offset-4">
                     {service.name}
                   </Link>
                 ) : (
@@ -123,7 +123,7 @@ export default function ProjectPage({ params }: Params) {
               </Row>
               <Row label="Location">
                 {city ? (
-                  <Link href={cityPath(city.slug)} className="text-moss-700 underline underline-offset-4">
+                  <Link href={cityPath(city.slug)} className="text-brand-600 underline underline-offset-4">
                     {city.name}, WA
                   </Link>
                 ) : (
@@ -167,8 +167,8 @@ export default function ProjectPage({ params }: Params) {
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <dt className="text-caption font-semibold uppercase tracking-wide text-stone-500">{label}</dt>
-      <dd className="mt-1 text-body text-stone-950">{children}</dd>
+      <dt className="text-caption font-semibold uppercase tracking-wide text-ink-500">{label}</dt>
+      <dd className="mt-1 text-body text-brand-900">{children}</dd>
     </div>
   );
 }

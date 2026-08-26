@@ -79,12 +79,12 @@ export function PortfolioBrowser({ projects }: { projects: Project[] }) {
         />
       </div>
 
-      <p className="mt-6 text-caption text-stone-500" aria-live="polite">
+      <p className="mt-6 text-caption text-ink-500" aria-live="polite">
         {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
       </p>
 
       {filtered.length === 0 ? (
-        <p className="mt-8 rounded-sm border border-stone-200 bg-white p-6 text-body text-stone-500">
+        <p className="mt-8 rounded-sm border border-ink-200 bg-white p-6 text-body text-ink-500">
           Nothing matches that combination yet. Clear a filter to see everything.
         </p>
       ) : (
@@ -121,7 +121,7 @@ function FilterRow({
   return (
     <fieldset className="flex flex-wrap items-center gap-2">
       <legend className="sr-only">Filter by {label.toLowerCase()}</legend>
-      <span aria-hidden="true" className="mr-1 text-caption font-semibold uppercase tracking-wide text-stone-500">
+      <span aria-hidden="true" className="mr-1 text-caption font-semibold uppercase tracking-wide text-ink-500">
         {label}
       </span>
       <Chip active={!value} onClick={() => onChange('')}>
@@ -153,8 +153,8 @@ function Chip({
       className={cn(
         'min-h-[40px] rounded-sm border px-3.5 text-caption transition-colors',
         active
-          ? 'border-moss-700 bg-moss-100/60 font-semibold text-stone-950'
-          : 'border-stone-200 bg-white text-stone-800 hover:border-stone-500',
+          ? 'border-brand-600 bg-brand-50/60 font-semibold text-brand-900'
+          : 'border-ink-200 bg-white text-ink-800 hover:border-ink-500',
       )}
     >
       {children}

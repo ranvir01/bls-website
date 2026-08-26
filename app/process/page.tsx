@@ -85,7 +85,7 @@ export default function ProcessPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             How we work
           </p>
           <h1 className="mt-2 text-h1">From first call to final walkthrough</h1>
@@ -100,13 +100,13 @@ export default function ProcessPage() {
               <div className="grid gap-6 md:grid-cols-[auto_1fr] md:gap-10">
                 <span
                   aria-hidden="true"
-                  className="font-display text-display leading-none text-moss-100"
+                  className="font-display text-display leading-none text-brand-50"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
                   <h2 className="text-h2">{step.title}</h2>
-                  <div className="mt-4 max-w-prose space-y-4 text-body-lg text-stone-800">
+                  <div className="mt-4 max-w-prose space-y-4 text-body-lg text-ink-800">
                     {step.body.map((p, j) => (
                       <p key={j}>{p}</p>
                     ))}

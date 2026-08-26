@@ -177,7 +177,7 @@ const post: BlogPost = {
     {
       type: 'callout',
       title: 'The crew that built it is the crew that empties it',
-      text: 'Blue Landscaping Services designs irrigation in-house and installs it with our own people out of a Kent shop, so the person who set your head heights in June is the one clearing the lines in October. We tow a 185 CFM compressor, blow out zone by zone at pressures matched to your pipe material, and close the backflow assembly properly before we leave. Call (253) 217-0814 to get on the fall schedule. October fills first.',
+      text: 'Blue Landscaping Services designs irrigation in-house and installs it with our own people out of a Kent shop, so the person who set your head heights in June is the one clearing the lines in October. We tow a 185 CFM compressor, blow out zone by zone at pressures matched to your pipe material, and close the backflow assembly properly before we leave. Call (253) 429-7052 to get on the fall schedule. October fills first.',
     },
   ],
   faqs: [

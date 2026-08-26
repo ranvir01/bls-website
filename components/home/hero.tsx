@@ -42,7 +42,7 @@ export function Hero() {
 
   return (
     <LazyMotion features={domAnimation} strict>
-      <section ref={ref} className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-stone-950">
+      <section ref={ref} className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-brand-900">
         <m.div className="absolute inset-0 -z-10" style={reduced ? undefined : { y }}>
           <picture>
             <source media="(max-width: 767px)" srcSet="/images/hero-home-mobile.jpg" />
@@ -57,9 +57,18 @@ export function Hero() {
             />
           </picture>
           {/* Gradient scrim so the headline holds 4.5:1 contrast over any crop. */}
+          {/* Two layers, deliberately. A neutral black gradient does the
+              legibility work without tinting the greens in the photo, and a
+              light brand wash underneath ties it to the palette. A single
+              heavy navy gradient drowns the image — which is exactly what the
+              previous revision did. */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/70 to-stone-950/25"
+            className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/20"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-brand-900/55 via-brand-900/15 to-transparent"
           />
         </m.div>
 
@@ -69,7 +78,7 @@ export function Hero() {
               initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: ease.out }}
-              className="text-caption font-semibold uppercase tracking-wide text-moss-100"
+              className="text-caption font-semibold uppercase tracking-wide text-brand-50"
             >
               Kent, WA · Licensed &amp; insured · Since {business.foundedYear}
             </m.p>
@@ -93,10 +102,10 @@ export function Hero() {
               initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.5, ease: ease.out }}
-              className="mt-6 max-w-prose text-body-lg text-stone-200"
+              className="mt-6 max-w-prose text-body-lg text-ink-200"
             >
-              We design in-house and self-perform the install — the crew that draws it is the crew
-              that builds it. Serving Kent, Auburn, Renton and Greater Seattle.
+              We draw the plan and we build it. Same crew start to finish, no subs on the
+              hardscape. Kent, Auburn, Renton and the rest of Greater Seattle.
             </m.p>
 
             <m.div

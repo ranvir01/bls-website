@@ -26,9 +26,9 @@ export default function Error({
   return (
     <div className="shell py-24 lg:py-32">
       <div className="max-w-prose">
-        <p className="text-caption font-semibold uppercase tracking-wide text-clay-600">Error</p>
+        <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">Error</p>
         <h1 className="mt-2 text-h1">Something went wrong on our end</h1>
-        <p className="mt-5 text-body-lg text-stone-500">
+        <p className="mt-5 text-body-lg text-ink-500">
           This is our problem, not yours. Try again, or just call — we answer the phone.
         </p>
 
@@ -45,7 +45,7 @@ export default function Error({
         </div>
 
         {error.digest && (
-          <p className="mt-6 text-caption text-stone-500">Reference: {error.digest}</p>
+          <p className="mt-6 text-caption text-ink-500">Reference: {error.digest}</p>
         )}
       </div>
     </div>

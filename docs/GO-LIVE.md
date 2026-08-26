@@ -8,19 +8,11 @@ combined.
 
 ---
 
-## 1. Confirm the phone number — 2 minutes, blocking
+## 1. ~~Phone number~~ — DONE
 
-`data/business.ts` uses **(253) 217-0814**. That was the number appearing 16
-times across the old site; the other candidate, 206-854-8929, appeared zero
-times, so this is the right default — but it has not been confirmed with the
-owner.
-
-If it is wrong, change `PHONE` in `data/business.ts`. That one edit updates the
-header, footer, every `tel:` link, the JSON-LD, the contact page, the email
-templates and the SMS templates. Nothing else needs touching.
-
-The same number must then be used on the Google Business Profile, character for
-character. A mismatch between the site and GBP actively costs local ranking.
+**(253) 429-7052** is the single number sitewide, driven by the `PHONE`
+constant in `data/business.ts`. It must match the Google Business Profile
+character for character; if the GBP still shows the old number, update it there.
 
 ## 2. Wire up lead delivery — 20 minutes, blocking
 
@@ -53,22 +45,37 @@ A Twilio number is about $1.15/month plus under a cent per message. The site
 already texts the owner within seconds of a submit and auto-replies to the
 customer; it just needs credentials.
 
-## 3. Create the Google Business Profile — 2 hours
+## 3. ~~Create the Google Business Profile~~ — DONE, two follow-ups
 
-There is currently no profile. That means the business does not appear in the
-map pack at all, which is where most "landscaper near me" searches end.
+The profile exists. Its URL is in `data/business.ts` and feeds `sameAs` on the
+Organization JSON-LD, which is how Google ties this site to that profile.
 
-Full instructions in `docs/BACKLINKS.md`. This is the single highest-return item
-on the entire list.
+1. **Swap in the canonical URL.** What is stored is the `share.google/...` short
+   link. Open the profile, copy the full `google.com/maps/place/...` URL and
+   replace `profiles[0].url`. Google resolves the short link, but the canonical
+   one is unambiguous.
+2. **Check NAP agreement.** Name, address and phone on the profile must match
+   `data/business.ts` exactly: Blue Landscaping Services, 11703 SE 229th Pl,
+   Kent, WA 98031, **(253) 429-7052**. A mismatch costs local ranking.
 
----
+Then work `docs/BACKLINKS.md` from the top.
 
-## 4. Deploy
+## 4. Deploy — already merged to `main`
 
-The branch is `claude/website-deploy-cleanup-3qe2sy`. Merge it to `main` and
-Netlify will build and deploy automatically.
+The work is on `main` and pushed. The build is verified: a clean `npm ci` from
+the lockfile plus the exact Netlify build command succeeds from a bare checkout,
+so an install or compile failure is ruled out.
 
-Before merging, check the Netlify build settings match `netlify.toml`:
+If the site still shows an old version, the cause is on the Netlify side:
+
+1. **Is the site connected to this repo?** Site configuration → Build & deploy →
+   Continuous deployment. Production branch must be `main`.
+2. **Is auto-publishing paused?** The Deploys tab has a toggle that silently
+   keeps the previous deploy live.
+3. **Did a build fail?** A failed build leaves the old version up, which looks
+   exactly like nothing happening.
+
+Build settings must match `netlify.toml`:
 
 - Build command: `npm run build:ci`
 - Publish directory: `.next`
@@ -124,7 +131,29 @@ needs changing if yours differs.
 Budget note: rate limits are 3 generations/hour and 10/day per IP, so cost is
 bounded.
 
-## 8. Photography — the thing that actually closes the gap
+## 8. Imagery — what is on the cards right now
+
+Every service and category card has a panel on it, but those panels are
+**generated artwork, not photographs**. Each one is an abstract pattern in the
+brand palette that matches the material: block courses for walls, a running
+bond for pavers, spray arcs for irrigation, slats for fencing. They exist so the
+cards do not look unfinished, and they are deliberately not photographic so
+nobody can mistake one for a picture of your work.
+
+The old site put stock photos on these cards by hotlinking Unsplash. Those
+hotlinks are gone: third-party image hosts break, they cost a DNS lookup and a
+connection on every card, and none of it was your work anyway. I could not
+download replacement stock from the build environment either — outbound access
+to image hosts is blocked there.
+
+**To replace any panel with a real photo**, drop a JPEG at
+`public/images/services/<service-slug>.jpg`. It wins automatically; the code
+prefers a photo and falls back to the generated panel. Slugs are listed in
+`data/taxonomy.ts`. Run `npm run optimize:images` afterwards.
+
+Regenerate the panels any time with `node scripts/generate-service-art.mjs`.
+
+## 9. Photography — the thing that actually closes the gap
 
 `/portfolio` is empty, and it says so honestly rather than showing stock images
 or other companies' work.
@@ -138,7 +167,7 @@ Adding a project is one entry in `data/projects.ts` — the project page,
 portfolio filters, sitemap, internal links and homepage section all pick it up
 automatically.
 
-## 9. Reviews
+## 10. Reviews
 
 `/reviews` is empty and says so. `docs/REVIEW-ENGINE.md` has the routine: a text
 24 hours after the final walkthrough with a direct Google review link, targeting
@@ -147,7 +176,7 @@ automatically.
 Adding one entry to `data/reviews.ts` activates the reviews page, the homepage
 section, the city-page sections and the `AggregateRating` structured data.
 
-## 10. The L&I verification link
+## 11. The L&I verification link
 
 The footer, the about page and every NAP block link the licence number to
 `https://secure.lni.wa.gov/verify/` — L&I's contractor verification search.
@@ -159,7 +188,7 @@ from the business UBI and could not be verified from the build environment
 record and copy the resulting URL, paste it into `license.lookupUrl` in
 `data/business.ts` and every link on the site updates.
 
-## 11. Repository housekeeping
+## 12. Repository housekeeping
 
 - **PR #1** (`cursor/setup-dev-environment-c0c8`, open draft) documents the
   broken `next lint` caused by ESLint 9. That is now fixed — ESLint is pinned to

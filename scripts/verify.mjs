@@ -65,7 +65,7 @@ const RULES = [
     // "(253) 217-0814", "253-217-0814" and "+12532170814" all read as the same
     // number and only a genuinely different one fails.
     match(text) {
-      const CANONICAL = '2532170814';
+      const CANONICAL = '2534297052';
       const found = text.match(/\+?1?[\s.\-(]*\d{3}[\s.\-)]*\d{3}[\s.\-]*\d{4}\b/g) ?? [];
       return found.some((raw) => {
         const digits = raw.replace(/\D/g, '').replace(/^1/, '');

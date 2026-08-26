@@ -11,49 +11,49 @@ import { PHONE, TEL_HREF, business, formattedAddress } from '@/data/business';
  */
 export function NapBlock({ heading = 'Blue Landscaping Services' }: { heading?: string }) {
   return (
-    <section className="rounded-sm border border-stone-200 bg-white p-6">
+    <section className="rounded-sm border border-ink-200 bg-white p-6">
       <h2 className="text-h3">{heading}</h2>
 
       <address className="mt-4 space-y-3 not-italic">
-        <p className="flex items-start gap-2.5 text-body text-stone-800">
-          <MapPin className="mt-1 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+        <p className="flex items-start gap-2.5 text-body text-ink-800">
+          <MapPin className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
           <span>{formattedAddress}</span>
         </p>
         <p className="flex items-start gap-2.5">
-          <Phone className="mt-1 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
-          <a href={TEL_HREF} className="text-body font-semibold text-stone-950 hover:text-moss-700">
+          <Phone className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+          <a href={TEL_HREF} className="text-body font-semibold text-brand-900 hover:text-brand-600">
             {PHONE.display}
           </a>
         </p>
         <p className="flex items-start gap-2.5">
-          <Mail className="mt-1 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+          <Mail className="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
           <a
             href={`mailto:${business.email}`}
-            className="break-all text-body text-stone-800 hover:text-moss-700"
+            className="break-all text-body text-ink-800 hover:text-brand-600"
           >
             {business.email}
           </a>
         </p>
       </address>
 
-      <div className="mt-5 border-t border-stone-200 pt-4">
-        <p className="flex items-start gap-2.5 text-caption text-stone-500">
-          <Clock className="mt-0.5 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+      <div className="mt-5 border-t border-ink-200 pt-4">
+        <p className="flex items-start gap-2.5 text-caption text-ink-500">
+          <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
           <span>
             Mon–Fri 7am–6pm · Sat 8am–4pm
             <br />
             Closed Sunday
           </span>
         </p>
-        <p className="mt-3 flex items-start gap-2.5 text-caption text-stone-500">
-          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />
+        <p className="mt-3 flex items-start gap-2.5 text-caption text-ink-500">
+          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
           <span>
             WA Contractor License{' '}
             <a
               href={business.license.lookupUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-stone-800 underline underline-offset-2"
+              className="font-medium text-ink-800 underline underline-offset-2"
             >
               {business.license.number}
             </a>

@@ -19,12 +19,12 @@ export function SiteFooter() {
   const years = yearsInBusiness();
 
   return (
-    <footer className="mt-auto border-t border-stone-200 bg-stone-950 text-stone-200">
+    <footer className="mt-auto border-t border-ink-200 bg-brand-900 text-ink-200">
       <div className="shell py-16 md:py-20">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Services — all of them */}
           <nav aria-labelledby="footer-services">
-            <h2 id="footer-services" className="mb-4 text-caption font-semibold uppercase tracking-wide text-moss-100">
+            <h2 id="footer-services" className="mb-4 text-caption font-semibold uppercase tracking-wide text-brand-50">
               Services
             </h2>
             <ul className="space-y-2">
@@ -32,7 +32,7 @@ export function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-caption text-stone-200/80 transition-colors hover:text-white hover:underline"
+                    className="text-caption text-ink-200/80 transition-colors hover:text-white hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -43,7 +43,7 @@ export function SiteFooter() {
 
           {/* Service areas — all of them */}
           <nav aria-labelledby="footer-areas">
-            <h2 id="footer-areas" className="mb-4 text-caption font-semibold uppercase tracking-wide text-moss-100">
+            <h2 id="footer-areas" className="mb-4 text-caption font-semibold uppercase tracking-wide text-brand-50">
               Service Areas
             </h2>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -51,7 +51,7 @@ export function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-caption text-stone-200/80 transition-colors hover:text-white hover:underline"
+                    className="text-caption text-ink-200/80 transition-colors hover:text-white hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -62,7 +62,7 @@ export function SiteFooter() {
 
           {/* Company */}
           <nav aria-labelledby="footer-company">
-            <h2 id="footer-company" className="mb-4 text-caption font-semibold uppercase tracking-wide text-moss-100">
+            <h2 id="footer-company" className="mb-4 text-caption font-semibold uppercase tracking-wide text-brand-50">
               Company
             </h2>
             <ul className="space-y-2">
@@ -70,7 +70,7 @@ export function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-caption text-stone-200/80 transition-colors hover:text-white hover:underline"
+                    className="text-caption text-ink-200/80 transition-colors hover:text-white hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -93,37 +93,37 @@ export function SiteFooter() {
             </Link>
 
             <address className="space-y-3 not-italic">
-              <p className="flex items-start gap-2.5 text-caption text-stone-200/80">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-moss-100" aria-hidden="true" />
+              <p className="flex items-start gap-2.5 text-caption text-ink-200/80">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-50" aria-hidden="true" />
                 <span>{formattedAddress}</span>
               </p>
               <p className="flex items-start gap-2.5">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-moss-100" aria-hidden="true" />
-                <a href={TEL_HREF} className="text-caption text-stone-200/80 transition-colors hover:text-white">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-50" aria-hidden="true" />
+                <a href={TEL_HREF} className="text-caption text-ink-200/80 transition-colors hover:text-white">
                   {PHONE.display}
                 </a>
               </p>
               <p className="flex items-start gap-2.5">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-moss-100" aria-hidden="true" />
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-50" aria-hidden="true" />
                 <a
                   href={`mailto:${business.email}`}
-                  className="break-all text-caption text-stone-200/80 transition-colors hover:text-white"
+                  className="break-all text-caption text-ink-200/80 transition-colors hover:text-white"
                 >
                   {business.email}
                 </a>
               </p>
             </address>
 
-            <div className="mt-5 border-t border-stone-800 pt-4">
-              <p className="flex items-start gap-2.5 text-caption text-stone-200/80">
-                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-moss-100" aria-hidden="true" />
+            <div className="mt-5 border-t border-ink-800 pt-4">
+              <p className="flex items-start gap-2.5 text-caption text-ink-200/80">
+                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-50" aria-hidden="true" />
                 <span>
                   WA Lic.{' '}
                   <a
                     href={business.license.lookupUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline decoration-stone-500 underline-offset-2 transition-colors hover:text-white"
+                    className="underline decoration-ink-500 underline-offset-2 transition-colors hover:text-white"
                   >
                     {business.license.number}
                   </a>
@@ -133,10 +133,10 @@ export function SiteFooter() {
               </p>
             </div>
 
-            <h2 className="mb-2 mt-5 text-caption font-semibold uppercase tracking-wide text-moss-100">Hours</h2>
+            <h2 className="mb-2 mt-5 text-caption font-semibold uppercase tracking-wide text-brand-50">Hours</h2>
             <ul className="space-y-1">
               {business.hours.map((h) => (
-                <li key={h.day} className="flex justify-between gap-4 text-caption text-stone-200/70">
+                <li key={h.day} className="flex justify-between gap-4 text-caption text-ink-200/70">
                   <span>{h.day.slice(0, 3)}</span>
                   <span>{h.opens && h.closes ? `${to12h(h.opens)} – ${to12h(h.closes)}` : 'Closed'}</span>
                 </li>
@@ -146,8 +146,8 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-stone-800">
-        <div className="shell pb-action-bar flex flex-col gap-3 pt-6 text-caption text-stone-500 md:flex-row md:items-center md:justify-between md:pb-6">
+      <div className="border-t border-ink-800">
+        <div className="shell pb-action-bar flex flex-col gap-3 pt-6 text-caption text-ink-500 md:flex-row md:items-center md:justify-between md:pb-6">
           <p>
             © {new Date().getFullYear()} {business.legalName}. Serving Greater Seattle from Kent, WA
             {years > 0 ? ` since ${business.foundedYear}.` : '.'}
@@ -155,7 +155,7 @@ export function SiteFooter() {
           <ul className="flex flex-wrap gap-x-5 gap-y-1">
             {legalLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="transition-colors hover:text-stone-200">
+                <Link href={link.href} className="transition-colors hover:text-ink-200">
                   {link.label}
                 </Link>
               </li>

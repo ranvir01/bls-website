@@ -52,7 +52,7 @@ export function SiteHeader() {
         className={cn(
           'fixed inset-x-0 top-0 z-40',
           solid
-            ? 'border-b border-stone-200 bg-stone-50/95 backdrop-blur-md'
+            ? 'border-b border-ink-200 bg-ink-50/95 backdrop-blur-md'
             : 'border-b border-transparent bg-transparent',
         )}
         initial={false}
@@ -76,7 +76,7 @@ export function SiteHeader() {
             <span
               className={cn(
                 'hidden font-display text-lg leading-tight sm:block',
-                solid ? 'text-stone-950' : 'text-white',
+                solid ? 'text-brand-900' : 'text-white',
               )}
             >
               Blue Landscaping
@@ -97,8 +97,8 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'px-3 py-2 text-caption font-medium transition-colors hover:text-moss-700',
-                  solid ? 'text-stone-800' : 'text-white/90 hover:text-white',
+                  'px-3 py-2 text-caption font-medium transition-colors hover:text-brand-600',
+                  solid ? 'text-ink-800' : 'text-white/90 hover:text-white',
                 )}
               >
                 {item.label}
@@ -113,7 +113,7 @@ export function SiteHeader() {
               onClick={() => trackEvent('click_to_call', { location: 'header' })}
               className={cn(
                 'hidden items-center gap-2 rounded-sm px-3 py-2 text-caption font-semibold transition-colors md:inline-flex',
-                solid ? 'text-stone-950 hover:text-moss-700' : 'text-white hover:text-moss-100',
+                solid ? 'text-brand-900 hover:text-brand-600' : 'text-white hover:text-brand-50',
               )}
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
@@ -126,7 +126,7 @@ export function SiteHeader() {
               onClick={() => trackEvent('click_to_call', { location: 'header_icon' })}
               className={cn(
                 'inline-flex h-11 w-11 items-center justify-center rounded-sm transition-colors md:hidden',
-                solid ? 'text-stone-950 hover:bg-stone-200/60' : 'text-white hover:bg-white/10',
+                solid ? 'text-brand-900 hover:bg-ink-200/60' : 'text-white hover:bg-white/10',
               )}
             >
               <Phone className="h-5 w-5" aria-hidden="true" />

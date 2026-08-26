@@ -226,7 +226,7 @@ export function QuoteForm({
         onSubmit={onSubmit}
         onChange={markStarted}
         noValidate
-        className={cn('rounded-sm border border-stone-200 bg-white p-5 shadow-card sm:p-7', className)}
+        className={cn('rounded-sm border border-ink-200 bg-white p-5 shadow-card sm:p-7', className)}
       >
         {/* Honeypot. Hidden from sight and from assistive tech; bots fill it. */}
         <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
@@ -236,10 +236,10 @@ export function QuoteForm({
 
         <div className="mb-6">
           <div className="mb-2 flex items-baseline justify-between">
-            <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+            <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
               Step {step + 1} of {TOTAL_STEPS}
             </p>
-            <p className="text-caption text-stone-500">Takes about a minute</p>
+            <p className="text-caption text-ink-500">Takes about a minute</p>
           </div>
           <div
             role="progressbar"
@@ -247,10 +247,10 @@ export function QuoteForm({
             aria-valuemax={TOTAL_STEPS}
             aria-valuenow={step + 1}
             aria-label="Quote request progress"
-            className="h-1 w-full overflow-hidden rounded-sm bg-stone-200"
+            className="h-1 w-full overflow-hidden rounded-sm bg-ink-200"
           >
             <m.div
-              className="h-full bg-moss-700"
+              className="h-full bg-brand-600"
               initial={false}
               animate={{ width: `${progress}%` }}
               transition={{ duration: reduced ? 0 : 0.3, ease: ease.out }}
@@ -303,7 +303,7 @@ export function QuoteForm({
                     id="details"
                     rows={3}
                     placeholder="Slope, drainage problems, access, a deadline…"
-                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    className="w-full rounded-sm border border-ink-200 bg-white px-3 py-2.5 text-body text-brand-900 placeholder:text-ink-500 focus:border-brand-600"
                     {...register('details')}
                   />
                 </Field>
@@ -318,7 +318,7 @@ export function QuoteForm({
                     type="text"
                     autoComplete="address-level2"
                     placeholder="Kent"
-                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    className="w-full rounded-sm border border-ink-200 bg-white px-3 py-2.5 text-body text-brand-900 placeholder:text-ink-500 focus:border-brand-600"
                     {...register('city')}
                   />
                 </Field>
@@ -330,13 +330,13 @@ export function QuoteForm({
                     autoComplete="postal-code"
                     maxLength={5}
                     placeholder="98031"
-                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    className="w-full rounded-sm border border-ink-200 bg-white px-3 py-2.5 text-body text-brand-900 placeholder:text-ink-500 focus:border-brand-600"
                     {...register('zip')}
                   />
                 </Field>
                 {/* Out of area is a note, never a block — the lead is still worth having. */}
                 {values.zip?.length === 5 && !isInServiceArea(values.zip) && (
-                  <p className="rounded-sm border border-warn/30 bg-warn/5 px-3 py-2.5 text-caption text-stone-800">
+                  <p className="rounded-sm border border-warn/30 bg-warn/5 px-3 py-2.5 text-caption text-ink-800">
                     That looks like it may be outside our usual service area. Send it anyway — if we
                     cannot get out there, we will tell you straight and point you somewhere good.
                   </p>
@@ -368,7 +368,7 @@ export function QuoteForm({
                     id="name"
                     type="text"
                     autoComplete="name"
-                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 focus:border-moss-700"
+                    className="w-full rounded-sm border border-ink-200 bg-white px-3 py-2.5 text-body text-brand-900 focus:border-brand-600"
                     {...register('name')}
                   />
                 </Field>
@@ -379,7 +379,7 @@ export function QuoteForm({
                     inputMode="tel"
                     autoComplete="tel"
                     placeholder="(253) 555-0123"
-                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 placeholder:text-stone-500 focus:border-moss-700"
+                    className="w-full rounded-sm border border-ink-200 bg-white px-3 py-2.5 text-body text-brand-900 placeholder:text-ink-500 focus:border-brand-600"
                     {...register('phone')}
                   />
                 </Field>
@@ -389,11 +389,11 @@ export function QuoteForm({
                     type="email"
                     inputMode="email"
                     autoComplete="email"
-                    className="w-full rounded-sm border border-stone-200 bg-white px-3 py-2.5 text-body text-stone-950 focus:border-moss-700"
+                    className="w-full rounded-sm border border-ink-200 bg-white px-3 py-2.5 text-body text-brand-900 focus:border-brand-600"
                     {...register('email')}
                   />
                 </Field>
-                <p className="text-caption text-stone-500">
+                <p className="text-caption text-ink-500">
                   We call to confirm the details and book a free on-site walkthrough. No spam, no
                   list-selling.
                 </p>
@@ -403,7 +403,7 @@ export function QuoteForm({
         </AnimatePresence>
 
         {serverError && (
-          <p role="alert" aria-live="assertive" className="mt-4 rounded-sm border border-error/30 bg-error/5 px-3 py-2.5 text-caption text-stone-950">
+          <p role="alert" aria-live="assertive" className="mt-4 rounded-sm border border-error/30 bg-error/5 px-3 py-2.5 text-caption text-brand-900">
             {serverError}{' '}
             <a href={TEL_HREF} className="font-semibold underline">
               Call {PHONE.display}
@@ -416,7 +416,7 @@ export function QuoteForm({
             <button
               type="button"
               onClick={goBack}
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-sm border border-stone-200 px-4 text-body font-medium text-stone-800 transition-colors hover:border-stone-500"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-sm border border-ink-200 px-4 text-body font-medium text-ink-800 transition-colors hover:border-ink-500"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               Back
@@ -427,7 +427,7 @@ export function QuoteForm({
             <button
               type="button"
               onClick={goNext}
-              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
+              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-leaf-600 px-6 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90"
             >
               Continue
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -436,7 +436,7 @@ export function QuoteForm({
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90 disabled:opacity-70"
+              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-sm bg-leaf-600 px-6 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90 disabled:opacity-70"
             >
               {submitting ? (
                 <>
@@ -484,16 +484,16 @@ function CardGroup({
               className={cn(
                 'min-h-[64px] rounded-sm border p-4 text-left transition-colors',
                 selected
-                  ? 'border-moss-700 bg-moss-100/50 ring-1 ring-moss-700'
-                  : 'border-stone-200 bg-white hover:border-stone-500',
+                  ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600'
+                  : 'border-ink-200 bg-white hover:border-ink-500',
               )}
             >
               <span className="flex items-start justify-between gap-2">
-                <span className="text-body font-medium text-stone-950">{option.label}</span>
-                {selected && <Check className="mt-0.5 h-4 w-4 shrink-0 text-moss-700" aria-hidden="true" />}
+                <span className="text-body font-medium text-brand-900">{option.label}</span>
+                {selected && <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />}
               </span>
               {option.description && (
-                <span className="mt-0.5 block text-caption text-stone-500">{option.description}</span>
+                <span className="mt-0.5 block text-caption text-ink-500">{option.description}</span>
               )}
             </button>
           );
@@ -521,7 +521,7 @@ function ChipGroup({
 }) {
   return (
     <fieldset>
-      <legend className="mb-2.5 text-caption font-semibold uppercase tracking-wide text-stone-500">
+      <legend className="mb-2.5 text-caption font-semibold uppercase tracking-wide text-ink-500">
         {legend}
       </legend>
       <div className="flex flex-wrap gap-2">
@@ -536,8 +536,8 @@ function ChipGroup({
               className={cn(
                 'min-h-[44px] rounded-sm border px-4 text-body transition-colors',
                 selected
-                  ? 'border-moss-700 bg-moss-100/50 font-medium text-stone-950 ring-1 ring-moss-700'
-                  : 'border-stone-200 bg-white text-stone-800 hover:border-stone-500',
+                  ? 'border-brand-600 bg-brand-50/50 font-medium text-brand-900 ring-1 ring-brand-600'
+                  : 'border-ink-200 bg-white text-ink-800 hover:border-ink-500',
               )}
             >
               {option.label}
@@ -562,7 +562,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="mb-1.5 block text-caption font-medium text-stone-800">
+      <label htmlFor={htmlFor} className="mb-1.5 block text-caption font-medium text-ink-800">
         {label}
       </label>
       {children}
@@ -582,20 +582,20 @@ function SuccessPanel({ name, className }: { name?: string; className?: string }
     <div
       role="status"
       aria-live="polite"
-      className={cn('rounded-sm border border-moss-700/30 bg-moss-100/40 p-7 text-center', className)}
+      className={cn('rounded-sm border border-brand-600/30 bg-brand-50/40 p-7 text-center', className)}
     >
-      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-moss-700">
+      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600">
         <Check className="h-6 w-6 text-white" aria-hidden="true" />
       </div>
       <h2 className="text-h3">{first ? `Thanks, ${first} — we have it.` : 'Thanks — we have it.'}</h2>
-      <p className="mx-auto mt-3 max-w-prose text-body text-stone-800">
+      <p className="mx-auto mt-3 max-w-prose text-body text-ink-800">
         An estimator will call you shortly to confirm the details and book your free on-site
         walkthrough. If you would rather reach us now, we are on the phone.
       </p>
       <a
         href={TEL_HREF}
         onClick={() => trackEvent('click_to_call', { location: 'quote_success' })}
-        className="mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-sm bg-clay-600 px-6 text-body font-semibold text-white transition-colors hover:bg-clay-600/90"
+        className="mt-5 inline-flex min-h-[48px] items-center gap-2 rounded-sm bg-leaf-600 px-6 text-body font-semibold text-white transition-colors hover:bg-leaf-600/90"
       >
         <Phone className="h-4 w-4" aria-hidden="true" />
         {PHONE.display}

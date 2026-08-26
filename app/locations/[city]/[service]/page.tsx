@@ -97,7 +97,7 @@ export default function ServiceCityPage({ params }: Params) {
 
       <article>
         <header className="shell pt-8">
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             {city.region}
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
@@ -111,9 +111,9 @@ export default function ServiceCityPage({ params }: Params) {
             </Reveal>
 
             <Reveal as="section">
-              <div className="border-l-2 border-clay-600 bg-white py-5 pl-6 pr-5">
+              <div className="border-l-2 border-leaf-600 bg-white py-5 pl-6 pr-5">
                 <h2 className="text-h3">What&rsquo;s different about {city.name}</h2>
-                <p className="mt-3 max-w-prose text-body-lg text-stone-800">{content.localAngle}</p>
+                <p className="mt-3 max-w-prose text-body-lg text-ink-800">{content.localAngle}</p>
               </div>
             </Reveal>
 
@@ -137,7 +137,7 @@ export default function ServiceCityPage({ params }: Params) {
             {cityDetail && (
               <Reveal as="section">
                 <h2 className="text-h2">Permits in {city.name}</h2>
-                <p className="mt-4 max-w-prose text-body text-stone-800">{cityDetail.permitNotes}</p>
+                <p className="mt-4 max-w-prose text-body text-ink-800">{cityDetail.permitNotes}</p>
               </Reveal>
             )}
 
@@ -154,7 +154,7 @@ export default function ServiceCityPage({ params }: Params) {
           </aside>
         </div>
 
-        <section className="border-t border-stone-200 bg-white">
+        <section className="border-t border-ink-200 bg-white">
           <div className="shell section-tight grid gap-10 md:grid-cols-3">
             <LinkCluster
               title="More on this service"

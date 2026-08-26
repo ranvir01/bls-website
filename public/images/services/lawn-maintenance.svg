@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f6642"/>
+      <stop offset="1" stop-color="#257f52"/>
+    </linearGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="88" fill="#ffffff" opacity="0.160"/><rect x="0" y="88" width="1200" height="88" fill="#ffffff" opacity="0.082"/><rect x="0" y="176" width="1200" height="88" fill="#ffffff" opacity="0.185"/><rect x="0" y="264" width="1200" height="88" fill="#ffffff" opacity="0.091"/><rect x="0" y="352" width="1200" height="88" fill="#ffffff" opacity="0.197"/><rect x="0" y="440" width="1200" height="88" fill="#ffffff" opacity="0.109"/><rect x="0" y="528" width="1200" height="88" fill="#ffffff" opacity="0.161"/><rect x="0" y="616" width="1200" height="88" fill="#ffffff" opacity="0.103"/><rect x="0" y="704" width="1200" height="88" fill="#ffffff" opacity="0.157"/><rect x="0" y="792" width="1200" height="88" fill="#ffffff" opacity="0.114"/>
+  <rect width="1200" height="800" fill="url(#bg)" opacity="0.12"/>
+</svg>

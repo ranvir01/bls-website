@@ -5,6 +5,13 @@
 [build.environment]
   NODE_VERSION = "20"
   NEXT_TELEMETRY_DISABLED = "1"
+  # Playwright is a devDependency for the browser-driven UI audit, which runs in
+  # CI, not here. Without this its postinstall downloads ~150MB of browsers on
+  # every production build for no reason.
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+  # Deliberately NOT setting NODE_ENV=production: that makes npm skip
+  # devDependencies, and typescript, tailwind, postcss and autoprefixer all live
+  # there. The old config set it, which is a build failure waiting to happen.
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

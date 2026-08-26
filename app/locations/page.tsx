@@ -30,7 +30,7 @@ export default function LocationsPage() {
 
       <div className="shell pb-16 pt-8">
         <header>
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             Where we work
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">Service areas across Greater Seattle</h1>
@@ -54,15 +54,15 @@ export default function LocationsPage() {
                       <li key={city.slug}>
                         <Link
                           href={cityPath(city.slug)}
-                          className="group flex h-full flex-col rounded-sm border border-stone-200 bg-white p-5 transition-shadow hover:shadow-card"
+                          className="group flex h-full flex-col rounded-sm border border-ink-200 bg-white p-5 transition-shadow hover:shadow-card"
                         >
-                          <h3 className="text-body-lg font-semibold text-stone-950 group-hover:text-moss-700">
+                          <h3 className="text-body-lg font-semibold text-brand-900 group-hover:text-brand-600">
                             {city.name}
                           </h3>
-                          <p className="mt-1 text-caption text-stone-500">
+                          <p className="mt-1 text-caption text-ink-500">
                             {content.driveTimeFromKent} from our Kent shop
                           </p>
-                          <p className="mt-3 flex-1 text-body text-stone-500">
+                          <p className="mt-3 flex-1 text-body text-ink-500">
                             {content.quickAnswer.split('. ').slice(0, 2).join('. ')}.
                           </p>
                         </Link>

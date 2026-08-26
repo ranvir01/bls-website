@@ -20,9 +20,9 @@ export default function TermsPage() {
 
       <article className="shell max-w-prose pb-16 pt-8">
         <h1 className="text-h1">Terms of Service</h1>
-        <p className="mt-3 text-caption text-stone-500">Last updated {UPDATED}</p>
+        <p className="mt-3 text-caption text-ink-500">Last updated {UPDATED}</p>
 
-        <div className="mt-8 space-y-6 text-body-lg text-stone-800">
+        <div className="mt-8 space-y-6 text-body-lg text-ink-800">
           <p>
             These terms govern your use of this website, operated by {business.legalName}. By using
             the site you accept them.

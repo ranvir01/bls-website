@@ -17,20 +17,23 @@ import { cn } from '@/lib/utils';
  * router.push, which would break middle-click and open-in-new-tab.
  */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-60 active:scale-[0.98] motion-reduce:active:scale-100',
+  'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors disabled:pointer-events-none disabled:opacity-60 active:scale-[0.98] motion-reduce:active:scale-100',
   {
     variants: {
       variant: {
-        /** Warm accent on a cool page — the strongest pull available. */
-        primary: 'bg-clay-600 text-white hover:bg-clay-600/90',
-        brand: 'bg-moss-700 text-white hover:bg-moss-700/90',
-        outline: 'border border-stone-200 bg-white text-stone-950 hover:border-moss-700',
+        /** Green on a blue page — the strongest pull available inside the
+            original palette, and the 'landscaping' half of the name. */
+        primary: 'bg-leaf-600 text-white hover:bg-leaf-700',
+        brand: 'bg-brand-600 text-white hover:bg-brand-700',
+        outline: 'border border-ink-200 bg-white text-brand-900 hover:border-brand-600',
         /** For dark sections, where a light border is the only workable option. */
-        onDark: 'border border-moss-100/30 text-white hover:border-moss-100/70',
+        onDark: 'border border-brand-50/30 text-white hover:border-brand-50/70',
         /** Over a photographic hero, where the backdrop is unpredictable. */
+        /* A photo has bright and dark halves, so a 5%-white fill vanishes over
+           half of them. A dark scrim guarantees contrast wherever it lands. */
         onHero:
-          'border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-white/60',
-        ghost: 'text-stone-950 hover:bg-stone-200/60',
+          'border border-white/40 bg-black/40 text-white backdrop-blur-sm hover:bg-black/55 hover:border-white/70',
+        ghost: 'text-brand-900 hover:bg-ink-200/60',
       },
       size: {
         sm: 'min-h-[44px] px-4 text-caption',

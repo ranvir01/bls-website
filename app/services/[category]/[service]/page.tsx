@@ -124,7 +124,7 @@ export default function ServicePage({ params }: Params) {
 
       <article>
         <header className="shell pt-8">
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">
             {category.name}
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">{content.h1}</h1>
@@ -158,12 +158,12 @@ export default function ServicePage({ params }: Params) {
               <div className="mt-6">
                 <ProcessSteps steps={content.process} />
               </div>
-              <p className="mt-6 max-w-prose text-body text-stone-500">{content.timeline}</p>
+              <p className="mt-6 max-w-prose text-body text-ink-500">{content.timeline}</p>
             </Reveal>
 
             <Reveal as="section">
               <h2 className="text-h2">What it costs</h2>
-              <p className="mt-3 max-w-prose text-body-lg text-stone-500">
+              <p className="mt-3 max-w-prose text-body-lg text-ink-500">
                 Real installed ranges for the Puget Sound market, published so you can plan before
                 anyone visits.
               </p>
@@ -180,9 +180,9 @@ export default function ServicePage({ params }: Params) {
               <h2 className="text-h2">Building this in the Pacific Northwest</h2>
               <div className="mt-6 grid gap-6 sm:grid-cols-2">
                 {content.pnwConsiderations.map((item) => (
-                  <div key={item.title} className="rounded-sm border border-stone-200 bg-white p-5">
-                    <h3 className="text-body-lg font-semibold text-stone-950">{item.title}</h3>
-                    <p className="mt-2 text-body text-stone-500">{item.body}</p>
+                  <div key={item.title} className="rounded-sm border border-ink-200 bg-white p-5">
+                    <h3 className="text-body-lg font-semibold text-brand-900">{item.title}</h3>
+                    <p className="mt-2 text-body text-ink-500">{item.body}</p>
                   </div>
                 ))}
               </div>
@@ -217,7 +217,7 @@ export default function ServicePage({ params }: Params) {
 
         {/* Internal linking web: every service page links to its category, its
             siblings, the cities it serves, related reading and the portfolio. */}
-        <section className="border-t border-stone-200 bg-white">
+        <section className="border-t border-ink-200 bg-white">
           <div className="shell section-tight grid gap-10 md:grid-cols-2 lg:grid-cols-4">
             <LinkCluster
               title="Related services"
@@ -234,12 +234,12 @@ export default function ServicePage({ params }: Params) {
             )}
             <div>
               <h2 className="text-h3">See the work</h2>
-              <p className="mt-3 text-body text-stone-500">
+              <p className="mt-3 text-body text-ink-500">
                 Real projects, filterable by service and city.
               </p>
               <Link
                 href={`/portfolio?service=${content.slug}`}
-                className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-moss-700 underline underline-offset-4"
+                className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-brand-600 underline underline-offset-4"
               >
                 View {ref.name.toLowerCase()} projects
               </Link>

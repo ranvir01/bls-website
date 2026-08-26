@@ -30,7 +30,7 @@ export default function QuotePage() {
       <div className="shell grid gap-12 pb-20 pt-8 lg:grid-cols-12 lg:gap-16">
         <div className="min-w-0 lg:col-span-5">
           <h1 className="text-h1">Get a real number, not a ballpark</h1>
-          <p className="mt-5 max-w-prose text-body-lg text-stone-500">
+          <p className="mt-5 max-w-prose text-body-lg text-ink-500">
             Five quick questions. We call the same day to confirm the details and book a free
             on-site walkthrough — then you get a written scope with materials named and a cost range
             you can plan around.
@@ -75,10 +75,10 @@ function Benefit({
 }) {
   return (
     <li className="flex gap-4">
-      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-moss-700" aria-hidden="true" />
+      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" aria-hidden="true" />
       <div>
-        <h2 className="text-body-lg font-semibold text-stone-950">{title}</h2>
-        <p className="mt-1 text-body text-stone-500">{children}</p>
+        <h2 className="text-body-lg font-semibold text-brand-900">{title}</h2>
+        <p className="mt-1 text-body text-ink-500">{children}</p>
       </div>
     </li>
   );

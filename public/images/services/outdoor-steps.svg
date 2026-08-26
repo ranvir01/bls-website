@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00348f"/>
+      <stop offset="1" stop-color="#007ab8"/>
+    </linearGradient>
+    
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="0" y="685.7142857142857" width="173.42857142857142" height="114.28571428571433" fill="#ffffff" opacity="0.102"/><rect x="171.42857142857142" y="571.4285714285714" width="173.42857142857142" height="228.57142857142856" fill="#ffffff" opacity="0.188"/><rect x="342.85714285714283" y="457.14285714285717" width="173.42857142857142" height="342.85714285714283" fill="#ffffff" opacity="0.089"/><rect x="514.2857142857143" y="342.85714285714283" width="173.42857142857142" height="457.14285714285717" fill="#ffffff" opacity="0.113"/><rect x="685.7142857142857" y="228.57142857142856" width="173.42857142857142" height="571.4285714285714" fill="#ffffff" opacity="0.119"/><rect x="857.1428571428571" y="114.28571428571433" width="173.42857142857142" height="685.7142857142857" fill="#ffffff" opacity="0.080"/><rect x="1028.5714285714287" y="0" width="173.42857142857142" height="800" fill="#ffffff" opacity="0.083"/>
+  <rect width="1200" height="800" fill="url(#bg)" opacity="0.12"/>
+</svg>

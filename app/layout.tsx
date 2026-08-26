@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Inter } from 'next/font/google';
+import { Montserrat, Quicksand } from 'next/font/google';
 import Script from 'next/script';
 
 import './globals.css';
@@ -13,26 +13,25 @@ import { GA_MEASUREMENT_ID } from '@/lib/analytics';
 import { graph, organizationSchema, websiteSchema } from '@/lib/seo';
 
 /**
- * Display face. Fraunces is a variable serif with an optical-size axis — it
- * holds up at display sizes where most serifs get spindly, and a serif is the
- * single cheapest way to not look like every other landscaping site in the
- * market, all of which use geometric sans.
+ * The original type pairing, restored. Montserrat carries the headings;
+ * Quicksand's rounded terminals keep the body approachable rather than
+ * corporate, which is the tone the business actually has.
  *
  * Self-hosted by next/font, so there is no third-party font request, no FOUT
  * and no layout shift.
  */
-const fraunces = Fraunces({
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-fraunces',
+  variable: '--font-montserrat',
   preload: true,
 });
 
-/** Body/UI face. Variable weight; only the display face is preloaded. */
-const inter = Inter({
+/** Body/UI face. Only the display face is preloaded. */
+const quicksand = Quicksand({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-quicksand',
   preload: false,
 });
 
@@ -65,19 +64,19 @@ export const viewport: Viewport = {
   // Never cap zoom at 1 — pinch-zoom is an accessibility requirement.
   maximumScale: 5,
   viewportFit: 'cover',
-  themeColor: '#F7F7F4',
+  themeColor: '#0052e6',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${quicksand.variable}`}>
       <body className="flex min-h-screen flex-col bg-background text-foreground">
         {/* Sitewide structured data. Page-level schema is added per route. */}
         <JsonLd data={graph([organizationSchema(), websiteSchema()])} />
 
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-stone-950 focus:px-4 focus:py-2.5 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-brand-900 focus:px-4 focus:py-2.5 focus:text-white"
         >
           Skip to content
         </a>

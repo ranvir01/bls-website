@@ -157,7 +157,7 @@ const content: ServiceContent = {
     {
       question: 'Do I need a contract, and can I cancel?',
       answer:
-        'We work on a rolling seasonal schedule, not a long lock-in. You get a written scope and per-visit or monthly pricing, and you can change frequency or stop with reasonable notice. Most clients run weekly from March into November and switch to the winter rotation automatically. Call the office at (253) 217-0814 and we will adjust the route rather than argue about a term.',
+        'We work on a rolling seasonal schedule, not a long lock-in. You get a written scope and per-visit or monthly pricing, and you can change frequency or stop with reasonable notice. Most clients run weekly from March into November and switch to the winter rotation automatically. Call the office at (253) 429-7052 and we will adjust the route rather than argue about a term.',
     },
   ],
   relatedServices: ['sod-installation', 'irrigation-maintenance', 'planting-design'],

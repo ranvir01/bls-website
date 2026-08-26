@@ -20,9 +20,9 @@ export default function PrivacyPolicyPage() {
 
       <article className="shell max-w-prose pb-16 pt-8">
         <h1 className="text-h1">Privacy Policy</h1>
-        <p className="mt-3 text-caption text-stone-500">Last updated {UPDATED}</p>
+        <p className="mt-3 text-caption text-ink-500">Last updated {UPDATED}</p>
 
-        <div className="mt-8 space-y-6 text-body-lg text-stone-800">
+        <div className="mt-8 space-y-6 text-body-lg text-ink-800">
           <p>
             {business.legalName} (&ldquo;we&rdquo;, &ldquo;us&rdquo;) operates this website. This
             policy explains what we collect, why, and what we do with it. It is written to be read

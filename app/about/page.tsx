@@ -28,7 +28,7 @@ export default function AboutPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-moss-700">About us</p>
+          <p className="text-caption font-semibold uppercase tracking-wide text-brand-600">About us</p>
           <h1 className="mt-2 text-h1">A Kent contractor that designs and builds its own work</h1>
           <QuickAnswer>
             {`Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor based at ${business.address.street} in Kent, WA. Founded in ${business.foundedYear}, owned by ${business.owner}, and operating under Washington contractor registration ${business.license.number} with a $12,000 bond and $1M liability coverage.`}
@@ -42,7 +42,7 @@ export default function AboutPage() {
         <div className="min-w-0 space-y-12 lg:col-span-8">
           <Reveal as="section">
             <h2 className="text-h2">How we work, and why it is set up this way</h2>
-            <div className="mt-5 max-w-prose space-y-4 text-body-lg text-stone-800">
+            <div className="mt-5 max-w-prose space-y-4 text-body-lg text-ink-800">
               <p>
                 Most landscape projects in this market pass through at least three companies: a
                 designer who draws it, a general contractor who prices it, and whichever crew bid
@@ -63,7 +63,7 @@ export default function AboutPage() {
 
           <Reveal as="section">
             <h2 className="text-h2">What we will not do</h2>
-            <div className="mt-5 max-w-prose space-y-4 text-body-lg text-stone-800">
+            <div className="mt-5 max-w-prose space-y-4 text-body-lg text-ink-800">
               <p>
                 We will not skip the base to hit a number. If a competing bid is meaningfully
                 cheaper on the same scope, the difference is almost always excavation depth,
@@ -87,14 +87,14 @@ export default function AboutPage() {
 
           <Reveal as="section">
             <h2 className="text-h2">Licensing and insurance</h2>
-            <div className="mt-5 max-w-prose space-y-4 text-body-lg text-stone-800">
+            <div className="mt-5 max-w-prose space-y-4 text-body-lg text-ink-800">
               <p>
                 We hold Washington contractor registration{' '}
                 <a
                   href={business.license.lookupUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-moss-700 underline underline-offset-4"
+                  className="font-semibold text-brand-600 underline underline-offset-4"
                 >
                   {business.license.number}
                 </a>
@@ -121,9 +121,9 @@ export default function AboutPage() {
         <aside className="space-y-8 lg:col-span-4">
           <div className="lg:sticky lg:top-28 lg:space-y-8">
             <NapBlock />
-            <div className="rounded-sm border border-stone-200 bg-white p-6">
+            <div className="rounded-sm border border-ink-200 bg-white p-6">
               <h2 className="text-h3">Home turf</h2>
-              <p className="mt-3 text-body text-stone-500">
+              <p className="mt-3 text-body text-ink-500">
                 We work out of Kent. These are the cities closest to the shop, and where we can get
                 out for a walkthrough fastest.
               </p>
@@ -134,7 +134,7 @@ export default function AboutPage() {
                     <li key={c.slug}>
                       <Link
                         href={cityPath(c.slug)}
-                        className="text-caption text-stone-800 underline decoration-stone-200 underline-offset-4 hover:text-moss-700"
+                        className="text-caption text-ink-800 underline decoration-ink-200 underline-offset-4 hover:text-brand-600"
                       >
                         {c.name}
                       </Link>

@@ -20,15 +20,15 @@ export function VisualizerTeaser({
   cta?: string;
 }) {
   return (
-    <section className="overflow-hidden rounded-sm border border-moss-700/25 bg-moss-100/40">
+    <section className="overflow-hidden rounded-sm border border-brand-600/25 bg-brand-50/40">
       <div className="grid gap-6 p-7 md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:p-10">
         <div>
-          <p className="inline-flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-clay-600">
+          <p className="inline-flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-leaf-600">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
             Yard visualizer
           </p>
           <h2 className="mt-2 text-h3 md:text-h2">{headline}</h2>
-          <p className="mt-3 max-w-prose text-body-lg text-stone-800">{body}</p>
+          <p className="mt-3 max-w-prose text-body-lg text-ink-800">{body}</p>
         </div>
         <Button asChild size="lg" className="self-start md:self-center">
           <Link href="/visualizer">

@@ -25,18 +25,18 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
     <>
       <JsonLd data={graph([breadcrumbSchema(full)])} />
       <nav aria-label="Breadcrumb" className="shell pt-24 lg:pt-28">
-        <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-caption text-stone-500">
+        <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-caption text-ink-500">
           {full.map((crumb, i) => {
             const isLast = i === full.length - 1;
             return (
               <li key={crumb.path} className="flex items-center gap-1.5">
                 {i > 0 && <ChevronRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />}
                 {isLast ? (
-                  <span aria-current="page" className="text-stone-800">
+                  <span aria-current="page" className="text-ink-800">
                     {crumb.name}
                   </span>
                 ) : (
-                  <Link href={crumb.path} className="transition-colors hover:text-moss-700 hover:underline">
+                  <Link href={crumb.path} className="transition-colors hover:text-brand-600 hover:underline">
                     {crumb.name}
                   </Link>
                 )}

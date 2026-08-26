@@ -19,7 +19,7 @@ const Visualizer = dynamicImport(
   () => import('@/components/visualizer/visualizer').then((m) => m.Visualizer),
   {
     loading: () => (
-      <div className="shimmer aspect-[4/3] w-full rounded-sm border border-stone-200" aria-hidden="true" />
+      <div className="shimmer aspect-[4/3] w-full rounded-sm border border-ink-200" aria-hidden="true" />
     ),
   },
 );
@@ -87,7 +87,7 @@ export default function VisualizerPage() {
 
       <div className="shell pb-16 pt-8">
         <header className="max-w-3xl">
-          <p className="text-caption font-semibold uppercase tracking-wide text-clay-600">
+          <p className="text-caption font-semibold uppercase tracking-wide text-leaf-600">
             Free tool
           </p>
           <h1 className="mt-2 text-h1">
@@ -103,11 +103,11 @@ export default function VisualizerPage() {
         </div>
       </div>
 
-      <section className="border-y border-stone-200 bg-white">
+      <section className="border-y border-ink-200 bg-white">
         <div className="shell section-tight grid gap-10 md:grid-cols-3">
           <div>
             <h2 className="text-h3">Why this is different</h2>
-            <p className="mt-3 text-body text-stone-500">
+            <p className="mt-3 text-body text-ink-500">
               Most design tools generate whatever looks good and leave you to find someone who can
               build it. This one can only draw what our crew installs, so the design is a proposal
               rather than inspiration.
@@ -115,7 +115,7 @@ export default function VisualizerPage() {
           </div>
           <div>
             <h2 className="text-h3">No separate design fee</h2>
-            <p className="mt-3 text-body text-stone-500">
+            <p className="mt-3 text-body text-ink-500">
               We design in-house and self-perform the hardscape install. Most competitors either
               outsource design, charge for it up front, or route you to a landscape architect before
               anyone talks about construction.
@@ -123,7 +123,7 @@ export default function VisualizerPage() {
           </div>
           <div>
             <h2 className="text-h3">Built for this climate</h2>
-            <p className="mt-3 text-body text-stone-500">
+            <p className="mt-3 text-body text-ink-500">
               Planting is restricted to USDA zone 8b material that survives wet winters and a dry
               August here. Walls render at 4 ft or under, which is the height Western Washington
               cities start requiring engineering.
