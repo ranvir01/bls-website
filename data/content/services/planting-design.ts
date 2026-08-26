@@ -9,7 +9,7 @@ const content: ServiceContent = {
   metaDescription:
     'Zone 8b planting plans for Kent, Renton and Greater Seattle. Plant palettes, soil prep and mulch, from $18 to $45 a square foot of finished bed.',
   quickAnswer:
-    'Planting design is a drawn plan and installed plant palette matched to Zone 8b conditions: wet winters, dry Augusts and till subsoil. We design in house, then prep beds, plant and mulch. Typical Puget Sound bed installations run $18 to $45 per square foot depending on plant size and soil work.',
+    'Planting design is a drawn plan and installed plant palette matched to Zone 8b conditions: wet winters, dry Augusts and till subsoil. We draw the plan, then prep beds, plant and mulch. Typical Puget Sound bed installations run $18 to $45 per square foot depending on plant size and soil work.',
   intro: [
     'Plants die here for one reason far more often than any other, and it is not cold. It is a planting hole dug into cemented glacial till, backfilled with fluffy compost, that fills with water in November and holds it until March. The roots sit in that bathtub and drown. A rhododendron that looked fine all summer collapses the following spring and everyone blames the winter. Design in this region starts underground, with how a bed drains, and only then moves to what looks good next to the front door.',
     'Sun and shade are mapped through the actual day on your lot, not assumed from a satellite photo, because a west-facing Kent East Hill bed and a north-side Ballard strip under a mature maple are two entirely different growing environments 20 miles apart. We put a scaled plan and a plant schedule in your hands, with mature sizes noted, so you know what the bed looks like in year seven rather than the week it goes in.',

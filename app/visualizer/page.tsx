@@ -109,16 +109,17 @@ export default function VisualizerPage() {
             <h2 className="text-h3">Why this is different</h2>
             <p className="mt-3 text-body text-ink-500">
               Most design tools generate whatever looks good and leave you to find someone who can
-              build it. This one can only draw what our crew installs, so the design is a proposal
-              rather than inspiration.
+              build it. This one draws only from the fixed catalog we install and stock locally, so
+              the design is a proposal rather than inspiration.
             </p>
           </div>
           <div>
             <h2 className="text-h3">No separate design fee</h2>
             <p className="mt-3 text-body text-ink-500">
-              We design in-house and self-perform the hardscape install. Most competitors either
-              outsource design, charge for it up front, or route you to a landscape architect before
-              anyone talks about construction.
+              The render is free and you can walk away with it. A name and a phone number gets you
+              the full-resolution version and the written scope sheet. Most competitors charge for
+              design up front, or route you to a landscape architect before anyone talks about
+              construction.
             </p>
           </div>
           <div>

@@ -15,7 +15,7 @@ import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 export const metadata: Metadata = buildMetadata({
   title: 'About Blue Landscaping Services — Kent, WA',
   description:
-    'Blue Landscaping Services is a licensed, family-run hardscaping and landscaping contractor in Kent, WA, founded in 2012. In-house design, self-performed install, WA license BLUELLS880K2.',
+    'Licensed, family-run hardscaping and landscaping contractor in Kent, WA, founded in 2012. Washington registration BLUELLS880K2, a $12,000 bond and $1M liability cover.',
   path: '/about',
 });
 
@@ -66,8 +66,8 @@ export default function AboutPage() {
                 both drifted.
               </p>
               <p>
-                We draw it, we price it, our crew builds it. No separate design fee. One phone
-                number if something isn&rsquo;t right.
+                We draw it, we price it, we build it. No separate design fee. One phone number if
+                something isn&rsquo;t right.
               </p>
               <p>
                 {`We've worked that way since ${business.foundedYear}${years >= 5 ? `. That's ${years} years of watching what survives a Puget Sound winter and what doesn't` : ''}. Here's what it taught us. Almost every hardscape failure in this region comes back to base prep or drainage. You can't see either one the day the job finishes.`}

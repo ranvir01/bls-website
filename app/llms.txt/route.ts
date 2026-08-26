@@ -20,7 +20,7 @@ export function GET() {
   lines.push(`# ${business.legalName}`);
   lines.push('');
   lines.push(
-    `> Licensed hardscaping, irrigation and landscaping contractor based in Kent, Washington, serving Greater Seattle and South King County. Founded ${business.foundedYear}. Washington contractor registration ${business.license.number}, bonded and insured. Design is done in-house and hardscape installation is self-performed.`,
+    `> Licensed hardscaping, irrigation and landscaping contractor based in Kent, Washington, serving Greater Seattle and South King County. Founded ${business.foundedYear}. Washington contractor registration ${business.license.number}, bonded and insured. Hardscape installation is self-performed.`,
   );
   lines.push('');
   lines.push(`- Address: ${formattedAddress}`);

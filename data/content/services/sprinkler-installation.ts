@@ -18,7 +18,7 @@ const content: ServiceContent = {
   ],
   included: [
     'Static pressure and flow test at the point of connection, measured with a gauge and a timed bucket fill before any layout is drawn',
-    'Zone plan produced in-house that separates turf from beds, sun from shade, and slope from flat ground so nothing shares a valve it should not',
+    'Zone plan that separates turf from beds, sun from shade, and slope from flat ground so nothing shares a valve it should not',
     'Head layout at head-to-head spacing with matched-precipitation nozzles inside every zone',
     'Mainline tap, isolation valve and backflow assembly installed to your water purveyor requirements',
     'Trenching or vibratory plowing with laterals set 8 to 12 inches deep and mainline below that',
@@ -44,9 +44,9 @@ const content: ServiceContent = {
         'We start at the meter and the hose bib. Gauge on, bucket timed, meter size and service line material written down. Then we walk the property. Sun exposure, slope, what is already planted, where the dog runs. That hour tells us whether the yard is a four-zone job or a nine-zone job. It is also why you do not end up with a brown arc every August.',
     },
     {
-      title: 'Draw the zones in-house',
+      title: 'Draw the zones',
       description:
-        'The plan comes off our own desk. Turf gets rotors or MP Rotators. Beds get dripline. Anything on a south-facing slope gets its own valve, separate from the flat shady side of the house, because it needs twice the run time. We keep zone flow under about 75 percent of measured capacity. That way the last head on the line still throws its full radius.',
+        'Turf gets rotors or MP Rotators. Beds get dripline. Anything on a south-facing slope gets its own valve, separate from the flat shady side of the house, because it needs twice the run time. We keep zone flow under about 75 percent of measured capacity. That way the last head on the line still throws its full radius.',
     },
     {
       title: 'Locate utilities and open the ground',

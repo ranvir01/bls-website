@@ -131,13 +131,13 @@ const post: BlogPost = {
         'Look at access before you look at product. A 34-inch side gate quietly eliminates boulders and gabions and leaves segmental block as the only sensible answer.',
         'Find out where the water leaves. A wall with no legal outlet for its drain has a cost nobody has priced yet.',
         'Match rigidity to the ground. Soft valley soils reward a flexible system. Firm upland bearing on a tight urban lot is where concrete justifies its premium.',
-        'Ask whether the crew setting the block works for the company that drew the section. Hardscape subbed out puts distance between the person who designed the wall and the person compacting behind it.',
+        'Price the reinforced zone, not the block. Geogrid holds by friction against clean crushed rock, so a block wall in till means importing granular fill and hauling your native soil away, and the grid commonly reaches 60 to 70 percent of the wall height back into the yard.',
       ],
     },
     {
       type: 'callout',
       title: 'Built by the people who drew it',
-      text: 'Blue Landscaping Services designs in-house and self-performs hardscape out of a shop in Kent, so the crew stacking block is the crew that walked your slope. Every figure above is a typical installed range for the Puget Sound market in 2026, not a quote. Grade, access, soil and where water already moves decide your number. Licensed, bonded and insured in Washington, registration BLUELLS880K2. Call (253) 429-7052 and we will look at the actual hillside.',
+      text: 'Blue Landscaping Services builds walls out of a shop in Kent, so the crew stacking block is the crew that walked your slope. Every figure above is a typical installed range for the Puget Sound market in 2026, not a quote. Grade, access, soil and where water already moves decide your number. Licensed, bonded and insured in Washington, registration BLUELLS880K2. Call (253) 429-7052 and we will look at the actual hillside.',
     },
   ],
   faqs: [

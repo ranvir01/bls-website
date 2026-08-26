@@ -134,7 +134,7 @@ const post: BlogPost = {
     {
       type: 'callout',
       title: 'The number comes off the slope, not off a calculator',
-      text: 'Every figure here is a typical installed range for the Puget Sound market in 2026, not a quote. What your wall costs depends on grade, soil, access and where water is already moving, and none of that is visible from a satellite photo. Blue Landscaping Services designs walls in-house and sets every block with our own crew out of a Kent shop. Call (253) 429-7052 and we will walk the slope with you.',
+      text: 'Every figure here is a typical installed range for the Puget Sound market in 2026, not a quote. What your wall costs depends on grade, soil, access and where water is already moving, and none of that is visible from a satellite photo. A 50-foot run at 4 feet of exposed face is 200 face square feet either way; whether it lands near $11,000 or near $22,000 is decided by the dig and by how far the drain outlet has to travel. Call (253) 429-7052 and we will walk the slope with you.',
     },
   ],
   faqs: [

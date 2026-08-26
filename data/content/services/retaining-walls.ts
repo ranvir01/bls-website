@@ -12,13 +12,13 @@ const content: ServiceContent = {
     'A retaining wall holds back graded soil so a sloped yard becomes usable. Around Puget Sound, segmental block walls run roughly $45 to $70 per face square foot installed, with drain rock, filter fabric and a perforated drain line behind every course. Walls over 4 feet need engineering and a permit.',
   intro: [
     'Most of South King County sits on glacial till. Alderwood and Everett series soils, pressed flat by ice and never fully drained. Dig two feet down on a Kent hillside and you hit hardpan. Water sheets across it instead of soaking through. That\'s why so many walls here fail from behind. The front still looks fine. Hydrostatic pressure builds against the back face over a wet January, and the wall leans out an inch at a time until the caps no longer line up.',
-    'Transitions are where a wall gets tricky. A run that steps down into a stair return. A corner that wraps over a utility easement. Those get sorted at 7 a.m. with a tape measure, not in a change order two weeks later. The person who drew the section detail is on site when the base course goes in, and our own crew sets every block.',
+    'Transitions are where a wall gets tricky. A run that steps down into a stair return. A corner that wraps over a utility easement. Those get sorted at 7 a.m. with a tape measure, not in a change order two weeks later. The person who drew the section detail is on site when the base course goes in.',
     'Height drives almost everything. Under 4 feet of exposed face, a gravity wall with proper backfill usually does the job, and most King County jurisdictions treat it as exempt. Go above that, carry a driveway, or pick up a surcharge from an upslope structure and you\'re into stamped engineering, geogrid layers tied back into the hillside and a permit review. We\'ll tell you which side of that line your yard falls on at the first walkthrough. Before anyone talks price.',
     'Blue Landscaping Services has been building walls out of a Kent shop since 2012, licensed and bonded in Washington under BLUELLS880K2. The shop matters on a wall job. It means the excavator, the plate compactor and the second pallet of block are twenty minutes away instead of a rental-yard reservation. That\'s how a wall gets finished before the next weather window closes.',
   ],
   included: [
     'Site walkthrough with grade shots, existing drainage mapped and utility locates called in before any digging',
-    'In-house wall layout and section detail showing base depth, block type, geogrid spacing and drain outlet',
+    'Wall layout and section detail showing base depth, block type, geogrid spacing and drain outlet',
     'Excavation of the trench and any failed wall, with spoils hauled off or reused as backfill where the soil allows',
     'Compacted crushed base course, minimum 6 inches, plate-compacted in lifts and checked with a laser level',
     'Full drainage assembly: non-woven filter fabric, 12 inches of clean drain rock, and 4-inch perforated pipe daylighted to a legal outlet',
@@ -44,7 +44,7 @@ const content: ServiceContent = {
         'We walk the slope with you and shoot elevations at the top and toe. Then we find where water is already moving. Downspout tightlines, neighbor runoff, any existing wall that\'s bulging. You get a straight answer that day on whether this is a gravity wall or an engineered one.',
     },
     {
-      title: 'In-house design and engineering call',
+      title: 'Design and engineering stamp',
       description:
         'We draw the wall. Length, exposed height, batter, cap detail, where the drain daylights. If the exposed face clears 4 feet or the wall carries a surcharge, the section goes to a Washington-licensed structural engineer for a stamp. We submit that set to the city or to King County DLS.',
     },

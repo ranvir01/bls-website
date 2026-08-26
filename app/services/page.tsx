@@ -46,7 +46,7 @@ export default function ServicesPage() {
           </p>
           <h1 className="mt-2 max-w-4xl text-h1">Expert Landscaping, Hardscaping &amp; Irrigation in Seattle</h1>
           <QuickAnswer>
-            {`Blue Landscaping Services offers ${services.length} services across three categories: hardscaping, irrigation and landscaping. Hardscape work is self-performed by our own crew under Washington license BLUELLS880K2 — design and construction both happen in-house, with no separate design fee.`}
+            {`Blue Landscaping Services offers ${services.length} services across three categories: hardscaping, irrigation and landscaping. Our own crew builds the hardscape, under Washington license BLUELLS880K2. Every service page below publishes its installed cost range and a real timeline.`}
           </QuickAnswer>
         </header>
 

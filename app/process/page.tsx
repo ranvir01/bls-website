@@ -11,7 +11,7 @@ import { buildMetadata, faqSchema, graph, localBusinessSchema } from '@/lib/seo'
 export const metadata: Metadata = buildMetadata({
   title: 'Our Process — Consultation to Final Walkthrough',
   description:
-    'How a Blue Landscaping project runs: free on-site walkthrough, in-house design and written scope, self-performed build, and a final walkthrough together.',
+    'How a Blue Landscaping project runs: free on-site walkthrough, a written scope with a real cost range, a self-performed build, and a final walkthrough together.',
   path: '/process',
 });
 
@@ -90,7 +90,7 @@ export default function ProcessPage() {
           </p>
           <h1 className="mt-2 text-h1">From first call to final walkthrough</h1>
           <QuickAnswer>
-            {`A Blue Landscaping project runs in ${howItWorks.length} steps: a free on-site walkthrough, in-house design with a written scope and cost range, permitting where required, a self-performed build by our own crew, and a final walkthrough together. No design fee, and no subcontractors on hardscape.`}
+            {`A Blue Landscaping project runs in ${howItWorks.length} steps: a free on-site walkthrough, a written scope with a real cost range, permitting where the work needs it, the build, and a final walkthrough together. There is no design fee, and most quotes go out the same day we come look.`}
           </QuickAnswer>
         </header>
 

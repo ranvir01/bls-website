@@ -18,10 +18,10 @@ export const howItWorks: ProcessStep[] = [
   {
     title: 'You get a real number',
     description:
-      "We draw it and price it ourselves. The quote names the materials, the phases and a schedule. There's no design fee. Sit on the number as long as you want.",
+      "We draw it and price it. The quote names the materials, the phases and a schedule. There's no design fee. Sit on the number as long as you want.",
   },
   {
-    title: 'Our crew builds it',
+    title: 'We build it',
     description:
       "We dig it, set the base, run the drainage and do the finish work. Most of the days on site go into the part that ends up buried. Once the pavers are down, nobody can see whether the base was done right. So that's where we spend the time.",
   },
@@ -34,11 +34,11 @@ export const howItWorks: ProcessStep[] = [
 
 export const whyUs = [
   {
-    title: 'We draw it and we build it',
-    body: "We sketch it, we price it, and our own crew installs it. Your yard doesn't get passed from a designer to a GC to whoever bid lowest that week. If something's off a year from now, you call the same number and you get us.",
+    title: 'You call the same number later',
+    body: "Same shop in Kent since 2012, same phone number. If something needs looking at a year from now, the person who answers is the person who built it. Nobody has moved on, folded, or handed your file to whoever bought the customer list.",
   },
   {
-    title: 'Our crew does the hardscape',
+    title: 'What a cheap bid skips',
     body: "A cheap bid has to save the money somewhere, and it's almost always underground. Shallow excavation. Base that never got compacted properly. No drain rock behind the wall. None of that shows up the week the job finishes. It shows up a few winters later, when the wall starts leaning.",
   },
   {
@@ -80,7 +80,7 @@ export const homeFaqs: Faq[] = [
   {
     question: 'Do you do the work yourselves or sub it out?',
     answer:
-      "Hardscape is all our own crew. Walls, patios, walkways and steps are ours. We bring in a specialty trade only where the law requires it. Anything past low-voltage needs a licensed electrician, so we hire one for that.",
+      "Hardscape is all our own crew: walls, patios, walkways and steps. We bring in a specialty trade only where the law requires it. Anything past low-voltage needs a licensed electrician, so we hire one for that.",
   },
   {
     question: 'When is the best time of year to start?',

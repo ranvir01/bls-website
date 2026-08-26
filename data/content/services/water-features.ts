@@ -13,12 +13,12 @@ const content: ServiceContent = {
   intro: [
     'The sound is the point. On a lot in Tukwila that backs to a busy arterial, or a Capitol Hill yard boxed in by three neighbors, a few gallons per minute falling eighteen inches will cover a surprising amount of road noise. That is the practical reason most of our water feature calls start. The second reason is that a running feature is the one part of a winter garden that still moves when everything else has gone dormant and brown.',
     'Almost everything we install is pondless. Water leaves a bubbler or a spillway, runs over rock, then disappears through a gravel bed into a buried reservoir where the pump lives. There is no standing water, which matters if you have a toddler, and no open pond ecology to manage. A koi pond is a hobby with a maintenance calendar. A pondless basalt set is a feature you turn on with a switch and clean out twice a year.',
-    'Basalt is the local answer. Columns quarried in Washington and Oregon come out of the ground with that hexagonal fracture, and a drilled three-column set at staggered heights looks like it belongs in a Northwest garden in a way an imported urn never will. We lay out the set in-house, core the columns, and our own crew digs the basin and rigs the stone. Final column placement gets decided on site with a machine and a sling, not from a plan.',
+    'Basalt is the local answer. Columns quarried in Washington and Oregon come out of the ground with that hexagonal fracture, and a drilled three-column set at staggered heights looks like it belongs in a Northwest garden in a way an imported urn never will. We core the columns, dig the basin and rig the stone. Final column placement gets decided on site with a machine and a sling, not from a plan.',
     'The part nobody thinks about is the electrical. A recirculating feature needs a dedicated GFCI-protected circuit in a weatherproof in-use cover, run by a licensed electrician under permit, and the run from the panel is often the longest single line on the estimate. Decide the outlet location before the basin goes in the ground. We also size the pump for the flow the feature actually wants, because an oversized pump turns a fountain into the sound of a garden hose.',
   ],
   included: [
     'Sound and sightline walkthrough to place the feature where you will actually hear and see it',
-    'Feature layout and stone selection done in-house, including column heights and spill geometry',
+    'Feature layout and stone selection, including column heights and spill geometry',
     'Excavation of the basin cavity and the plumbing trench, with spoils removed from the site',
     'Rigid pondless reservoir or lined and vaulted basin sized to the feature flow and evaporation rate',
     'Pump sizing to the head height and spill width, with flexible PVC, a ball valve and a union for service',
