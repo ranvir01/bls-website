@@ -450,14 +450,22 @@ export function Visualizer() {
                         </div>
                       </figure>
                     ) : (
-                      <div className="rounded-sm border border-warn/30 bg-warn/5 p-6">
-                        <p className="text-body font-medium text-brand-900">
-                          {current.message ?? 'Rendering is unavailable right now.'}
-                        </p>
-                        <p className="mt-2 text-body text-ink-500">
-                          Your scope and cost range are below — that is the part that matters, and
-                          it is built from the same selections.
-                        </p>
+                      <div className="space-y-4">
+                        {photo ? (
+                          <figure>
+                            <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-ink-200 bg-ink-200">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img src={photo} alt="Your yard today" className="h-full w-full object-cover" />
+                            </div>
+                            <figcaption className="mt-2 text-caption text-ink-500">Your yard today</figcaption>
+                          </figure>
+                        ) : null}
+                        <div className="rounded-sm border border-ink-200 bg-white p-5">
+                          <p className="text-body font-medium text-brand-900">
+                            {current.message ??
+                              'Photoreal after-photos of your own yard are off right now.'}
+                          </p>
+                        </div>
                       </div>
                     )}
 
