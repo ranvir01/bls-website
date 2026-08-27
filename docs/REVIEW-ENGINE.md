@@ -24,6 +24,10 @@ Keep it short and human:
 Send the **direct review link**, not "search for us on Google". Get it from your
 Google Business Profile under *Ask for reviews*. Every extra step loses people.
 
+Until Yelp, Houzz, or Angi listings are confirmed as **this** Kent company,
+do not ask for those platforms and do not paste their URLs into the site.
+Other businesses named Blue are not us. Google is the review engine.
+
 **Never script the praise.** Do not suggest what to write, do not offer an
 incentive, do not send a template they can paste. People spot canned wording
 immediately, and so does Google.

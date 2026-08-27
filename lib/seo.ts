@@ -194,6 +194,7 @@ export function localBusinessSchema({
       '@type': 'EducationalOccupationalCredential',
       credentialCategory: 'Contractor License',
       identifier: business.license.number,
+      url: business.license.lookupUrl,
       recognizedBy: { '@type': 'Organization', name: business.license.authority },
     },
   };

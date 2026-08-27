@@ -6,6 +6,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { ReviewsSection } from '@/components/reviews-section';
+import { VerifyListings } from '@/components/verify-listings';
 import { Button } from '@/components/ui/button';
 import { GOOGLE_PROFILE_URL, PHONE, TEL_HREF, business } from '@/data/business';
 import { averageRating, reviews } from '@/data/reviews';
@@ -102,6 +103,10 @@ export default function ReviewsPage() {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="mt-10">
+          <VerifyListings />
         </div>
 
         {GOOGLE_PROFILE_URL && (

@@ -26,6 +26,11 @@ export function GET() {
   lines.push(`- Address: ${formattedAddress}`);
   lines.push(`- Phone: ${business.phone.display}`);
   lines.push(`- License: ${business.license.number} (${business.license.authority})`);
+  lines.push(`- License lookup: ${business.license.lookupUrl}`);
+  lines.push(`- Public license record: ${business.license.publicRecordUrl}`);
+  for (const profile of business.profiles) {
+    lines.push(`- ${profile.label}: ${profile.url}`);
+  }
   lines.push(`- Founded: ${business.foundedYear}`);
   lines.push('');
 
@@ -62,7 +67,7 @@ export function GET() {
   lines.push('## Tools');
   lines.push('');
   lines.push(
-    `- [Yard design visualizer](${SITE_URL}/visualizer): Free tool that generates a photorealistic redesign of a homeowner's yard from an uploaded photo, constrained to materials this contractor actually installs, and produces a written scope with a cost range.`,
+    `- [Yard design visualizer](${SITE_URL}/visualizer): Free tool. Upload a yard photo, pick a scope from materials this contractor actually installs, and get a written scope with a cost range plus real comparable jobs. An AI after-photo of the homeowner's own house is optional, labeled, and only runs when an image key is configured. It is not iScape or SketchUp.`,
   );
   lines.push('');
 

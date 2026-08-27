@@ -14,6 +14,9 @@ import type { Review } from './types';
  * is the correct, legal behaviour until real reviews exist.
  *
  * Collect them with the post-job SMS flow described in docs/REVIEW-ENGINE.md.
+ *
+ * Google is the ask until we have a confirmed Yelp (or Houzz, Angi) URL for
+ * this Kent company. Do not copy reviews from another "Blue" landscaper.
  */
 export const reviews: Review[] = [];
 

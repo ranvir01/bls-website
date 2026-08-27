@@ -145,6 +145,15 @@ export function SiteFooter() {
                   </a>
                   <br />
                   Licensed, bonded &amp; insured
+                  <br />
+                  <a
+                    href={business.license.publicRecordUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-ink-500 underline-offset-2 transition-colors hover:text-white"
+                  >
+                    Public license record
+                  </a>
                 </span>
               </p>
 

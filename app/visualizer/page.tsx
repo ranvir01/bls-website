@@ -25,9 +25,9 @@ const Visualizer = dynamicImport(
 );
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Yard Design Visualizer — See Your Yard Redesigned',
+  title: 'Yard Design Visualizer — See What We Would Build',
   description:
-    'Upload a photo and see your yard redesigned in about 30 seconds, using materials Blue Landscaping actually installs around Seattle and Kent, WA. Free, instant, no account.',
+    'Upload a photo of your Kent or Greater Seattle yard. Get a written scope from materials Blue Landscaping actually installs, a cost range, and real jobs like yours. AI after-photos of your own house when rendering is on — labeled, catalog-only, free.',
   path: '/visualizer',
 });
 
@@ -35,7 +35,7 @@ const faqs: Faq[] = [
   {
     question: 'Is this a real design or just a picture?',
     answer:
-      'It is a buildable design. Every material the tool can draw comes from a fixed catalog of what we install and source locally — Mutual Materials, Allan Block, Basalite, Belgard, Techo-Bloc, cedar, and zone 8b planting. It cannot generate a pool, a pergola, or a wall we would need to engineer, because those are not on the list.',
+      'It is a buildable scope. Every material the tool can draw comes from a fixed catalog of what we install and source locally — Mutual Materials, Allan Block, Basalite, Belgard, Techo-Bloc, cedar, and zone 8b planting. It cannot generate a pool, a pergola, or a wall we would need to engineer, because those are not on the list. If an after-photo of your house is on, it is labeled AI. Either way you also see photographs of jobs we actually built in that category.',
   },
   {
     question: 'How accurate is the cost range?',
@@ -46,6 +46,11 @@ const faqs: Faq[] = [
     question: 'Will the finished job look exactly like the render?',
     answer:
       'The materials and the scope will match, because we build from the same catalog the render draws from. The exact layout gets confirmed at the on-site walkthrough, where grading, drainage, permits and plant availability all get factored in. We claim buildability, not a pixel match.',
+  },
+  {
+    question: 'Is this like iScape or SketchUp?',
+    answer:
+      'No. Those are designer apps you buy and learn. This page is a free lead tool on your phone: upload a photo, pick what we actually install, and get a scope you can quote. We do not embed iScape, SketchUp, or Home Depot Project Color — they are not constrained to this crew’s catalog, and they do not convert to a walkthrough in Kent.',
   },
   {
     question: 'Do you keep my photo?',
@@ -60,7 +65,7 @@ const faqs: Faq[] = [
   {
     question: 'Is there a catch? Do I have to book anything?',
     answer:
-      'No. The render is free and you can walk away with it. If you want the full-resolution version and the written scope sheet, we ask for a name and a phone number so an estimator can call. That is the whole exchange.',
+      'No. You can walk away with the scope, the range, and the real job photos. If you want an estimator to walk the site, we ask for a name and a phone number. That is the whole exchange.',
   },
 ];
 
@@ -90,9 +95,9 @@ export default function VisualizerPage() {
           <p className="eyebrow text-leaf-600">
             Free tool
           </p>
-          <h1 className="mt-2 text-h1">See your yard redesigned in about 30 seconds</h1>
+          <h1 className="mt-2 text-h1">See what we would build in your yard</h1>
           <QuickAnswer>
-            {`Upload a photo, pick a scope and a style, and get a design drawn only from materials Blue Landscaping installs and stocks locally. Free, instant, no account. Washington license ${business.license.number}.`}
+            {`Upload a photo, pick a scope and a style, and get a written plan drawn only from materials Blue Landscaping installs around Kent and Greater Seattle — plus real jobs like yours. Free, no account. Washington license ${business.license.number}.`}
           </QuickAnswer>
         </header>
 

@@ -16,20 +16,26 @@ geographic relevance of the linking domain.
 
 ### Google Business Profile — start here
 
-Roughly a third of Local Pack ranking weight. There is currently no profile,
-which means the business is invisible in the map results that most "landscaper
-near me" searches return.
+Roughly a third of Local Pack ranking weight. The profile exists. Its URL is
+in `data/business.ts` (`share.google/rqx6Hs2RgAzSXmHuz`) and is linked from
+the header-adjacent trust bar, the footer, `/reviews`, and `sameAs` JSON-LD.
 
-- Claim / create at business.google.com
-- Category: **Landscaper**. Secondary: *Landscape designer*, *Paving
-  contractor*, *Lawn sprinkler system contractor*, *Fence contractor*
+Still to do by a human:
+
+- Swap the short link for the canonical `google.com/maps/place/...` URL
 - NAP must match `data/business.ts` **character for character**:
   Blue Landscaping Services · 11703 SE 229th Pl, Kent, WA 98031 · (253) 429-7052
+- Public L&I / OpenGov copies of the license can still show an old phone.
+  Update those records to the number above. Do not put a second number on
+  this site.
+- Category: **Landscaper**. Secondary: *Landscape designer*, *Paving
+  contractor*, *Lawn sprinkler system contractor*, *Fence contractor*
 - Service area: list the primary cities from the taxonomy
 - Add every service as a GBP service item
 - Upload the real job photos as they are shot (see `docs/PHOTO-SOP.md`)
 - Post weekly — even a short update. Activity is a signal
-- **Time: ~2 hours. Do it before anything else on this page.**
+- Get the **Ask for reviews** short link and use it in the post-job text
+  (`docs/REVIEW-ENGINE.md`)
 
 ### Chambers of Commerce
 
@@ -48,14 +54,24 @@ high-authority site, because the linking domain is geographically relevant.
 
 ### Contractor-specific citations
 
-The double signal of *what you do* plus *where you do it*:
+The double signal of *what you do* plus *where you do it*. **Do not add a
+URL to this website until you have opened the listing and confirmed it is
+this Kent company** (Jose Oliva, 11703 SE 229th Pl, license BLUELLS880K2).
+Other businesses named Blue Landscapes are not us. We searched and did not
+find a verified Yelp, Houzz, Angi, Thumbtack, or Nextdoor URL to ship.
 
 - Houzz — build out a full profile with real project photos
 - Angi
 - Thumbtack
 - Nextdoor — high intent in this market specifically
-- Yelp
-- Apple Business Connect — feeds Apple Maps, frequently neglected by competitors
+- Yelp — claim, then paste the URL into `data/business.ts` `profiles`
+- Apple Business Connect — feeds Apple Maps, frequently neglected
+- Bing Places — same NAP as Google; submit the sitemap after
+- National Contractor Index — already in `sameAs`; claiming it is optional
+  and paid. Official L&I is the verification that matters.
+
+Once a listing is live, add `{ label, url }` to `business.profiles`. That
+updates JSON-LD `sameAs` and the verify hub on `/reviews` automatically.
 
 ### Manufacturer contractor locators
 

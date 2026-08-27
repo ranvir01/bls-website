@@ -206,7 +206,30 @@ export function deriveSpec(req: VisualizeRequest): RenderSpec {
   };
 }
 
-/** True when an image-generation provider is configured. */
+/**
+ * True when an image-generation provider can run.
+ *
+ * One Google AI Studio key is enough (`IMAGE_API_KEY` only → Gemini
+ * 2.5 Flash Image). A generic endpoint still needs IMAGE_API_URL as well.
+ */
 export function generationConfigured(): boolean {
-  return Boolean(process.env.IMAGE_API_KEY && process.env.IMAGE_API_URL);
+  if (!process.env.IMAGE_API_KEY) return false;
+  if (usesGeminiProvider()) return true;
+  return Boolean(process.env.IMAGE_API_URL);
+}
+
+/**
+ * Gemini is the almost-free default: key only, or a generativelanguage URL.
+ * Set IMAGE_PROVIDER=generic (or openai / replicate) to force the Bearer JSON
+ * adapter, which then requires IMAGE_API_URL.
+ */
+export function usesGeminiProvider(): boolean {
+  const provider = (process.env.IMAGE_PROVIDER || '').toLowerCase();
+  if (provider === 'generic' || provider === 'openai' || provider === 'replicate') {
+    return false;
+  }
+  if (provider === 'gemini' || provider === 'google') return true;
+  const url = process.env.IMAGE_API_URL || '';
+  if (url.includes('generativelanguage.googleapis.com')) return true;
+  return !process.env.IMAGE_API_URL;
 }

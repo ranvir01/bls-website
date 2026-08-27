@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
  */
 export function VisualizerTeaser({
   headline = 'See your yard before anyone digs',
-  body = 'Upload a photo, pick a style, and see it with materials we actually install around Kent and Greater Seattle. Free, instant, no account.',
+  body = 'Upload a photo, pick a style, and see a written scope plus real jobs like yours — materials we actually install around Kent and Greater Seattle. Free, no account.',
   cta = 'Open the yard visualizer',
 }: {
   headline?: string;

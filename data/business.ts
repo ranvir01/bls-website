@@ -62,6 +62,13 @@ export const business = {
      * abandoned business. Searching "BLUELLS880K2" here returns the record.
      */
     lookupUrl: 'https://secure.lni.wa.gov/verify/',
+    /**
+     * Third-party copy of the same L&I record, with a stable deep link.
+     * Official verification is still lookupUrl. Scraped pages can lag the
+     * state (phone and dates) — keep PHONE in this file as the number to use,
+     * and update the L&I / SOS records to match it.
+     */
+    publicRecordUrl: 'https://opengovwa.com/labor-industries-contractor/BLUELLS880K2',
     bondAmount: 12000,
     insuranceAmount: 1000000,
   },
@@ -89,7 +96,9 @@ export const business = {
    * signal, not decoration. Structured data only; nothing renders them as
    * links, so a share-style URL is fine here.
    *
-   * Add Yelp, Houzz, Angi and the rest as those profiles are created.
+   * Add Yelp, Houzz, Angi, Apple Business Connect and the rest only after we
+   * have a real listing URL. Other companies named "Blue Landscapes" are not
+   * this company — do not copy their profiles.
    */
   profiles: [
     {
@@ -97,6 +106,14 @@ export const business = {
       // Short link as supplied by the owner. Replacing it with the canonical
       // google.com/maps/place/... URL is a small improvement — see docs/GO-LIVE.md.
       url: 'https://share.google/rqx6Hs2RgAzSXmHuz',
+    },
+    {
+      label: 'WA L&I contractor record',
+      url: 'https://opengovwa.com/labor-industries-contractor/BLUELLS880K2',
+    },
+    {
+      label: 'National Contractor Index',
+      url: 'https://nationalcontractorindex.com/contractors/blue-landscaping-services-llc/',
     },
   ] as { label: string; url: string }[],
 } as const;

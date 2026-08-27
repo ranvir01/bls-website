@@ -1,12 +1,12 @@
 'use client';
 
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
-import Image from 'next/image';
 import { Camera, Check, Loader2, RefreshCw, Upload } from 'lucide-react';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { AiConceptBadge, AiConceptNote } from '@/components/ai-concept-badge';
 import { QuoteForm } from '@/components/quote/quote-form';
+import { VisualizerComparables } from '@/components/visualizer/comparables';
 import { catalogGroups, elementToggles, scopes, styles } from '@/data/buildable';
 import { formatRange, type Estimate, type RenderSpec } from '@/data/pricing';
 import { trackEvent } from '@/lib/analytics';
@@ -29,17 +29,9 @@ interface RenderResult {
 /**
  * The live yard redesign tool.
  *
- * Speed is the feature. Three things make it feel instant:
- *   1. The photo appears the moment it is picked, resized client-side before
- *      any upload — the user never waits on a 12MP phone shot.
- *   2. On first submit, several style variants are fired concurrently. The
- *      first to land is shown; the rest are cached, so switching styles
- *      afterwards costs zero wait.
- *   3. Element toggles regenerate against the same seed, so the yard stays
- *      stable and only the toggled element changes.
- *
- * The render is free and instant. The written scope and cost range are the
- * gated asset — that is the conversion event.
+ * The after-photo is optional and labeled AI. The written scope, cost range,
+ * and real comparable jobs always run — including when no image key is set.
+ * We do not pre-warm extra styles: that burned four API calls per click.
  */
 export function Visualizer() {
   const [photo, setPhoto] = useState<string | null>(null);
@@ -51,7 +43,9 @@ export function Visualizer() {
 
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [gateOpen, setGateOpen] = useState(false);
+  const [gateOpen] = useState(false);
+  /** null = still asking the API; false = honest degraded mode. */
+  const [generationLive, setGenerationLive] = useState<boolean | null>(null);
 
   /** Cache of results keyed by style, so switching styles is instant. */
   const [results, setResults] = useState<Record<string, RenderResult>>({});
@@ -62,6 +56,21 @@ export function Visualizer() {
   const scope = useMemo(() => scopes.find((s) => s.id === scopeId), [scopeId]);
   const current = styleId ? results[styleId] : undefined;
   const hasAnyResult = Object.keys(results).length > 0;
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/visualize')
+      .then((res) => res.json())
+      .then((json: { generation?: boolean }) => {
+        if (!cancelled) setGenerationLive(Boolean(json.generation));
+      })
+      .catch(() => {
+        if (!cancelled) setGenerationLive(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // ── Photo intake ──────────────────────────────────────────────────────────
   const onPickFile = useCallback(async (file: File) => {
@@ -110,23 +119,8 @@ export function Visualizer() {
     trackEvent('visualizer_generate', { scope: scopeId, style: styleId });
 
     try {
-      // Show the chosen style the moment it lands.
       const primary = await callApi(styleId, false);
       setResults({ [styleId]: primary });
-
-      // Then warm the other styles in the background so switching is free.
-      const others = styles.filter((s) => s.id !== styleId).slice(0, 3);
-      void Promise.allSettled(
-        others.map(async (s) => {
-          try {
-            const result = await callApi(s.id, true);
-            setResults((prev) => ({ ...prev, [s.id]: result }));
-          } catch {
-            /* a warm-up failure is invisible — the user can still switch,
-               it just costs one round trip when they do. */
-          }
-        }),
-      );
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
@@ -139,6 +133,13 @@ export function Visualizer() {
       setStyleId(id);
       if (results[id] || !hasAnyResult) return;
 
+      // Style does not change the estimate. When rendering is off, reuse it.
+      if (generationLive === false) {
+        const existing = Object.values(results)[0];
+        if (existing) setResults((prev) => ({ ...prev, [id]: existing }));
+        return;
+      }
+
       setBusy(true);
       try {
         const result = await callApi(id, true);
@@ -149,7 +150,7 @@ export function Visualizer() {
         setBusy(false);
       }
     },
-    [callApi, hasAnyResult, results],
+    [callApi, generationLive, hasAnyResult, results],
   );
 
   const applyToggle = useCallback(
@@ -183,6 +184,13 @@ export function Visualizer() {
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
         {/* ── Controls ───────────────────────────────────────────────────── */}
         <div className="min-w-0 space-y-8 lg:col-span-5">
+          {generationLive === false && (
+            <p className="rounded-sm border border-ink-200 bg-white px-4 py-3 text-caption text-ink-800">
+              Photoreal after-photos of your own house are off right now. Upload
+              a photo anyway — you still get a written scope, a cost range, and
+              real jobs we built like this.
+            </p>
+          )}
           <Step n={1} title="Add a photo of your yard">
             <input
               ref={fileInput}
@@ -360,8 +368,10 @@ export function Visualizer() {
                 <RefreshCw className="h-4 w-4" aria-hidden="true" />
                 Try another version
               </>
-            ) : (
+            ) : generationLive ? (
               'See your yard redesigned'
+            ) : (
+              'See the scope and real jobs like this'
             )}
           </button>
 
@@ -396,14 +406,21 @@ export function Visualizer() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex aspect-[4/3] w-full flex-col items-center justify-center rounded-sm border border-dashed border-ink-200 bg-white p-8 text-center"
+                    className="flex min-h-[280px] w-full flex-col items-center justify-center rounded-sm border border-dashed border-ink-200 bg-white p-8 text-center"
                   >
                     <p className="text-body-lg font-medium text-brand-900">
-                      Your design appears here
+                      {scopeId ? 'Real jobs in this category' : 'Your design appears here'}
                     </p>
                     <p className="mt-2 max-w-sm text-body text-ink-500">
-                      Pick a scope and a style, then hit the button. It takes about thirty seconds.
+                      {generationLive
+                        ? 'Pick a scope and a style, then hit the button. An after-photo of your own yard takes about thirty seconds and is labeled AI.'
+                        : 'Pick a scope and a style. You will get a written scope, a cost range, and photographs of jobs we actually built — not a mockup of someone else’s house.'}
                     </p>
+                    {scopeId ? (
+                      <div className="mt-6 w-full max-w-xl text-left">
+                        <VisualizerComparables scopeId={scopeId} compact />
+                      </div>
+                    ) : null}
                   </m.div>
                 )}
 
@@ -446,6 +463,8 @@ export function Visualizer() {
 
                     <AiConceptNote />
 
+                    {scopeId ? <VisualizerComparables scopeId={scopeId} /> : null}
+
                     {current.notices.map((notice) => (
                       <p
                         key={notice}
@@ -485,16 +504,19 @@ export function Visualizer() {
                       </div>
                     </fieldset>
 
-                    <ScopeSheet estimate={current.estimate} gated={!gateOpen} />
+                    <ScopeSheet estimate={current.estimate} gated={Boolean(current.image) && !gateOpen} />
 
                     {!gateOpen ? (
                       <div className="rounded-sm border border-brand-600/30 bg-brand-50/40 p-6">
                         <h3 className="text-h3">
-                          Get the full-resolution design + written scope and cost range
+                          {current.image
+                            ? 'Get the full-resolution design + written scope and cost range'
+                            : 'Want this built? Send the scope to an estimator'}
                         </h3>
                         <p className="mt-2 max-w-prose text-body text-ink-800">
-                          We will send the un-watermarked render along with a written scope sheet,
-                          and an estimator will call to confirm the site details.
+                          {current.image
+                            ? 'We will send the un-watermarked render along with a written scope sheet, and an estimator will call to confirm the site details.'
+                            : 'The numbers above are a range for this market, not a quote. Leave a name and a number and we will walk the site.'}
                         </p>
                         <div className="mt-5">
                           <QuoteForm

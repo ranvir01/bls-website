@@ -141,19 +141,21 @@ and submit `https://<domain>/sitemap.xml`.
 
 ## 7. The yard visualizer
 
-The tool is fully built: the constraint catalog, the prompt assembly, the scope
-sheet, the cost estimate, the lead gate, rate limiting and the graceful
-degradation path all work today. Right now it runs in **degraded mode** — it
-produces the scope and the cost range but no image, and tells the user so.
+The tool is fully built: catalog, prompt assembly, scope sheet, cost range,
+comparable real jobs, lead gate, rate limiting, and an honest degraded path.
+**One Google AI Studio key turns after-photos on.** Set `IMAGE_API_KEY` in
+Netlify. Leave `IMAGE_API_URL` empty. The server talks to Gemini 2.5 Flash
+Image (Nano Banana), keeps the uploaded house in the frame, and labels the
+result AI. Rate limits are 3 generations/hour and 10/day per IP, and we do
+not pre-warm extra styles, so the free tier is enough.
 
-To turn on rendering, set `IMAGE_API_URL`, `IMAGE_API_KEY` and optionally
-`IMAGE_API_MODEL`. The expected request and response shapes are in
-`docs/DEPLOYMENT.md`; any provider that takes a prompt and returns a URL or
-base64 image will work, and only `generate()` in `app/api/visualize/route.ts`
-needs changing if yours differs.
+Without the key, the UI does **not** promise a 30-second photoreal render. It
+still returns a written scope, a cost range, and photographs of jobs this
+crew actually built in that category. That is the conversion path that works
+today. Product rules are in `docs/VISUALIZER.md`.
 
-Budget note: rate limits are 3 generations/hour and 10/day per IP, so cost is
-bounded.
+Generic providers still work: `IMAGE_PROVIDER=generic` plus `IMAGE_API_URL`
+and `IMAGE_API_KEY`. Shapes are in `docs/DEPLOYMENT.md`.
 
 ## 8. Imagery — what is on the cards right now
 
@@ -193,12 +195,22 @@ automatically.
 
 ## 10. Reviews
 
-`/reviews` is empty and says so. `docs/REVIEW-ENGINE.md` has the routine: a text
-24 hours after the final walkthrough with a direct Google review link, targeting
-5–8 per month, responding to every one within 24 hours.
+`/reviews` stays empty of quotes until a real customer writes one.
+`docs/REVIEW-ENGINE.md` is the routine: text 24 hours after the final
+walkthrough with the Google review link.
 
-Adding one entry to `data/reviews.ts` activates the reviews page, the homepage
-section, the city-page sections and the `AggregateRating` structured data.
+The page is now a **verify hub** as well: Google Business Profile, official
+L&I search, the OpenGov public record, and the National Contractor Index
+identity page. Do not add Yelp, Houzz, Angi, or Nextdoor until you have a
+URL that is actually this Kent company — other businesses named Blue are not
+us.
+
+Adding one entry to `data/reviews.ts` activates the reviews page quotes, the
+homepage section, the city-page sections and the `AggregateRating` structured
+data.
+
+Public L&I / OpenGov records can still show an old phone. Update those
+records to **(253) 429-7052**. Do not put a second number in this repo.
 
 ## 11. The L&I verification link
 
@@ -206,11 +218,15 @@ The footer, the about page and every NAP block link the licence number to
 `https://secure.lni.wa.gov/verify/` — L&I's contractor verification search.
 Searching `BLUELLS880K2` there returns the record.
 
-A direct `Detail.aspx` deep link would be one click better, but it is built
-from the business UBI and could not be verified from the build environment
-(outbound access to `secure.lni.wa.gov` is blocked there). If you look up the
-record and copy the resulting URL, paste it into `license.lookupUrl` in
-`data/business.ts` and every link on the site updates.
+A public third-party copy with a stable deep link is also on `/reviews` and
+in `sameAs`: `https://opengovwa.com/labor-industries-contractor/BLUELLS880K2`.
+Scraped pages can lag. If the phone on that page is not (253) 429-7052,
+update L&I and the Secretary of State — do not add a second number here.
+
+A direct `Detail.aspx` deep link on secure.lni.wa.gov would be one click
+better. If you look up the record and copy the resulting URL, paste it into
+`license.lookupUrl` in `data/business.ts` and every official-verify link
+updates.
 
 ## 12. Repository housekeeping
 
