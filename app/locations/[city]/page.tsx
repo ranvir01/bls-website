@@ -11,6 +11,8 @@ import { NapBlock } from '@/components/nap-block';
 import { ProjectGrid } from '@/components/portfolio/project-grid';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { ReviewsSection } from '@/components/reviews-section';
+import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
+import { business } from '@/data/business';
 import { cityContent, getCityContent } from '@/data/content/cities';
 import { serviceCityContent } from '@/data/content/service-cities';
 import { postsForCity } from '@/data/content/blog';
@@ -125,7 +127,18 @@ export default function CityPage({ params }: Params) {
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
               <div>
                 <dt className="text-caption font-semibold text-brand-900">Licensed in WA</dt>
-                <dd className="text-caption text-ink-500">Bonded &amp; insured</dd>
+                <dd className="text-caption text-ink-500">
+                  <a
+                    href={business.license.lookupUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-brand-600"
+                  >
+                    {business.license.number}
+                  </a>
+                  {' · '}
+                  bonded &amp; insured
+                </dd>
               </div>
             </div>
           </dl>
@@ -172,6 +185,13 @@ export default function CityPage({ params }: Params) {
             )}
 
             <ProjectGrid projects={cityProjects} heading={`Projects in and around ${content.name}`} />
+
+            <Reveal as="section">
+              <VisualizerTeaser
+                headline={`See what we'd build in ${content.name}`}
+                body="Upload a photo of your yard. You get a written scope from materials we install, a cost range, and real jobs like yours."
+              />
+            </Reveal>
 
             <ReviewsSection reviews={cityReviews} heading={`What ${content.name} customers say`} />
 

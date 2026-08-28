@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand, FaqList, LinkCluster, QuickAnswer } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
+import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { blogPosts, getPost } from '@/data/content/blog';
 import type { BlogBlock } from '@/data/types';
 import { cityBySlug, cityPath, serviceBySlug, servicePath } from '@/data/taxonomy';
@@ -109,6 +110,13 @@ export default function BlogPostPage({ params }: Params) {
           />
         </div>
       </article>
+
+      <div className="shell pb-16">
+        <VisualizerTeaser
+          headline="See it in your own yard"
+          body="Upload a photo. You get a written scope from materials we install, a cost range, and real jobs like yours."
+        />
+      </div>
 
       <CtaBand />
     </>

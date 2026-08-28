@@ -7,9 +7,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AiConceptBadge, AiConceptNote } from '@/components/ai-concept-badge';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { VisualizerComparables } from '@/components/visualizer/comparables';
+import { YardCompare } from '@/components/visualizer/yard-compare';
 import { catalogGroups, elementToggles, scopes, styles } from '@/data/buildable';
 import { formatRange, type Estimate, type RenderSpec } from '@/data/pricing';
 import { trackEvent } from '@/lib/analytics';
+import { comparableJobs } from '@/lib/comparable-jobs';
 import { ease } from '@/lib/motion';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -56,6 +58,7 @@ export function Visualizer() {
   const scope = useMemo(() => scopes.find((s) => s.id === scopeId), [scopeId]);
   const current = styleId ? results[styleId] : undefined;
   const hasAnyResult = Object.keys(results).length > 0;
+  const compareJob = useMemo(() => (scopeId ? comparableJobs(scopeId, 1)[0] : undefined), [scopeId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -433,41 +436,53 @@ export function Visualizer() {
                     transition={{ duration: reduced ? 0.01 : 0.25, ease: ease.out }}
                     className="space-y-5"
                   >
-                    {current.image ? (
-                      <figure className="relative">
-                        <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-ink-200 bg-ink-200">
-                          {/* Provider output: either a remote URL or a data URL,
-                              neither of which next/image can optimize. */}
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={current.image}
-                            alt="AI-generated design concept for your yard"
-                            className={cn('h-full w-full object-cover', !gateOpen && 'blur-[1.5px]')}
+                    {(() => {
+                      const afterSrc = current.image ?? compareJob?.after.src;
+                      const canCompare = Boolean(photo && afterSrc);
+                      if (canCompare && afterSrc) {
+                        return (
+                          <YardCompare
+                            beforeSrc={photo!}
+                            afterSrc={afterSrc}
+                            afterKind={current.image ? 'ai' : 'job'}
+                            afterAlt={
+                              current.image
+                                ? 'AI-generated design concept for your yard'
+                                : (compareJob?.after.alt ?? 'A job we built')
+                            }
+                            caption={
+                              current.image
+                                ? 'Drag to compare your photo with an AI concept of the same yard. It is a design we can build, not a photo of finished work.'
+                                : `Drag to compare your yard with “${compareJob?.title ?? 'a job we built'}” — a real install, not a mockup of your house.`
+                            }
                           />
-                          <div className="absolute inset-x-3 bottom-3">
-                            <AiConceptBadge />
-                          </div>
-                        </div>
-                      </figure>
-                    ) : (
-                      <div className="space-y-4">
-                        {photo ? (
-                          <figure>
+                        );
+                      }
+                      if (current.image) {
+                        return (
+                          <figure className="relative">
                             <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-ink-200 bg-ink-200">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img src={photo} alt="Your yard today" className="h-full w-full object-cover" />
+                              <img
+                                src={current.image}
+                                alt="AI-generated design concept for your yard"
+                                className={cn('h-full w-full object-cover', !gateOpen && 'blur-[1.5px]')}
+                              />
+                              <div className="absolute inset-x-3 bottom-3">
+                                <AiConceptBadge />
+                              </div>
                             </div>
-                            <figcaption className="mt-2 text-caption text-ink-500">Your yard today</figcaption>
                           </figure>
-                        ) : null}
-                        <div className="rounded-sm border border-ink-200 bg-white p-5">
-                          <p className="text-body font-medium text-brand-900">
-                            {current.message ??
-                              'Photoreal after-photos of your own yard are off right now.'}
-                          </p>
-                        </div>
-                      </div>
-                    )}
+                        );
+                      }
+                      return null;
+                    })()}
+
+                    {!current.image && current.message ? (
+                      <p className="rounded-sm border border-ink-200 bg-white px-4 py-3 text-caption text-ink-800">
+                        {current.message}
+                      </p>
+                    ) : null}
 
                     <AiConceptNote />
 

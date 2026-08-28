@@ -181,6 +181,7 @@ export function localBusinessSchema({
       longitude: business.geo.longitude,
     },
     openingHoursSpecification: openingHoursSpec(),
+    ...(business.profiles.length ? { sameAs: business.profiles.map((p) => p.url) } : {}),
     ...(areaServed?.length
       ? {
           areaServed: areaServed.map((name) => ({

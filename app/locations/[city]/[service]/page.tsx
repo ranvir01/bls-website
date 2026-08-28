@@ -7,6 +7,7 @@ import { JsonLd } from '@/components/json-ld';
 import { Reveal } from '@/components/motion/reveal';
 import { NapBlock } from '@/components/nap-block';
 import { QuoteForm } from '@/components/quote/quote-form';
+import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { getCityContent } from '@/data/content/cities';
 import { getServiceContent } from '@/data/content/services';
 import { getServiceCityContent, serviceCityContent, siblingServiceCities } from '@/data/content/service-cities';
@@ -143,6 +144,13 @@ export default function ServiceCityPage({ params }: Params) {
 
             <Reveal as="section">
               <FaqList faqs={content.faqs} title={`${service.name} in ${city.name}: questions`} />
+            </Reveal>
+
+            <Reveal as="section">
+              <VisualizerTeaser
+                headline={`Picture this ${service.name.toLowerCase()} in ${city.name}`}
+                body="Upload a photo of your yard. You get a written scope from materials we install, a cost range, and real jobs like yours."
+              />
             </Reveal>
           </div>
 

@@ -98,6 +98,16 @@ export const homeFaqs: Faq[] = [
       "Often, yes. A good share of our work is exactly that. Settling pavers, leaning walls, irrigation that never worked right. We'll tell you honestly whether it's a repair or whether the whole thing has to come out and be rebuilt. Sometimes it's the second one.",
   },
   {
+    question: 'Can I see what my yard would look like first?',
+    answer:
+      "Yes. Upload a photo on the yard visualizer. You get a written scope from materials we install, a cost range, and photos of jobs we actually built in that category. If rendering is on, you also get an AI after-photo of your own house, labeled as a concept.",
+  },
+  {
+    question: 'Where can I check you besides this website?',
+    answer:
+      "Google Business Profile, the Washington L&I contractor search for license BLUELLS880K2, and the public license record. We do not invent reviews. The Reviews page has the links.",
+  },
+  {
     question: 'How fast will you get back to me?',
     answer:
       "Same day on almost everything. A quote request off this site texts and emails the owner within seconds. During working hours you'll usually hear back inside the hour.",

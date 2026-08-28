@@ -226,14 +226,12 @@ export default function ServicePage({ params }: Params) {
           </aside>
         </div>
 
-        {ref.category === 'hardscaping' && (
-          <div className="shell pb-16">
-            <VisualizerTeaser
-              headline="Not sure what you want? Design it here in 30 seconds."
-              body="Upload a photo of your yard, pick a style, and see it rebuilt with the materials we actually install. Then we build it — same crew."
-            />
-          </div>
-        )}
+        <div className="shell pb-16">
+          <VisualizerTeaser
+            headline="See what we'd build in your yard"
+            body="Upload a photo, pick a style, and get a written scope plus real jobs like yours — materials we actually install. Free, no account."
+          />
+        </div>
 
         {/* Internal linking web: every service page links to its category, its
             siblings, the cities it serves, related reading and the portfolio. */}
