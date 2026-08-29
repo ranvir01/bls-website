@@ -9,7 +9,7 @@ import { PortfolioBrowser } from '@/components/portfolio/portfolio-browser';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { WorkGallery } from '@/components/work-gallery';
 import { portfolioProjects } from '@/data/projects';
-import { allWorkPhotos } from '@/data/work-photos';
+import { allWorkPhotos, beforeAfterPairs } from '@/data/work-photos';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -54,16 +54,18 @@ export default function PortfolioPage() {
           )}
         </div>
 
-        <div className="mt-16">
-          <SectionHeader
-            eyebrow="Before & after"
-            title="Slide to compare"
-            lead="A few yards before we started and after we finished."
-          />
-          <div className="mt-8">
-            <BeforeAfterShowcase limit={6} />
+        {beforeAfterPairs.length > 0 && (
+          <div className="mt-16">
+            <SectionHeader
+              eyebrow="Before & after"
+              title="Slide to compare"
+              lead="A few yards before we started and after we finished."
+            />
+            <div className="mt-8">
+              <BeforeAfterShowcase limit={6} />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="mt-16">
           <SectionHeader

@@ -12,7 +12,8 @@
     "check:links": "node scripts/check-links.mjs",
     "check:all": "npm run typecheck && npm run lint && node scripts/verify.mjs && npm run build",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "check:ui": "node scripts/audit-ui.mjs"
+    "check:ui": "node scripts/audit-ui.mjs",
+    "check:gallery": "node scripts/check-gallery.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

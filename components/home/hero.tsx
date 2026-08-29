@@ -1,13 +1,13 @@
 'use client';
 
 import { LazyMotion, domAnimation, m, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CreditCard, Phone, Shield } from 'lucide-react';
 import { useRef } from 'react';
 
 import { PHONE, TEL_HREF, business } from '@/data/business';
 import { trackEvent } from '@/lib/analytics';
+import { heroArt } from '@/lib/hero-art';
 import { ease, heroWord } from '@/lib/motion';
 import { Button } from '@/components/ui/button';
 
@@ -38,16 +38,37 @@ export function Hero() {
         className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-brand-900"
       >
         <m.div className="absolute inset-0 -z-10" style={reduced ? undefined : { y }}>
-          <picture>
-            <source media="(max-width: 767px)" srcSet="/images/hero-home-mobile.jpg" />
-            <Image
-              src="/images/hero-home.jpg"
-              alt="Landscaped Seattle property with custom stonework and retaining walls by Blue Landscaping Services"
-              fill
-              priority
-              fetchPriority="high"
+          {/* Two crops, not two sizes — see lib/hero-art.ts. next/image cannot
+              emit <source> elements, so the srcSets are built against the
+              optimizer by hand; the preload that pairs with this lives in
+              app/page.tsx, where it can carry a media attribute.
+
+              The block/inset-0 on <picture> is not decoration: it is inline by
+              default, and at 1920px its line box pushed 8px past the section and
+              gave the homepage a horizontal scrollbar. */}
+          <picture className="absolute inset-0 block h-full w-full">
+            <source
+              media={heroArt.mobile.media}
+              srcSet={heroArt.mobile.srcSet}
               sizes="100vw"
-              className="img-grade object-cover object-center brightness-[0.7] saturate-[1.05]"
+            />
+            <source
+              media={heroArt.desktop.media}
+              srcSet={heroArt.desktop.srcSet}
+              sizes="100vw"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element -- the whole
+                point of this block is art direction across two source files,
+                which next/image's single-<img> output cannot express. The
+                srcSets still go through /_next/image, so nothing is unoptimized. */}
+            <img
+              src={heroArt.fallback}
+              alt={heroArt.alt}
+              width={1920}
+              height={1440}
+              fetchPriority="high"
+              decoding="async"
+              className="img-grade h-full w-full object-cover object-center brightness-[0.7] saturate-[1.05]"
             />
           </picture>
           <div

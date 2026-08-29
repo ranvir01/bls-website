@@ -1,0 +1,650 @@
+{
+  "before-after/01-after.jpg": {
+    "sha1": "d891d68ac2b97a21",
+    "source": "not-our-work"
+  },
+  "before-after/01-before.jpg": {
+    "sha1": "4f57cfe35b745fc9",
+    "source": "not-our-work"
+  },
+  "before-after/02-after.jpg": {
+    "sha1": "c91a50cd1aec362b",
+    "source": "not-our-work"
+  },
+  "before-after/02-before.jpg": {
+    "sha1": "983ed601241ac17f",
+    "source": "not-our-work"
+  },
+  "before-after/03-after.jpg": {
+    "sha1": "0f943ccccb17afcc",
+    "source": "not-our-work"
+  },
+  "before-after/03-before.jpg": {
+    "sha1": "b92c1e79e4d89ccc",
+    "source": "not-our-work"
+  },
+  "before-after/04-after.jpg": {
+    "sha1": "d881b0d731fcfdb3",
+    "source": "not-our-work"
+  },
+  "before-after/04-before.jpg": {
+    "sha1": "761495e0cf818dab",
+    "source": "not-our-work"
+  },
+  "before-after/05-after.jpg": {
+    "sha1": "1042eed4b2e5ae0a",
+    "source": "not-our-work"
+  },
+  "before-after/05-before.jpg": {
+    "sha1": "8e42b72e1eb0c06b",
+    "source": "not-our-work"
+  },
+  "before-after/06-after.jpg": {
+    "sha1": "06f07d641f9689b2",
+    "source": "not-our-work"
+  },
+  "before-after/06-before.jpg": {
+    "sha1": "05b7cc4d33d159b5",
+    "source": "not-our-work"
+  },
+  "before-after/07-after.jpg": {
+    "sha1": "42abefdf92058ed0",
+    "source": "not-our-work"
+  },
+  "before-after/07-before.jpg": {
+    "sha1": "dd7d4afc5ec49efc",
+    "source": "not-our-work"
+  },
+  "hero-home-mobile.jpg": {
+    "sha1": "0109ad1f90c32760",
+    "source": "own-photo"
+  },
+  "hero-home.jpg": {
+    "sha1": "dbe4270f75bf66b9",
+    "source": "own-photo"
+  },
+  "portfolio/backyard-patio-irrigation.jpg": {
+    "sha1": "fdf8d41f3e8d8b63",
+    "source": "own-photo"
+  },
+  "portfolio/custom-entry-design.jpg": {
+    "sha1": "daac6be5116f3e41",
+    "source": "own-photo"
+  },
+  "portfolio/custom-planting-bed.jpg": {
+    "sha1": "aed73c704f8d733b",
+    "source": "own-photo"
+  },
+  "portfolio/deck-stairs.jpg": {
+    "sha1": "91a3642b4c05518c",
+    "source": "own-photo"
+  },
+  "portfolio/driveway-pathway.jpg": {
+    "sha1": "016d178792a2f655",
+    "source": "own-photo"
+  },
+  "portfolio/front-yard-renovation.jpg": {
+    "sha1": "9ddbe676c6d10df1",
+    "source": "own-photo"
+  },
+  "portfolio/irrigation-system.jpg": {
+    "sha1": "f2dcb77b4cce3d68",
+    "source": "own-photo"
+  },
+  "portfolio/modern-gate.jpg": {
+    "sha1": "bbddce033330d7a0",
+    "source": "own-photo"
+  },
+  "portfolio/modern-patio-design.jpg": {
+    "sha1": "505b827b92f6dbfa",
+    "source": "own-photo"
+  },
+  "portfolio/modern-planting-design.jpg": {
+    "sha1": "75dddb3768e4a3dc",
+    "source": "own-photo"
+  },
+  "portfolio/outdoor-kitchen.jpg": {
+    "sha1": "d89c8bb8f104cda8",
+    "source": "own-photo"
+  },
+  "portfolio/sod-and-lighting.jpg": {
+    "sha1": "8d3fbe3a3df968f2",
+    "source": "own-photo"
+  },
+  "portfolio/stepping-stone-pathway.jpg": {
+    "sha1": "9bb4501d1ac3bce5",
+    "source": "own-photo"
+  },
+  "portfolio/stone-retaining-wall.jpg": {
+    "sha1": "83b9b829063c593a",
+    "source": "own-photo"
+  },
+  "services/driveways.jpg": {
+    "sha1": "d7e4b7e018c62fbe",
+    "source": "not-our-work"
+  },
+  "services/fencing.jpg": {
+    "sha1": "bbddce033330d7a0",
+    "source": "own-photo"
+  },
+  "services/fire-features.jpg": {
+    "sha1": "d89c8bb8f104cda8",
+    "source": "own-photo"
+  },
+  "services/hardscaping.jpg": {
+    "sha1": "5b7baba6afb71447",
+    "source": "own-photo"
+  },
+  "services/irrigation-maintenance.jpg": {
+    "sha1": "fd7d6dde4188b0b4",
+    "source": "not-our-work"
+  },
+  "services/irrigation.jpg": {
+    "sha1": "6d22048e8b14330c",
+    "source": "not-our-work"
+  },
+  "services/landscaping.jpg": {
+    "sha1": "8fe36ba458c80c3b",
+    "source": "own-photo"
+  },
+  "services/lawn-maintenance.jpg": {
+    "sha1": "8d3fbe3a3df968f2",
+    "source": "own-photo"
+  },
+  "services/outdoor-steps.jpg": {
+    "sha1": "91a3642b4c05518c",
+    "source": "own-photo"
+  },
+  "services/paver-patios.jpg": {
+    "sha1": "505b827b92f6dbfa",
+    "source": "own-photo"
+  },
+  "services/planting-design.jpg": {
+    "sha1": "75dddb3768e4a3dc",
+    "source": "own-photo"
+  },
+  "services/retaining-walls.jpg": {
+    "sha1": "83b9b829063c593a",
+    "source": "own-photo"
+  },
+  "services/seating-walls.jpg": {
+    "sha1": "485f6cc99d75d798",
+    "source": "own-photo"
+  },
+  "services/sod-installation.jpg": {
+    "sha1": "09929b48528ddbf2",
+    "source": "own-photo"
+  },
+  "services/sprinkler-installation.jpg": {
+    "sha1": "6d22048e8b14330c",
+    "source": "not-our-work"
+  },
+  "services/sprinkler-repair.jpg": {
+    "sha1": "6f3d87ab4f2ac9b3",
+    "source": "not-our-work"
+  },
+  "services/walkways.jpg": {
+    "sha1": "9bb4501d1ac3bce5",
+    "source": "own-photo"
+  },
+  "services/water-features.jpg": {
+    "sha1": "b6bf8b751d4a0d81",
+    "source": "own-photo"
+  },
+  "team.jpg": {
+    "sha1": "dc89637ab166fdd3",
+    "source": "own-photo"
+  },
+  "work/hardscaping/01.jpg": {
+    "sha1": "f6c1630f20818af6",
+    "source": "own-photo"
+  },
+  "work/hardscaping/02.jpg": {
+    "sha1": "5b7baba6afb71447",
+    "source": "own-photo"
+  },
+  "work/hardscaping/03.jpg": {
+    "sha1": "8d3fbe3a3df968f2",
+    "source": "own-photo"
+  },
+  "work/hardscaping/04.jpg": {
+    "sha1": "daac6be5116f3e41",
+    "source": "own-photo"
+  },
+  "work/hardscaping/05.jpg": {
+    "sha1": "a557cd87e076dcaf",
+    "source": "own-photo"
+  },
+  "work/hardscaping/06.jpg": {
+    "sha1": "02c1e470f52796f7",
+    "source": "own-photo"
+  },
+  "work/hardscaping/07.jpg": {
+    "sha1": "2daa1a36c896a51b",
+    "source": "own-photo"
+  },
+  "work/hardscaping/08.jpg": {
+    "sha1": "9e06803a702a7451",
+    "source": "own-photo"
+  },
+  "work/hardscaping/09.jpg": {
+    "sha1": "4536f98febd8af9a",
+    "source": "own-photo"
+  },
+  "work/hardscaping/10.jpg": {
+    "sha1": "69e6cc2a0d85ac84",
+    "source": "own-photo"
+  },
+  "work/hardscaping/11.jpg": {
+    "sha1": "800b6c4f37852258",
+    "source": "own-photo"
+  },
+  "work/hardscaping/12.jpg": {
+    "sha1": "a423d0c05f3957b6",
+    "source": "own-photo"
+  },
+  "work/hardscaping/13.jpg": {
+    "sha1": "03da848635020f13",
+    "source": "own-photo"
+  },
+  "work/hardscaping/14.jpg": {
+    "sha1": "62bff7e34188f04b",
+    "source": "own-photo"
+  },
+  "work/hardscaping/15.jpg": {
+    "sha1": "ff1b13d2dc7ee4eb",
+    "source": "own-photo"
+  },
+  "work/hardscaping/16.jpg": {
+    "sha1": "9bb4501d1ac3bce5",
+    "source": "own-photo"
+  },
+  "work/hardscaping/17.jpg": {
+    "sha1": "b6f5054c07bf0960",
+    "source": "own-photo"
+  },
+  "work/hardscaping/18.jpg": {
+    "sha1": "aed73c704f8d733b",
+    "source": "own-photo"
+  },
+  "work/hardscaping/19.jpg": {
+    "sha1": "60bcbec941048a49",
+    "source": "own-photo"
+  },
+  "work/hardscaping/20.jpg": {
+    "sha1": "939d2bc4db05aaf0",
+    "source": "own-photo"
+  },
+  "work/hardscaping/21.jpg": {
+    "sha1": "75dddb3768e4a3dc",
+    "source": "own-photo"
+  },
+  "work/hardscaping/22.jpg": {
+    "sha1": "9a88dc88ce28a57e",
+    "source": "own-photo"
+  },
+  "work/hardscaping/23.jpg": {
+    "sha1": "bbddce033330d7a0",
+    "source": "own-photo"
+  },
+  "work/hardscaping/24.jpg": {
+    "sha1": "054d8e300610d831",
+    "source": "own-photo"
+  },
+  "work/hardscaping/25.jpg": {
+    "sha1": "2233c57478e8cf1c",
+    "source": "own-photo"
+  },
+  "work/hardscaping/26.jpg": {
+    "sha1": "91a3642b4c05518c",
+    "source": "own-photo"
+  },
+  "work/hardscaping/27.jpg": {
+    "sha1": "536a835d0f9fdb26",
+    "source": "own-photo"
+  },
+  "work/hardscaping/28.jpg": {
+    "sha1": "1f8a6f258b08a6e0",
+    "source": "own-photo"
+  },
+  "work/hardscaping/29.jpg": {
+    "sha1": "e5252e7af0b322b5",
+    "source": "own-photo"
+  },
+  "work/hardscaping/30.jpg": {
+    "sha1": "eccbd2a0516b70b4",
+    "source": "own-photo"
+  },
+  "work/hardscaping/31.jpg": {
+    "sha1": "305d04881c7cabe3",
+    "source": "own-photo"
+  },
+  "work/hardscaping/32.jpg": {
+    "sha1": "51f2d20c4b81d7ee",
+    "source": "own-photo"
+  },
+  "work/hardscaping/33.jpg": {
+    "sha1": "3337734ddd426132",
+    "source": "own-photo"
+  },
+  "work/hardscaping/34.jpg": {
+    "sha1": "870d12f99e81b6aa",
+    "source": "own-photo"
+  },
+  "work/hardscaping/35.jpg": {
+    "sha1": "988334a77892e6a8",
+    "source": "own-photo"
+  },
+  "work/hardscaping/36.jpg": {
+    "sha1": "150afda3faef5b67",
+    "source": "own-photo"
+  },
+  "work/hardscaping/37.jpg": {
+    "sha1": "993b135584cbd8f1",
+    "source": "own-photo"
+  },
+  "work/hardscaping/38.jpg": {
+    "sha1": "8a8c94075dfeeac9",
+    "source": "own-photo"
+  },
+  "work/hardscaping/39.jpg": {
+    "sha1": "83b9b829063c593a",
+    "source": "own-photo"
+  },
+  "work/hardscaping/40.jpg": {
+    "sha1": "e75fd580feead43f",
+    "source": "own-photo"
+  },
+  "work/hardscaping/41.jpg": {
+    "sha1": "6cfa2b141038cb84",
+    "source": "not-our-work"
+  },
+  "work/hardscaping/42.jpg": {
+    "sha1": "c3562e00ac190eb1",
+    "source": "not-our-work"
+  },
+  "work/hardscaping/43.jpg": {
+    "sha1": "be1f245082fb6c7d",
+    "source": "not-our-work"
+  },
+  "work/hardscaping/44.jpg": {
+    "sha1": "ebbf9c8df27bbcf3",
+    "source": "not-our-work"
+  },
+  "work/hardscaping/45.jpg": {
+    "sha1": "1064ffd5a99f39ce",
+    "source": "not-our-work"
+  },
+  "work/hardscaping/46.jpg": {
+    "sha1": "c29405a795158fb1",
+    "source": "not-our-work"
+  },
+  "work/irrigation/01.jpg": {
+    "sha1": "20166744684161f3",
+    "source": "own-photo"
+  },
+  "work/irrigation/02.jpg": {
+    "sha1": "3c066558fcf2c53f",
+    "source": "own-photo"
+  },
+  "work/irrigation/03.jpg": {
+    "sha1": "9ddbe676c6d10df1",
+    "source": "own-photo"
+  },
+  "work/irrigation/04.jpg": {
+    "sha1": "a557cd87e076dcaf",
+    "source": "own-photo"
+  },
+  "work/irrigation/05.jpg": {
+    "sha1": "02c1e470f52796f7",
+    "source": "own-photo"
+  },
+  "work/irrigation/06.jpg": {
+    "sha1": "d638736ba65677ff",
+    "source": "own-photo"
+  },
+  "work/irrigation/07.jpg": {
+    "sha1": "afa2064ecaed885a",
+    "source": "own-photo"
+  },
+  "work/irrigation/08.jpg": {
+    "sha1": "f656eebabbb0b5c6",
+    "source": "own-photo"
+  },
+  "work/irrigation/09.jpg": {
+    "sha1": "c3ebe955e1c5e8cc",
+    "source": "own-photo"
+  },
+  "work/irrigation/10.jpg": {
+    "sha1": "7f8d0f4ce9e91fac",
+    "source": "own-photo"
+  },
+  "work/irrigation/11.jpg": {
+    "sha1": "aed73c704f8d733b",
+    "source": "own-photo"
+  },
+  "work/irrigation/12.jpg": {
+    "sha1": "60bcbec941048a49",
+    "source": "own-photo"
+  },
+  "work/irrigation/13.jpg": {
+    "sha1": "75dddb3768e4a3dc",
+    "source": "own-photo"
+  },
+  "work/irrigation/14.jpg": {
+    "sha1": "f2dcb77b4cce3d68",
+    "source": "own-photo"
+  },
+  "work/irrigation/15.jpg": {
+    "sha1": "806d49a0b41568ac",
+    "source": "not-our-work"
+  },
+  "work/irrigation/16.jpg": {
+    "sha1": "3b11749011e14651",
+    "source": "not-our-work"
+  },
+  "work/irrigation/17.jpg": {
+    "sha1": "3aeb86ad211272cc",
+    "source": "not-our-work"
+  },
+  "work/irrigation/18.jpg": {
+    "sha1": "ce182c693708c989",
+    "source": "own-photo"
+  },
+  "work/irrigation/19.jpg": {
+    "sha1": "883bfc4fb583a44b",
+    "source": "own-photo"
+  },
+  "work/landscaping/01.jpg": {
+    "sha1": "8fe36ba458c80c3b",
+    "source": "own-photo"
+  },
+  "work/landscaping/02.jpg": {
+    "sha1": "3380cbd014a1e087",
+    "source": "own-photo"
+  },
+  "work/landscaping/03.jpg": {
+    "sha1": "8ce60d578ac6d946",
+    "source": "own-photo"
+  },
+  "work/landscaping/04.jpg": {
+    "sha1": "508499ef248dc4ff",
+    "source": "own-photo"
+  },
+  "work/landscaping/05.jpg": {
+    "sha1": "6f1cf37de76f63da",
+    "source": "own-photo"
+  },
+  "work/landscaping/06.jpg": {
+    "sha1": "daac6be5116f3e41",
+    "source": "own-photo"
+  },
+  "work/landscaping/07.jpg": {
+    "sha1": "150ea60f5bd8deb2",
+    "source": "own-photo"
+  },
+  "work/landscaping/08.jpg": {
+    "sha1": "9cfa9e57cba21860",
+    "source": "own-photo"
+  },
+  "work/landscaping/09.jpg": {
+    "sha1": "8abac8bc3693732a",
+    "source": "own-photo"
+  },
+  "work/landscaping/10.jpg": {
+    "sha1": "574d7455423b5c06",
+    "source": "own-photo"
+  },
+  "work/landscaping/11.jpg": {
+    "sha1": "d64a7f482c77c226",
+    "source": "own-photo"
+  },
+  "work/landscaping/12.jpg": {
+    "sha1": "89c0a7ad424e97cd",
+    "source": "own-photo"
+  },
+  "work/landscaping/13.jpg": {
+    "sha1": "a0bd75b1cfdddd51",
+    "source": "own-photo"
+  },
+  "work/landscaping/14.jpg": {
+    "sha1": "1066e8f14887b03c",
+    "source": "own-photo"
+  },
+  "work/landscaping/15.jpg": {
+    "sha1": "5f65fca6121f2ee0",
+    "source": "own-photo"
+  },
+  "work/landscaping/16.jpg": {
+    "sha1": "7fcea9c065147c58",
+    "source": "own-photo"
+  },
+  "work/landscaping/17.jpg": {
+    "sha1": "7f8d0f4ce9e91fac",
+    "source": "own-photo"
+  },
+  "work/landscaping/18.jpg": {
+    "sha1": "5ba23a0bfafd5c08",
+    "source": "own-photo"
+  },
+  "work/landscaping/19.jpg": {
+    "sha1": "bbca6356dae6f8c9",
+    "source": "own-photo"
+  },
+  "work/landscaping/20.jpg": {
+    "sha1": "2881477b3683b4d2",
+    "source": "own-photo"
+  },
+  "work/landscaping/21.jpg": {
+    "sha1": "8be2b1edaa955fed",
+    "source": "own-photo"
+  },
+  "work/landscaping/22.jpg": {
+    "sha1": "e4dbdb2278234498",
+    "source": "own-photo"
+  },
+  "work/landscaping/23.jpg": {
+    "sha1": "13551908f07e7ffb",
+    "source": "own-photo"
+  },
+  "work/landscaping/24.jpg": {
+    "sha1": "5b7baba6afb71447",
+    "source": "own-photo"
+  },
+  "work/landscaping/25.jpg": {
+    "sha1": "20166744684161f3",
+    "source": "own-photo"
+  },
+  "work/landscaping/26.jpg": {
+    "sha1": "9ddbe676c6d10df1",
+    "source": "own-photo"
+  },
+  "work/landscaping/27.jpg": {
+    "sha1": "8d3fbe3a3df968f2",
+    "source": "own-photo"
+  },
+  "work/landscaping/28.jpg": {
+    "sha1": "4594afa0f11306ff",
+    "source": "own-photo"
+  },
+  "work/landscaping/29.jpg": {
+    "sha1": "afa2064ecaed885a",
+    "source": "own-photo"
+  },
+  "work/landscaping/30.jpg": {
+    "sha1": "fcc758c6ce8564ce",
+    "source": "own-photo"
+  },
+  "work/landscaping/31.jpg": {
+    "sha1": "d638736ba65677ff",
+    "source": "own-photo"
+  },
+  "work/landscaping/32.jpg": {
+    "sha1": "d54d2858ba1d1857",
+    "source": "own-photo"
+  },
+  "work/landscaping/33.jpg": {
+    "sha1": "939d2bc4db05aaf0",
+    "source": "own-photo"
+  },
+  "work/landscaping/34.jpg": {
+    "sha1": "5117cee06f9d9637",
+    "source": "own-photo"
+  },
+  "work/landscaping/35.jpg": {
+    "sha1": "bbca6356dae6f8c9",
+    "source": "own-photo"
+  },
+  "work/landscaping/36.jpg": {
+    "sha1": "4011020dbe5cc762",
+    "source": "own-photo"
+  },
+  "work/landscaping/37.jpg": {
+    "sha1": "daac6be5116f3e41",
+    "source": "own-photo"
+  },
+  "work/landscaping/38.jpg": {
+    "sha1": "d8313fb0cd249333",
+    "source": "own-photo"
+  },
+  "work/landscaping/39.jpg": {
+    "sha1": "b7284a5063e0ad6e",
+    "source": "own-photo"
+  },
+  "work/landscaping/40.jpg": {
+    "sha1": "51f2d20c4b81d7ee",
+    "source": "own-photo"
+  },
+  "work/landscaping/41.jpg": {
+    "sha1": "2881477b3683b4d2",
+    "source": "own-photo"
+  },
+  "work/landscaping/42.jpg": {
+    "sha1": "8be2b1edaa955fed",
+    "source": "own-photo"
+  },
+  "work/landscaping/43.jpg": {
+    "sha1": "f7a9596814144cb6",
+    "source": "own-photo"
+  },
+  "work/landscaping/44.jpg": {
+    "sha1": "d6fd9312e0789988",
+    "source": "own-photo"
+  },
+  "work/landscaping/45.jpg": {
+    "sha1": "638e73b96bc5c969",
+    "source": "own-photo"
+  },
+  "work/landscaping/46.jpg": {
+    "sha1": "2390e5fbb3f4203c",
+    "source": "own-photo"
+  },
+  "work/landscaping/47.jpg": {
+    "sha1": "dcaf61c3f02e0acd",
+    "source": "own-photo"
+  },
+  "work/landscaping/48.jpg": {
+    "sha1": "505b827b92f6dbfa",
+    "source": "own-photo"
+  }
+}

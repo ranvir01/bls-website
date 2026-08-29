@@ -11,6 +11,7 @@
  *   node scripts/verify.mjs
  */
 
+import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -131,6 +132,141 @@ const RULES = [
   },
 ];
 
+/**
+ * Photo provenance.
+ *
+ * WHY THIS CHECK EXISTS
+ * ---------------------
+ * The site tells visitors, in as many words, that every photograph on it is a
+ * job this company did — /portfolio is headed "Projects we have actually built"
+ * and the trust bar counts the photos and adds "no stock imagery anywhere".
+ *
+ * For a while that was not true. Twenty-eight files in public/images were
+ * generated rather than photographed: a paver driveway in front of a brick
+ * house that is not in Washington, four renders of sprinklers watering a park,
+ * and — under a slider captioned "a few yards before we started and after we
+ * finished" — seven "before" illustrations paired with seven "after" renders of
+ * yards that do not exist. Every other check in this file passed the whole time,
+ * because nothing here reads pixels.
+ *
+ * Nothing here can read them now either. Real and generated are
+ * indistinguishable to a script once both have been through the same re-encode:
+ * EXIF is stripped from all of it, and the aspect ratios that happened to give
+ * these away are a coincidence, not a rule. Only a person looking at the
+ * picture can tell.
+ *
+ * So this does not try to classify. It pins the inventory instead:
+ * data/photo-provenance.json records every image the site can present as our
+ * own work, with a hash and a source. A new or altered file fails the build
+ * until someone adds it — which is the moment a human is asked where it came
+ * from. That is the check that was missing.
+ */
+const PROVENANCE = 'data/photo-provenance.json';
+const PROVENANCE_DIRS = ['work', 'before-after', 'portfolio', 'services'];
+const PROVENANCE_LOOSE = ['hero-home.jpg', 'hero-home-mobile.jpg', 'team.jpg'];
+const IMAGE_EXT = /\.(jpe?g|png|webp|avif)$/i;
+
+async function* walkImages(dir) {
+  let entries;
+  try {
+    entries = await readdir(dir, { withFileTypes: true });
+  } catch {
+    return;
+  }
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) yield* walkImages(full);
+    else if (IMAGE_EXT.test(entry.name)) yield full;
+  }
+}
+
+async function checkPhotoProvenance() {
+  let manifest;
+  try {
+    manifest = JSON.parse(await readFile(path.join(ROOT, PROVENANCE), 'utf8'));
+  } catch (e) {
+    fail(PROVENANCE, null, `cannot be read (${e.message}). Every image the site shows as our own work has to be listed here.`);
+    return;
+  }
+
+  const base = path.join(ROOT, 'public', 'images');
+  const found = [];
+  for (const dir of PROVENANCE_DIRS) {
+    for await (const file of walkImages(path.join(base, dir))) {
+      found.push(path.relative(base, file));
+    }
+  }
+  for (const name of PROVENANCE_LOOSE) {
+    try {
+      await readFile(path.join(base, name));
+      found.push(name);
+    } catch {
+      /* optional */
+    }
+  }
+
+  let ownPhotos = 0;
+  let notOurWork = 0;
+
+  for (const rel of found.sort()) {
+    const entry = manifest[rel];
+    if (!entry) {
+      fail(
+        PROVENANCE,
+        null,
+        `public/images/${rel} is not listed. Add it with source "own-photo" if it is a photograph of our own job, or "not-our-work" if it is stock, a render, or anything else — and do not reference it.`,
+      );
+      continue;
+    }
+
+    const sha1 = createHash('sha1').update(await readFile(path.join(base, rel))).digest('hex').slice(0, 16);
+    if (sha1 !== entry.sha1) {
+      fail(PROVENANCE, null, `public/images/${rel} has changed since it was vetted (${entry.sha1} → ${sha1}). Confirm what the new file is, then update the hash.`);
+    }
+
+    if (entry.source === 'own-photo') ownPhotos += 1;
+    else notOurWork += 1;
+  }
+
+  const orphans = Object.keys(manifest).filter((rel) => !found.includes(rel));
+  for (const rel of orphans) {
+    notes.push(`provenance lists public/images/${rel}, which is no longer on disk — drop the entry.`);
+  }
+
+  notes.push(`photo provenance: ${ownPhotos} of our own, ${notOurWork} marked not-our-work and referenced by nothing`);
+}
+
+/**
+ * A file marked not-our-work must not be reachable from the site.
+ *
+ * The data layer is the only way a work photo gets onto a page, so a literal
+ * path match across the source is enough — with one deliberate exception for
+ * lib/service-art.ts, which resolves service card art by filesystem lookup and
+ * therefore has to name these slugs in order to skip them.
+ */
+async function checkNotOurWorkUnreferenced(sourceFiles) {
+  let manifest;
+  try {
+    manifest = JSON.parse(await readFile(path.join(ROOT, PROVENANCE), 'utf8'));
+  } catch {
+    return;
+  }
+  const banned = Object.entries(manifest)
+    .filter(([, v]) => v.source === 'not-our-work')
+    .map(([rel]) => `/images/${rel}`);
+  if (!banned.length) return;
+
+  for (const file of sourceFiles) {
+    if (file === 'lib/service-art.ts') continue;
+    const source = await readFile(path.join(ROOT, file), 'utf8');
+    for (const rel of banned) {
+      if (source.includes(rel)) {
+        fail(file, null, `references ${rel}, which data/photo-provenance.json marks as not our work. It cannot appear on a site that says every photo is a job we did.`);
+      }
+    }
+  }
+}
+
 async function main() {
   const files = [];
   for (const dir of SCAN_DIRS) {
@@ -161,6 +297,9 @@ async function main() {
   }
 
   notes.push(`scanned ${files.length} source files`);
+
+  await checkPhotoProvenance();
+  await checkNotOurWorkUnreferenced(files);
 
   if (failures.length) {
     console.error(`\n${failures.length} acceptance failure(s):\n`);

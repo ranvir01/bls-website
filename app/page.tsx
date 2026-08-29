@@ -16,7 +16,7 @@ import { homeFaqs, howItWorks, whyUs } from '@/data/content/home';
 import { getCategoryContent } from '@/data/content/categories';
 import { conceptToBuiltProjects, portfolioProjects } from '@/data/projects';
 import { reviews } from '@/data/reviews';
-import { featuredWorkPhotos } from '@/data/work-photos';
+import { beforeAfterPairs, featuredWorkPhotos } from '@/data/work-photos';
 import {
   categories,
   cities,
@@ -25,6 +25,7 @@ import {
   servicePath,
   servicesInCategory,
 } from '@/data/taxonomy';
+import { heroArt } from '@/lib/hero-art';
 import { faqSchema, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
 
 export default function HomePage() {
@@ -32,6 +33,33 @@ export default function HomePage() {
 
   return (
     <>
+      {/*
+        LCP preload for the hero, one per breakpoint.
+
+        `priority` on a next/image emits a preload with no media attribute, so
+        phones were told to fetch the desktop crop they never paint. A <link>
+        written out here can carry `media`, which means exactly one crop is
+        preloaded and it is always the one that gets displayed. React hoists
+        these into <head>, ahead of the body, so the preload scanner still finds
+        them before it reaches the hero markup.
+      */}
+      <link
+        rel="preload"
+        as="image"
+        media={heroArt.mobile.media}
+        imageSrcSet={heroArt.mobile.srcSet}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        media={heroArt.desktop.media}
+        imageSrcSet={heroArt.desktop.srcSet}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
+
       <JsonLd
         data={graph([
           localBusinessSchema({ path: '/', areaServed: cities.map((c) => c.name) }),
@@ -114,16 +142,21 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="shell section">
-        <SectionHeader
-          eyebrow="Before & after"
-          title="See the difference"
-          lead="Real yards we rebuilt. Drag the slider."
-        />
-        <div className="mt-10">
-          <BeforeAfterShowcase limit={3} />
-        </div>
-      </section>
+      {/* Header and slider stand or fall together — a "drag the slider" heading
+          over an empty div is worse than no section. beforeAfterPairs is empty
+          until a real pair exists; see the note in data/work-photos.ts. */}
+      {beforeAfterPairs.length > 0 && (
+        <section className="shell section">
+          <SectionHeader
+            eyebrow="Before & after"
+            title="See the difference"
+            lead="Real yards we rebuilt. Drag the slider."
+          />
+          <div className="mt-10">
+            <BeforeAfterShowcase limit={3} />
+          </div>
+        </section>
+      )}
 
       <section className="border-y border-ink-200 bg-white">
         <div className="shell section">

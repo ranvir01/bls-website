@@ -67,6 +67,33 @@ for (const width of WIDTHS) {
       continue;
     }
 
+    /*
+     * 'networkidle' is not "the page has settled".
+     *
+     * It fires when the network has been quiet for 500ms, which on a cold image
+     * optimizer happens while images are still being transcoded and before web
+     * fonts have swapped. Measuring there produced failures that did not
+     * reproduce: an 8px horizontal overflow on the homepage hero, and pages
+     * reported with zero <h1> that plainly have one. Both went away on a warm
+     * cache, which is the signature of a race rather than a defect — and a
+     * flaky gate is worse than no gate, because it trains people to re-run it
+     * until it passes.
+     *
+     * So wait for what is actually being measured. Note the loading="lazy"
+     * exclusion: a lazy image below the fold has not been fetched, so its
+     * .complete is false and stays false until someone scrolls — waiting on
+     * every image would never resolve and would just trade a flake for a
+     * timeout. Eager images are the ones holding up layout anyway.
+     */
+    await page
+      .waitForFunction(
+        () => document.fonts.status === 'loaded'
+          && [...document.images].every((img) => img.loading === 'lazy' || img.complete),
+        null,
+        { timeout: 15000 },
+      )
+      .catch(() => report(path, width, 'eager images or fonts did not settle within 15s'));
+
     // ── Horizontal overflow ───────────────────────────────────────────────
     const overflow = await page.evaluate(() => {
       const doc = document.documentElement;
