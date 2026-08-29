@@ -166,7 +166,12 @@ export function WorkGallery({
                     aria-hidden="true"
                     fill
                     sizes={GRID_SIZES}
-                    className="scale-105 object-contain blur-lg"
+                    className={cn(
+                      'scale-105 object-contain blur-lg transition-opacity duration-300',
+                      // Faded out once the real one is up, or its blur haloes
+                      // around the sharp edges for as long as the photo is open.
+                      loaded ? 'opacity-0' : 'opacity-100',
+                    )}
                   />
                   <Image
                     key={current.src}
