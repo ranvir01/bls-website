@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 import type { ImageAsset } from '@/data/types';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 /**
  * Two columns on phones, three from md, four from lg.
@@ -16,6 +17,27 @@ import { cn } from '@/lib/utils';
  * lightbox on purpose — see PreviewBackdrop.
  */
 const GRID_SIZES = '(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw';
+
+/** The lightbox's own ceiling — max-w-5xl. */
+const LIGHTBOX_MAX = 1024;
+
+/**
+ * How wide to let a photo be shown in the lightbox.
+ *
+ * Not every photo in this library is 1400px. A good number of the owner's older
+ * job photos survive only as ~417px web thumbnails, and stretching one of those
+ * across a 1024px lightbox is a 2.5x upscale — a soft, blocky mess that looks
+ * like a broken image rather than a small one. Capping the display at twice the
+ * file's real width keeps the enlargement honest: a small photo still opens
+ * bigger than its thumbnail, but never so big that the upscaling is the first
+ * thing you notice.
+ *
+ * It also stops the optimizer being asked for a 1024px variant of a 417px
+ * source, which costs bytes to deliver no extra detail.
+ */
+function lightboxWidth(photo: ImageAsset) {
+  return Math.min(LIGHTBOX_MAX, photo.width * 2);
+}
 
 /**
  * Photographic work grid with a lightbox.
@@ -38,6 +60,16 @@ const GRID_SIZES = '(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw';
  * Previous/Next are real buttons. Arrow keys still work, but a gallery of
  * forty-odd photos cannot be navigable only by a shortcut nothing announces.
  */
+/**
+ * How many tiles to show before the "see the rest" button.
+ *
+ * The full library is eighty photographs. All eighty in one grid is twenty rows
+ * of scrolling before the page's closing call to action, and it costs eighty
+ * lazy-loaded requests on a page most visitors skim. Two rows short of half is
+ * enough to prove the work is real; the rest are one click away.
+ */
+const COLLAPSE_AFTER = 40;
+
 export function WorkGallery({
   photos,
   heading,
@@ -47,7 +79,10 @@ export function WorkGallery({
   heading?: string;
   limit?: number;
 }) {
-  const items = limit ? photos.slice(0, limit) : photos;
+  const all = limit ? photos.slice(0, limit) : photos;
+  const [expanded, setExpanded] = useState(false);
+  const collapsible = all.length > COLLAPSE_AFTER;
+  const items = collapsible && !expanded ? all.slice(0, COLLAPSE_AFTER) : all;
   const [active, setActive] = useState<number | null>(null);
 
   /**
@@ -114,6 +149,14 @@ export function WorkGallery({
         ))}
       </ul>
 
+      {collapsible && !expanded && (
+        <div className="mt-8 flex justify-center">
+          <Button type="button" variant="outline" onClick={() => setExpanded(true)}>
+            Show all {all.length} photos
+          </Button>
+        </div>
+      )}
+
       <Dialog.Root
         open={active !== null}
         onOpenChange={(open) => {
@@ -147,7 +190,10 @@ export function WorkGallery({
                   </button>
                 </Dialog.Close>
 
-                <div className="relative h-[75vh] w-full max-w-5xl">
+                <div
+                  className="relative h-[75vh] w-full max-w-5xl"
+                  style={{ maxWidth: lightboxWidth(current) }}
+                >
                   {/*
                     The thumbnail, blurred, underneath the real thing.
 
@@ -178,7 +224,7 @@ export function WorkGallery({
                     src={current.src}
                     alt={current.alt}
                     fill
-                    sizes="(max-width: 1023px) 100vw, 1024px"
+                    sizes={`(max-width: ${lightboxWidth(current)}px) 100vw, ${lightboxWidth(current)}px`}
                     onLoad={() => setLoaded(true)}
                     className={cn(
                       'object-contain transition-opacity duration-300',

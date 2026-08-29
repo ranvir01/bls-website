@@ -30,7 +30,14 @@ The owner asked to restore the **old look and real photos** while **keeping the 
 - Catalog: `data/work-photos.ts`
 - Named jobs: `data/projects.ts`
 - Resolver: `lib/service-art.ts` — drop a JPEG at `public/images/services/<slug>.jpg` and it is used automatically
-- Tiny Imgur thumbs were filtered from galleries (width ≥ 800)
+- ~~Tiny Imgur thumbs were filtered from galleries (width ≥ 800)~~ — **superseded.**
+  That filter was applied by file size without anyone looking at the pictures, and
+  it hid 48 real jobs. Every one has since been opened, described and verified, and
+  they are back in `data/work-photos.ts`. They are 417–640px because that is the
+  only size the originals survive at; `components/work-gallery.tsx` caps how far
+  the lightbox enlarges them. **Do not re-apply a width filter** — judge a photo by
+  whether it is real and legible, not by its pixel count. `data/photo-provenance.json`
+  is the record of what is genuine; `scripts/verify.mjs` enforces it.
 
 **Phone (single source of truth)**
 - Display: `(253) 429-7052`

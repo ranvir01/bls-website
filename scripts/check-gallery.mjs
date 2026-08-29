@@ -110,6 +110,32 @@ console.log('\n== /portfolio gallery ==');
   const banda = await page.getByText('Slide to compare').count();
   banda === 0 ? ok('empty before/after section is hidden, not an orphaned header')
               : bad('"Slide to compare" header still rendered with no slider');
+
+  // The grid collapses past 40 tiles. Expanding must reveal the rest and must
+  // not reintroduce a repeat — the concatenated arrays are where repeats came
+  // from last time, and only the tail is collapsed away.
+  const more = page.getByRole('button', { name: /Show all \d+ photos/ });
+  if (await more.count()) {
+    const label = await more.first().innerText();
+    await more.first().click();
+    await page.waitForTimeout(400);
+    const after = await page.$$eval('ul button[aria-label^="Open photo"] img', els => els.map(e => ({
+      src: decodeURIComponent(new URL(e.currentSrc || e.src, location.href).searchParams.get('url') || e.src),
+      alt: e.alt,
+    })));
+    const s2 = after.map(i => i.src), a2 = after.map(i => i.alt);
+    const promised = parseInt(label.match(/\d+/)[0], 10);
+    after.length === promised ? ok(`"${label}" revealed exactly ${promised}`)
+                              : bad(`"${label}" revealed ${after.length}`);
+    s2.filter((s, i) => s2.indexOf(s) !== i).length === 0
+      ? ok('expanded grid has no repeated photo')
+      : bad('expanding reintroduced a duplicate photo');
+    a2.filter((a, i) => a2.indexOf(a) !== i).length === 0
+      ? ok('expanded grid has no repeated alt')
+      : bad('expanding reintroduced a duplicate alt');
+  } else {
+    ok('gallery short enough that no expander is needed');
+  }
   await ctx.close();
 }
 
