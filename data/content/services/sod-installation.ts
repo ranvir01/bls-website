@@ -109,7 +109,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'The numbers above are typical installed ranges for the Puget Sound market in 2026, not a quote, since gate width and machine access, how much old material has to leave, soil import depth and whether the yard needs drainage work swing the total considerably, and a walkthrough is what produces the real figure.',
+    'The first two rows of this table differ by nearly double, and the whole difference is what sits under the grass. Sod over soil we have already prepared is the cheap number. A complete lawn carries tear-out, grade correction and imported screened loam at $65 to $110 a yard. A yard that has stayed soggy for years needs the drainage sorted before it needs turf, or the new lawn fails the same way the old one did.',
   pnwConsiderations: [
     {
       title: 'Drainage decides whether the lawn survives its first winter',

@@ -177,7 +177,17 @@ console.log('\n== lightbox focus management ==');
 
   await page.keyboard.press('Escape');
   await page.waitForSelector('[role="dialog"]', { state: 'detached' });
-  const restored = await page.evaluate(() => document.activeElement?.getAttribute('aria-label'));
+  // Focus restore can legitimately land a frame or two after the dialog
+  // detaches, so poll briefly rather than sampling once — otherwise this
+  // measures the test's timing rather than the page's behaviour.
+  const restored = await page
+    .waitForFunction(
+      (want) => document.activeElement?.getAttribute('aria-label') === want,
+      before,
+      { timeout: 2000 },
+    )
+    .then(() => before)
+    .catch(() => page.evaluate(() => document.activeElement?.getAttribute('aria-label')));
   restored === before ? ok('focus returned to the thumbnail that opened it')
                       : bad(`focus went to ${JSON.stringify(restored)}, expected ${JSON.stringify(before)}`);
   await ctx.close();

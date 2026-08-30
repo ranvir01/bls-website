@@ -111,7 +111,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'Figures above are typical installed ranges for King County in 2026 rather than a quote, since the real driver is total rise, machine access and what has to come out first, all of which we price after a site walkthrough.',
+    'Steps are priced by total rise, not by the number you count from the bottom. Every riser needs its own compacted base, so a flight climbing six feet costs roughly double one climbing three at the same tread width. Cheek walls flanking the flight are a separate line and frequently half of what you actually see. What the flight is founded on decides the rest: glacial till bears a stair, and old fill does not.',
   pnwConsiderations: [
     {
       title: 'Water runs down a stair before you do',

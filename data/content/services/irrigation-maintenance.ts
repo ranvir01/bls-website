@@ -110,7 +110,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical service ranges for the Puget Sound market in 2026 rather than a quote, because zone count, the number of backflow assemblies on the property and how much the system has been neglected all change the visit length, and we confirm the figure after a walkthrough of the yard and the controller.',
+    'Two numbers set a maintenance price: how many zones the controller drives, and how many backflow assemblies are on the property. A second assembly means a second certified test and a second report filed with your water purveyor. After that it comes down to history — a system blown out every October takes a fraction of the time of one that has been left charged through a Fraser outflow and is being found out one fitting at a time.',
   pnwConsiderations: [
     {
       title: 'The freeze that catches everyone',

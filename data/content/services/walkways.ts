@@ -104,7 +104,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'Every figure above is a typical installed range for this market rather than a quote; length, width, access for a machine, and how much old surface has to come out move the real number, which we set after walking the site.',
+    'Material spans this table more than anything else we build. The same four-foot path is $12 a square foot in compacted crushed fines and $65 in dry-set flagstone, and both are correct answers depending on where the path goes and how often anyone walks it in the dark. After material, the variables are width, how much old concrete has to leave the property, and whether a machine can get to the work at all.',
   pnwConsiderations: [
     {
       title: 'North-facing walks grow moss, and moss is a slip hazard',

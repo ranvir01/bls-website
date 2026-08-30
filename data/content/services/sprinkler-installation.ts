@@ -112,7 +112,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market in 2026 rather than a quote, because measured pressure, meter size, soil type and how far the point of connection sits from the far corner of the yard move the number more than square footage does, and all four get confirmed during a site walkthrough.',
+    'You are buying zones, not square footage, and zone count comes out of measured static pressure and meter size rather than lawn area. A small meter on a low-pressure street supports fewer heads per zone, so two yards of the same dimensions can need four zones or seven. That measurement takes about ten minutes at the hose bib and it is the first thing we do. The backflow assembly and its first certified test are a fixed cost on top, whatever the lawn looks like.',
   pnwConsiderations: [
     {
       title: 'Where the water goes when the zone shuts off',

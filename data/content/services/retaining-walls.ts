@@ -120,7 +120,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market in 2026, not a quote; the actual number comes out of a site walkthrough where we can see the grade, the soil, the access and where the water goes. You will find local bids starting nearer $25 per face square foot. That number is real, and it usually means no drain rock, no filter fabric and a base course laid on native soil — a wall that looks identical on day one and leans by year five. Our range starts where a full drainage assembly starts.',
+    'You will find local bids starting nearer $25 per face square foot. That number is real, and it usually means no drain rock, no filter fabric, and a base course laid straight on native soil — a wall that looks identical on day one and leans by year five. The range above starts where a full drainage assembly starts. What moves it on your lot is the grade, the soil, and where the water goes.',
   pnwConsiderations: [
     {
       title: 'Drainage is the wall, not an accessory',

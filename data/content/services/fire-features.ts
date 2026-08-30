@@ -110,7 +110,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These reflect typical installed ranges for the Puget Sound market rather than a quoted price; burner brand, cap material, how far the gas meter sits from the patio, and your city fee schedule all move the total, and a site walkthrough is what turns a range into a number.',
+    'Most of the distance between a wood-burning pit and a gas one is the gas line: $28 to $55 a linear foot from wherever the meter sits to wherever you want the fire, run and connected by a licensed gas fitter. The same fire pit fifteen feet off the meter and at the far corner of the lot are different jobs at an identical spec. Pace that run out before you compare two bids, or you are comparing the pits and not the plumbing.',
   pnwConsiderations: [
     {
       title: 'Rain gets in, and the enclosure has to let it back out',

@@ -267,6 +267,65 @@ async function checkNotOurWorkUnreferenced(sourceFiles) {
   }
 }
 
+/**
+ * Cost notes must not converge on one sentence.
+ *
+ * Every service page carries a `costNote` under its price table. All fifteen
+ * had drifted into the same paragraph wearing fifteen hats: thirteen said
+ * "Puget Sound market", thirteen ended at a "walkthrough", eleven managed
+ * "typical installed range" and "site walkthrough" and "in 2026" all at once,
+ * and every one of them opened with a variant of "These are typical installed
+ * ranges … rather than a quote".
+ *
+ * None of it was false, which is why nothing caught it. It was just the same
+ * disclaimer fifteen times, and worse, redundant — the table's own column
+ * header already reads "Typical range", so restating that in prose underneath
+ * bought nothing and displaced the sentence that could have said what actually
+ * drives the price for that trade.
+ *
+ * The check is deliberately narrow: three or more notes opening with an
+ * identical six words is templating, not coincidence. Two is allowed, because
+ * a pair of genuinely parallel services can legitimately read alike.
+ */
+const COST_NOTE_OPENING_WORDS = 6;
+const COST_NOTE_MAX_SHARING = 2;
+
+async function checkCostNoteVariety() {
+  const dir = path.join(ROOT, 'data', 'content', 'services');
+  let names;
+  try {
+    names = (await readdir(dir)).filter((n) => n.endsWith('.ts'));
+  } catch {
+    return;
+  }
+
+  const openings = new Map();
+  for (const name of names) {
+    const source = await readFile(path.join(dir, name), 'utf8');
+    const match = source.match(/costNote:\s*\n?\s*'((?:[^'\\]|\\.)*)'/);
+    if (!match) continue;
+    const key = match[1]
+      .toLowerCase()
+      .split(/\s+/)
+      .slice(0, COST_NOTE_OPENING_WORDS)
+      .join(' ');
+    if (!openings.has(key)) openings.set(key, []);
+    openings.get(key).push(name.replace('.ts', ''));
+  }
+
+  for (const [opening, slugs] of openings) {
+    if (slugs.length > COST_NOTE_MAX_SHARING) {
+      fail(
+        'data/content/services',
+        null,
+        `${slugs.length} cost notes open with the same ${COST_NOTE_OPENING_WORDS} words ("${opening}…"): ${slugs.join(', ')}. Say what drives the price for each trade instead — the table header already says these are ranges.`,
+      );
+    }
+  }
+
+  notes.push(`cost notes: ${openings.size} distinct openings across ${names.length} service files`);
+}
+
 async function main() {
   const files = [];
   for (const dir of SCAN_DIRS) {
@@ -300,6 +359,7 @@ async function main() {
 
   await checkPhotoProvenance();
   await checkNotOurWorkUnreferenced(files);
+  await checkCostNoteVariety();
 
   if (failures.length) {
     console.error(`\n${failures.length} acceptance failure(s):\n`);

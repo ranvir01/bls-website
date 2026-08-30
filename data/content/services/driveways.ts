@@ -110,7 +110,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'Treat these as typical installed ranges for driveways in the Puget Sound market, not as a bid; slope, machine access, how bad the subgrade turns out to be, and each city fee schedule change the total, and a site walkthrough is what produces the actual number.',
+    'A driveway price turns on two lines you cannot see from the street: what the subgrade turns out to be once the old slab is off, and whether the city wants the right-of-way apron rebuilt while you are at it. The first runs $9 to $18 a square foot over whatever area needs correcting. The second is its own permitted job with its own inspection. Anything quoted before someone has stood on the drive is a guess with a decimal point in it.',
   pnwConsiderations: [
     {
       title: 'Water trapped in the base is what breaks a driveway',

@@ -112,7 +112,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market in 2026 and not a quote; the real figure depends on wall length, cap material, curves and access, which we settle during a site walkthrough.',
+    'A straight seat wall and a serpentine one are the same block at different prices, because every curve means cut units and a lot of them — that is the $15 to $35 a foot the table adds for it. Cap choice is the other lever, and it is the one you notice: the cap is what your hand rests on and what the backs of your legs sit against, so a bluestone or thermal granite slab is where the money shows.',
   pnwConsiderations: [
     {
       title: 'A freestanding wall drains through its base',

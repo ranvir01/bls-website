@@ -109,7 +109,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'The figures above are typical installed and serviced ranges for the Puget Sound market in 2026 rather than a quote, since lot size, slope, bed square footage, gate access and how many trees drop on the property all move the price, and a short site walkthrough is what produces your actual number.',
+    'Mowing tracks trimmable edge more than lawn area. A quarter acre in one clean rectangle is quicker than the same square footage cut into beds, a strip along the drive and a parking strip out front. Gate width is the other thing to check, because a yard a riding mower cannot enter is a walk-behind yard for as long as the fence stands. Winter visits drop in frequency rather than stopping, since turf here never quite goes dormant.',
   pnwConsiderations: [
     {
       title: 'Mowing a lawn that never really goes dormant',

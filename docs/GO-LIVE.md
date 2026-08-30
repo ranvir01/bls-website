@@ -157,39 +157,68 @@ bounded.
 
 ## 8. Imagery — what is on the cards right now
 
-Every service and category card has a panel on it, but those panels are
-**generated artwork, not photographs**. Each one is an abstract pattern in the
-brand palette that matches the material: block courses for walls, a running
-bond for pavers, spray arcs for irrigation, slats for fencing. They exist so the
-cards do not look unfinished, and they are deliberately not photographic so
-nobody can mistake one for a picture of your work.
+**13 of the 18 service and category cards now carry a real photograph of your
+work.** The other five fall back to a generated panel — an abstract pattern in
+the brand palette matching the material, deliberately non-photographic so nobody
+mistakes one for a picture of a job.
 
-The old site put stock photos on these cards by hotlinking Unsplash. Those
-hotlinks are gone: third-party image hosts break, they cost a DNS lookup and a
-connection on every card, and none of it was your work anyway. I could not
-download replacement stock from the build environment either — outbound access
-to image hosts is blocked there.
+The five on panels are all the same story: the files that used to sit on them
+were generated stock rather than photographs. A paver driveway in front of a
+brick house that is not in Washington, and four near-identical renders of
+sprinklers watering a park.
 
-**To replace any panel with a real photo**, drop a JPEG at
-`public/images/services/<service-slug>.jpg`. It wins automatically; the code
-prefers a photo and falls back to the generated panel. Slugs are listed in
-`data/taxonomy.ts`. Run `npm run optimize:images` afterwards.
+| Slug | Why it is on a panel |
+| --- | --- |
+| `driveways` | its JPEG was a generated stock driveway |
+| `irrigation` | generated stock sprinklers |
+| `irrigation-maintenance` | generated stock sprinklers |
+| `sprinkler-installation` | generated stock sprinklers |
+| `sprinkler-repair` | generated stock sprinklers |
+
+**To put a real photo on any of the other thirteen**, drop a JPEG at
+`public/images/services/<service-slug>.jpg`. It wins automatically — the code
+prefers a photo and falls back to the panel. Slugs are in `data/taxonomy.ts`.
+Run `npm run optimize:images` afterwards.
+
+**For the five in the table above, the file alone is not enough.** Those slugs
+are held in a `NOT_OUR_WORK` set in `lib/service-art.ts` precisely so that
+dropping a file back in does not quietly restore the generated stock. Take the
+slug off that list at the same time as you add the photograph. That is one line,
+and the comment above the set explains why it is there.
 
 Regenerate the panels any time with `node scripts/generate-service-art.mjs`.
 
 ## 9. Photography — the thing that actually closes the gap
 
-`/portfolio` is empty, and it says so honestly rather than showing stock images
-or other companies' work.
+`/portfolio` is no longer empty. It carries **14 named projects and 80
+photographs** of your own work, every one of them opened and described by hand.
+The grid collapses at 40 tiles behind a "Show all 80" button, ordered so the
+strongest framing is what a visitor sees first.
 
-`docs/PHOTO-SOP.md` is a field procedure: six fixed camera positions before the
-job, the same six after, plus detail and crew shots. Follow it on every job from
-the next one onward. Twenty real before/afters beat two hundred fake ones and
-are the strongest trust asset this business can own.
+Two gaps remain, and only a camera closes either.
+
+**Before-and-after pairs.** The slider on `/portfolio` and the homepage is
+hidden, because the library does not contain a single genuine pair. Every photo
+is either finished work or work in progress — there is no untouched yard with a
+matching finished shot of the same address. It previously showed seven pairs
+that were illustrations and renders of yards that do not exist; those are gone.
+Pairing a during-shot with an after-shot would be the same lie in a new costume,
+so the section stays hidden until a real pair exists.
+
+**Irrigation.** Two photographs, total. All 48 of the recovered job photos were
+checked against this specifically and none shows a sprinkler head, drip line or
+spray. This is the thinnest part of the site and it is a service you sell.
+
+`docs/PHOTO-SOP.md` is the field procedure that fixes both: six fixed camera
+positions before the job, the same six after, plus detail and crew shots. Shoot
+the *before* set even on jobs you think are unremarkable — that is the half the
+library is missing, and it cannot be recovered later.
 
 Adding a project is one entry in `data/projects.ts` — the project page,
 portfolio filters, sitemap, internal links and homepage section all pick it up
-automatically.
+automatically. Adding a gallery photo is one entry in `data/work-photos.ts`,
+plus a line in `data/photo-provenance.json`; `node scripts/verify.mjs` will tell
+you if you forget the second.
 
 ## 10. Reviews
 

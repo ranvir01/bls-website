@@ -106,7 +106,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market in 2026 rather than a quote, because hole conditions, slope, access for materials and how much old fence has to come out move the per-foot number substantially, and we confirm all of it during a site walkthrough.',
+    'Per-foot pricing hides the part that actually varies, which is what the post holes hit. Hardpan, a buried footing or an old concrete collar turns a two-minute hole into a twenty-minute one, and that repeats every eight feet down the run. Removing and hauling the old fence is the other swing. Gates are priced on their own because a gate is a small piece of joinery that has to keep swinging true, not a panel with hinges.',
   pnwConsiderations: [
     {
       title: 'Rot happens at the soil line, not underground',

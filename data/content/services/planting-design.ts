@@ -111,7 +111,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market in 2026 and not a quote, because plant size, how far material has to be carried, and how much soil work a bed actually needs change the total more than the plant list does, all of which we pin down at the site walkthrough.',
+    'Most of a planting budget goes into the ground rather than into the plants. Bed soil work alone is $4.00 to $8.50 a square foot before a single shrub arrives, and skipping it is the reason rhododendron and Japanese maple die in their second spring here rather than their first. Plant size and how far material has to be carried from the truck move the total more than the species on the list do.',
   pnwConsiderations: [
     {
       title: 'Winter drowning kills more plants here than cold',

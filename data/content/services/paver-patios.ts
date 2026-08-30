@@ -110,7 +110,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market and include labor, base, and materials; the number that ends up on your proposal comes from a site walkthrough where we can see access, grade, and what the subgrade is actually made of. Bids around $15 a square foot exist here and they are usually the same pavers over four inches of base instead of eight to twelve, laid on fabric-free subgrade. On Alderwood till that is the difference between a flat patio and a wavy one by the third winter.',
+    'Bids around $15 a square foot exist here, and they are usually the same pavers over four inches of base instead of eight to twelve, laid on fabric-free subgrade. On Alderwood till that is the difference between a flat patio and a wavy one by the third winter. The ranges above include labor, base and materials; what moves them on your lot is access, grade, and what the subgrade turns out to be made of.',
   pnwConsiderations: [
     {
       title: 'Water has to leave the patio, not just soak through it',
