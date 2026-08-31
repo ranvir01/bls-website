@@ -50,3 +50,9 @@ next-env.d.ts
 
 # UI audit screenshots
 .audit/
+
+# Scratch scripts written by audit agents into the repo root so that imports
+# resolve against node_modules. They are throwaway and must never be committed.
+_*.mjs
+.audit-md/
+.audit/
