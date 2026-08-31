@@ -14,6 +14,7 @@
 import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
+import sharp from 'sharp';
 
 const ROOT = process.cwd();
 const SCAN_DIRS = ['app', 'components', 'data', 'lib'];
@@ -157,14 +158,51 @@ const RULES = [
  *
  * So this does not try to classify. It pins the inventory instead:
  * data/photo-provenance.json records every image the site can present as our
- * own work, with a hash and a source. A new or altered file fails the build
+ * own work, with a source and two hashes. A new or altered file fails the build
  * until someone adds it — which is the moment a human is asked where it came
  * from. That is the check that was missing.
+ *
+ * WHY TWO HASHES
+ * --------------
+ * A sha1 of the bytes catches everything, which sounds ideal until a legitimate
+ * re-encode arrives. Converting 53 mislabelled PNGs to real JPEG changed 53
+ * hashes at once and the only available response was to re-stamp all 53 — which
+ * is precisely the move this file exists to catch, performed by the person it
+ * exists to stop.
+ *
+ * So each entry also carries a perceptual hash of the decoded pixels, which
+ * survives re-encoding and does not survive a substitution. Measured on that
+ * conversion: re-encoding the same photograph moved it by at most 6 bits of 64,
+ * while two different photographs from this library differ by around 30. The
+ * threshold below sits in the gap.
+ *
+ *   phash differs beyond the threshold  → a different picture. Fail.
+ *   phash matches, sha1 differs         → same picture, re-encoded. Report it.
+ *   not listed at all                   → fail, as before.
  */
 const PROVENANCE = 'data/photo-provenance.json';
 const PROVENANCE_DIRS = ['work', 'before-after', 'portfolio', 'services'];
 const PROVENANCE_LOOSE = ['hero-home.jpg', 'hero-home-mobile.jpg', 'team.jpg'];
 const IMAGE_EXT = /\.(jpe?g|png|webp|avif)$/i;
+/** Bits of 64. Re-encoding measured at most 6; different photographs, about 30. */
+const PHASH_TOLERANCE = 10;
+
+/** Perceptual hash of the decoded pixels — survives a re-encode, not a swap. */
+async function perceptualHash(file) {
+  const raw = await sharp(file).greyscale().resize(9, 8, { fit: 'fill' }).raw().toBuffer();
+  let bits = '';
+  for (let y = 0; y < 8; y += 1) {
+    for (let x = 0; x < 8; x += 1) bits += raw[y * 9 + x] < raw[y * 9 + x + 1] ? '1' : '0';
+  }
+  return BigInt(`0b${bits}`).toString(16).padStart(16, '0');
+}
+
+function hammingHex(a, b) {
+  let x = BigInt(`0x${a}`) ^ BigInt(`0x${b}`);
+  let n = 0;
+  while (x) { n += Number(x & 1n); x >>= 1n; }
+  return n;
+}
 
 async function* walkImages(dir) {
   let entries;
@@ -207,6 +245,7 @@ async function checkPhotoProvenance() {
 
   let ownPhotos = 0;
   let notOurWork = 0;
+  const reencoded = [];
 
   for (const rel of found.sort()) {
     const entry = manifest[rel];
@@ -221,7 +260,24 @@ async function checkPhotoProvenance() {
 
     const sha1 = createHash('sha1').update(await readFile(path.join(base, rel))).digest('hex').slice(0, 16);
     if (sha1 !== entry.sha1) {
-      fail(PROVENANCE, null, `public/images/${rel} has changed since it was vetted (${entry.sha1} → ${sha1}). Confirm what the new file is, then update the hash.`);
+      // Bytes moved. The perceptual hash decides whether that matters.
+      let phash;
+      try {
+        phash = await perceptualHash(path.join(base, rel));
+      } catch (e) {
+        fail(PROVENANCE, null, `public/images/${rel} changed and could not be decoded to compare (${e.message}).`);
+        continue;
+      }
+      const drift = entry.phash ? hammingHex(phash, entry.phash) : Infinity;
+      if (drift > PHASH_TOLERANCE) {
+        fail(
+          PROVENANCE,
+          null,
+          `public/images/${rel} is a different picture from the one that was vetted (${drift} bits of 64 apart, tolerance ${PHASH_TOLERANCE}). If the replacement is genuinely our own work, say so and update both hashes; otherwise put the original back.`,
+        );
+      } else {
+        reencoded.push(`${rel} (${drift} bits)`);
+      }
     }
 
     if (entry.source === 'own-photo') ownPhotos += 1;
@@ -234,6 +290,11 @@ async function checkPhotoProvenance() {
   }
 
   notes.push(`photo provenance: ${ownPhotos} of our own, ${notOurWork} marked not-our-work and referenced by nothing`);
+  if (reencoded.length) {
+    notes.push(
+      `${reencoded.length} image(s) re-encoded since vetting — same picture, new bytes. Refresh their sha1 in ${PROVENANCE}: ${reencoded.slice(0, 4).join(', ')}${reencoded.length > 4 ? ', …' : ''}`,
+    );
+  }
 }
 
 /**
