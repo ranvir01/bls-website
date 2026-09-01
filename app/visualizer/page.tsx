@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import dynamicImport from 'next/dynamic';
+import { Suspense } from 'react';
 
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand, FaqList, QuickAnswer } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { business } from '@/data/business';
 import type { Faq } from '@/data/types';
-import { buildMetadata, faqSchema, graph, localBusinessSchema } from '@/lib/seo';
+import { buildMetadata, faqSchema, graph, howToSchema, localBusinessSchema } from '@/lib/seo';
 
 /**
  * The visualizer is a heavy client component, so it is dynamically imported and
@@ -65,7 +66,26 @@ const faqs: Faq[] = [
   {
     question: 'Is there a catch? Do I have to book anything?',
     answer:
-      'No. You can walk away with the scope, the range, and the real job photos. If you want an estimator to walk the site, we ask for a name and a phone number. That is the whole exchange.',
+      'No. You can walk away with the scope, the range, and the real job photos. Call or text the written scope, copy it, or leave a name and a number if you want an estimator to walk the site. That is the whole exchange.',
+  },
+];
+
+const howToSteps = [
+  {
+    name: 'Upload a photo of your yard',
+    text: 'Take a picture from far enough back to get the whole area in frame. The photo stays in your browser unless you send the design.',
+  },
+  {
+    name: 'Pick a scope and a style',
+    text: 'Choose what you are thinking about — patio, wall, full backyard — and a style from the catalog of materials Blue Landscaping actually installs.',
+  },
+  {
+    name: 'Review the written scope and real jobs',
+    text: 'You get a cost range for this market and photographs of jobs this crew built in that category. An AI after-photo of your own house only appears when rendering is on, and it is labeled.',
+  },
+  {
+    name: 'Call, text, or send the scope',
+    text: 'Copy the scope, text it to Jose, or leave a name and number for a free on-site walkthrough. No account and no design fee.',
   },
 ];
 
@@ -76,6 +96,13 @@ export default function VisualizerPage() {
         data={graph([
           localBusinessSchema({ path: '/visualizer' }),
           faqSchema(faqs),
+          howToSchema({
+            name: 'See what Blue Landscaping would build in your yard',
+            description:
+              'Upload a yard photo, pick a buildable scope, and get a written cost range plus real jobs from this Kent crew.',
+            path: '/visualizer',
+            steps: howToSteps,
+          }),
           {
             '@type': 'WebApplication',
             name: 'Blue Landscaping Yard Design Visualizer',
@@ -102,7 +129,13 @@ export default function VisualizerPage() {
         </header>
 
         <div className="mt-12">
-          <Visualizer />
+          <Suspense
+            fallback={
+              <div className="shimmer aspect-[4/3] w-full rounded-sm border border-ink-200" aria-hidden="true" />
+            }
+          >
+            <Visualizer />
+          </Suspense>
         </div>
       </div>
 

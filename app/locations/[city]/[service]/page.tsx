@@ -8,6 +8,7 @@ import { Reveal } from '@/components/motion/reveal';
 import { NapBlock } from '@/components/nap-block';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
+import { scopeIdForService, visualizerHref } from '@/lib/visualizer-href';
 import { getCityContent } from '@/data/content/cities';
 import { getServiceContent } from '@/data/content/services';
 import { getServiceCityContent, serviceCityContent, siblingServiceCities } from '@/data/content/service-cities';
@@ -150,6 +151,7 @@ export default function ServiceCityPage({ params }: Params) {
               <VisualizerTeaser
                 headline={`Picture this ${service.name.toLowerCase()} in ${city.name}`}
                 body="Upload a photo of your yard. You get a written scope from materials we install, a cost range, and real jobs like yours."
+                href={visualizerHref({ scope: scopeIdForService(service.slug) })}
               />
             </Reveal>
           </div>

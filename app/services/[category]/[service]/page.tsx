@@ -20,6 +20,7 @@ import { WorkGallery } from '@/components/work-gallery';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { ServiceArt } from '@/components/service-art';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
+import { scopeIdForService, visualizerHref } from '@/lib/visualizer-href';
 import { getServiceContent } from '@/data/content/services';
 import { postsForService } from '@/data/content/blog';
 import { workPhotosByCategory } from '@/data/work-photos';
@@ -230,6 +231,7 @@ export default function ServicePage({ params }: Params) {
           <VisualizerTeaser
             headline="See what we'd build in your yard"
             body="Upload a photo, pick a style, and get a written scope plus real jobs like yours — materials we actually install. Free, no account."
+            href={visualizerHref({ scope: scopeIdForService(content.slug) })}
           />
         </div>
 

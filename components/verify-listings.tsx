@@ -24,6 +24,11 @@ export function VerifyListings() {
       href: business.license.lookupUrl,
     },
     {
+      label: `WA UBI ${business.license.ubi}`,
+      detail: 'Secretary of State Corporations & Charities search. Look the number up — the search page has no stable deep link.',
+      href: business.license.sosSearchUrl,
+    },
+    {
       label: 'Public L&I record',
       detail: 'A third-party copy of the same registration, with a stable link.',
       href: business.license.publicRecordUrl,
@@ -33,6 +38,7 @@ export function VerifyListings() {
         if (profile.url === GOOGLE_PROFILE_URL) return false;
         if (profile.url === business.license.lookupUrl) return false;
         if (profile.url === business.license.publicRecordUrl) return false;
+        if (profile.url === business.license.sosSearchUrl) return false;
         return true;
       })
       .map((profile) => ({

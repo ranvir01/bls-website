@@ -55,3 +55,13 @@ written scope from the same catalog.
 | No key (today) | No, and the UI says so | Yes | Yes |
 
 The conversion asset is the scope sheet and the call, not the pixels.
+
+## Deep links and sending the scope
+
+Money pages can open the tool on a catalog scope:
+
+`/visualizer?scope=paver-patio`
+
+Unknown query values are ignored. After generate, the homeowner can copy the
+written scope, text it to Jose, or send the quote form with that note prefilled.
+None of those paths invent an after-photo of their house.

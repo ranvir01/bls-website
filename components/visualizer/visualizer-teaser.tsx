@@ -13,10 +13,13 @@ export function VisualizerTeaser({
   headline = 'See your yard before anyone digs',
   body = 'Upload a photo, pick a style, and see a written scope plus real jobs like yours — materials we actually install around Kent and Greater Seattle. Free, no account.',
   cta = 'Open the yard visualizer',
+  href = '/visualizer',
 }: {
   headline?: string;
   body?: string;
   cta?: string;
+  /** Prefer a scoped deep link (`/visualizer?scope=paver-patio`) from money pages. */
+  href?: string;
 }) {
   return (
     <section className="overflow-hidden rounded-sm border border-brand-600/25 bg-brand-50/40">
@@ -30,7 +33,7 @@ export function VisualizerTeaser({
           <p className="mt-3 max-w-prose text-body-lg text-ink-800">{body}</p>
         </div>
         <Button asChild size="lg" className="self-start md:self-center">
-          <Link href="/visualizer">
+          <Link href={href}>
             {cta}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

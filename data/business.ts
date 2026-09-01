@@ -54,12 +54,16 @@ export const business = {
   license: {
     /** Washington State Department of Labor & Industries contractor registration */
     number: 'BLUELLS880K2',
+    /** Unified Business Identifier — public on the L&I and SOS records. */
+    ubi: '603206072',
     authority: 'Washington State Department of Labor & Industries',
+    /** Official Corporations & Charities Filing System search. No deep link. */
+    sosSearchUrl: 'https://ccfs.sos.wa.gov/#/BusinessSearch',
     /**
      * L&I's contractor verification search. Deliberately the search page
-     * rather than a Detail.aspx deep link: that link is built from a UBI we do
-     * not publish, and a dead outbound link on a contractor site reads as an
-     * abandoned business. Searching "BLUELLS880K2" here returns the record.
+     * rather than a Detail.aspx deep link — those URLs rotate, and a dead
+     * outbound link on a contractor site reads as an abandoned business.
+     * Searching BLUELLS880K2 or UBI 603206072 here returns the record.
      */
     lookupUrl: 'https://secure.lni.wa.gov/verify/',
     /**

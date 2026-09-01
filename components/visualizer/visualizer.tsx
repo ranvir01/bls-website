@@ -2,19 +2,27 @@
 
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
 import { Camera, Check, Loader2, RefreshCw, Upload } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { AiConceptBadge, AiConceptNote } from '@/components/ai-concept-badge';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { VisualizerComparables } from '@/components/visualizer/comparables';
+import { ScopeTakeaway } from '@/components/visualizer/scope-takeaway';
 import { YardCompare } from '@/components/visualizer/yard-compare';
 import { catalogGroups, elementToggles, scopes, styles } from '@/data/buildable';
 import { formatRange, type Estimate, type RenderSpec } from '@/data/pricing';
 import { trackEvent } from '@/lib/analytics';
 import { comparableJobs } from '@/lib/comparable-jobs';
 import { ease } from '@/lib/motion';
+import { formatScopeMessage } from '@/lib/visualizer-href';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+
+function catalogId(list: { id: string }[], raw: string | null): string {
+  if (!raw) return '';
+  return list.some((item) => item.id === raw) ? raw : '';
+}
 
 const MAX_UPLOAD_PX = 1600;
 
@@ -36,9 +44,10 @@ interface RenderResult {
  * We do not pre-warm extra styles: that burned four API calls per click.
  */
 export function Visualizer() {
+  const searchParams = useSearchParams();
   const [photo, setPhoto] = useState<string | null>(null);
-  const [scopeId, setScopeId] = useState<string>('');
-  const [styleId, setStyleId] = useState<string>('');
+  const [scopeId, setScopeId] = useState(() => catalogId(scopes, searchParams.get('scope')));
+  const [styleId, setStyleId] = useState(() => catalogId(styles, searchParams.get('style')));
   const [optionIds, setOptionIds] = useState<string[]>([]);
   const [toggleIds, setToggleIds] = useState<string[]>([]);
   const [referenceWidth, setReferenceWidth] = useState<string>('');
@@ -59,6 +68,16 @@ export function Visualizer() {
   const current = styleId ? results[styleId] : undefined;
   const hasAnyResult = Object.keys(results).length > 0;
   const compareJob = useMemo(() => (scopeId ? comparableJobs(scopeId, 1)[0] : undefined), [scopeId]);
+  const scopeMessage = useMemo(() => {
+    if (!current || !scope) return '';
+    return formatScopeMessage({
+      scopeLabel: scope.label,
+      styleLabel: styles.find((s) => s.id === styleId)?.label,
+      widthFt: referenceWidth || undefined,
+      estimate: current.estimate,
+      comparableTitle: compareJob?.title,
+    });
+  }, [compareJob?.title, current, referenceWidth, scope, styleId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -529,6 +548,8 @@ export function Visualizer() {
 
                     <ScopeSheet estimate={current.estimate} gated={Boolean(current.image) && !gateOpen} />
 
+                    {scopeMessage ? <ScopeTakeaway message={scopeMessage} /> : null}
+
                     {!gateOpen ? (
                       <div className="rounded-sm border border-brand-600/30 bg-brand-50/40 p-6">
                         <h3 className="text-h3">
@@ -539,13 +560,14 @@ export function Visualizer() {
                         <p className="mt-2 max-w-prose text-body text-ink-800">
                           {current.image
                             ? 'We will send the un-watermarked render along with a written scope sheet, and an estimator will call to confirm the site details.'
-                            : 'The numbers above are a range for this market, not a quote. Leave a name and a number and we will walk the site.'}
+                            : 'The numbers above are a range for this market, not a quote. Leave a name and a number and we will walk the site. Or call or text the scope — no form required.'}
                         </p>
                         <div className="mt-5">
                           <QuoteForm
                             renderId={String(current.seed)}
                             compact
                             defaultProjectType={quoteTypeForScope(scopeId)}
+                            defaultDetails={scopeMessage || undefined}
                           />
                         </div>
                       </div>
