@@ -31,6 +31,28 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ['0px', '-60px']);
   const words = HEADLINE.split(' ');
 
+  /**
+   * Entrance props for one hero element.
+   *
+   * lib/motion.ts states the contract: "prefers-reduced-motion replaces every
+   * motion with an instant state change." The hero was honouring half of it —
+   * it dropped the translate but kept the opacity fade AND its stagger delay, so
+   * a reduced-motion visitor still watched the copy arrive over about a second.
+   *
+   * The reduced branch has to paint the end state rather than merely animate
+   * less, because the server renders before useReducedMotion() can know the
+   * answer: the HTML always arrives stamped with opacity 0, and something has to
+   * put it back.
+   */
+  const enter = (delay: number) =>
+    reduced
+      ? { initial: { opacity: 1, y: 0 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0 } }
+      : {
+          initial: { opacity: 0, y: 12 },
+          animate: { opacity: 1, y: 0 },
+          transition: { delay, duration: 0.5, ease: ease.out },
+        };
+
   return (
     <LazyMotion features={domAnimation} strict>
       <section
@@ -80,9 +102,7 @@ export function Hero() {
         <div className="shell w-full py-28 md:py-32">
           <div className="mx-auto max-w-4xl text-center">
             <m.p
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: ease.out }}
+              {...enter(0)}
               className="text-caption font-semibold uppercase tracking-wide text-sky-200"
             >
               Kent, WA · Licensed &amp; insured · Serving Greater Seattle since {business.foundedYear}
@@ -95,9 +115,16 @@ export function Hero() {
                   <m.span
                     key={`${word}-${i}`}
                     custom={i}
+                    /* initial={false} used to sit in the reduced branch, which
+                       told framer to adopt whatever the DOM already had. What it
+                       already had was the server-rendered opacity: 0, and with
+                       no variants there was nothing for animate="visible" to
+                       resolve against — so the site's headline stayed invisible
+                       for the whole visit. The reduced branch now states the end
+                       state outright. */
                     variants={reduced ? undefined : heroWord}
-                    initial={reduced ? false : 'hidden'}
-                    animate="visible"
+                    initial={reduced ? { opacity: 1, y: 0 } : 'hidden'}
+                    animate={reduced ? { opacity: 1, y: 0 } : 'visible'}
                     className={`inline-block whitespace-pre ${isSeattle ? 'text-sky-300' : ''}`}
                   >
                     {word}{' '}
@@ -107,9 +134,7 @@ export function Hero() {
             </h1>
 
             <m.p
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5, ease: ease.out }}
+              {...enter(0.35)}
               className="mx-auto mt-6 max-w-2xl text-body-lg text-white/90"
             >
               Transform your outdoor space with retaining walls, custom paver patios, and
@@ -117,9 +142,7 @@ export function Hero() {
             </m.p>
 
             <m.div
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5, ease: ease.out }}
+              {...enter(0.4)}
               className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/90"
             >
               <span className="inline-flex items-center gap-1.5 text-caption font-medium">
@@ -134,9 +157,7 @@ export function Hero() {
             </m.div>
 
             <m.div
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.5, ease: ease.out }}
+              {...enter(0.45)}
               className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
             >
               <Button asChild size="lg" variant="onPhoto">

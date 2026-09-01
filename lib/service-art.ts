@@ -19,29 +19,38 @@ const DIR = path.join(process.cwd(), 'public', 'images', 'services');
 const PHOTO_EXTS = ['.jpg', '.jpeg', '.webp', '.avif', '.png'];
 
 /**
- * Slugs whose JPEG in public/images/services/ is NOT a photograph of our work.
+ * Slugs whose JPEG in public/images/services/ must not be used, and why.
  *
- * Five files there are generated stock rather than job photos: a paver driveway
- * in front of a brick house that is not in Washington, and four near-identical
- * renders of sprinklers watering a park lawn. They were resolving ahead of the
- * generated material panels purely because a .jpg outranks a .svg here, which
- * put invented imagery on the driveway and irrigation cards of a site that
- * tells visitors every photo is our own work.
+ * A .jpg outranks a .svg below, so any file sitting at that path silently wins
+ * the card. These six must not, for two different reasons — which is why this
+ * is a map of reasons rather than a bare list. There is a real difference
+ * between "this picture is invented" and "this picture is ours but shows the
+ * wrong job", and a future maintainer needs to know which they are looking at.
  *
- * They stay listed rather than simply deleted so that dropping the file back in
- * does not quietly restore them. Take a slug off this list the moment a real
- * photograph of that service exists — the file is all it takes, no other change.
+ * Take a slug off this map the moment a real photograph of that service exists.
+ * The file is all it takes; no other change.
  */
-const NOT_OUR_WORK = new Set([
-  'driveways',
-  'irrigation',
-  'irrigation-maintenance',
-  'sprinkler-installation',
-  'sprinkler-repair',
-]);
+const UNUSABLE_SERVICE_ART: Record<string, string> = {
+  // Generated stock, not photographs of anything this company built.
+  driveways: 'generated stock: a paver driveway in front of a brick house that is not in Washington',
+  irrigation: 'generated stock: a render of sprinklers watering a park lawn',
+  'irrigation-maintenance': 'generated stock: a render of sprinklers watering a park lawn',
+  'sprinkler-installation': 'generated stock: a render of sprinklers watering a park lawn',
+  'sprinkler-repair': 'generated stock: a render of sprinklers watering a park lawn',
+
+  // A real photograph of our own work — of the wrong subject. The file is the
+  // outdoor kitchen, byte-identical to portfolio/outdoor-kitchen.jpg, and the
+  // card's alt is generated from the slug, so it announced an outdoor kitchen
+  // as "Fire Features" to anyone who could not see it. The only photograph in
+  // the library that does contain a fire pit is work/hardscaping/21.jpg, where
+  // the ring is a small background element beside a woodpile and does not read
+  // as a fire feature at card size. The panel is the honest answer until
+  // someone photographs one.
+  'fire-features': 'real photo, wrong subject: it is the outdoor kitchen, not a fire feature',
+};
 
 export function serviceArt(slug: string): string | null {
-  if (!NOT_OUR_WORK.has(slug)) {
+  if (!(slug in UNUSABLE_SERVICE_ART)) {
     for (const ext of PHOTO_EXTS) {
       if (existsSync(path.join(DIR, `${slug}${ext}`))) {
         return `/images/services/${slug}${ext}`;

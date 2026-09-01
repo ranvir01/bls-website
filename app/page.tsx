@@ -26,7 +26,27 @@ import {
   servicesInCategory,
 } from '@/data/taxonomy';
 import { heroArt } from '@/lib/hero-art';
-import { faqSchema, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
+import { buildMetadata, faqSchema, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
+
+/**
+ * The homepage needs its own metadata export, not just the layout's.
+ *
+ * The root layout supplies a title and description, but nothing else — no
+ * openGraph and no twitter block, because those live in buildMetadata and every
+ * other route calls it. So the homepage was the one page on the site with no
+ * share card: 95 of 96 routes had one, and the missing one was the URL the
+ * Google Business Profile, the follow-up text after a call, and any Facebook or
+ * Nextdoor post all point at. Pasted into a message it rendered as a bare link.
+ *
+ * buildMetadata sets `title: { absolute }`, so this does not double the brand
+ * suffix the way returning a plain string would.
+ */
+export const metadata = buildMetadata({
+  title: 'Expert Landscaping & Hardscaping in Seattle',
+  description:
+    'Expert landscaping and hardscaping in Seattle and Kent, WA. Retaining walls, custom paver patios, and professional irrigation systems. Licensed, bonded, insured. Free consultation.',
+  path: '/',
+});
 
 export default function HomePage() {
   const featured = portfolioProjects().slice(0, 6);

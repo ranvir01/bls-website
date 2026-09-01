@@ -157,15 +157,14 @@ bounded.
 
 ## 8. Imagery — what is on the cards right now
 
-**13 of the 18 service and category cards now carry a real photograph of your
-work.** The other five fall back to a generated panel — an abstract pattern in
+**12 of the 18 service and category cards now carry a real photograph of your
+work.** The other six fall back to a generated panel — an abstract pattern in
 the brand palette matching the material, deliberately non-photographic so nobody
 mistakes one for a picture of a job.
 
-The five on panels are all the same story: the files that used to sit on them
-were generated stock rather than photographs. A paver driveway in front of a
-brick house that is not in Washington, and four near-identical renders of
-sprinklers watering a park.
+Five are on panels for the same reason: the file that used to sit there was
+generated stock rather than a photograph. The sixth is different and worth
+knowing about.
 
 | Slug | Why it is on a panel |
 | --- | --- |
@@ -174,17 +173,29 @@ sprinklers watering a park.
 | `irrigation-maintenance` | generated stock sprinklers |
 | `sprinkler-installation` | generated stock sprinklers |
 | `sprinkler-repair` | generated stock sprinklers |
+| `fire-features` | **a real photo of your work, of the wrong job** — the file was the outdoor kitchen, and the card's alt is generated from the slug, so a screen reader announced an outdoor kitchen as "Fire Features" |
 
-**To put a real photo on any of the other thirteen**, drop a JPEG at
+On `fire-features`: the only photograph in the whole library that contains a fire
+pit is `work/hardscaping/21.jpg`, where the ring is a small background element
+next to a woodpile. It is a fine deck photo and it will not read as a fire
+feature on a card. **One photograph of a finished fire pit or fire table fixes
+this**, and it is the single highest-value photo you could take for the site
+after the irrigation gap.
+
+Planting & Design was mismatched in the other direction and is fixed: its card
+was the deck-and-fire-pit photo, and now carries the front bed of carex,
+coneflower and salvia along a driveway, which is actually planting design.
+
+**To put a real photo on any of the other twelve**, drop a JPEG at
 `public/images/services/<service-slug>.jpg`. It wins automatically — the code
 prefers a photo and falls back to the panel. Slugs are in `data/taxonomy.ts`.
 Run `npm run optimize:images` afterwards.
 
-**For the five in the table above, the file alone is not enough.** Those slugs
-are held in a `NOT_OUR_WORK` set in `lib/service-art.ts` precisely so that
-dropping a file back in does not quietly restore the generated stock. Take the
-slug off that list at the same time as you add the photograph. That is one line,
-and the comment above the set explains why it is there.
+**For the six in the table above, the file alone is not enough.** Those slugs are
+held in `UNUSABLE_SERVICE_ART` in `lib/service-art.ts`, a map of slug to reason,
+precisely so that dropping a file back in does not quietly restore the wrong
+picture. Take the slug off that map at the same time as you add the photograph.
+That is one line, and each entry records why it is there.
 
 Regenerate the panels any time with `node scripts/generate-service-art.mjs`.
 
