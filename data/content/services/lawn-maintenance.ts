@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'lawn-maintenance',
   category: 'landscaping',
   name: 'Lawn Maintenance',
-  h1: 'Lawn Maintenance in Kent & Greater Seattle',
-  metaTitle: 'Lawn Maintenance & Mowing in Kent, WA',
+  h1: 'Lawn Maintenance in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Lawn Maintenance & Mowing in Seattle & Kent, WA',
   metaDescription:
     'Scheduled mowing, edging, bed care, pruning and seasonal cleanups for South King County yards. Real per-visit and monthly pricing, plus how we handle moss.',
   quickAnswer:

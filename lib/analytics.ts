@@ -18,6 +18,7 @@ export type AnalyticsEvent =
   | 'visualizer_start'
   | 'visualizer_generate'
   | 'visualizer_toggle'
+  | 'visualizer_share'
   | 'visualizer_lead_submit'
   | 'portfolio_view'
   | 'service_page_view'

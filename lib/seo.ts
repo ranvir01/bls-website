@@ -8,7 +8,7 @@
 
 import type { Metadata } from 'next';
 
-import { SITE_URL, business, formattedAddress } from '@/data/business';
+import { GOOGLE_PROFILE_URL, SITE_URL, business, formattedAddress } from '@/data/business';
 import type { Faq, Review } from '@/data/types';
 
 export const BRAND = business.name;
@@ -181,6 +181,9 @@ export function localBusinessSchema({
       longitude: business.geo.longitude,
     },
     openingHoursSpecification: openingHoursSpec(),
+    paymentAccepted: business.paymentMethods.join(', '),
+    ...(GOOGLE_PROFILE_URL ? { hasMap: GOOGLE_PROFILE_URL } : {}),
+    ...(business.profiles.length ? { sameAs: business.profiles.map((p) => p.url) } : {}),
     ...(areaServed?.length
       ? {
           areaServed: areaServed.map((name) => ({
@@ -194,6 +197,7 @@ export function localBusinessSchema({
       '@type': 'EducationalOccupationalCredential',
       credentialCategory: 'Contractor License',
       identifier: business.license.number,
+      url: business.license.lookupUrl,
       recognizedBy: { '@type': 'Organization', name: business.license.authority },
     },
   };
@@ -230,6 +234,31 @@ export function faqSchema(faqs: Faq[]) {
       '@type': 'Question',
       name: f.question,
       acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  };
+}
+
+export function howToSchema({
+  name,
+  description,
+  path,
+  steps,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  steps: { name: string; text: string }[];
+}) {
+  return {
+    '@type': 'HowTo',
+    name,
+    description,
+    url: absoluteUrl(path),
+    step: steps.map((step, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: step.name,
+      text: step.text,
     })),
   };
 }

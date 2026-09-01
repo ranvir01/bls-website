@@ -72,6 +72,15 @@ export function NapBlock({ heading = 'Blue Landscaping Services' }: { heading?: 
             >
               {business.license.number}
             </a>
+            {' · '}
+            <a
+              href={business.license.publicRecordUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-ink-800 underline underline-offset-2"
+            >
+              Public record
+            </a>
             <br />
             $12,000 bond · $1M liability
           </span>

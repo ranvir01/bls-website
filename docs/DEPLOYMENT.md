@@ -45,17 +45,26 @@ When these are absent, SMS is skipped silently and email still goes out.
 
 | Variable | Required | What it does |
 |---|---|---|
-| `IMAGE_API_URL` | for rendering | Image-generation endpoint |
-| `IMAGE_API_KEY` | for rendering | Bearer token for that endpoint |
-| `IMAGE_API_MODEL` | no | Model identifier, if the provider needs one |
+| `IMAGE_API_KEY` | for after-photos | Google AI Studio key, or Bearer token for a generic provider |
+| `IMAGE_API_URL` | only for generic providers | Image-generation endpoint. **Leave empty** to use Gemini |
+| `IMAGE_API_MODEL` | no | Defaults to `gemini-2.5-flash-image` for Gemini |
+| `IMAGE_PROVIDER` | no | `gemini` (default when URL is empty) or `generic` |
 
-Without these the visualizer runs in **degraded mode**: it still takes the
-photo, still assembles the scope, still produces the written cost range, and
-still captures the lead. It just does not render an image, and it says so
-plainly. This is deliberate — the scope sheet is the conversion asset, and the
-user must never hit a dead end.
+Without a key the visualizer runs in **degraded mode**: it still takes the
+photo, still assembles the scope, still produces the written cost range, still
+shows real comparable jobs, and still captures the lead. It does not render
+an after-photo of the house, and the UI says so. This is deliberate — the
+scope sheet and the real jobs are the conversion asset, and the user must
+never hit a dead end. See `docs/VISUALIZER.md`.
 
-**Provider contract.** `POST` to `IMAGE_API_URL` with:
+**Almost-free path (recommended).** Create a key at
+[Google AI Studio](https://aistudio.google.com/apikey), set only
+`IMAGE_API_KEY`. The server calls Gemini 2.5 Flash Image (Nano Banana) as
+img2img so the house stays in the frame. The free tier plus 3/hour and
+10/day per IP is enough.
+
+**Generic provider contract.** Set `IMAGE_PROVIDER=generic` and `POST` to
+`IMAGE_API_URL` with:
 
 ```json
 {

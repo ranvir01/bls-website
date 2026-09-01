@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'sprinkler-repair',
   category: 'irrigation',
   name: 'Sprinkler Repair',
-  h1: 'Sprinkler Repair in Kent & Greater Seattle',
-  metaTitle: 'Sprinkler Repair in Kent & South King County',
+  h1: 'Sprinkler Repair in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Sprinkler Repair in Seattle, Kent & South King County',
   metaDescription:
     'Dead zones, broken heads, cut laterals, bad valves and wire faults diagnosed and repaired across Kent, Auburn, Renton and Greater Seattle. Real repair costs.',
   quickAnswer:

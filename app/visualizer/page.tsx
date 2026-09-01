@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import dynamicImport from 'next/dynamic';
+import { Suspense } from 'react';
 
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CtaBand, FaqList, QuickAnswer } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { business } from '@/data/business';
 import type { Faq } from '@/data/types';
-import { buildMetadata, faqSchema, graph, localBusinessSchema } from '@/lib/seo';
+import { buildMetadata, faqSchema, graph, howToSchema, localBusinessSchema } from '@/lib/seo';
 
 /**
  * The visualizer is a heavy client component, so it is dynamically imported and
@@ -25,9 +26,9 @@ const Visualizer = dynamicImport(
 );
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Yard Design Visualizer — See Your Yard Redesigned',
+  title: 'Yard Design Visualizer — See What We Would Build',
   description:
-    'Upload a photo and see your yard redesigned in about 30 seconds, using materials Blue Landscaping actually installs. Free, instant, and the same crew builds it. Kent, WA.',
+    'Upload a photo of your Kent or Greater Seattle yard. Get a written scope from materials Blue Landscaping actually installs, a cost range, and real jobs like yours. AI after-photos of your own house when rendering is on — labeled, catalog-only, free.',
   path: '/visualizer',
 });
 
@@ -35,7 +36,7 @@ const faqs: Faq[] = [
   {
     question: 'Is this a real design or just a picture?',
     answer:
-      'It is a buildable design. Every material the tool can draw comes from a fixed catalog of what we install and source locally — Mutual Materials, Allan Block, Basalite, Belgard, Techo-Bloc, cedar, and zone 8b planting. It cannot generate a pool, a pergola, or a wall we would need to engineer, because those are not on the list.',
+      'It is a buildable scope. Every material the tool can draw comes from a fixed catalog of what we install and source locally — Mutual Materials, Allan Block, Basalite, Belgard, Techo-Bloc, cedar, and zone 8b planting. It cannot generate a pool, a pergola, or a wall we would need to engineer, because those are not on the list. If an after-photo of your house is on, it is labeled AI. Either way you also see photographs of jobs we actually built in that category.',
   },
   {
     question: 'How accurate is the cost range?',
@@ -46,6 +47,11 @@ const faqs: Faq[] = [
     question: 'Will the finished job look exactly like the render?',
     answer:
       'The materials and the scope will match, because we build from the same catalog the render draws from. The exact layout gets confirmed at the on-site walkthrough, where grading, drainage, permits and plant availability all get factored in. We claim buildability, not a pixel match.',
+  },
+  {
+    question: 'Is this like iScape or SketchUp?',
+    answer:
+      'No. Those are designer apps you buy and learn. This page is a free lead tool on your phone: upload a photo, pick what we actually install, and get a scope you can quote. We do not embed iScape, SketchUp, or Home Depot Project Color — they are not constrained to this crew’s catalog, and they do not convert to a walkthrough in Kent.',
   },
   {
     question: 'Do you keep my photo?',
@@ -60,7 +66,26 @@ const faqs: Faq[] = [
   {
     question: 'Is there a catch? Do I have to book anything?',
     answer:
-      'No. The render is free and you can walk away with it. If you want the full-resolution version and the written scope sheet, we ask for a name and a phone number so an estimator can call. That is the whole exchange.',
+      'No. You can walk away with the scope, the range, and the real job photos. Call or text the written scope, copy it, or leave a name and a number if you want an estimator to walk the site. That is the whole exchange.',
+  },
+];
+
+const howToSteps = [
+  {
+    name: 'Upload a photo of your yard',
+    text: 'Take a picture from far enough back to get the whole area in frame. The photo stays in your browser unless you send the design.',
+  },
+  {
+    name: 'Pick a scope and a style',
+    text: 'Choose what you are thinking about — patio, wall, full backyard — and a style from the catalog of materials Blue Landscaping actually installs.',
+  },
+  {
+    name: 'Review the written scope and real jobs',
+    text: 'You get a cost range for this market and photographs of jobs this crew built in that category. An AI after-photo of your own house only appears when rendering is on, and it is labeled.',
+  },
+  {
+    name: 'Call, text, or send the scope',
+    text: 'Copy the scope, text it to Jose, or leave a name and number for a free on-site walkthrough. No account and no design fee.',
   },
 ];
 
@@ -71,6 +96,13 @@ export default function VisualizerPage() {
         data={graph([
           localBusinessSchema({ path: '/visualizer' }),
           faqSchema(faqs),
+          howToSchema({
+            name: 'See what Blue Landscaping would build in your yard',
+            description:
+              'Upload a yard photo, pick a buildable scope, and get a written cost range plus real jobs from this Kent crew.',
+            path: '/visualizer',
+            steps: howToSteps,
+          }),
           {
             '@type': 'WebApplication',
             name: 'Blue Landscaping Yard Design Visualizer',
@@ -90,36 +122,37 @@ export default function VisualizerPage() {
           <p className="eyebrow text-leaf-600">
             Free tool
           </p>
-          <h1 className="mt-2 text-h1">
-            See your yard redesigned in 30 seconds — then we build it
-          </h1>
+          <h1 className="mt-2 text-h1">See what we would build in your yard</h1>
           <QuickAnswer>
-            {`Upload a photo of your yard, pick a scope and a style, and get a photorealistic design built only from materials Blue Landscaping installs and stocks locally. Free, instant, no account. We designed it and we build it — same crew, Washington license ${business.license.number}.`}
+            {`Upload a photo, pick a scope and a style, and get a written plan drawn only from materials Blue Landscaping installs around Kent and Greater Seattle — plus real jobs like yours. Free, no account. Washington license ${business.license.number}.`}
           </QuickAnswer>
         </header>
 
         <div className="mt-12">
-          <Visualizer />
+          <Suspense
+            fallback={
+              <div className="shimmer aspect-[4/3] w-full rounded-sm border border-ink-200" aria-hidden="true" />
+            }
+          >
+            <Visualizer />
+          </Suspense>
         </div>
       </div>
 
       <section className="border-y border-ink-200 bg-white">
         <div className="shell section-tight grid gap-10 md:grid-cols-3">
           <div>
-            <h2 className="text-h3">Why this is different</h2>
+            <h2 className="text-h3">Only what we can build</h2>
             <p className="mt-3 text-body text-ink-500">
-              Most design tools generate whatever looks good and leave you to find someone who can
-              build it. This one draws only from the fixed catalog we install and stock locally, so
-              the design is a proposal rather than inspiration.
+              The tool can only draw materials we install and stock locally. No pools, no fantasy
+              pergolas, no 8-foot walls that would need an engineer first.
             </p>
           </div>
           <div>
-            <h2 className="text-h3">No separate design fee</h2>
+            <h2 className="text-h3">No design fee</h2>
             <p className="mt-3 text-body text-ink-500">
-              The render is free and you can walk away with it. A name and a phone number gets you
-              the full-resolution version and the written scope sheet. Most competitors charge for
-              design up front, or route you to a landscape architect before anyone talks about
-              construction.
+              Play with options here, then book a free visit if you like what you see. The written
+              quote is still the number that matters.
             </p>
           </div>
           <div>

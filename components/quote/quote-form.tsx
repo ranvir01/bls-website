@@ -44,11 +44,14 @@ const TOTAL_STEPS = STEP_FIELDS.length;
 export function QuoteForm({
   className,
   defaultProjectType,
+  defaultDetails,
   renderId,
   compact = false,
 }: {
   className?: string;
   defaultProjectType?: string;
+  /** Prefill the optional notes — used by the visualizer to send the written scope. */
+  defaultDetails?: string;
   renderId?: string;
   compact?: boolean;
 }) {
@@ -127,6 +130,17 @@ export function QuoteForm({
     }
     setRestored(true);
   }, [setValue]);
+
+  // Visualizer (and similar) can hand us a written scope. Fill it in once the
+  // session restore has run, and refresh it when the tool updates — but never
+  // overwrite a note the homeowner typed themselves.
+  useEffect(() => {
+    if (!restored || !defaultDetails) return;
+    const current = getValues('details') ?? '';
+    if (current === '' || current.startsWith('Visualizer:')) {
+      setValue('details', defaultDetails);
+    }
+  }, [defaultDetails, getValues, restored, setValue]);
 
   useEffect(() => {
     if (!restored || submitted) return;

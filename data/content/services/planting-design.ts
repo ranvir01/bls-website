@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'planting-design',
   category: 'landscaping',
   name: 'Planting & Design',
-  h1: 'Planting Design & Installation in Kent & Greater Seattle',
-  metaTitle: 'Planting Design & Installation in Kent, WA',
+  h1: 'Planting Design & Installation in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Planting Design & Installation in Seattle & Kent, WA',
   metaDescription:
     'Zone 8b planting plans for Kent, Renton and Greater Seattle. Plant palettes, soil prep and mulch, from $18 to $45 a square foot of finished bed.',
   quickAnswer:

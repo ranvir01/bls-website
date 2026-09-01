@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'driveways',
   category: 'hardscaping',
   name: 'Driveways',
-  h1: 'Paver Driveways in Kent & Greater Seattle',
-  metaTitle: 'Paver Driveway Installation in Kent, WA',
+  h1: 'Paver Driveways in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Paver Driveway Installation in Seattle & Kent, WA',
   metaDescription:
     'Paver driveway installation in Kent and Greater Seattle. Vehicle-rated 80 mm units, deep compacted base, right-of-way permit help and installed cost ranges.',
   quickAnswer:

@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'sod-installation',
   category: 'landscaping',
   name: 'Sod Installation',
-  h1: 'Sod Installation in Kent & Greater Seattle',
-  metaTitle: 'Sod Installation & New Lawns in Kent, WA',
+  h1: 'Sod Installation in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Sod Installation & New Lawns in Seattle & Kent, WA',
   metaDescription:
     'New sod lawns installed across Kent, Auburn and Greater Seattle: tear-out, grading, imported topsoil and locally grown turf. Real per-square-foot pricing.',
   quickAnswer:

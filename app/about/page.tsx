@@ -110,8 +110,16 @@ export default function AboutPage() {
                   {business.license.number}
                 </a>
                 , a $12,000 contractor bond, and $1,000,000 in general liability coverage. Check
-                all of it yourself with the Department of Labor &amp; Industries. Do it for us. Do
-                it for whoever else is bidding your job.
+                all of it yourself with the Department of Labor &amp; Industries, or open the{' '}
+                <a
+                  href={business.license.publicRecordUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-brand-600 underline underline-offset-4"
+                >
+                  public license record
+                </a>
+                . Do it for us. Do it for whoever else is bidding your job.
               </p>
               <p>
                 Hire an unregistered contractor in Washington and there&rsquo;s no bond to claim

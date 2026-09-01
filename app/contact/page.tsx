@@ -6,6 +6,8 @@ import { CtaBand, QuickAnswer } from '@/components/blocks';
 import { JsonLd } from '@/components/json-ld';
 import { NapBlock } from '@/components/nap-block';
 import { QuoteForm } from '@/components/quote/quote-form';
+import { VerifyListings } from '@/components/verify-listings';
+import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { PHONE, SMS_HREF, TEL_HREF, business, formattedAddress } from '@/data/business';
 import { cities, cityPath, regions } from '@/data/taxonomy';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
@@ -119,9 +121,26 @@ export default function ContactPage() {
                   className="h-64 w-full border-0"
                 />
               </div>
+              <p className="mt-3 text-caption">
+                <a
+                  href={`https://maps.apple.com/?ll=${business.geo.latitude},${business.geo.longitude}&q=${encodeURIComponent(business.name)}`}
+                  className="font-semibold text-brand-600 underline underline-offset-4"
+                >
+                  Open in Apple Maps
+                </a>
+              </p>
             </section>
+
+            <VerifyListings />
           </aside>
         </div>
+      </div>
+
+      <div className="shell pb-16">
+        <VisualizerTeaser
+          headline="Rather start with a photo?"
+          body="Upload a picture of your yard. You get a written scope, a cost range, and real jobs like yours — then call if you want it built."
+        />
       </div>
 
       <CtaBand />

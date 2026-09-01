@@ -4,7 +4,12 @@ import { z } from 'zod';
 import { buildEstimate } from '@/data/pricing';
 import { scopes, styles } from '@/data/buildable';
 import { clientIp, rateLimit } from '@/lib/rate-limit';
-import { assemblePrompt, deriveSpec, generationConfigured } from '@/lib/visualizer-prompt';
+import {
+  assemblePrompt,
+  deriveSpec,
+  generationConfigured,
+  usesGeminiProvider,
+} from '@/lib/visualizer-prompt';
 
 /**
  * Yard visualizer generation endpoint.
@@ -37,6 +42,18 @@ const requestSchema = z.object({
   /** True when this is an element toggle on an existing render, not a new one. */
   isToggle: z.boolean().default(false),
 });
+
+/** Lets the UI tell the truth before anyone hits generate. */
+export async function GET() {
+  const live = generationConfigured();
+  return NextResponse.json({
+    generation: live,
+    provider: live ? (usesGeminiProvider() ? 'gemini' : 'generic') : 'none',
+    message: live
+      ? 'Photoreal after-photos are on. We keep your house in the frame and only draw materials we install.'
+      : 'After-photos of your own yard need an image key. You still get a written scope, a cost range, and real jobs like yours.',
+  });
+}
 
 export async function POST(req: Request) {
   const ip = clientIp(req.headers);
@@ -88,7 +105,7 @@ export async function POST(req: Request) {
       degraded: true,
       reason: 'generation_unavailable',
       message:
-        'Live rendering is not switched on yet. Here is the scope and cost range from your selections — send it over and we will sketch it properly.',
+        'Photoreal after-photos of your own yard are off right now. The scope, cost range, and real jobs below are what we would actually build.',
       image: null,
       seed,
       spec,
@@ -130,9 +147,9 @@ export async function POST(req: Request) {
 /**
  * Call the configured image provider.
  *
- * Deliberately provider-agnostic: point IMAGE_API_URL at any endpoint that
- * accepts a JSON body with a prompt and returns either a URL or base64 image
- * data. See docs/DEPLOYMENT.md for the exact shape and worked examples.
+ * Default: Gemini 2.5 Flash Image (Nano Banana) from IMAGE_API_KEY alone.
+ * Generic: IMAGE_PROVIDER=generic plus IMAGE_API_URL that accepts the JSON
+ * body below. See docs/DEPLOYMENT.md and docs/VISUALIZER.md.
  */
 async function generate(
   prompt: string,
@@ -140,9 +157,93 @@ async function generate(
   seed: number,
   photo?: string,
 ): Promise<string> {
-  const url = process.env.IMAGE_API_URL!;
+  if (usesGeminiProvider()) {
+    return generateGemini(prompt, negativePrompt, photo);
+  }
+  return generateGeneric(prompt, negativePrompt, seed, photo);
+}
+
+async function generateGemini(
+  prompt: string,
+  negativePrompt: string,
+  photo?: string,
+): Promise<string> {
+  const key = process.env.IMAGE_API_KEY!;
+  const model = process.env.IMAGE_API_MODEL || 'gemini-2.5-flash-image';
+  const url =
+    process.env.IMAGE_API_URL ||
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+  const keepHouse = photo
+    ? 'This is a real photograph of the homeowner’s yard. Keep the house, camera angle, roof, existing large trees, fences that are not being replaced, neighboring structures, and sky. Only change the landscaping described. Photorealistic. No people, no text, no watermark, no extra structures that were not requested.'
+    : 'Photorealistic residential yard in the Pacific Northwest. No people, no text, no watermark.';
+
+  const parts: { text?: string; inlineData?: { mimeType: string; data: string } }[] = [];
+
+  if (photo) {
+    const mime = photo.match(/^data:(image\/[\w.+-]+);base64,/)?.[1] ?? 'image/jpeg';
+    const data = photo.replace(/^data:image\/[\w.+-]+;base64,/, '');
+    parts.push({ inlineData: { mimeType: mime, data } });
+  }
+  parts.push({
+    text: `${keepHouse}\n\n${prompt}\n\nDo not include: ${negativePrompt}`,
+  });
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 60_000);
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': key,
+      },
+      body: JSON.stringify({
+        contents: [{ role: 'user', parts }],
+        generationConfig: { responseModalities: ['TEXT', 'IMAGE'] },
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`gemini responded ${res.status}`);
+    }
+
+    const json = (await res.json()) as {
+      candidates?: {
+        content?: {
+          parts?: {
+            inlineData?: { data?: string; mimeType?: string };
+            inline_data?: { data?: string; mime_type?: string };
+          }[];
+        };
+      }[];
+    };
+
+    for (const part of json.candidates?.[0]?.content?.parts ?? []) {
+      const data = part.inlineData?.data ?? part.inline_data?.data;
+      if (!data) continue;
+      const mime = part.inlineData?.mimeType ?? part.inline_data?.mime_type ?? 'image/png';
+      return `data:${mime};base64,${data}`;
+    }
+
+    throw new Error('gemini returned no image');
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function generateGeneric(
+  prompt: string,
+  negativePrompt: string,
+  seed: number,
+  photo?: string,
+): Promise<string> {
+  const url = process.env.IMAGE_API_URL;
   const key = process.env.IMAGE_API_KEY!;
   const model = process.env.IMAGE_API_MODEL;
+  if (!url) throw new Error('IMAGE_API_URL required for generic provider');
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 60_000);

@@ -65,31 +65,26 @@ The owner asked to restore the **old look and real photos** while **keeping the 
 - Shop: 11703 SE 229th Pl, Kent, WA 98031
 - Email: blue_landscaping@yahoo.com
 - License: BLUELLS880K2 (WA L&I)
-- Google Business Profile: https://share.google/udIRuWuNg13lXgC5t
+- Google Business Profile: https://share.google/rqx6Hs2RgAzSXmHuz
+- Formspree (live lead floor): `https://formspree.io/f/xzzdagdw` via `FORMSPREE_ENDPOINT` / `lib/notify.ts`
 - Payments: Zelle, Venmo, PayPal, Cash, Visa, Mastercard
 
 ## Do this next, in order
 
-1. **Walk the site locally** (`npm run dev`). Confirm hero, photos, phone, portfolio, about team photo. Do not start a second visual redesign.
+1. **Add real reviews only.** Copy verbatim Google/Yelp/Facebook reviews into `data/reviews.ts` with `source`, `sourceUrl`, and date. If you cannot verify a review, leave the array empty. The `/reviews` empty state already links the Google listing and L&I.
 
-2. **Add real reviews only.** Copy verbatim Google/Yelp/Facebook reviews into `data/reviews.ts` with `source`, `sourceUrl`, and date. If you cannot verify a review, leave the array empty.
+2. **Go-live.** Follow `docs/GO-LIVE.md` (SMTP/Twilio for `/api/lead`, GBP NAP match). Swap the Google short link in `data/business.ts` for the canonical maps URL if you have it. Do not submit live quote forms while testing.
 
-3. **Photo pass only.** If a service card shows the wrong kind of job, swap `public/images/services/<slug>.jpg`. Do not delete the restored library. New job photos follow `docs/PHOTO-SOP.md`.
-
-4. **Copy pass for leftover AI tone.** Highest traffic first: homepage leftovers, `/about`, `/process`, retaining walls, paver patios, sprinkler installation, Kent / Auburn / Renton / Seattle neighborhood pages. Keep local facts (till, hardpan, 4-ft wall permits, backflow). Cut repeated “in-house / no subs” sermons.
-
-5. **Local SEO, not a new brand.** Tighten `{service} in {city}` pages that already exist in `data/taxonomy.ts`. Do not add cities or services without content files. Do not restore “since 1998.”
-
-6. **Go-live.** Follow `docs/GO-LIVE.md` (SMTP/Twilio for `/api/lead`, GBP NAP match). Do not submit live quote forms while testing.
-
-7. **Verify before you finish:**
+3. **Verify before you finish:**
    - `npm run typecheck`
    - `npm run lint`
    - `node scripts/verify.mjs`
    - `npm run build`
-   - Click: home → a service page → portfolio → a project → about → contact
+   - Click: home → a service page → portfolio → a project → about → contact → reviews
    - Phone must still be (253) 429-7052
    - Photos must still load
+
+Photo cards, Seattle H1s on every service, and leftover AI-tone copy were already tightened. Do not start a second visual redesign.
 
 ## Do not
 

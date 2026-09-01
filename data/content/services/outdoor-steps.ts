@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'outdoor-steps',
   category: 'hardscaping',
   name: 'Outdoor Steps',
-  h1: 'Outdoor Steps & Garden Stairs in Kent & Greater Seattle',
-  metaTitle: 'Outdoor Steps & Stone Stairs in Kent, WA',
+  h1: 'Outdoor Steps & Garden Stairs in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Outdoor Steps & Stone Stairs in Seattle & Kent, WA',
   metaDescription:
     'Block, slab and natural stone outdoor steps across Kent, Renton, Auburn and Greater Seattle. Even risers, real drainage, code handrails, from $250 a tread foot.',
   quickAnswer:

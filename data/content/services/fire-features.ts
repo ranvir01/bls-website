@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'fire-features',
   category: 'hardscaping',
   name: 'Fire Features',
-  h1: 'Fire Features in Kent & Greater Seattle',
-  metaTitle: 'Fire Pits & Gas Fire Features in Kent, WA',
+  h1: 'Fire Features in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Fire Pits & Gas Fire Features in Seattle & Kent, WA',
   metaDescription:
     'Custom fire pits, gas fire bowls and fire tables for Kent and Greater Seattle yards. Wood or gas, burn ban realities, permit help and typical installed costs.',
   quickAnswer:

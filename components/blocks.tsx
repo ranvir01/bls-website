@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight, Check, Phone, ShieldCheck } from 'lucide-react';
 
-import { PHONE, TEL_HREF, business } from '@/data/business';
+import { PHONE, TEL_HREF, GOOGLE_PROFILE_URL, business } from '@/data/business';
 import { allWorkPhotos } from '@/data/work-photos';
 import { projects } from '@/data/projects';
 import type { CostRow, Faq } from '@/data/types';
@@ -208,13 +208,19 @@ export function TrustBar() {
       label: `$${business.license.bondAmount.toLocaleString('en-US')} bond · $1M liability`,
       detail: 'Bonded and insured',
     },
+    ...(GOOGLE_PROFILE_URL
+      ? [
+          {
+            label: 'Find us on Google',
+            detail: 'Map pin, hours, reviews we cannot edit',
+            href: GOOGLE_PROFILE_URL,
+          },
+        ]
+      : []),
     {
       label: `${allWorkPhotos.length + projects.length} photos of our own work`,
       detail: 'No stock imagery anywhere',
-    },
-    {
-      label: `Family-run since ${business.foundedYear}`,
-      detail: 'Kent, WA · no subs on hardscape',
+      href: '/portfolio',
     },
   ];
 
@@ -232,20 +238,32 @@ export function TrustBar() {
             </>
           );
 
-          return item.href ? (
+          if (!item.href) {
+            return (
+              <div key={item.label} className="flex items-start gap-3">
+                {body}
+              </div>
+            );
+          }
+
+          const className =
+            '-m-1 flex min-h-[44px] items-start gap-3 rounded-lg p-1 transition-colors hover:bg-brand-50';
+          const external = item.href.startsWith('http');
+
+          return external ? (
             <a
               key={item.label}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="-m-1 flex min-h-[44px] items-start gap-3 rounded-lg p-1 transition-colors hover:bg-brand-50"
+              className={className}
             >
               {body}
             </a>
           ) : (
-            <div key={item.label} className="flex items-start gap-3">
+            <Link key={item.label} href={item.href} className={className}>
               {body}
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -20,6 +20,7 @@ import { WorkGallery } from '@/components/work-gallery';
 import { QuoteForm } from '@/components/quote/quote-form';
 import { ServiceArt } from '@/components/service-art';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
+import { scopeIdForService, visualizerHref } from '@/lib/visualizer-href';
 import { getServiceContent } from '@/data/content/services';
 import { postsForService } from '@/data/content/blog';
 import { workPhotosByCategory } from '@/data/work-photos';
@@ -226,14 +227,13 @@ export default function ServicePage({ params }: Params) {
           </aside>
         </div>
 
-        {ref.category === 'hardscaping' && (
-          <div className="shell pb-16">
-            <VisualizerTeaser
-              headline="Not sure what you want? Design it here in 30 seconds."
-              body="Upload a photo of your yard, pick a style, and see it rebuilt with the materials we actually install. Then we build it — same crew."
-            />
-          </div>
-        )}
+        <div className="shell pb-16">
+          <VisualizerTeaser
+            headline="See what we'd build in your yard"
+            body="Upload a photo, pick a style, and get a written scope plus real jobs like yours — materials we actually install. Free, no account."
+            href={visualizerHref({ scope: scopeIdForService(content.slug) })}
+          />
+        </div>
 
         {/* Internal linking web: every service page links to its category, its
             siblings, the cities it serves, related reading and the portfolio. */}

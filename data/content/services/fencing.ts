@@ -4,8 +4,8 @@ const content: ServiceContent = {
   slug: 'fencing',
   category: 'landscaping',
   name: 'Fencing',
-  h1: 'Fence Installation in Kent & Greater Seattle',
-  metaTitle: 'Cedar Fence Installation in Kent & Seattle',
+  h1: 'Fence Installation in Seattle, Kent & Greater Seattle',
+  metaTitle: 'Cedar Fence Installation in Seattle & Kent, WA',
   metaDescription:
     'Cedar privacy, horizontal cedar, aluminum and split rail fencing installed across Kent, Renton and Greater Seattle. Real per-foot costs and permit rules.',
   quickAnswer:

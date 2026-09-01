@@ -29,11 +29,10 @@ export default function QuotePage() {
 
       <div className="shell grid gap-12 pb-20 pt-8 lg:grid-cols-12 lg:gap-16">
         <div className="min-w-0 lg:col-span-5">
-          <h1 className="text-h1">Get a real number, not a ballpark</h1>
+          <h1 className="text-h1">Get a written quote for your yard</h1>
           <p className="mt-5 max-w-prose text-body-lg text-ink-500">
-            Five quick questions. We call the same day to confirm the details and book a free
-            on-site walkthrough — then you get a written scope with materials named and a cost range
-            you can plan around.
+            Five quick questions. We call the same day, book a free visit, and send a written scope
+            with the materials named and a cost range you can plan around.
           </p>
 
           <ul className="mt-9 space-y-5">

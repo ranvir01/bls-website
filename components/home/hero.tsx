@@ -131,6 +131,19 @@ export function Hero() {
                 </a>
               </Button>
             </m.div>
+            <m.p
+              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.45, ease: ease.out }}
+              className="mt-5"
+            >
+              <Link
+                href="/visualizer"
+                className="text-caption font-semibold text-sky-200 underline underline-offset-4 hover:text-white"
+              >
+                Or upload a photo of your yard
+              </Link>
+            </m.p>
           </div>
         </div>
       </section>
