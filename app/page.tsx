@@ -26,6 +26,7 @@ import {
   servicesInCategory,
 } from '@/data/taxonomy';
 import { heroArt } from '@/lib/hero-art';
+import { withoutProjectPhotos } from '@/lib/photo-identity';
 import { buildMetadata, faqSchema, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
 
 /**
@@ -82,7 +83,7 @@ export default function HomePage() {
 
       <JsonLd
         data={graph([
-          localBusinessSchema({ path: '/', areaServed: cities.map((c) => c.name) }),
+          localBusinessSchema({ areaServed: cities.map((c) => c.name) }),
           faqSchema(homeFaqs),
           reviewSchema(reviews),
         ])}
@@ -186,7 +187,7 @@ export default function HomePage() {
             lead="Hardscaping, irrigation, and landscaping around Kent, Auburn, Renton, and Greater Seattle."
           />
           <div className="mt-10">
-            <WorkGallery photos={featuredWorkPhotos} />
+            <WorkGallery photos={withoutProjectPhotos(featuredWorkPhotos, featured).slice(0, 12)} />
           </div>
           <Link
             href="/portfolio"

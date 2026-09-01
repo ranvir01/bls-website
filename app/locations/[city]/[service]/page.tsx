@@ -18,7 +18,6 @@ import {
   serviceCityPath,
 } from '@/data/taxonomy';
 import {
-  breadcrumbSchema,
   buildMetadata,
   faqSchema,
   graph,
@@ -87,9 +86,8 @@ export default function ServiceCityPage({ params }: Params) {
             path,
             areaServed: [city.name],
           }),
-          localBusinessSchema({ path, areaServed: [city.name] }),
+          localBusinessSchema({ areaServed: [city.name] }),
           faqSchema(content.faqs),
-          breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs]),
         ])}
       />
 

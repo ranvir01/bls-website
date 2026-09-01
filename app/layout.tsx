@@ -102,7 +102,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <SiteHeader />
 
-        <main id="main" className="flex-1">
+        {/* tabIndex={-1} lets the skip link actually move focus here. Without
+            it activating the link only sets location.hash, and
+            document.activeElement stays on <body>. Programmatic focus on a
+            non-interactive element does not trigger :focus-visible, so no
+            ring appears. */}
+        <main id="main" tabIndex={-1} className="flex-1 outline-none">
           {children}
         </main>
 

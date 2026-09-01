@@ -53,6 +53,17 @@
     scroll-padding-top: 6rem;
   }
 
+  /* The same courtesy at the bottom, where the mobile action bar sits. The
+     browser scrolls a newly focused control into view using these paddings,
+     so without this a Tab onto the last card of an inline quote form landed
+     it two-thirds behind CALL / TEXT / FREE QUOTE. The bar is md:hidden, so
+     the padding stops where it does. Same sum as .pb-action-bar below. */
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-bottom: calc(var(--action-bar-h) + 1rem + env(safe-area-inset-bottom));
+    }
+  }
+
   body {
     @apply bg-background text-ink-800 font-sans antialiased;
     /* Horizontal overflow is a bug to fix at the source, not clip globally —

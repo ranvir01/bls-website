@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { ArrowLeft, ArrowRight, Check, Loader2, Phone } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { cloneElement, useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, type FieldPath } from 'react-hook-form';
 
 import { PHONE, TEL_HREF } from '@/data/business';
@@ -70,6 +70,12 @@ export function QuoteForm({
   const [restored, setRestored] = useState(false);
   const startedRef = useRef(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  /**
+   * Set by goNext/goBack, consumed by the focus effect below. The step can
+   * also change on mount when sessionStorage restores a half-finished form,
+   * and grabbing focus on page load for that is a hijack, not a courtesy.
+   */
+  const navigatedRef = useRef(false);
   const pathname = usePathname();
   const reduced = useReducedMotion();
 
@@ -177,19 +183,27 @@ export function QuoteForm({
 
     clearErrors(fields);
     trackEvent('quote_form_step', { step: step + 1, path: pathname });
+    navigatedRef.current = true;
     setDirection(1);
     setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
   }, [clearErrors, getValues, markStarted, pathname, setError, step]);
 
   const goBack = useCallback(() => {
+    navigatedRef.current = true;
     setDirection(-1);
     setStep((s) => Math.max(0, s - 1));
   }, []);
 
   // Move focus to the new step heading so keyboard and screen-reader users are
-  // not stranded at the top of the document after advancing.
+  // not stranded after a step change. This used to be gated on `step > 0`,
+  // which meant Back from step 2 to step 1 unmounted the Back button under the
+  // focus and dropped it on <body>; the next Tab then skipped every card on
+  // the step. Every navigation focuses the heading now; the ref keeps a
+  // sessionStorage restore on mount from doing the same.
   useEffect(() => {
-    if (step > 0) headingRef.current?.focus();
+    if (!navigatedRef.current) return;
+    navigatedRef.current = false;
+    headingRef.current?.focus();
   }, [step]);
 
   // ── Submit ────────────────────────────────────────────────────────────────
@@ -226,14 +240,27 @@ export function QuoteForm({
     }
   });
 
-  if (submitted) {
-    return <SuccessPanel name={values.name} delivered={delivered} className={className} />;
-  }
-
   const progress = ((step + 1) / TOTAL_STEPS) * 100;
+  const outOfArea = values.zip?.length === 5 && !isInServiceArea(values.zip);
+
+  /*
+   * The confirmation's live region is mounted from the first render and stays
+   * put across the form → panel swap. A region that enters the DOM already
+   * holding its text is not reliably announced: screen readers announce
+   * changes to live regions, and a region born full has not changed. Keeping
+   * it as the first child of the fragment means React reuses the node.
+   */
+  const announcement = submitted ? confirmationText(values.name, delivered) : '';
 
   return (
     <LazyMotion features={domAnimation} strict>
+      <div role="status" aria-live="polite" className="sr-only">
+        {announcement}
+      </div>
+
+      {submitted ? (
+        <SuccessPanel name={values.name} delivered={delivered} className={className} />
+      ) : (
       <form
         onSubmit={onSubmit}
         onChange={markStarted}
@@ -290,7 +317,7 @@ export function QuoteForm({
           >
             {step === 0 && (
               <CardGroup
-                name="projectType"
+                legend={STEP_TITLES[0]}
                 options={PROJECT_TYPES}
                 value={values.projectType}
                 onSelect={(id) => {
@@ -304,7 +331,8 @@ export function QuoteForm({
             {step === 1 && (
               <div className="space-y-5">
                 <CardGroup
-                  name="projectSize"
+                  legend="Project size (optional)"
+                  note="Optional — a rough size helps us prep the estimate."
                   options={SIZE_OPTIONS}
                   value={values.projectSize}
                   onSelect={(id) => setValue('projectSize', id, { shouldValidate: true })}
@@ -323,8 +351,9 @@ export function QuoteForm({
             )}
 
             {step === 2 && (
-              <div className="space-y-4">
-                <Field label="City" htmlFor="city" error={formState.errors.city?.message}>
+              <div className="space-y-2">
+                <p className="text-caption text-ink-500">Required unless it says optional.</p>
+                <Field label="City" htmlFor="city" required error={formState.errors.city?.message}>
                   <input
                     id="city"
                     type="text"
@@ -334,7 +363,13 @@ export function QuoteForm({
                     {...register('city')}
                   />
                 </Field>
-                <Field label="ZIP code" htmlFor="zip" error={formState.errors.zip?.message}>
+                <Field
+                  label="ZIP code"
+                  htmlFor="zip"
+                  required
+                  error={formState.errors.zip?.message}
+                  describedBy={outOfArea ? 'zip-area-note' : undefined}
+                >
                   <input
                     id="zip"
                     type="text"
@@ -346,20 +381,28 @@ export function QuoteForm({
                     {...register('zip')}
                   />
                 </Field>
-                {/* Out of area is a note, never a block — the lead is still worth having. */}
-                {values.zip?.length === 5 && !isInServiceArea(values.zip) && (
-                  <p className="rounded-sm border border-warn/30 bg-warn/5 px-3 py-2.5 text-caption text-ink-800">
-                    That looks like it may be outside our usual service area. Send it anyway — if we
-                    cannot get out there, we will tell you straight and point you somewhere good.
-                  </p>
-                )}
+                {/* Out of area is a note, never a block — the lead is still worth
+                    having. The live region is always mounted on this step and
+                    only its contents come and go, so the note is announced
+                    when it appears and is tied to the ZIP field while shown.
+                    The margin sits on the inner <p>, not the region, so the
+                    empty region takes no space. */}
+                <div id="zip-area-note" role="status" aria-live="polite" className="!mt-0">
+                  {outOfArea && (
+                    <p className="mt-4 rounded-sm border border-warn/30 bg-warn/5 px-3 py-2.5 text-caption text-ink-800">
+                      That looks like it may be outside our usual service area. Send it anyway —
+                      if we cannot get out there, we will tell you straight and point you
+                      somewhere good.
+                    </p>
+                  )}
+                </div>
               </div>
             )}
 
             {step === 3 && (
               <div className="space-y-6">
                 <ChipGroup
-                  legend="Timeline"
+                  legend="Timeline (optional)"
                   options={TIMELINE_OPTIONS}
                   value={values.timeline}
                   onSelect={(id) => setValue('timeline', id)}
@@ -374,8 +417,9 @@ export function QuoteForm({
             )}
 
             {step === 4 && (
-              <div className="space-y-4">
-                <Field label="Your name" htmlFor="name" error={formState.errors.name?.message}>
+              <div className="space-y-2">
+                <p className="text-caption text-ink-500">Required unless it says optional.</p>
+                <Field label="Your name" htmlFor="name" required error={formState.errors.name?.message}>
                   <input
                     id="name"
                     type="text"
@@ -384,7 +428,7 @@ export function QuoteForm({
                     {...register('name')}
                   />
                 </Field>
-                <Field label="Phone" htmlFor="phone" error={formState.errors.phone?.message}>
+                <Field label="Phone" htmlFor="phone" required error={formState.errors.phone?.message}>
                   <input
                     id="phone"
                     type="tel"
@@ -462,20 +506,34 @@ export function QuoteForm({
           )}
         </div>
       </form>
+      )}
     </LazyMotion>
   );
+}
+
+/** The sentence the live region speaks once the lead is in. */
+function confirmationText(name: string | undefined, delivered: boolean): string {
+  const first = name?.split(' ')[0];
+  const thanks = first ? `Thanks, ${first} — we have it.` : 'Thanks — we have it.';
+  return delivered
+    ? `${thanks} An estimator will call you shortly to confirm the details and book your free on-site walkthrough.`
+    : `${thanks} Your details are saved, but our notifications are not getting through right now. Please give us a ring so we know you are waiting.`;
 }
 
 // ── Sub-components ───────────────────────────────────────────────────────────
 
 function CardGroup({
-  name,
+  legend,
+  note,
   options,
   value,
   onSelect,
   error,
 }: {
-  name: string;
+  /** Read by screen readers as the group's name, so it is the question, not the field id. */
+  legend: string;
+  /** Optional visible line above the cards — used to say a group can be skipped. */
+  note?: string;
   options: readonly { id: string; label: string; description?: string }[];
   value?: string;
   onSelect: (id: string) => void;
@@ -483,7 +541,8 @@ function CardGroup({
 }) {
   return (
     <fieldset>
-      <legend className="sr-only">{name}</legend>
+      <legend className="sr-only">{legend}</legend>
+      {note && <p className="mb-2.5 text-caption text-ink-500">{note}</p>}
       <div className="grid gap-2.5 sm:grid-cols-2">
         {options.map((option) => {
           const selected = value === option.id;
@@ -561,28 +620,59 @@ function ChipGroup({
   );
 }
 
+/**
+ * Label + control + error row.
+ *
+ * The control is cloned so the association can be made in one place: the
+ * error paragraph gets an id, and the input gets aria-describedby pointing at
+ * it, aria-invalid while it shows, and aria-required when the field is. Before
+ * this the error was a bare sibling paragraph, so a screen reader landing on
+ * the ZIP field had no way to hear "Enter a 5-digit ZIP code".
+ *
+ * The error row is always laid out, at the height of one caption line, even
+ * while empty. Validation runs on blur, and a message appearing between the
+ * input and the Continue button pushed the button 27px down the page in the
+ * same instant the pointer was pressing it — so the first click after a typo
+ * landed on the form instead of the button and did nothing.
+ */
 function Field({
   label,
   htmlFor,
   error,
+  required = false,
+  describedBy,
   children,
 }: {
   label: string;
   htmlFor: string;
   error?: string;
-  children: React.ReactNode;
+  required?: boolean;
+  /** Extra id(s) to describe the control by, e.g. an advisory note below it. */
+  describedBy?: string;
+  children: React.ReactElement;
 }) {
+  const errorId = `${htmlFor}-error`;
+  const describedIds = [error ? errorId : null, describedBy ?? null].filter(Boolean).join(' ');
+
+  const control = cloneElement(children, {
+    'aria-describedby': describedIds || undefined,
+    'aria-invalid': error ? true : undefined,
+    'aria-required': required || undefined,
+  });
+
   return (
     <div>
       <label htmlFor={htmlFor} className="mb-1.5 block text-caption font-medium text-ink-800">
         {label}
       </label>
-      {children}
-      {error && (
-        <p role="alert" aria-live="polite" className="mt-1.5 text-caption text-error">
-          {error}
-        </p>
-      )}
+      {control}
+      <div className="mt-1 min-h-[1.3125rem]">
+        {error && (
+          <p id={errorId} role="alert" aria-live="polite" className="text-caption text-error">
+            {error}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
@@ -597,17 +687,24 @@ function SuccessPanel({
   className?: string;
 }) {
   const first = name?.split(' ')[0];
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // The form that had focus is gone; put it on the confirmation rather than
+  // letting it fall to <body>, where the next Tab starts from the top of the
+  // page. The live-region announcement is handled by the parent, which keeps
+  // a region mounted from before the swap.
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
 
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className={cn('rounded-sm border border-brand-600/30 bg-brand-50/40 p-7 text-center', className)}
-    >
+    <div className={cn('rounded-sm border border-brand-600/30 bg-brand-50/40 p-7 text-center', className)}>
       <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600">
         <Check className="h-6 w-6 text-white" aria-hidden="true" />
       </div>
-      <h2 className="text-h3">{first ? `Thanks, ${first} — we have it.` : 'Thanks — we have it.'}</h2>
+      <h2 ref={headingRef} tabIndex={-1} className="text-h3 outline-none">
+        {first ? `Thanks, ${first} — we have it.` : 'Thanks — we have it.'}
+      </h2>
       {delivered ? (
         <p className="mx-auto mt-3 max-w-prose text-body text-ink-800">
           An estimator will call you shortly to confirm the details and book your free on-site

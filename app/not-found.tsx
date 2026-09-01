@@ -1,8 +1,32 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { PHONE, TEL_HREF } from '@/data/business';
 import { categories, cities, cityPath } from '@/data/taxonomy';
 import { Button } from '@/components/ui/button';
+import { buildMetadata } from '@/lib/seo';
+
+/*
+ * Without its own metadata this page inherited the root layout's — so a
+ * dead URL served the homepage title, description and canonical, and told
+ * search engines to index it.
+ *
+ * `robots: null` on purpose. Next writes <meta name="robots" content="noindex">
+ * into every 404 response itself (app-render's NonIndex), so the robots block
+ * buildMetadata produces for noindex pages made this the one page with two
+ * robots tags. null keeps the root layout's index/follow from inheriting and
+ * leaves Next's tag as the only one.
+ */
+export const metadata: Metadata = {
+  ...buildMetadata({
+    title: 'Page not found',
+    description:
+      'That page has moved or no longer exists. Every service and city is one click away.',
+    path: '/404',
+    noindex: true,
+  }),
+  robots: null,
+};
 
 /**
  * Branded 404.

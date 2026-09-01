@@ -20,10 +20,19 @@ import { assemblePrompt, deriveSpec, generationConfigured } from '@/lib/visualiz
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-/** 3 generations per hour, 10 per day. Toggles cost less than a fresh render. */
+/**
+ * 3 generations per hour, 10 per day. Toggles cost less than a fresh render.
+ *
+ * Toggles and the background style warm-ups get their own buckets, hourly AND
+ * daily. The daily bucket used to be shared, and since every Generate click
+ * fans out into one primary plus three warm-up requests, "10 a day" was really
+ * two and a half — the third click 429'd on its warm-ups and the fourth on
+ * the render itself. The warm-up allowance is sized at four per render.
+ */
 const HOURLY_LIMIT = 3;
 const DAILY_LIMIT = 10;
 const TOGGLE_HOURLY_LIMIT = 12;
+const TOGGLE_DAILY_LIMIT = 40;
 
 const requestSchema = z.object({
   scopeId: z.enum(scopes.map((s) => s.id) as [string, ...string[]]),
@@ -62,7 +71,11 @@ export async function POST(req: Request) {
     input.isToggle ? TOGGLE_HOURLY_LIMIT : HOURLY_LIMIT,
     60 * 60 * 1000,
   );
-  const daily = rateLimit(`viz:d:${ip}`, DAILY_LIMIT, 24 * 60 * 60 * 1000);
+  const daily = rateLimit(
+    `viz:d:${ip}${input.isToggle ? ':t' : ''}`,
+    input.isToggle ? TOGGLE_DAILY_LIMIT : DAILY_LIMIT,
+    24 * 60 * 60 * 1000,
+  );
 
   if (!hourly.ok || !daily.ok) {
     return NextResponse.json(

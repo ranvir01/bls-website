@@ -1,6 +1,7 @@
 'use client';
 
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
@@ -34,11 +35,15 @@ export function PortfolioBrowser({ projects }: { projects: Project[] }) {
   }, [projects]);
 
   const cityOptions = useMemo(() => {
-    const slugs = Array.from(new Set(projects.map((p) => p.citySlug)));
-    return slugs
+    const slugs = new Set(projects.map((p) => p.citySlug));
+    // Every city page links here as `?city=<slug>`, including cities with
+    // no projects yet. That city still needs a chip — otherwise the visitor
+    // lands on "0 projects" with nothing on screen to clear.
+    if (activeCity) slugs.add(activeCity);
+    return Array.from(slugs)
       .map((slug) => cityBySlug.get(slug))
       .filter((c): c is NonNullable<typeof c> => Boolean(c));
-  }, [projects]);
+  }, [projects, activeCity]);
 
   const filtered = useMemo(
     () =>
@@ -84,9 +89,18 @@ export function PortfolioBrowser({ projects }: { projects: Project[] }) {
       </p>
 
       {filtered.length === 0 ? (
-        <p className="mt-8 rounded-sm border border-ink-200 bg-white p-6 text-body text-ink-500">
-          Nothing matches that combination yet. Clear a filter to see everything.
-        </p>
+        <div className="mt-8 rounded-sm border border-ink-200 bg-white p-6">
+          <p className="text-body text-ink-500">
+            Nothing matches that combination yet. Every finished job is in the full list.
+          </p>
+          <Link
+            href="/portfolio"
+            scroll={false}
+            className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-brand-600 underline underline-offset-4"
+          >
+            Show all projects
+          </Link>
+        </div>
       ) : (
         <>
         {/* The cards are h3. Without an h2 between them and the page's h1 the
@@ -122,7 +136,9 @@ function FilterRow({
   options: { value: string; label: string }[];
   onChange: (value: string) => void;
 }) {
-  if (options.length < 2) return null;
+  // One option is no choice, so the row hides — unless a value is already
+  // applied, in which case the row is the only visible way to remove it.
+  if (options.length < 2 && !value) return null;
 
   return (
     <fieldset className="flex flex-wrap items-center gap-2">

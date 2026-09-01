@@ -23,7 +23,7 @@ export const metadata: Metadata = buildMetadata({
 export default function QuotePage() {
   return (
     <>
-      <JsonLd data={graph([localBusinessSchema({ path: '/quote' })])} />
+      <JsonLd data={graph([localBusinessSchema()])} />
 
       <Breadcrumbs crumbs={[{ name: 'Get a Quote', path: '/quote' }]} />
 

@@ -23,6 +23,7 @@ import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { getServiceContent } from '@/data/content/services';
 import { postsForService } from '@/data/content/blog';
 import { workPhotosByCategory } from '@/data/work-photos';
+import { withoutProjectPhotos } from '@/lib/photo-identity';
 import { projectsForService } from '@/data/projects';
 import {
   categoryBySlug,
@@ -35,7 +36,6 @@ import {
   serviceCityPath,
 } from '@/data/taxonomy';
 import {
-  breadcrumbSchema,
   buildMetadata,
   faqSchema,
   graph,
@@ -80,11 +80,13 @@ export default function ServicePage({ params }: Params) {
     .filter((s): s is NonNullable<typeof s> => Boolean(s))
     .map((s) => ({ label: s.name, href: servicePath(s.slug) }));
 
-  // Cities where this exact service has a dedicated page, then top primary
-  // cities as a fallback, so every service page links out to 6 locations.
+  // Every city where this exact service has a dedicated page — all of them,
+  // because a service-city page that its own service never links to is the
+  // weakest-signalled URL on the site. (A `.slice(0, 6)` here used to drop
+  // Des Moines and Tukwila once the list grew to eight.) Primary cities are
+  // the fallback for services with no dedicated pages yet.
   const dedicatedCityLinks = serviceCityPairs
     .filter((p) => p.serviceSlug === content.slug)
-    .slice(0, 6)
     .map((p) => ({
       label: `${ref.name} in ${cities.find((c) => c.slug === p.citySlug)?.name ?? p.citySlug}`,
       href: serviceCityPath(p.citySlug, p.serviceSlug),
@@ -116,9 +118,8 @@ export default function ServicePage({ params }: Params) {
             path,
             areaServed: cities.map((c) => c.name),
           }),
-          localBusinessSchema({ path }),
+          localBusinessSchema(),
           faqSchema(content.faqs),
-          breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs]),
         ])}
       />
 
@@ -202,7 +203,7 @@ export default function ServicePage({ params }: Params) {
             {/* The job photography for this discipline, self-hosted. */}
             <Reveal as="div">
               <WorkGallery
-                photos={workPhotosByCategory[ref.category]}
+                photos={withoutProjectPhotos(workPhotosByCategory[ref.category], serviceProjects)}
                 heading={`${ref.name} we have built`}
                 limit={12}
               />

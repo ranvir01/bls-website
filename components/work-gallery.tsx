@@ -179,6 +179,13 @@ export function WorkGallery({
             {current && (
               <>
                 <Dialog.Title className="sr-only">{current.alt}</Dialog.Title>
+                {/* Radix warns in production without a description; this one
+                    also tells a screen-reader user how to drive the viewer,
+                    which nothing else in the dialog does. */}
+                <Dialog.Description className="sr-only">
+                  Photo {(active ?? 0) + 1} of {items.length}. Use the arrow keys to move between
+                  photos and Escape to close.
+                </Dialog.Description>
 
                 <Dialog.Close asChild>
                   <button

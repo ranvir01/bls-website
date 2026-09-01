@@ -23,7 +23,7 @@ export default function ReviewsPage() {
 
   return (
     <>
-      <JsonLd data={graph([localBusinessSchema({ path: '/reviews' }), reviewSchema(reviews)])} />
+      <JsonLd data={graph([localBusinessSchema(), reviewSchema(reviews)])} />
 
       <Breadcrumbs crumbs={[{ name: 'Reviews', path: '/reviews' }]} />
 

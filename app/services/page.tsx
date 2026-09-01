@@ -25,7 +25,7 @@ export default function ServicesPage() {
     <>
       <JsonLd
         data={graph([
-          localBusinessSchema({ path: '/services' }),
+          localBusinessSchema(),
           ...categories.map((c) =>
             serviceSchema({
               name: c.name,

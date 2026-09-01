@@ -121,9 +121,11 @@ export function Visualizer() {
           try {
             const result = await callApi(s.id, true);
             setResults((prev) => ({ ...prev, [s.id]: result }));
-          } catch {
+          } catch (err) {
             /* a warm-up failure is invisible — the user can still switch,
-               it just costs one round trip when they do. */
+               it just costs one round trip when they do. Debug level on
+               purpose: this is not an error the page needs to shout about. */
+            console.debug('[visualizer] warm-up skipped', s.id, err);
           }
         }),
       );
@@ -184,11 +186,20 @@ export function Visualizer() {
         {/* ── Controls ───────────────────────────────────────────────────── */}
         <div className="min-w-0 space-y-8 lg:col-span-5">
           <Step n={1} title="Add a photo of your yard">
+            {/* The picker is opened by the visible buttons below, which are the
+                keyboard path too. sr-only is clip-based, so without
+                tabIndex={-1} this input stayed a tab stop: one Tab landed on a
+                1px invisible control with no focus ring, the next on the button
+                that does the same job. It keeps a name so the file chooser it
+                opens is announced as something other than "Choose File". */}
             <input
               ref={fileInput}
+              id="yard-photo"
               type="file"
               accept="image/*"
               capture="environment"
+              tabIndex={-1}
+              aria-label="Photo of your yard"
               className="sr-only"
               onChange={(e) => {
                 const file = e.target.files?.[0];

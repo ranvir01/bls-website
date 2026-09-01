@@ -49,6 +49,55 @@ const UNUSABLE_SERVICE_ART: Record<string, string> = {
   'fire-features': 'real photo, wrong subject: it is the outdoor kitchen, not a fire feature',
 };
 
+/**
+ * What each service photograph actually shows.
+ *
+ * The card used to announce "<Service> by Blue Landscaping Services", which
+ * is the heading read twice with a company name attached, and said nothing
+ * about the picture. Every entry here was written from the picture. Nine of
+ * the files are byte-identical to photos in public/images/work/ and reuse
+ * the description already verified in data/work-photos.ts; the other three
+ * were described by eye. Anything not listed falls back to the service name.
+ *
+ * Keep the entry and the file together: if a JPEG at
+ * public/images/services/<slug>.jpg is swapped, rewrite its line here.
+ */
+export const SERVICE_ART_ALT: Record<string, string> = {
+  // = work/hardscaping/23.jpg
+  fencing:
+    'Bluestone paver walk down a narrow side yard with a new cedar and wire-mesh gate, star jasmine climbing the trellis beside it',
+  // = work/hardscaping/02.jpg
+  hardscaping:
+    'Curved grey block retaining wall holding a bark bed of sedge and hakone grass beside a gravel path, with a lace-leaf maple against a modern house',
+  // = work/landscaping/01.jpg
+  landscaping:
+    'Cedar picket fence with a pergola-style top rail running along a back property line, taller solid cedar panels behind it',
+  // = work/hardscaping/03.jpg
+  'lawn-maintenance':
+    'Fresh sod laid across a front yard up to the sidewalk, weeping Japanese maple in the corner and a stump ground out at the parking strip',
+  // = work/hardscaping/26.jpg
+  'outdoor-steps':
+    'Wide cedar deck stairs with a matching handrail and cedar planter boxes, leading down from an existing deck',
+  // = work/landscaping/48.jpg
+  'paver-patios':
+    'Paver patio and matching walkway wrapping a grey shingled house, with a circular seating area, a flower bed and a block retaining wall along the lawn',
+  // = work/hardscaping/40.jpg
+  'planting-design':
+    'Front bed planted along a driveway with variegated carex, coneflower, salvia and low shrubs in fresh bark',
+  // = work/hardscaping/39.jpg
+  'retaining-walls':
+    'Two-tier grey block retaining wall stepping down a back slope, graded and ready for topsoil',
+  // = work/hardscaping/16.jpg
+  walkways:
+    'Flagstone stepping stones set in fresh bark down a narrow side yard beside a new deck frame, boulders lining the fence and a pop-up sprinkler head at the edge',
+  'seating-walls':
+    'Terraced grey block walls with cap stones holding bark beds of black mondo grass, small shrubs and grasses',
+  'sod-installation':
+    'Fresh sod laid across a fenced back yard up to a horizontal cedar fence and timber retaining edge',
+  'water-features':
+    'River-rock pondless waterfall and dry creek bed lined with boulders beside a shingled house',
+};
+
 export function serviceArt(slug: string): string | null {
   if (!(slug in UNUSABLE_SERVICE_ART)) {
     for (const ext of PHOTO_EXTS) {

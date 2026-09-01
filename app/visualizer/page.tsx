@@ -69,7 +69,7 @@ export default function VisualizerPage() {
     <>
       <JsonLd
         data={graph([
-          localBusinessSchema({ path: '/visualizer' }),
+          localBusinessSchema(),
           faqSchema(faqs),
           {
             '@type': 'WebApplication',

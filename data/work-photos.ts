@@ -184,11 +184,16 @@ export const allWorkPhotos: ImageAsset[] = interleave(
   irrigationPhotos,
 );
 
-/** Homepage strip. Weighted to hardscaping because that is most of the work. */
+/**
+ * Homepage strip candidates, weighted to hardscaping because that is most of
+ * the work. This is a pool, not the strip: the homepage drops any that are
+ * already on it as a project card (lib/photo-identity.ts) and shows the first
+ * twelve that remain, so there are more than twelve here on purpose.
+ */
 export const featuredWorkPhotos: ImageAsset[] = [
-  ...hardscapingPhotos.slice(0, 6),
+  ...hardscapingPhotos.slice(0, 9),
   ...irrigationPhotos.slice(0, 2),
-  ...landscapingPhotos.slice(0, 4),
+  ...landscapingPhotos.slice(0, 6),
 ];
 
 export const teamPhoto: ImageAsset = {

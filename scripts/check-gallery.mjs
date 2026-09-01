@@ -13,7 +13,9 @@
  *   - Seventeen of the fifty-eight gallery entries pointed at a photograph that
  *     was already in the grid, and all fifty-eight shared one alt string. The
  *     link checker only asserts that an alt attribute exists, which is why it
- *     passed. So: no repeated src, no repeated alt, no template text.
+ *     passed. So: no repeated src, no repeated alt, no template text — and,
+ *     since twelve project photos turned out to be gallery files under a
+ *     second name, no repeated photograph either, judged by perceptual hash.
  *
  *   - The lightbox was <div role="dialog" aria-modal="true"> with no focus
  *     management at all. So: focus enters, stays in, and comes back to the
@@ -30,6 +32,7 @@
  *   node scripts/check-gallery.mjs --base=http://localhost:3000
  */
 
+import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 const args = process.argv.slice(2);
 const BASE = (args.find((a) => a.startsWith('--base=')) ?? '--base=http://localhost:3000').split('=')[1].replace(/\/$/, '');
@@ -38,6 +41,40 @@ const EXE = process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined;
 let failures = 0;
 const ok  = m => console.log('  ✓ ' + m);
 const bad = m => { failures++; console.log('  ✗ ' + m); };
+
+/**
+ * Same photograph, different file. Twelve of the project photos in
+ * public/images/portfolio/ are byte-for-byte (one of them re-encoded) copies
+ * of a job-gallery file, and the src/alt checks below compare paths, so they
+ * passed while /portfolio showed the same picture twice. The provenance
+ * manifest carries a perceptual hash of every file's pixels; two hashes within
+ * six bits are one photograph (lib/photo-identity.ts, same number).
+ */
+const PROVENANCE = JSON.parse(readFileSync(new URL('../data/photo-provenance.json', import.meta.url), 'utf8'));
+const SAME_PHOTO_BITS = 6;
+const phashOf = src => PROVENANCE[src.replace(/^\/images\//, '')]?.phash;
+const hamming = (a, b) => {
+  let bits = 0;
+  for (let i = 0; i < a.length; i += 1) {
+    let x = parseInt(a[i], 16) ^ parseInt(b[i], 16);
+    while (x) { bits += x & 1; x >>= 1; }
+  }
+  return bits;
+};
+/** Pairs of paths on one page that hold the same photograph. */
+const samePhotoPairs = srcs => {
+  const pairs = [];
+  for (let i = 0; i < srcs.length; i += 1) {
+    const a = phashOf(srcs[i]);
+    if (!a) continue;
+    for (let j = i + 1; j < srcs.length; j += 1) {
+      if (srcs[i] === srcs[j]) continue;
+      const b = phashOf(srcs[j]);
+      if (b && hamming(a, b) <= SAME_PHOTO_BITS) pairs.push(`${srcs[i]} = ${srcs[j]}`);
+    }
+  }
+  return pairs;
+};
 
 const browser = await chromium.launch(EXE ? { executablePath: EXE } : {});
 
@@ -95,6 +132,10 @@ console.log('\n== /portfolio gallery ==');
   dupSrc.length === 0 ? ok(`${srcs.length} gallery photos, none repeated`)
                       : bad(`repeated photo(s): ${[...new Set(dupSrc)].join(', ')}`);
 
+  const twins = samePhotoPairs(srcs);
+  twins.length === 0 ? ok('no photograph appears under two filenames')
+                     : bad(`same photograph twice: ${twins.join('; ')}`);
+
   const alts = imgs.map(i => i.alt);
   const dupAlt = alts.filter((a, i) => alts.indexOf(a) !== i);
   dupAlt.length === 0 ? ok('every alt string is unique')
@@ -133,6 +174,13 @@ console.log('\n== /portfolio gallery ==');
     a2.filter((a, i) => a2.indexOf(a) !== i).length === 0
       ? ok('expanded grid has no repeated alt')
       : bad('expanding reintroduced a duplicate alt');
+    // Project cards plus every gallery tile: the collapsed tail is where the
+    // project twins used to sit.
+    const whole = await page.$$eval('ul img', els => els.map(e =>
+      decodeURIComponent(new URL(e.currentSrc || e.src, location.href).searchParams.get('url') || e.src)));
+    const twins2 = samePhotoPairs(whole);
+    twins2.length === 0 ? ok(`${whole.length} photos on the page, each photograph once`)
+                        : bad(`same photograph twice after expanding: ${twins2.join('; ')}`);
   } else {
     ok('gallery short enough that no expander is needed');
   }

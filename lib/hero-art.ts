@@ -77,7 +77,7 @@ export const heroArt = {
   },
   /** Non-srcSet fallback for anything that ignores <source>. */
   fallback: nextImageUrl('/images/hero-home.jpg', 1200),
-  alt:
-    'Flagstone path set through fresh bark beds and low groundcover, leading past a ' +
-    'red Japanese maple to the porch of a Seattle-area home',
+  // Only what is in the frame. The maple and the porch it once mentioned are
+  // cropped out of the mobile picture entirely.
+  alt: 'Flagstone path set through fresh bark beds and low groundcover in a Seattle-area front yard',
 } as const;
