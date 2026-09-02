@@ -94,7 +94,7 @@ export default function VisualizerPage() {
             See your yard redesigned in 30 seconds — then we build it
           </h1>
           <QuickAnswer>
-            {`Upload a photo of your yard, pick a scope and a style, and get a photorealistic design built only from materials Blue Landscaping installs and stocks locally. Free, instant, no account. We designed it and we build it — same crew, Washington license ${business.license.number}.`}
+            {`Upload a photo of your yard, pick a scope and a style, and get a photorealistic design built only from materials Blue Landscaping installs and stocks locally. Free, instant, no account. Washington license ${business.license.number}.`}
           </QuickAnswer>
         </header>
 

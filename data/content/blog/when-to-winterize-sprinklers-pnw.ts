@@ -176,7 +176,7 @@ const post: BlogPost = {
     },
     {
       type: 'callout',
-      title: 'The crew that built it is the crew that empties it',
+      title: 'Two passes on every zone, then the cover goes on',
       text: 'Blue Landscaping Services works out of a Kent shop and tows a 185 CFM compressor. Zone by zone starting at the far end, a second pass on every zone, 50 psi on polyethylene and 80 psi on PVC, then the test cocks cracked open and an insulated cover fitted over the assembly before we leave. Call (253) 429-7052 to get on the fall schedule. October fills first.',
     },
   ],

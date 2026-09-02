@@ -17,7 +17,7 @@ export const categoryContent: Record<string, CategoryContent> = {
     intro: [
       'Hardscaping has to get through a Puget Sound winter. A patio that was never compacted right will show every rut by its second February. Put up a wall with no drain rock behind it and water pushes on it until it leans. Almost every repair we get called out for started as one of those two shortcuts.',
       'So we build the base properly. Dig down to soil that will hold, put crushed rock in and compact it in layers, and give the water a route out before it picks its own. None of that is interesting to look at and most of your money goes into it. It is also the only reason the job still looks right ten winters later.',
-      'We draw the plan and we build it. No design fee, no waiting on an architect, no handing the drawings to whoever bid lowest. It also means we never draw something we do not already know how to build at the price we quoted.',
+      'We draw the plan and we build it. No design fee, no waiting on an architect. It also means we never draw something we do not already know how to build at the price we quoted.',
     ],
     faqs: [
       {
