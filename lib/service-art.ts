@@ -61,6 +61,15 @@ const UNUSABLE_SERVICE_ART: Record<string, string> = {
  *
  * Keep the entry and the file together: if a JPEG at
  * public/images/services/<slug>.jpg is swapped, rewrite its line here.
+ *
+ * Ten of these twelve are live. `hardscaping` and `landscaping` are category
+ * slugs, and no page passes a category slug to <ServiceArt> — all four call
+ * sites pass a service slug, so /services renders exactly fifteen cards and
+ * none of them is a category. Their files (and services/irrigation.jpg, which
+ * is the same generated render as services/sprinkler-installation.jpg) sit
+ * unused. The two descriptions are kept because they were written from the
+ * pictures and the resolver is slug-generic: the day a category card is
+ * rendered, the art and its alt are already correct.
  */
 export const SERVICE_ART_ALT: Record<string, string> = {
   // = work/hardscaping/23.jpg

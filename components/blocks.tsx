@@ -5,6 +5,7 @@ import { PHONE, TEL_HREF, business } from '@/data/business';
 import { allWorkPhotos } from '@/data/work-photos';
 import { projects } from '@/data/projects';
 import type { CostRow, Faq } from '@/data/types';
+import { countDistinctPhotographs } from '@/lib/photo-identity';
 import { cn } from '@/lib/utils';
 
 import { Reveal } from './motion/reveal';
@@ -209,7 +210,10 @@ export function TrustBar() {
       detail: 'Bonded and insured',
     },
     {
-      label: `${allWorkPhotos.length + projects.length} photos of our own work`,
+      // Distinct photographs, not array entries: twelve projects keep a second
+      // copy of a gallery photo under public/images/portfolio/, and adding the
+      // two lengths advertised 94 pictures for a library of 82.
+      label: `${countDistinctPhotographs(allWorkPhotos, projects)} photos of our own work`,
       detail: 'No stock imagery anywhere',
     },
     {

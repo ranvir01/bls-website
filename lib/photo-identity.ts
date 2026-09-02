@@ -58,3 +58,17 @@ export function withoutProjectPhotos(gallery: ImageAsset[], shown: Project[]): I
   if (!shown.length) return gallery;
   return gallery.filter((photo) => !shown.some((p) => samePhotograph(photo.src, p.after.src)));
 }
+
+/**
+ * How many distinct photographs the site actually holds.
+ *
+ * The trust bar advertises this number next to "No stock imagery anywhere",
+ * so it has to be a count of pictures, not of files. Adding the two arrays
+ * gave 94 while the library holds 82: twelve of the fourteen projects store
+ * their photo a second time under public/images/portfolio/, and a visitor
+ * who counted would find twelve of them twice.
+ */
+export function countDistinctPhotographs(gallery: ImageAsset[], shown: Project[]): number {
+  const extra = shown.filter((p) => !gallery.some((photo) => samePhotograph(photo.src, p.after.src)));
+  return gallery.length + extra.length;
+}
