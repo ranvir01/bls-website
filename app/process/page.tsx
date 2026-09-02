@@ -79,7 +79,7 @@ const faqs: Faq[] = [
 export default function ProcessPage() {
   return (
     <>
-      <JsonLd data={graph([localBusinessSchema({ path: '/process' }), faqSchema(faqs)])} />
+      <JsonLd data={graph([localBusinessSchema(), faqSchema(faqs)])} />
 
       <Breadcrumbs crumbs={[{ name: 'Our Process', path: '/process' }]} />
 

@@ -6,10 +6,12 @@ import { CtaBand, SectionHeader } from '@/components/blocks';
 import { BeforeAfterShowcase } from '@/components/before-after-showcase';
 import { JsonLd } from '@/components/json-ld';
 import { PortfolioBrowser } from '@/components/portfolio/portfolio-browser';
+import { ProjectGrid } from '@/components/portfolio/project-grid';
 import { VisualizerTeaser } from '@/components/visualizer/visualizer-teaser';
 import { WorkGallery } from '@/components/work-gallery';
 import { portfolioProjects } from '@/data/projects';
-import { allWorkPhotos } from '@/data/work-photos';
+import { allWorkPhotos, beforeAfterPairs } from '@/data/work-photos';
+import { withoutProjectPhotos } from '@/lib/photo-identity';
 import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -21,10 +23,13 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PortfolioPage() {
   const projects = portfolioProjects();
+  // Twelve of the projects' photos are also in the job gallery under another
+  // filename. Each picture appears once on this page: as its project.
+  const gallery = withoutProjectPhotos(allWorkPhotos, projects);
 
   return (
     <>
-      <JsonLd data={graph([localBusinessSchema({ path: '/portfolio' })])} />
+      <JsonLd data={graph([localBusinessSchema()])} />
 
       <Breadcrumbs crumbs={[{ name: 'Portfolio', path: '/portfolio' }]} />
 
@@ -43,7 +48,27 @@ export default function PortfolioPage() {
 
         <div className="mt-12">
           {projects.length > 0 ? (
-            <Suspense fallback={<p className="text-body text-ink-500">Loading projects…</p>}>
+            /*
+             * The browser reads its filters from useSearchParams, which
+             * cannot be resolved at build time, so what gets prerendered
+             * here is the fallback. It used to be a "Loading…" line, which
+             * meant the static HTML of the portfolio hub carried zero links
+             * to its project pages — anything that does not run JavaScript
+             * saw an index with nothing in it. The fallback is now the full
+             * grid; hydration swaps in the same cards with the filter row
+             * above them.
+             *
+             * The Suspense boundary itself is load-bearing: without it
+             * useSearchParams fails `next build`.
+             */
+            <Suspense
+              fallback={
+                <>
+                  <h2 className="sr-only">Completed projects</h2>
+                  <ProjectGrid projects={projects} />
+                </>
+              }
+            >
               <PortfolioBrowser projects={projects} />
             </Suspense>
           ) : (
@@ -54,16 +79,18 @@ export default function PortfolioPage() {
           )}
         </div>
 
-        <div className="mt-16">
-          <SectionHeader
-            eyebrow="Before & after"
-            title="Slide to compare"
-            lead="A few yards before we started and after we finished."
-          />
-          <div className="mt-8">
-            <BeforeAfterShowcase limit={6} />
+        {beforeAfterPairs.length > 0 && (
+          <div className="mt-16">
+            <SectionHeader
+              eyebrow="Before & after"
+              title="Slide to compare"
+              lead="A few yards before we started and after we finished."
+            />
+            <div className="mt-8">
+              <BeforeAfterShowcase limit={6} />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="mt-16">
           <SectionHeader
@@ -72,7 +99,7 @@ export default function PortfolioPage() {
             lead="Hardscaping, irrigation, and landscaping. Click any photo to open it."
           />
           <div className="mt-8">
-            <WorkGallery photos={allWorkPhotos} />
+            <WorkGallery photos={gallery} />
           </div>
         </div>
       </div>

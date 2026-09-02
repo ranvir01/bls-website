@@ -23,7 +23,7 @@ export default function LocationsPage() {
   return (
     <>
       <JsonLd
-        data={graph([localBusinessSchema({ path: '/locations', areaServed: live.map((c) => c.name) })])}
+        data={graph([localBusinessSchema({ areaServed: live.map((c) => c.name) })])}
       />
 
       <Breadcrumbs crumbs={[{ name: 'Service Areas', path: '/locations' }]} />

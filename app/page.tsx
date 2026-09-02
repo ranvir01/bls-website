@@ -16,7 +16,7 @@ import { homeFaqs, howItWorks, whyUs } from '@/data/content/home';
 import { getCategoryContent } from '@/data/content/categories';
 import { conceptToBuiltProjects, portfolioProjects } from '@/data/projects';
 import { reviews } from '@/data/reviews';
-import { featuredWorkPhotos } from '@/data/work-photos';
+import { beforeAfterPairs, featuredWorkPhotos } from '@/data/work-photos';
 import {
   categories,
   cities,
@@ -25,16 +25,65 @@ import {
   servicePath,
   servicesInCategory,
 } from '@/data/taxonomy';
-import { faqSchema, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
+import { heroArt } from '@/lib/hero-art';
+import { withoutProjectPhotos } from '@/lib/photo-identity';
+import { buildMetadata, faqSchema, graph, localBusinessSchema, reviewSchema } from '@/lib/seo';
+
+/**
+ * The homepage needs its own metadata export, not just the layout's.
+ *
+ * The root layout supplies a title and description, but nothing else — no
+ * openGraph and no twitter block, because those live in buildMetadata and every
+ * other route calls it. So the homepage was the one page on the site with no
+ * share card: 95 of 96 routes had one, and the missing one was the URL the
+ * Google Business Profile, the follow-up text after a call, and any Facebook or
+ * Nextdoor post all point at. Pasted into a message it rendered as a bare link.
+ *
+ * buildMetadata sets `title: { absolute }`, so this does not double the brand
+ * suffix the way returning a plain string would.
+ */
+export const metadata = buildMetadata({
+  title: 'Expert Landscaping & Hardscaping in Seattle',
+  description:
+    'Expert landscaping and hardscaping in Seattle and Kent, WA. Retaining walls, custom paver patios, and professional irrigation systems. Licensed, bonded, insured. Free consultation.',
+  path: '/',
+});
 
 export default function HomePage() {
   const featured = portfolioProjects().slice(0, 6);
 
   return (
     <>
+      {/*
+        LCP preload for the hero, one per breakpoint.
+
+        `priority` on a next/image emits a preload with no media attribute, so
+        phones were told to fetch the desktop crop they never paint. A <link>
+        written out here can carry `media`, which means exactly one crop is
+        preloaded and it is always the one that gets displayed. React hoists
+        these into <head>, ahead of the body, so the preload scanner still finds
+        them before it reaches the hero markup.
+      */}
+      <link
+        rel="preload"
+        as="image"
+        media={heroArt.mobile.media}
+        imageSrcSet={heroArt.mobile.srcSet}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        media={heroArt.desktop.media}
+        imageSrcSet={heroArt.desktop.srcSet}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
+
       <JsonLd
         data={graph([
-          localBusinessSchema({ path: '/', areaServed: cities.map((c) => c.name) }),
+          localBusinessSchema({ areaServed: cities.map((c) => c.name) }),
           faqSchema(homeFaqs),
           reviewSchema(reviews),
         ])}
@@ -114,16 +163,21 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="shell section">
-        <SectionHeader
-          eyebrow="Before & after"
-          title="See the difference"
-          lead="Real yards we rebuilt. Drag the slider."
-        />
-        <div className="mt-10">
-          <BeforeAfterShowcase limit={3} />
-        </div>
-      </section>
+      {/* Header and slider stand or fall together — a "drag the slider" heading
+          over an empty div is worse than no section. beforeAfterPairs is empty
+          until a real pair exists; see the note in data/work-photos.ts. */}
+      {beforeAfterPairs.length > 0 && (
+        <section className="shell section">
+          <SectionHeader
+            eyebrow="Before & after"
+            title="See the difference"
+            lead="Real yards we rebuilt. Drag the slider."
+          />
+          <div className="mt-10">
+            <BeforeAfterShowcase limit={3} />
+          </div>
+        </section>
+      )}
 
       <section className="border-y border-ink-200 bg-white">
         <div className="shell section">
@@ -133,7 +187,7 @@ export default function HomePage() {
             lead="Hardscaping, irrigation, and landscaping around Kent, Auburn, Renton, and Greater Seattle."
           />
           <div className="mt-10">
-            <WorkGallery photos={featuredWorkPhotos} />
+            <WorkGallery photos={withoutProjectPhotos(featuredWorkPhotos, featured).slice(0, 12)} />
           </div>
           <Link
             href="/portfolio"

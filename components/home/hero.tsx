@@ -1,13 +1,13 @@
 'use client';
 
 import { LazyMotion, domAnimation, m, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CreditCard, Phone, Shield } from 'lucide-react';
 import { useRef } from 'react';
 
 import { PHONE, TEL_HREF, business } from '@/data/business';
 import { trackEvent } from '@/lib/analytics';
+import { heroArt } from '@/lib/hero-art';
 import { ease, heroWord } from '@/lib/motion';
 import { Button } from '@/components/ui/button';
 
@@ -31,6 +31,28 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ['0px', '-60px']);
   const words = HEADLINE.split(' ');
 
+  /**
+   * Entrance props for one hero element.
+   *
+   * lib/motion.ts states the contract: "prefers-reduced-motion replaces every
+   * motion with an instant state change." The hero was honouring half of it —
+   * it dropped the translate but kept the opacity fade AND its stagger delay, so
+   * a reduced-motion visitor still watched the copy arrive over about a second.
+   *
+   * The reduced branch has to paint the end state rather than merely animate
+   * less, because the server renders before useReducedMotion() can know the
+   * answer: the HTML always arrives stamped with opacity 0, and something has to
+   * put it back.
+   */
+  const enter = (delay: number) =>
+    reduced
+      ? { initial: { opacity: 1, y: 0 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0 } }
+      : {
+          initial: { opacity: 0, y: 12 },
+          animate: { opacity: 1, y: 0 },
+          transition: { delay, duration: 0.5, ease: ease.out },
+        };
+
   return (
     <LazyMotion features={domAnimation} strict>
       <section
@@ -38,16 +60,37 @@ export function Hero() {
         className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-brand-900"
       >
         <m.div className="absolute inset-0 -z-10" style={reduced ? undefined : { y }}>
-          <picture>
-            <source media="(max-width: 767px)" srcSet="/images/hero-home-mobile.jpg" />
-            <Image
-              src="/images/hero-home.jpg"
-              alt="Landscaped Seattle property with custom stonework and retaining walls by Blue Landscaping Services"
-              fill
-              priority
-              fetchPriority="high"
+          {/* Two crops, not two sizes — see lib/hero-art.ts. next/image cannot
+              emit <source> elements, so the srcSets are built against the
+              optimizer by hand; the preload that pairs with this lives in
+              app/page.tsx, where it can carry a media attribute.
+
+              The block/inset-0 on <picture> is not decoration: it is inline by
+              default, and at 1920px its line box pushed 8px past the section and
+              gave the homepage a horizontal scrollbar. */}
+          <picture className="absolute inset-0 block h-full w-full">
+            <source
+              media={heroArt.mobile.media}
+              srcSet={heroArt.mobile.srcSet}
               sizes="100vw"
-              className="img-grade object-cover object-center brightness-[0.7] saturate-[1.05]"
+            />
+            <source
+              media={heroArt.desktop.media}
+              srcSet={heroArt.desktop.srcSet}
+              sizes="100vw"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element -- the whole
+                point of this block is art direction across two source files,
+                which next/image's single-<img> output cannot express. The
+                srcSets still go through /_next/image, so nothing is unoptimized. */}
+            <img
+              src={heroArt.fallback}
+              alt={heroArt.alt}
+              width={1920}
+              height={1440}
+              fetchPriority="high"
+              decoding="async"
+              className="img-grade h-full w-full object-cover object-center brightness-[0.7] saturate-[1.05]"
             />
           </picture>
           <div
@@ -59,9 +102,7 @@ export function Hero() {
         <div className="shell w-full py-28 md:py-32">
           <div className="mx-auto max-w-4xl text-center">
             <m.p
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: ease.out }}
+              {...enter(0)}
               className="text-caption font-semibold uppercase tracking-wide text-sky-200"
             >
               Kent, WA · Licensed &amp; insured · Serving Greater Seattle since {business.foundedYear}
@@ -74,9 +115,16 @@ export function Hero() {
                   <m.span
                     key={`${word}-${i}`}
                     custom={i}
+                    /* initial={false} used to sit in the reduced branch, which
+                       told framer to adopt whatever the DOM already had. What it
+                       already had was the server-rendered opacity: 0, and with
+                       no variants there was nothing for animate="visible" to
+                       resolve against — so the site's headline stayed invisible
+                       for the whole visit. The reduced branch now states the end
+                       state outright. */
                     variants={reduced ? undefined : heroWord}
-                    initial={reduced ? false : 'hidden'}
-                    animate="visible"
+                    initial={reduced ? { opacity: 1, y: 0 } : 'hidden'}
+                    animate={reduced ? { opacity: 1, y: 0 } : 'visible'}
                     className={`inline-block whitespace-pre ${isSeattle ? 'text-sky-300' : ''}`}
                   >
                     {word}{' '}
@@ -86,9 +134,7 @@ export function Hero() {
             </h1>
 
             <m.p
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5, ease: ease.out }}
+              {...enter(0.35)}
               className="mx-auto mt-6 max-w-2xl text-body-lg text-white/90"
             >
               Transform your outdoor space with retaining walls, custom paver patios, and
@@ -96,9 +142,7 @@ export function Hero() {
             </m.p>
 
             <m.div
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5, ease: ease.out }}
+              {...enter(0.4)}
               className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/90"
             >
               <span className="inline-flex items-center gap-1.5 text-caption font-medium">
@@ -113,9 +157,7 @@ export function Hero() {
             </m.div>
 
             <m.div
-              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.5, ease: ease.out }}
+              {...enter(0.45)}
               className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
             >
               <Button asChild size="lg" variant="onPhoto">

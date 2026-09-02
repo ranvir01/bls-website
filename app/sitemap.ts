@@ -11,11 +11,15 @@ import { indexableRoutes } from '@/lib/routes';
  * it, because both read from lib/routes.ts.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
+  // lastmod used to be `new Date()` on every entry — the build timestamp,
+  // identical to the millisecond on all 96 URLs, re-announced on every deploy
+  // including CSS-only ones. Google uses lastmod only when it is consistently
+  // accurate, so that trained it to ignore the one crawl hint the sitemap
+  // offers. Now an entry carries a date only when its content records one;
+  // the rest omit the field, which is the honest answer.
   return indexableRoutes().map((route) => ({
     url: `${SITE_URL}${route.path === '/' ? '' : route.path}`,
-    lastModified,
+    ...(route.lastModified ? { lastModified: route.lastModified } : {}),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));

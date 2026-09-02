@@ -45,17 +45,36 @@ export const metadata: Metadata = {
     'Expert landscaping and hardscaping in Seattle and Kent, WA. Retaining walls, custom paver patios, and professional irrigation systems. Licensed, bonded, insured. Free consultation.',
   applicationName: 'Blue Landscaping Services',
   authors: [{ name: 'Blue Landscaping Services' }],
-  formatDetection: { telephone: true, address: true },
+  /*
+   * No formatDetection key on purpose.
+   *
+   * It used to read `{ telephone: true, address: true }`, which reads as
+   * "please do detect these" and emitted the exact opposite:
+   *
+   *   <meta name="format-detection" content="telephone=no, address=no">
+   *
+   * Next writes this tag for whichever keys are present and treats it as an
+   * opt-out list, so naming a key at all suppresses detection. On a contractor
+   * site whose primary call to action is a phone call, that is the wrong
+   * default. Omitting the key emits no tag and leaves native detection on,
+   * which is what the original line was trying to say.
+   */
   alternates: { canonical: '/' },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/images/logo.png',
-  },
+  /*
+   * No icons block: app/icon.png and app/apple-icon.png are picked up by Next
+   * automatically and served content-hashed.
+   *
+   * This used to declare `/favicon.ico`, which had never existed — so every
+   * page on the site asked the browser for a file that 404'd, and the apple
+   * entry pointed at the 480x284 wordmark, which is neither square nor legible
+   * at 180px. The icon is the skyline mark from that wordmark, cropped square;
+   * the lettering is unreadable below about 64px and only muddies it.
+   */
 };
 
 export const viewport: Viewport = {
@@ -83,7 +102,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <SiteHeader />
 
-        <main id="main" className="flex-1">
+        {/* tabIndex={-1} lets the skip link actually move focus here. Without
+            it activating the link only sets location.hash, and
+            document.activeElement stays on <body>. Programmatic focus on a
+            non-interactive element does not trigger :focus-visible, so no
+            ring appears. */}
+        <main id="main" tabIndex={-1} className="flex-1 outline-none">
           {children}
         </main>
 

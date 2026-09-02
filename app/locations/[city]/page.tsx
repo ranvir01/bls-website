@@ -24,7 +24,6 @@ import {
   serviceCityPath,
 } from '@/data/taxonomy';
 import {
-  breadcrumbSchema,
   buildMetadata,
   faqSchema,
   graph,
@@ -89,9 +88,8 @@ export default function CityPage({ params }: Params) {
     <>
       <JsonLd
         data={graph([
-          localBusinessSchema({ path, areaServed: [content.name] }),
+          localBusinessSchema({ areaServed: [content.name] }),
           faqSchema(content.faqs),
-          breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs]),
           reviewSchema(cityReviews),
         ])}
       />
@@ -199,15 +197,35 @@ export default function CityPage({ params }: Params) {
             )}
             <div>
               <h2 className="text-h3">See our work</h2>
-              <p className="mt-3 text-body text-ink-500">
-                Filter the portfolio by the projects closest to you.
-              </p>
-              <Link
-                href={`/portfolio?city=${content.slug}`}
-                className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-brand-600 underline underline-offset-4"
-              >
-                Projects near {content.name}
-              </Link>
+              {/* Only offer the city filter when it has something in it.
+                  Sending a visitor to a portfolio that reads "0 projects"
+                  is worse than sending them to the whole portfolio. */}
+              {cityProjects.length > 0 ? (
+                <>
+                  <p className="mt-3 text-body text-ink-500">
+                    Filter the portfolio by the projects closest to you.
+                  </p>
+                  <Link
+                    href={`/portfolio?city=${content.slug}`}
+                    className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-brand-600 underline underline-offset-4"
+                  >
+                    Projects near {content.name}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p className="mt-3 text-body text-ink-500">
+                    Retaining walls, patios, walkways and planting from jobs around Greater
+                    Seattle.
+                  </p>
+                  <Link
+                    href="/portfolio"
+                    className="mt-4 inline-flex min-h-[44px] items-center text-body font-medium text-brand-600 underline underline-offset-4"
+                  >
+                    Browse the portfolio
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </section>

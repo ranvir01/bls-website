@@ -54,9 +54,22 @@ export const revealVariants: Variants = {
   },
 };
 
+/**
+ * The reduced-motion stand-in for revealVariants.
+ *
+ * It has to name EVERY property the full variant animates, including the ones
+ * it does not want to move. That reads like redundancy and is not: the server
+ * renders before `useReducedMotion()` can know the answer, so the HTML always
+ * arrives stamped with the full `hidden` state — opacity 0 AND translateY(12px).
+ * A reduced variant that mentions only opacity animates the opacity back and
+ * leaves the transform exactly where the server put it, so every scroll-revealed
+ * block on the site sat permanently 12px low for anyone with reduced motion on.
+ *
+ * Naming `y: 0` here is what undoes it.
+ */
 export const reducedVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.01 } },
+  hidden: { opacity: 0, y: 0 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.01 } },
 };
 
 export const staggerParent: Variants = {

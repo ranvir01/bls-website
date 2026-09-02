@@ -22,7 +22,7 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd
-        data={graph([localBusinessSchema({ path: '/contact', areaServed: cities.map((c) => c.name) })])}
+        data={graph([localBusinessSchema({ areaServed: cities.map((c) => c.name) })])}
       />
 
       <Breadcrumbs crumbs={[{ name: 'Contact', path: '/contact' }]} />

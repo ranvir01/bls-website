@@ -18,7 +18,7 @@ export const metadata: Metadata = buildMetadata({
 export default function BlogIndexPage() {
   return (
     <>
-      <JsonLd data={graph([localBusinessSchema({ path: '/blog' })])} />
+      <JsonLd data={graph([localBusinessSchema()])} />
 
       <Breadcrumbs crumbs={[{ name: 'Guides', path: '/blog' }]} />
 

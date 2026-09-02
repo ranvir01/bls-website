@@ -21,6 +21,12 @@ export interface RouteEntry {
   changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly';
   /** Excluded from sitemap and from robots indexing. */
   noindex?: boolean;
+  /**
+   * ISO date the content last changed, for the sitemap's lastmod. Only set
+   * where the data actually records one (blog posts). Everything else omits
+   * it rather than guessing — see app/sitemap.ts for why.
+   */
+  lastModified?: string;
 }
 
 const STATIC_ROUTES: RouteEntry[] = [
@@ -77,6 +83,7 @@ export function allRoutes(): RouteEntry[] {
       path: `/blog/${p.slug}`,
       priority: 0.7,
       changeFrequency: 'yearly' as const,
+      lastModified: p.updatedAt ?? p.publishedAt,
     })),
 
     ...projects.map((p) => ({

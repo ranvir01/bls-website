@@ -12,7 +12,7 @@ const content: ServiceContent = {
     'A retaining wall holds back graded soil so a sloped yard becomes usable. Around Puget Sound, segmental block walls run roughly $45 to $70 per face square foot installed, with drain rock, filter fabric and a perforated drain line behind every course. Walls over 4 feet need engineering and a permit.',
   intro: [
     'Most of South King County sits on glacial till. Alderwood and Everett series soils, pressed flat by ice and never fully drained. Dig two feet down on a Kent hillside and you hit hardpan. Water sheets across it instead of soaking through. That\'s why so many walls here fail from behind. The front still looks fine. Hydrostatic pressure builds against the back face over a wet January, and the wall leans out an inch at a time until the caps no longer line up.',
-    'Transitions are where a wall gets tricky. A run that steps down into a stair return. A corner that wraps over a utility easement. Those get sorted at 7 a.m. with a tape measure, not in a change order two weeks later. The person who drew the section detail is on site when the base course goes in.',
+    'Transitions are where a wall gets tricky. A run that steps down into a stair return. A corner that wraps over a utility easement. Those get sorted at 7 a.m. with a tape measure, not in a change order two weeks later.',
     'Height drives almost everything. Under 4 feet of exposed face, a gravity wall with proper backfill usually does the job, and most King County jurisdictions treat it as exempt. Go above that, carry a driveway, or pick up a surcharge from an upslope structure and you\'re into stamped engineering, geogrid layers tied back into the hillside and a permit review. We\'ll tell you which side of that line your yard falls on at the first walkthrough. Before anyone talks price.',
     'Blue Landscaping Services has been building walls out of a Kent shop since 2012, licensed and bonded in Washington under BLUELLS880K2. The shop matters on a wall job. It means the excavator, the plate compactor and the second pallet of block are twenty minutes away instead of a rental-yard reservation. That\'s how a wall gets finished before the next weather window closes.',
   ],
@@ -120,7 +120,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'These are typical installed ranges for the Puget Sound market in 2026, not a quote; the actual number comes out of a site walkthrough where we can see the grade, the soil, the access and where the water goes. You will find local bids starting nearer $25 per face square foot. That number is real, and it usually means no drain rock, no filter fabric and a base course laid on native soil — a wall that looks identical on day one and leans by year five. Our range starts where a full drainage assembly starts.',
+    'You will find local bids starting nearer $25 per face square foot. That number is real, and it usually means no drain rock, no filter fabric, and a base course laid straight on native soil — a wall that looks identical on day one and leans by year five. The range above starts where a full drainage assembly starts. What moves it on your lot is the grade, the soil, and where the water goes.',
   pnwConsiderations: [
     {
       title: 'Drainage is the wall, not an accessory',

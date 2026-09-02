@@ -23,7 +23,7 @@ export default function ReviewsPage() {
 
   return (
     <>
-      <JsonLd data={graph([localBusinessSchema({ path: '/reviews' }), reviewSchema(reviews)])} />
+      <JsonLd data={graph([localBusinessSchema(), reviewSchema(reviews)])} />
 
       <Breadcrumbs crumbs={[{ name: 'Reviews', path: '/reviews' }]} />
 
@@ -77,7 +77,7 @@ export default function ReviewsPage() {
                   In the meantime, the three things actually worth checking are the ones you can
                   verify yourself: our Google Business Profile, our Washington contractor
                   registration with L&amp;I, and a conversation with us about recent jobs near you.
-                  We will give you the honest version of all three.
+                  The L&amp;I lookup takes about thirty seconds.
                 </p>
                 {GOOGLE_PROFILE_URL && (
                   <p>

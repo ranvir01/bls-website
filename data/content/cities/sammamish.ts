@@ -73,7 +73,7 @@ const content: CityContent = {
     {
       question: 'How far is Sammamish from your Kent shop?',
       answer:
-        'Roughly forty minutes, depending on the route and the hour. Installation projects here are a normal multi-day mobilization for us. Spring irrigation start-ups and fall blowouts on the plateau we batch with other Eastside stops. We do not run weekly mowing routes at that distance, and we say so up front rather than promise service we cannot deliver consistently.',
+        'Roughly forty minutes, depending on the route and the hour. Installation projects here are a normal multi-day mobilization for us. Spring irrigation start-ups and fall blowouts on the plateau we batch with other Eastside stops. We do not run weekly mowing routes at that distance.',
     },
   ],
   zips: ['98074', '98075'],

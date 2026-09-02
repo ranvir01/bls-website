@@ -13,7 +13,6 @@ import { getServiceContent } from '@/data/content/services';
 import { categories, cities, cityPath, servicePath, servicesInCategory } from '@/data/taxonomy';
 import type { CategorySlug } from '@/data/types';
 import {
-  breadcrumbSchema,
   buildMetadata,
   faqSchema,
   graph,
@@ -61,9 +60,8 @@ export default function CategoryPage({ params }: Params) {
             path,
             areaServed: cities.map((c) => c.name),
           }),
-          localBusinessSchema({ path }),
+          localBusinessSchema(),
           faqSchema(content.faqs),
-          breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs]),
         ])}
       />
 

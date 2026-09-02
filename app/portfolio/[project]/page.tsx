@@ -10,7 +10,7 @@ import { JsonLd } from '@/components/json-ld';
 import { ProjectGrid } from '@/components/portfolio/project-grid';
 import { portfolioProjects, projects } from '@/data/projects';
 import { cityBySlug, cityPath, serviceBySlug, servicePath } from '@/data/taxonomy';
-import { breadcrumbSchema, buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
+import { buildMetadata, graph, localBusinessSchema } from '@/lib/seo';
 
 interface Params {
   params: { project: string };
@@ -32,6 +32,8 @@ export function generateMetadata({ params }: Params): Metadata {
     description: `${service?.name ?? 'Project'} completed in ${city?.name ?? 'the Puget Sound region'}. ${project.caption}`,
     path: `/portfolio/${project.slug}`,
     image: project.after.src,
+    imageWidth: project.after.width,
+    imageHeight: project.after.height,
   });
 }
 
@@ -60,8 +62,7 @@ export default function ProjectPage({ params }: Params) {
     <>
       <JsonLd
         data={graph([
-          localBusinessSchema({ path, areaServed: city ? [city.name] : undefined }),
-          breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs]),
+          localBusinessSchema({ areaServed: city ? [city.name] : undefined }),
         ])}
       />
 

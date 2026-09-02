@@ -136,8 +136,8 @@ const post: BlogPost = {
     },
     {
       type: 'callout',
-      title: 'Built by the people who drew it',
-      text: 'Blue Landscaping Services builds walls out of a shop in Kent, so the crew stacking block is the crew that walked your slope. Every figure above is a typical installed range for the Puget Sound market in 2026, not a quote. Grade, access, soil and where water already moves decide your number. Licensed, bonded and insured in Washington, registration BLUELLS880K2. Call (253) 429-7052 and we will look at the actual hillside.',
+      title: 'Ranges, not quotes',
+      text: 'Blue Landscaping Services builds walls out of a shop in Kent. Every figure above is a typical installed range for the Puget Sound market in 2026, not a quote. Grade, access, soil and where water already moves decide your number. Licensed, bonded and insured in Washington, registration BLUELLS880K2. Call (253) 429-7052 and we will look at the actual hillside.',
     },
   ],
   faqs: [

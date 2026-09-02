@@ -69,6 +69,9 @@ export function MobileDrawer() {
                   transition={reduced ? { duration: 0.01 } : spring.snappy}
                 >
                   <Dialog.Title className="sr-only">Site navigation</Dialog.Title>
+                  <Dialog.Description className="sr-only">
+                    Links to every service, city and page on the site. Escape closes the menu.
+                  </Dialog.Description>
 
                   <div className="flex h-16 shrink-0 items-center justify-between border-b border-ink-200 px-5">
                     <span className="font-display text-lg text-brand-900">Menu</span>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { isPhoto, serviceArt } from '@/lib/service-art';
+import { SERVICE_ART_ALT, isPhoto, serviceArt } from '@/lib/service-art';
 import { cn } from '@/lib/utils';
 
 /**
@@ -38,7 +38,7 @@ export function ServiceArt({
     <div className={cn('relative overflow-hidden bg-brand-800', className)}>
       <Image
         src={src}
-        alt={photo ? `${name} by Blue Landscaping Services` : ''}
+        alt={photo ? (SERVICE_ART_ALT[slug] ?? name) : ''}
         aria-hidden={photo ? undefined : true}
         fill
         sizes={sizes}

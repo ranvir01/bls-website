@@ -13,7 +13,7 @@ const content: ServiceContent = {
   intro: [
     'A path gets judged at seven in the evening in December, with two bags of groceries and no free hand for the railing. That is the test we design to. Width comes first: 36 inches is the honest minimum for one person moving comfortably, 48 inches lets two people walk side by side without one stepping into the beds, and anything under 30 inches turns into a place people walk beside rather than on. Curves should follow how you actually cross the yard, not a shape drawn to look good on paper.',
     'Trees complicate almost every front walk in this region. Douglas fir, big-leaf maple, and western red cedar send structural roots out well past the drip line, and a poured walk over them cracks within a few seasons. Segmental pavers are the better answer because they move as individual units and can be lifted, the base corrected, and the same stone reset. Where we have to cross a root zone we hand-dig, prune cleanly at the right size instead of tearing with a machine bucket, and bridge with a shallower base rather than cutting anything structural.',
-    'Everything under the surface goes in before the base closes up: lighting sleeves, an irrigation crossover, sometimes a spare conduit for whatever comes later. It costs almost nothing while the trench is open and it is a demolition project afterward. Since the same crew handles design and installation, those decisions get made standing in the trench rather than negotiated between a designer and a subcontractor who was not there when the route was chosen.',
+    'Everything under the surface goes in before the base closes up: lighting sleeves, an irrigation crossover, sometimes a spare conduit for whatever comes later. It costs almost nothing while the trench is open and it is a demolition project afterward.',
   ],
   included: [
     'Route laid out on the ground with paint and hose lines, walked at full width before anything is dug',
@@ -104,7 +104,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'Every figure above is a typical installed range for this market rather than a quote; length, width, access for a machine, and how much old surface has to come out move the real number, which we set after walking the site.',
+    'Material spans this table more than anything else we build. The same four-foot path is $12 a square foot in compacted crushed fines and $65 in dry-set flagstone, and both are correct answers depending on where the path goes and how often anyone walks it in the dark. After material, the variables are width, how much old concrete has to leave the property, and whether a machine can get to the work at all.',
   pnwConsiderations: [
     {
       title: 'North-facing walks grow moss, and moss is a slip hazard',

@@ -24,7 +24,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <JsonLd data={graph([localBusinessSchema({ path: '/about', areaServed: cities.map((c) => c.name) })])} />
+      <JsonLd data={graph([localBusinessSchema({ areaServed: cities.map((c) => c.name) })])} />
 
       <Breadcrumbs crumbs={[{ name: 'About', path: '/about' }]} />
 

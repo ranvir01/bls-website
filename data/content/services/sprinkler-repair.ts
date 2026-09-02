@@ -112,7 +112,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'The figures above are typical installed repair ranges for the Puget Sound market in 2026, not a quote, since a buried failure is priced by what it takes to reach it and nobody can see that from a phone call, so the actual number comes out of the diagnostic visit and gets confirmed with you before we dig.',
+    'A buried failure is priced by what it takes to reach it, and nobody can see that down a phone line. The diagnostic hour is the honest first step: it establishes whether you have a $25 nozzle, a $185 valve, or a wire fault that has to be traced across the yard before anything can be fixed. You get the number for the repair before we open the ground, not after.',
   pnwConsiderations: [
     {
       title: 'What January actually breaks',

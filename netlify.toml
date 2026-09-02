@@ -124,7 +124,10 @@
     # 'unsafe-inline' on script-src is required by Next.js's inline bootstrap
     # and by the JSON-LD blocks. frame-src allows the OpenStreetMap embed on
     # /contact; img-src allows remote render URLs from the image provider.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.googletagmanager.com; frame-src https://www.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+    # GA4 sends its hits to a regional host (region1.google-analytics.com for
+    # EU visitors, others elsewhere), not only www — so connect-src takes the
+    # wildcard, or every regional beacon is silently dropped by the browser.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
 
 # Next.js content-hashes everything under /_next/static, so it is safe to cache
 # these forever. Nothing else gets an immutable header.

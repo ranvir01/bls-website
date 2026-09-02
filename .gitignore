@@ -50,3 +50,15 @@ next-env.d.ts
 
 # UI audit screenshots
 .audit/
+
+# Scratch scripts written by audit and review agents into the repo root, so that
+# their imports resolve against node_modules. They are throwaway, they are named
+# whatever the agent felt like (run3.mjs, probe7.mjs, kbd-audit.mjs), and a broad
+# `git add -A` has already swept a batch of them into a commit once.
+#
+# Everything this project actually ships lives in scripts/, so ignoring
+# root-level .mjs is safe — with the one real exception un-ignored below.
+/*.mjs
+!/next.config.mjs
+.audit-md/
+.audit/

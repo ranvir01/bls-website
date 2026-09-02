@@ -112,7 +112,7 @@ const content: ServiceContent = {
     },
   ],
   costNote:
-    'The ranges above are typical installed figures for the Puget Sound market in 2026 rather than a quote, since stone size, machine access and the distance to your electrical panel move the number more than anything else, all of which we confirm during a site walkthrough.',
+    'Two things move a water feature price and neither of them is the water. Stone size is the first: a five-foot basalt column needs machine access in a way a three-foot column does not, and access is often what decides which one you can have. The second is the distance from the basin to your electrical panel, because a dedicated GFCI circuit is $600 to $1,600 of licensed electrician before the pump has run for a second.',
   pnwConsiderations: [
     {
       title: 'Where the overflow goes in February',

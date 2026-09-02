@@ -9,7 +9,6 @@ import type { BlogBlock } from '@/data/types';
 import { cityBySlug, cityPath, serviceBySlug, servicePath } from '@/data/taxonomy';
 import {
   articleSchema,
-  breadcrumbSchema,
   buildMetadata,
   faqSchema,
   graph,
@@ -71,9 +70,8 @@ export default function BlogPostPage({ params }: Params) {
             publishedAt: post.publishedAt,
             updatedAt: post.updatedAt,
           }),
-          localBusinessSchema({ path }),
+          localBusinessSchema(),
           faqSchema(post.faqs),
-          breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs]),
         ])}
       />
 

@@ -67,6 +67,56 @@ for (const width of WIDTHS) {
       continue;
     }
 
+    /*
+     * 'networkidle' is not "the page has settled".
+     *
+     * It fires when the network has been quiet for 500ms, which on a cold image
+     * optimizer happens while images are still being transcoded and before web
+     * fonts have swapped. Measuring there produced failures that did not
+     * reproduce: an 8px horizontal overflow on the homepage hero, and pages
+     * reported with zero <h1> that plainly have one. Both went away on a warm
+     * cache, which is the signature of a race rather than a defect — and a
+     * flaky gate is worse than no gate, because it trains people to re-run it
+     * until it passes.
+     *
+     * So wait for what is actually being measured. Note the loading="lazy"
+     * exclusion: a lazy image below the fold has not been fetched, so its
+     * .complete is false and stays false until someone scrolls — waiting on
+     * every image would never resolve and would just trade a flake for a
+     * timeout. Eager images are the ones holding up layout anyway.
+     */
+    await page
+      .waitForFunction(
+        () => document.fonts.status === 'loaded'
+          && [...document.images].every((img) => img.loading === 'lazy' || img.complete),
+        null,
+        { timeout: 15000 },
+      )
+      .catch(() => report(path, width, 'eager images or fonts did not settle within 15s'));
+
+    /*
+     * Did the page actually hydrate?
+     *
+     * When React's error boundary catches a client exception it replaces the
+     * whole tree with "Application error: a client-side exception has occurred".
+     * Every later check then measures that placeholder, and what gets reported
+     * is "0 <h1> elements" — which sends you looking at headings on a page
+     * whose real problem is that none of its JavaScript ran.
+     *
+     * The usual cause when running locally is mundane and worth naming: `next
+     * build` was re-run underneath a live `next start`, so the served HTML
+     * references chunk hashes that no longer exist on disk and every chunk
+     * 404s. Restart the server after a build. In production the same signature
+     * means a genuinely broken deploy.
+     */
+    const crashed = await page.evaluate(() =>
+      document.body.innerText.includes('Application error: a client-side exception'),
+    );
+    if (crashed) {
+      report(path, width, 'page did not hydrate — React error boundary is showing. If you just rebuilt, restart `next start`; its chunk hashes are stale. Skipping the rest of the checks for this page.');
+      continue;
+    }
+
     // ── Horizontal overflow ───────────────────────────────────────────────
     const overflow = await page.evaluate(() => {
       const doc = document.documentElement;

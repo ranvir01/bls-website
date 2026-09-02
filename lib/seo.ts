@@ -9,9 +9,21 @@
 import type { Metadata } from 'next';
 
 import { SITE_URL, business, formattedAddress } from '@/data/business';
+import { cities } from '@/data/taxonomy';
 import type { Faq, Review } from '@/data/types';
 
 export const BRAND = business.name;
+
+/**
+ * One @id for the business, everywhere.
+ *
+ * It used to be `${page}#localbusiness`, which told a crawler the site was 94
+ * different contractors that happened to share a phone number — and meant the
+ * AggregateRating node (which always pointed at the homepage form) would have
+ * described a second, address-less business on every page but `/`.
+ */
+const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+const LOCAL_BUSINESS_ID = `${SITE_URL}/#localbusiness`;
 
 /** Absolute URL for any site-relative path. */
 export function absoluteUrl(path: string): string {
@@ -29,6 +41,8 @@ export function buildMetadata({
   description,
   path,
   image = '/images/og-default.jpg',
+  imageWidth = 1200,
+  imageHeight = 630,
   noindex = false,
   publishedTime,
   modifiedTime,
@@ -37,6 +51,14 @@ export function buildMetadata({
   description: string;
   path: string;
   image?: string;
+  /**
+   * Real pixel size of `image`. The defaults describe og-default.jpg only;
+   * a page that passes its own photo passes its own dimensions, or the
+   * scrapers are told a 1400x1867 portrait is a 1200x630 landscape and crop
+   * it accordingly.
+   */
+  imageWidth?: number;
+  imageHeight?: number;
   noindex?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
@@ -53,7 +75,10 @@ export function buildMetadata({
     // the previous site shipped on every page.
     title: { absolute: full },
     description,
-    alternates: { canonical: url },
+    // A canonical on a noindex page is a contradiction (it nominates a URL
+    // for the index while asking to be left out), and the 404 route would
+    // otherwise inherit the homepage's `/` from the root layout.
+    alternates: { canonical: noindex ? null : url },
     robots: noindex
       ? { index: false, follow: false }
       : {
@@ -74,7 +99,7 @@ export function buildMetadata({
       url,
       title: full,
       description,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: bare }],
+      images: [{ url: ogImage, width: imageWidth, height: imageHeight, alt: bare }],
       ...(publishedTime ? { publishedTime, modifiedTime } : {}),
     },
     twitter: {
@@ -112,7 +137,7 @@ function openingHoursSpec() {
 export function organizationSchema() {
   return {
     '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
+    '@id': ORGANIZATION_ID,
     name: business.legalName,
     alternateName: business.name,
     url: SITE_URL,
@@ -138,31 +163,60 @@ export function websiteSchema() {
     '@id': `${SITE_URL}/#website`,
     url: SITE_URL,
     name: BRAND,
-    publisher: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': ORGANIZATION_ID },
     inLanguage: 'en-US',
   };
+}
+
+const CITY_TIER = new Map(cities.map((c) => [c.name, c.tier]));
+
+/**
+ * `areaServed` entries from a list of city names.
+ *
+ * The four Seattle entries in the taxonomy are neighbourhoods, not cities —
+ * declaring "Ballard, Washington" as a City is a claim no gazetteer agrees
+ * with, and the site's headline keyword, Seattle itself, never appeared at
+ * all. A neighbourhood is emitted as a Place inside the City of Seattle, and
+ * Seattle is added once whenever any of them is present.
+ */
+function areaServedNodes(names: string[]) {
+  const state = { '@type': 'State', name: 'Washington' };
+  const seattle = { '@type': 'City', name: 'Seattle', containedInPlace: state };
+  const nodes: object[] = [];
+  let hasNeighbourhood = false;
+
+  for (const name of names) {
+    if (CITY_TIER.get(name) === 'seattle') {
+      hasNeighbourhood = true;
+      nodes.push({ '@type': 'Place', name, containedInPlace: seattle });
+    } else {
+      nodes.push({ '@type': 'City', name, containedInPlace: state });
+    }
+  }
+
+  if (hasNeighbourhood && !names.includes('Seattle')) nodes.push(seattle);
+  return nodes;
 }
 
 /**
  * GeneralContractor (a LocalBusiness subtype). Used on home and every location
  * page, with `areaServed` narrowed to that city.
  *
+ * The node has one stable @id on every page and points at the Organization
+ * node from the root layout, so the two resolve to a single business rather
+ * than two unrelated entities that happen to share a name.
+ *
  * AggregateRating is deliberately absent: it may only be emitted from genuine,
  * attributable reviews, so it is added by `reviewSchema` and nowhere else.
  */
-export function localBusinessSchema({
-  areaServed,
-  path = '/',
-}: {
-  areaServed?: string[];
-  path?: string;
-} = {}) {
+export function localBusinessSchema({ areaServed }: { areaServed?: string[] } = {}) {
   return {
     '@type': 'GeneralContractor',
-    '@id': `${absoluteUrl(path)}#localbusiness`,
+    '@id': LOCAL_BUSINESS_ID,
     name: business.legalName,
     image: absoluteUrl('/images/logo.png'),
-    url: absoluteUrl(path),
+    url: SITE_URL,
+    parentOrganization: { '@id': ORGANIZATION_ID },
     telephone: business.phone.e164,
     email: business.email,
     priceRange: '$$',
@@ -181,15 +235,7 @@ export function localBusinessSchema({
       longitude: business.geo.longitude,
     },
     openingHoursSpecification: openingHoursSpec(),
-    ...(areaServed?.length
-      ? {
-          areaServed: areaServed.map((name) => ({
-            '@type': 'City',
-            name,
-            containedInPlace: { '@type': 'State', name: 'Washington' },
-          })),
-        }
-      : {}),
+    ...(areaServed?.length ? { areaServed: areaServedNodes(areaServed) } : {}),
     hasCredential: {
       '@type': 'EducationalOccupationalCredential',
       credentialCategory: 'Contractor License',
@@ -217,8 +263,8 @@ export function serviceSchema({
     description,
     serviceType: name,
     url: absoluteUrl(path),
-    provider: { '@id': `${SITE_URL}/#organization` },
-    areaServed: areaServed.map((city) => ({ '@type': 'City', name: city })),
+    provider: { '@id': LOCAL_BUSINESS_ID },
+    areaServed: areaServedNodes(areaServed),
   };
 }
 
@@ -257,7 +303,9 @@ export function reviewSchema(reviews: Review[]) {
 
   return {
     '@type': 'GeneralContractor',
-    '@id': `${SITE_URL}/#localbusiness`,
+    // Same @id as localBusinessSchema, so the rating merges into the node
+    // that carries the address, phone and licence instead of standing alone.
+    '@id': LOCAL_BUSINESS_ID,
     name: business.legalName,
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -288,22 +336,26 @@ export function articleSchema({
   path,
   publishedAt,
   updatedAt,
+  image = '/images/og-default.jpg',
 }: {
   title: string;
   description: string;
   path: string;
   publishedAt: string;
   updatedAt?: string;
+  /** Site-relative path of the article's lead photo. Google requires one. */
+  image?: string;
 }) {
   return {
     '@type': 'Article',
     '@id': `${absoluteUrl(path)}#article`,
     headline: title,
     description,
+    image: absoluteUrl(image),
     datePublished: publishedAt,
     dateModified: updatedAt ?? publishedAt,
-    author: { '@id': `${SITE_URL}/#organization` },
-    publisher: { '@id': `${SITE_URL}/#organization` },
+    author: { '@id': ORGANIZATION_ID },
+    publisher: { '@id': ORGANIZATION_ID },
     mainEntityOfPage: absoluteUrl(path),
   };
 }
